@@ -1,6 +1,6 @@
 package com.gmail.takenokoii78.json.values;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public final class JSONNull extends JSONPrimitive<Object> {
     private JSONNull() {
