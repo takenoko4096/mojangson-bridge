@@ -21,7 +21,7 @@ public class MojangsonFile {
     public MojangsonFile(Path path) {
         this.path = path;
 
-        if (!path.toFile().isFile()) {
+        if (path.toFile().exists() && !path.toFile().isFile()) {
             throw new IllegalArgumentException("そのパスはファイルパスとして無効です");
         }
     }
