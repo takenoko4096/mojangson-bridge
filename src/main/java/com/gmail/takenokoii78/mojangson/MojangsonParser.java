@@ -4,15 +4,13 @@ import com.gmail.takenokoii78.mojangson.values.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @NullMarked
 public class MojangsonParser {
-    private static final Set<Character> WHITESPACE = Set.of(' ', '\n');
+    private static final Set<Character> WHITESPACE = Set.of(' ', '\n', '\t');
 
     private static final char COMMA = ',';
 
@@ -23,6 +21,8 @@ public class MojangsonParser {
     private static final char ESCAPE = '\\';
 
     private static final Set<Character> QUOTES = Set.of('"', '\'');
+
+    private static final char[] FUNCTION_BRACES = {'(', ')'};
 
     private static final char[] COMPOUND_BRACES = {'{', '}'};
 
@@ -59,7 +59,26 @@ public class MojangsonParser {
         'L', MojangsonLongArray::from
     ));
 
+    private final Map<String, MojangsonFunctionalOperator> functions = new HashMap<>(Map.of(
+        "bool", (parser, args) -> {
+            if (args.size() != 1) {
+                throw parser.newException("関数 bool() の引数長は 1 が適切です");
+            }
+
+            final MojangsonValue<?> value = args.getFirst();
+
+            if (value instanceof MojangsonNumber<?> number) {
+                return number.intValue() == 0 ? MojangsonByte.valueOf((byte) 0) : MojangsonByte.valueOf((byte) 1);
+            }
+            else {
+                throw parser.newException("関数 'bool()' の第一引数の型 '" + value.getType() + "' が正しくありません");
+            }
+        }
+    ));
+
     private static final Set<Character> SYMBOLS_ON_STRING = new HashSet<>();
+
+    private static final Set<Character> STOPPER_ON_STRING = new HashSet<>();
 
     static {
         SYMBOLS_ON_STRING.addAll(WHITESPACE);
@@ -68,19 +87,29 @@ public class MojangsonParser {
         SYMBOLS_ON_STRING.add(SEMICOLON);
         SYMBOLS_ON_STRING.add(ESCAPE);
         SYMBOLS_ON_STRING.addAll(QUOTES);
+        SYMBOLS_ON_STRING.add(FUNCTION_BRACES[0]);
+        SYMBOLS_ON_STRING.add(FUNCTION_BRACES[1]);
         SYMBOLS_ON_STRING.add(COMPOUND_BRACES[0]);
         SYMBOLS_ON_STRING.add(COMPOUND_BRACES[1]);
         SYMBOLS_ON_STRING.add(ARRAY_LIST_BRACES[0]);
         SYMBOLS_ON_STRING.add(ARRAY_LIST_BRACES[1]);
         SYMBOLS_ON_STRING.addAll(SIGNS);
         SYMBOLS_ON_STRING.add(DECIMAL_POINT);
+
+        STOPPER_ON_STRING.addAll(WHITESPACE);
+        STOPPER_ON_STRING.add(FUNCTION_BRACES[0]);
+        STOPPER_ON_STRING.add(FUNCTION_BRACES[1]);
+        STOPPER_ON_STRING.add(COMPOUND_BRACES[1]);
+        STOPPER_ON_STRING.add(ARRAY_LIST_BRACES[1]);
+        STOPPER_ON_STRING.add(COMMA);
+        STOPPER_ON_STRING.add(COLON);
     }
 
     private final String text;
 
     private int location = 0;
 
-    private MojangsonParser(String text) {
+    protected MojangsonParser(String text) {
         this.text = text;
     }
 
@@ -88,7 +117,7 @@ public class MojangsonParser {
         return location >= text.length();
     }
 
-    private MojangsonParseException newException(String message) {
+    public MojangsonParseException newException(String message) {
         return new MojangsonParseException(message, text, location);
     }
 
@@ -187,7 +216,7 @@ public class MojangsonParser {
             }
         }
         else {
-            while (!WHITESPACE.contains(current) && current != COLON && current != COMPOUND_BRACES[1] && current != ARRAY_LIST_BRACES[1] && current != COMMA) {
+            while (!STOPPER_ON_STRING.contains(current)) {
                 if (SYMBOLS_ON_STRING.contains(current)) {
                     throw newException("クオーテーションで囲まれていない文字列において利用できない文字("+ current +")を検出しました");
                 }
@@ -258,21 +287,6 @@ public class MojangsonParser {
         return MojangsonNumber.upcastedValueOf(parser.apply(sb.toString()));
     }
 
-    private @Nullable MojangsonByte booleanAsByte() {
-        int loc = location;
-        final String s = string();
-        if (s.equals(BOOLEANS[0])) {
-            return MojangsonByte.valueOf((byte) 0);
-        }
-        else if (s.equals(BOOLEANS[1])) {
-            return MojangsonByte.valueOf((byte) 1);
-        }
-        else {
-            location = loc;
-            return null;
-        }
-    }
-
     private MojangsonCompound compound() {
         expect(COMPOUND_BRACES[0]);
 
@@ -337,6 +351,22 @@ public class MojangsonParser {
         else throw newException("閉じ括弧が見つかりません");
     }
 
+    private MojangsonValue<?> function(String name, BiFunction<MojangsonParser, List<MojangsonValue<?>>, MojangsonValue<?>> function) {
+        expect(name);
+        expect(FUNCTION_BRACES[0]);
+
+        final List<MojangsonValue<?>> arguments = new ArrayList<>();
+
+        do {
+            arguments.add(value());
+        }
+        while (next(COMMA));
+
+        expect(FUNCTION_BRACES[1]);
+
+        return function.apply(this, arguments);
+    }
+
     private MojangsonValue<?> value() {
         if (test(COMPOUND_BRACES[0])) {
             return compound();
@@ -350,17 +380,28 @@ public class MojangsonParser {
                 return number;
             }
 
-            final MojangsonByte byteValue = booleanAsByte();
-            if (byteValue != null) {
-                return byteValue;
+            for (final var entry : functions.entrySet()) {
+                final String name = entry.getKey();
+                final var function = entry.getValue();
+
+                if (test(name + FUNCTION_BRACES[0])) {
+                    return function(name, function);
+                }
+            }
+
+            if (next(BOOLEANS[0])) {
+                return MojangsonByte.valueOf((byte) 0);
+            }
+            else if (next(BOOLEANS[1])) {
+                return MojangsonByte.valueOf((byte) 1);
+            }
+            else if (next(MojangsonNull.NULL.toString())) {
+                return MojangsonNull.NULL;
             }
 
             final String string = string();
 
-            if (string.equals(MojangsonNull.NULL.toString())) {
-                return MojangsonNull.NULL;
-            }
-            else return MojangsonString.valueOf(string);
+            return MojangsonString.valueOf(string);
         }
     }
 
@@ -372,6 +413,10 @@ public class MojangsonParser {
         final MojangsonValue<?> value = value();
         remainingChars();
         return value;
+    }
+
+    protected void register(String name, MojangsonFunctionalOperator function) {
+        functions.put(name, function);
     }
 
     private static <T> T parseAs(String text, Class<T> clazz) {

@@ -20,10 +20,16 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         this(new HashMap<>());
     }
 
+    @Override
+    public MojangsonValueType<?> getType() {
+        return MojangsonValueTypes.COMPOUND;
+    }
+
     public boolean has(String key) {
         return value.containsKey(key);
     }
 
+    @Override
     public boolean isEmpty() {
         return value.isEmpty();
     }
@@ -60,6 +66,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         else return false;
     }
 
+    @Override
     public boolean clear() {
         if (isEmpty()) {
             return false;

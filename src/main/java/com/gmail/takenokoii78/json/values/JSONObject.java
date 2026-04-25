@@ -18,10 +18,16 @@ public final class JSONObject extends JSONValue<Map<String, JSONValue<?>>> imple
         super(map);
     }
 
+    @Override
+    public JSONValueType<?> getType() {
+        return JSONValueTypes.OBJECT;
+    }
+
     public boolean has(String key) {
         return value.containsKey(key);
     }
 
+    @Override
     public boolean isEmpty() {
         return value.isEmpty();
     }
@@ -58,6 +64,7 @@ public final class JSONObject extends JSONValue<Map<String, JSONValue<?>>> imple
         else return false;
     }
 
+    @Override
     public boolean clear() {
         if (isEmpty()) return false;
         else {

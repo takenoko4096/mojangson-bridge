@@ -1,11 +1,18 @@
 package com.gmail.takenokoii78.json.values;
 
+import com.gmail.takenokoii78.json.JSONValueType;
+import com.gmail.takenokoii78.json.JSONValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public final class JSONNumber extends JSONPrimitive<Number> {
     private JSONNumber(Number value) {
         super(value);
+    }
+
+    @Override
+    public JSONValueType<?> getType() {
+        return JSONValueTypes.NUMBER;
     }
 
     public byte byteValue() {

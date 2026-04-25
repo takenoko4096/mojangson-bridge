@@ -1,5 +1,6 @@
 package com.gmail.takenokoii78.mojangson.values;
 
+import com.gmail.takenokoii78.mojangson.MojangsonValueType;
 import com.gmail.takenokoii78.mojangson.MojangsonValueTypes;
 import org.jspecify.annotations.NullMarked;
 
@@ -12,6 +13,11 @@ import java.util.List;
 public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     public MojangsonLongArray(long[] value) {
         super(value);
+    }
+
+    @Override
+    public MojangsonValueType<?> getType() {
+        return MojangsonValueTypes.LONG_ARRAY;
     }
 
     @Override

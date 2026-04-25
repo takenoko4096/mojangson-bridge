@@ -2,6 +2,7 @@ package com.gmail.takenokoii78.mojangson.values;
 
 import com.gmail.takenokoii78.mojangson.MojangsonValue;
 import com.gmail.takenokoii78.mojangson.MojangsonValueType;
+import com.gmail.takenokoii78.mojangson.MojangsonValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
@@ -19,6 +20,11 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
 
     public TypedMojangsonList(MojangsonValueType<T> type) {
         this(type, new ArrayList<>());
+    }
+
+    @Override
+    public MojangsonValueType<?> getType() {
+        return MojangsonValueTypes.LIST;
     }
 
     @Override

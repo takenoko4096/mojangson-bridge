@@ -20,6 +20,11 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
     }
 
     @Override
+    public MojangsonValueType<?> getType() {
+        return MojangsonValueTypes.LIST;
+    }
+
+    @Override
     public boolean has(int index) {
         if (index >= 0) return index < value.size();
         else return has(value.size() + index);

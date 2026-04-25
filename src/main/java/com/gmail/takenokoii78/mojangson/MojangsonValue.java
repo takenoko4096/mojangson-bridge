@@ -25,6 +25,8 @@ public abstract class MojangsonValue<T> {
         return Objects.hash(value);
     }
 
+    public abstract MojangsonValueType<?> getType();
+
     @Override
     public String toString() {
         return value.toString();

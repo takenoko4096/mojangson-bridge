@@ -19,6 +19,11 @@ public final class JSONArray extends JSONValue<List<JSONValue<?>>> implements JS
     }
 
     @Override
+    public JSONValueType<?> getType() {
+        return JSONValueTypes.ARRAY;
+    }
+
+    @Override
     public boolean has(int index) {
         if (index >= 0) return index < value.size();
         else if (value.size() + index >= 0) return has(value.size() + index);

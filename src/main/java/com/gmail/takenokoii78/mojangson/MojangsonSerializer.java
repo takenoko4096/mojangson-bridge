@@ -116,7 +116,7 @@ public class MojangsonSerializer {
     }
 
     private StringBuilder string(String value) {
-        boolean requireQuote = asJsonString || SYMBOLS_ON_STRING.stream().anyMatch(sym -> value.contains(sym.toString()));
+        boolean requireQuote = asJsonString || SYMBOLS_ON_STRING.stream().anyMatch(sym -> value.contains(sym.toString())) || KEYWORDS.contains(value);
         final StringBuilder stringBuilder = new StringBuilder();
 
         if (requireQuote) stringBuilder.append(QUOTE);
@@ -171,6 +171,10 @@ public class MojangsonSerializer {
     private static final char DECIMAL_POINT = '.';
 
     private static final Set<Character> SYMBOLS_ON_STRING = new HashSet<>();
+
+    private static final Set<String> KEYWORDS = new HashSet<>(Set.of(
+        "true", "false", "null"
+    ));
 
     static {
         SYMBOLS_ON_STRING.add(WHITESPACE);

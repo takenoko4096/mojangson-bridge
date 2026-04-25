@@ -1,5 +1,7 @@
 package com.gmail.takenokoii78.json.values;
 
+import com.gmail.takenokoii78.json.JSONValueType;
+import com.gmail.takenokoii78.json.JSONValueTypes;
 import org.jspecify.annotations.Nullable;
 
 public final class JSONNull extends JSONPrimitive<Object> {
@@ -10,6 +12,11 @@ public final class JSONNull extends JSONPrimitive<Object> {
     @Override
     public String toString() {
         return "null";
+    }
+
+    @Override
+    public JSONValueType<?> getType() {
+        return JSONValueTypes.NULL;
     }
 
     @Override

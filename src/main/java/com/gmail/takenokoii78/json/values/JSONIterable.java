@@ -5,6 +5,7 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public interface JSONIterable<T extends JSONValue<?>> extends JSONStructure, Iterable<T> {
+    @Override
     boolean isEmpty();
 
     boolean has(int index);
@@ -13,7 +14,9 @@ public interface JSONIterable<T extends JSONValue<?>> extends JSONStructure, Ite
 
     boolean delete(int index);
 
+    @Override
     boolean clear();
 
+    @Override
     JSONIterable<T> copy();
 }

@@ -5,7 +5,7 @@ import com.gmail.takenokoii78.json.values.*;
 import java.util.Map;
 import java.util.Objects;
 
-public class JSONValue<T> {
+public abstract class JSONValue<T> {
     protected final T value;
 
     protected JSONValue(T value) {
@@ -29,6 +29,8 @@ public class JSONValue<T> {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public abstract JSONValueType<?> getType();
 
     public static JSONValue<?> valueOf(Object value) {
         return switch (value) {

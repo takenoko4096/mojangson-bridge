@@ -4,7 +4,7 @@ import com.gmail.takenokoii78.mojangson.MojangsonValueType;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class MojangsonNumber<T extends Number> extends MojangsonPrimitive<T> {
+public abstract class MojangsonNumber<T extends Number> extends MojangsonPrimitive<T> {
     protected MojangsonNumber(T value) {
         super(value);
     }

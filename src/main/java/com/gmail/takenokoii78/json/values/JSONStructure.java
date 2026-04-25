@@ -4,5 +4,9 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public interface JSONStructure {
+    boolean isEmpty();
+
+    boolean clear();
+
     JSONStructure copy();
 }

@@ -16,85 +16,85 @@ import java.util.function.Function;
 
 @NullMarked
 public class JSONFile {
-    private final Path path;
+    private final File file;
+
+    public JSONFile(File file) {
+        this.file = file;
+
+        if (file.exists() && !file.isFile()) {
+            throw new IllegalArgumentException("パス '" + file + "' はディレクトリであり、ファイルパスとして無効です");
+        }
+    }
 
     public JSONFile(Path path) {
-        this.path = path;
-
-        if (path.toFile().exists() && !path.toFile().isFile()) {
-            throw new IllegalArgumentException("そのパスはファイルパスとして無効です");
-        }
+        this(path.toFile());
     }
 
     public JSONFile(String path) {
         this(Path.of(path));
     }
 
-    public JSONFile(File file) {
-        this(file.toPath());
-    }
-
-    public Path getPath() {
-        return path;
+    public File getFile() {
+        return file;
     }
 
     protected String readAsString() throws IllegalStateException {
         if (exists()) try {
-            return String.join("\n", Files.readAllLines(path));
+            return String.join("\n", Files.readAllLines(file.toPath()));
         }
         catch (IOException e) {
-            throw new IllegalStateException("ファイルの読み取りに失敗しました", e);
+            throw new IllegalStateException("ファイル '" + file + "' の読み取りに失敗しました", e);
         }
-        else throw new IllegalStateException("ファイルが存在しません");
+        else throw new IllegalStateException("ファイル '" + file + "' が存在しません");
     }
 
     protected void writeAsString(String json) throws IllegalStateException {
         if (exists()) try {
             Files.write(
-                path,
+                file.toPath(),
                 Arrays.asList(json.split("\\n")),
                 StandardCharsets.UTF_8,
                 StandardOpenOption.TRUNCATE_EXISTING
             );
         }
         catch (IOException e) {
-            throw new IllegalStateException("ファイルの書き込みに失敗しました", e);
+            throw new IllegalStateException("ファイル '" + file + "' への書き込みに失敗しました", e);
         }
-        else throw new IllegalStateException("ファイルが存在しません");
+        else throw new IllegalStateException("ファイル '" + file + "' が存在しません");
     }
 
     public boolean exists() {
-        return path.toFile().exists();
+        return file.exists();
     }
 
     public void create() throws IllegalStateException {
-        if (exists()) throw new IllegalStateException("既にファイルは存在します");
+        if (exists()) throw new IllegalStateException("既にファイル '" + file + "' は存在します");
         else try {
-            Files.createFile(path);
+            Files.createFile(file.toPath());
         }
         catch (IOException e) {
-            throw new IllegalStateException("ファイルの作成に失敗しました", e);
+            throw new IllegalStateException("ファイル '" + file + "' の作成に失敗しました", e);
         }
     }
 
     public void delete() throws IllegalStateException {
         if (exists()) try {
-            Files.delete(path);
+            Files.delete(file.toPath());
         }
         catch (IOException e) {
-            throw new IllegalStateException("ファイルの削除に失敗しました", e);
+            throw new IllegalStateException("ファイル '" + file + "' の削除に失敗しました", e);
         }
-        else throw new IllegalStateException("ファイルが存在しません");
+        else throw new IllegalStateException("ファイル '" + file + "' が存在しません");
     }
 
     public long getSize() throws IllegalStateException {
         if (exists()) try {
-            return Files.size(path);
+            return Files.size(file.toPath());
         }
         catch (IOException e) {
-            throw new IllegalStateException("ファイルサイズの取得に失敗しました", e);
+            throw new IllegalStateException("ファイル '" + file + "' のサイズの取得に失敗しました", e);
         }
-        else throw new IllegalStateException("ファイルが存在しません");
+        else throw new IllegalStateException("ファイル '" + file + "' が存在しません");
     }
 
     public JSONStructure read() throws JSONParseException, IllegalStateException {

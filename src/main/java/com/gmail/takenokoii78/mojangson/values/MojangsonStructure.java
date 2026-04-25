@@ -4,5 +4,9 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public interface MojangsonStructure {
+    boolean isEmpty();
+
+    boolean clear();
+
     MojangsonStructure copy();
 }

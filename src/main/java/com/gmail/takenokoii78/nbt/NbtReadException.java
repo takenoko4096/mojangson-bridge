@@ -4,15 +4,15 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class NbtReadException extends RuntimeException {
-    NbtReadException(String message, Throwable cause) {
+    protected NbtReadException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    NbtReadException(String message) {
+    protected NbtReadException(String message) {
         super(message);
     }
 
-    NbtReadException(Throwable cause) {
+    protected NbtReadException(Throwable cause) {
         super(cause);
     }
 }

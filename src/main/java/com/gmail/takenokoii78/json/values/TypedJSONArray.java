@@ -2,6 +2,7 @@ package com.gmail.takenokoii78.json.values;
 
 import com.gmail.takenokoii78.json.JSONValue;
 import com.gmail.takenokoii78.json.JSONValueType;
+import com.gmail.takenokoii78.json.JSONValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ public class TypedJSONArray<T extends JSONValue<?>> extends JSONValue<List<T>> i
     public TypedJSONArray(JSONValueType<T> type, List<T> list) {
         super(new ArrayList<>(list));
         this.type = type;
+    }
+
+    @Override
+    public JSONValueType<?> getType() {
+        return JSONValueTypes.ARRAY;
     }
 
     @Override
