@@ -1,9 +1,6 @@
 package com.gmail.takenokoii78.json;
 
-import com.gmail.takenokoii78.json.values.JSONArray;
-import com.gmail.takenokoii78.json.values.JSONNull;
-import com.gmail.takenokoii78.json.values.JSONObject;
-import com.gmail.takenokoii78.json.values.JSONStructure;
+import com.gmail.takenokoii78.json.values.*;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.Arrays;
@@ -60,12 +57,16 @@ public class JSONParser {
         SYMBOLS_ON_STRING.add(DECIMAL_POINT);
     }
 
-    private final String text;
+    private String text;
 
     private int location = 0;
 
     private JSONParser(String text) {
         this.text = text;
+    }
+
+    public JSONParser() {
+        this.text = "";
     }
 
     private JSONParseException exception(String message) {
@@ -280,7 +281,7 @@ public class JSONParser {
         else throw exception("閉じ括弧が見つかりません");
     }
 
-    private Object value() {
+    private JSONValue<?> value() {
         if (test(OBJECT_BRACES[0])) {
             return objectValue();
         }
@@ -288,13 +289,13 @@ public class JSONParser {
             return arrayValue();
         }
         else if (QUOTES.stream().anyMatch(this::test)) {
-            return stringValue();
+            return JSONString.valueOf(stringValue());
         }
         else if (Arrays.stream(BOOLEANS).anyMatch(this::test)) {
-            return booleanValue();
+            return JSONBoolean.valueOf(booleanValue());
         }
         else if (SIGNS.stream().anyMatch(this::test) || NUMBERS.stream().anyMatch(this::test)) {
-            return numberValue();
+            return JSONNumber.valueOf(numberValue());
         }
         else if (next(NULL)) {
             return JSONNull.NULL;
@@ -302,18 +303,24 @@ public class JSONParser {
         else throw exception("値が見つかりませんでした");
     }
 
-    private void extraChars() {
+    private void finish() {
         if (!isOver()) throw exception("解析終了後、末尾に無効な文字列(" + text.substring(location) + ")を検出しました");
+        location = 0;
     }
 
-    private Object parse() {
-        final Object value = value();
-        extraChars();
+    private JSONValue<?> parse() {
+        final JSONValue<?> value = value();
+        finish();
         return value;
     }
 
+    public JSONValue<?> parse(String text) {
+        this.text = text;
+        return parse();
+    }
+
     private static <T> T parseAs(String text, Class<T> clazz) {
-        final Object value = new JSONParser(text).parse();
+        final JSONValue<?> value = new JSONParser(text).parse();
 
         if (clazz.isInstance(value)) {
             return clazz.cast(value);

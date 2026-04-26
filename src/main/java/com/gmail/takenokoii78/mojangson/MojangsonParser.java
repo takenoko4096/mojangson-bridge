@@ -36,21 +36,46 @@ public class MojangsonParser {
 
     private static final String[] BOOLEANS = {"false", "true"};
 
-    private static final Function<String, ? extends Number> DEFAULT_INT_PARSER = Integer::parseInt;
+    private static final char SIGNED = 's';
+
+    private static final char UNSIGNED = 'u';
+
+    private static final Function<String, ? extends Number> DEFAULT_SIGNED_INT_PARSER = Integer::parseInt;
+
+    private static final Function<String, ? extends Number> DEFAULT_UNSIGNED_INT_PARSER = Integer::parseUnsignedInt;
 
     private static final Function<String, ? extends Number> DEFAULT_DECIMAL_PARSER = Double::parseDouble;
 
-    private static final Map<Character, Function<String, ? extends Number>> NUMBER_PARSERS = new HashMap<>(Map.of(
+    private static final Map<Character, Function<String, ? extends Number>> SIGNED_NUMBER_PARSERS = new HashMap<>(Map.of(
         'b', Byte::parseByte,
         's', Short::parseShort,
+        'i', Integer::parseInt,
         'l', Long::parseLong,
         'f', Float::parseFloat,
-        'd', Double::parseDouble,
-        'B', Byte::parseByte,
-        'S', Short::parseShort,
-        'L', Long::parseLong,
-        'F', Float::parseFloat,
-        'D', Double::parseDouble
+        'd', Double::parseDouble
+    ));
+
+    private final Map<Character, Function<String, ? extends Number>> UNSIGNED_NUMBER_PARSERS = new HashMap<>(Map.of(
+        'b', (string) -> {
+            final int value = Integer.parseUnsignedInt(string);
+            if (Byte.MIN_VALUE <= value && value <= Byte.MAX_VALUE) {
+                return (byte) value;
+            }
+            else {
+                throw exception(value + ' ' + "は byte の値として不正です");
+            }
+        },
+        's', (string) -> {
+            final int value = Integer.parseUnsignedInt(string);
+            if (Short.MIN_VALUE <= value && value <= Short.MAX_VALUE) {
+                return (short) value;
+            }
+            else {
+                throw exception(value + ' ' + "は short の値として不正です");
+            }
+        },
+        'i', Integer::parseUnsignedInt,
+        'l', Long::parseUnsignedLong
     ));
 
     private static final Map<Character, Function<MojangsonList, MojangsonIterable<? extends MojangsonNumber<?>>>> PRIMITIVE_ARRAY_CONVERTERS = new HashMap<>(Map.of(
@@ -60,9 +85,9 @@ public class MojangsonParser {
     ));
 
     private final Map<String, MojangsonFunctionalOperator> functions = new HashMap<>(Map.of(
-        "bool", (parser, args) -> {
+        "bool", (args) -> {
             if (args.size() != 1) {
-                throw parser.newException("関数 bool() の引数長は 1 が適切です");
+                throw exception("関数 bool() の引数長は 1 が適切です");
             }
 
             final MojangsonValue<?> value = args.getFirst();
@@ -71,7 +96,38 @@ public class MojangsonParser {
                 return number.intValue() == 0 ? MojangsonByte.valueOf((byte) 0) : MojangsonByte.valueOf((byte) 1);
             }
             else {
-                throw parser.newException("関数 'bool()' の第一引数の型 '" + value.getType() + "' が正しくありません");
+                throw exception("関数 'bool()' の第一引数の型 '" + value.getType() + "' が正しくありません");
+            }
+        },
+        "uuid", (args) -> {
+            if (args.size() != 1) {
+                throw exception("関数 uuid() の引数長は 1 が適切です");
+            }
+
+            final MojangsonValue<?> value = args.getFirst();
+
+            if (value instanceof MojangsonString string) {
+                final UUID uuid;
+                try {
+                    uuid = UUID.fromString(string.value);
+                }
+                catch (IllegalArgumentException e) {
+                    throw exception("'" + string + "' はUUIDとして不正です");
+                }
+
+                final long mostSignificantBits = uuid.getMostSignificantBits();
+                final long leastSignificantBits = uuid.getLeastSignificantBits();
+                final int[] array = new int[]{
+                    (int) (mostSignificantBits >> 32),
+                    (int) mostSignificantBits,
+                    (int) (leastSignificantBits >> 32),
+                    (int) leastSignificantBits
+                };
+
+                return new MojangsonIntArray(array);
+            }
+            else {
+                throw exception("関数 'uuid()' の第一引数の型 '" + value.getType() + "' が正しくありません");
             }
         }
     ));
@@ -105,25 +161,29 @@ public class MojangsonParser {
         STOPPER_ON_STRING.add(COLON);
     }
 
-    private final String text;
+    private String text;
 
     private int location = 0;
 
-    protected MojangsonParser(String text) {
+    private MojangsonParser(String text) {
         this.text = text;
+    }
+
+    public MojangsonParser() {
+        this.text = "";
     }
 
     private boolean isOver() {
         return location >= text.length();
     }
 
-    public MojangsonParseException newException(String message) {
+    private MojangsonParseException exception(String message) {
         return new MojangsonParseException(message, text, location);
     }
 
     private char next(boolean ignorable) {
         if (isOver()) {
-            throw newException("文字列の長さが期待より不足しています");
+            throw exception("文字列の長さが期待より不足しています");
         }
 
         final char next = text.charAt(location++);
@@ -187,7 +247,7 @@ public class MojangsonParser {
 
     private void expect(String next) {
         if (!next(next)) {
-            throw newException("期待された文字列は" + next + "でしたが、テストが偽を返しました");
+            throw exception("期待された文字列は" + next + "でしたが、テストが偽を返しました");
         }
     }
 
@@ -218,7 +278,7 @@ public class MojangsonParser {
         else {
             while (!STOPPER_ON_STRING.contains(current)) {
                 if (SYMBOLS_ON_STRING.contains(current)) {
-                    throw newException("クオーテーションで囲まれていない文字列において利用できない文字("+ current +")を検出しました");
+                    throw exception("クオーテーションで囲まれていない文字列において利用できない文字("+ current +")を検出しました");
                 }
 
                 sb.append(current);
@@ -246,19 +306,18 @@ public class MojangsonParser {
             return null;
         }
 
-        char previous;
         boolean decimalPointAppeared = false;
+        boolean isUnsigned = false;
 
         Function<String, ? extends Number> parser = null;
 
         while (!isOver()) {
-            previous = current;
             current = next(false);
 
             if (NUMBERS.contains(current)) {
                 sb.append(current);
             }
-            else if (NUMBERS.contains(previous) && current == DECIMAL_POINT && !decimalPointAppeared) {
+            else if (current == DECIMAL_POINT && !decimalPointAppeared) {
                 sb.append(current);
                 decimalPointAppeared = true;
             }
@@ -266,8 +325,18 @@ public class MojangsonParser {
                 back();
                 break;
             }
-            else if (NUMBER_PARSERS.containsKey(current)) {
-                parser = NUMBER_PARSERS.get(current);
+            else if (current == SIGNED) {
+                isUnsigned = false;
+            }
+            else if (current == UNSIGNED) {
+                isUnsigned = true;
+            }
+            else if (Character.isAlphabetic(current) && SIGNED_NUMBER_PARSERS.containsKey(Character.toLowerCase(current)) && !isUnsigned) {
+                parser = SIGNED_NUMBER_PARSERS.get(Character.toLowerCase(current));
+                break;
+            }
+            else if (Character.isAlphabetic(current) && UNSIGNED_NUMBER_PARSERS.containsKey(Character.toLowerCase(current)) && isUnsigned) {
+                parser = UNSIGNED_NUMBER_PARSERS.get(Character.toLowerCase(current));
                 break;
             }
             else {
@@ -277,11 +346,15 @@ public class MojangsonParser {
         }
 
         if (!NUMBERS.contains(sb.charAt(sb.length() - 1))) {
-            throw newException("数値は数字で終わる必要があります");
+            throw exception("数値は数字で終わる必要があります");
         }
 
         if (parser == null) {
-            parser = decimalPointAppeared ? DEFAULT_DECIMAL_PARSER : DEFAULT_INT_PARSER;
+            parser = decimalPointAppeared
+                ? DEFAULT_DECIMAL_PARSER
+                : isUnsigned
+                    ? DEFAULT_UNSIGNED_INT_PARSER
+                    : DEFAULT_SIGNED_INT_PARSER;
         }
 
         return MojangsonNumber.upcastedValueOf(parser.apply(sb.toString()));
@@ -331,14 +404,14 @@ public class MojangsonParser {
 
     private void keyValues(MojangsonCompound compound) {
         final String key = string();
-        if (!next(COLON)) throw newException("コロンが必要です");
+        if (!next(COLON)) throw exception("コロンが必要です");
         compound.set(key, value());
 
         final char commaOrBrace = next(true);
 
         if (commaOrBrace == COMMA) keyValues(compound);
         else if (commaOrBrace == COMPOUND_BRACES[1]) back();
-        else throw newException("閉じ括弧が見つかりません");
+        else throw exception("閉じ括弧が見つかりません");
     }
 
     private void elements(MojangsonList list) {
@@ -348,10 +421,10 @@ public class MojangsonParser {
 
         if (commaOrBrace == COMMA) elements(list);
         else if (commaOrBrace == ARRAY_LIST_BRACES[1]) back();
-        else throw newException("閉じ括弧が見つかりません");
+        else throw exception("閉じ括弧が見つかりません");
     }
 
-    private MojangsonValue<?> function(String name, BiFunction<MojangsonParser, List<MojangsonValue<?>>, MojangsonValue<?>> function) {
+    private MojangsonValue<?> function(String name, MojangsonFunctionalOperator function) {
         expect(name);
         expect(FUNCTION_BRACES[0]);
 
@@ -364,7 +437,7 @@ public class MojangsonParser {
 
         expect(FUNCTION_BRACES[1]);
 
-        return function.apply(this, arguments);
+        return function.apply(arguments);
     }
 
     private MojangsonValue<?> value() {
@@ -405,17 +478,23 @@ public class MojangsonParser {
         }
     }
 
-    private void remainingChars() {
-        if (!isOver()) throw newException("解析終了後、末尾に無効な文字列(" + text.substring(location) + ")を検出しました");
+    private void finish() {
+        if (!isOver()) throw exception("解析終了後、末尾に無効な文字列(" + text.substring(location) + ")を検出しました");
+        location = 0;
     }
 
     private MojangsonValue<?> parse() {
         final MojangsonValue<?> value = value();
-        remainingChars();
+        finish();
         return value;
     }
 
-    protected void register(String name, MojangsonFunctionalOperator function) {
+    public MojangsonValue<?> parse(String text) {
+        this.text = text;
+        return parse();
+    }
+
+    public void register(String name, MojangsonFunctionalOperator function) {
         functions.put(name, function);
     }
 
