@@ -37,6 +37,8 @@ public class MojangsonParser {
 
     private static final char[] SIGNED_AND_UNSIGNED = {'s', 'u'};
 
+    private static final char POWER = 'e';
+
     private static final Function<String, ? extends Number> DEFAULT_SIGNED_INT_PARSER = Integer::parseInt;
 
     private static final Function<String, ? extends Number> DEFAULT_UNSIGNED_INT_PARSER = Integer::parseUnsignedInt;
@@ -326,7 +328,10 @@ public class MojangsonParser {
             return null;
         }
 
+        // TODO: hex, binary
+
         boolean decimalPointAppeared = false;
+        int powerPhase = 0;
         final StringBuilder suffixBuilder = new StringBuilder();
 
         while (!isOver()) {
@@ -334,17 +339,33 @@ public class MojangsonParser {
 
             if (NUMBERS.contains(current)) {
                 numberBuilder.append(current);
+                if (powerPhase == 1) {
+                    powerPhase = 2;
+                }
             }
             else if (current == DECIMAL_POINT && !decimalPointAppeared) {
                 numberBuilder.append(current);
                 decimalPointAppeared = true;
+
+                if (powerPhase >= 1) {
+                    throw exception("累乗文字のあとには整数が必要です");
+                }
             }
             else if (SYMBOLS_ON_STRING.contains(current)) {
+                if (powerPhase == 1) throw exception("累乗文字のあとには整数が必要です");
                 back();
-
                 break;
             }
-            else if (Character.isAlphabetic(current)) {
+            else if (Character.isAlphabetic(current) && Character.toLowerCase(current) == POWER) {
+                if (powerPhase == 0) {
+                    powerPhase = 1;
+                    numberBuilder.append(POWER);
+                }
+                else {
+                    throw exception("累乗文字が重複しています");
+                }
+            }
+            else if (powerPhase != 1 && Character.isAlphabetic(current)) {
                 suffixBuilder.append(Character.toLowerCase(current));
                 if (suffixBuilder.length() >= 2) break;
             }
@@ -364,7 +385,7 @@ public class MojangsonParser {
         final Function<String, ? extends Number> parser;
 
         if (suffix.isEmpty()) {
-            parser = decimalPointAppeared ? DEFAULT_DECIMAL_PARSER : DEFAULT_SIGNED_INT_PARSER;
+            parser = (decimalPointAppeared || powerPhase == 2) ? DEFAULT_DECIMAL_PARSER : DEFAULT_SIGNED_INT_PARSER;
         }
         else if (suffix.length() == 1) {
             final char key = suffix.charAt(0);
