@@ -1,0 +1,137 @@
+package io.github.takenoko4096.mojangson.values;
+
+import io.github.takenoko4096.mojangson.MojangsonValue;
+import io.github.takenoko4096.mojangson.MojangsonValueType;
+import io.github.takenoko4096.mojangson.MojangsonValueTypes;
+import org.jspecify.annotations.NullMarked;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+@NullMarked
+public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonValue<List<T>> implements MojangsonIterable<T> {
+    private final MojangsonValueType<T> type;
+
+    public TypedMojangsonList(MojangsonValueType<T> type, List<T> list) {
+        super(list);
+        this.type = type;
+    }
+
+    public TypedMojangsonList(MojangsonValueType<T> type) {
+        this(type, new ArrayList<>());
+    }
+
+    @Override
+    public MojangsonValueType<?> getType() {
+        return MojangsonValueTypes.LIST;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
+    @Override
+    public boolean has(int index) {
+        if (index >= 0) return index < value.size();
+        else if (value.size() + index >= 0) return has(value.size() + index);
+        else return false;
+    }
+
+    protected boolean checkTypeAt(int index) {
+        if (!has(index)) {
+            throw new IllegalArgumentException("インデックス '" + index + "' は存在しません");
+        }
+
+        if (index >= 0) return MojangsonValueType.get(value.get(index)).equals(type);
+        else return MojangsonValueType.get(value.get(value.size() + index)).equals(type);
+    }
+
+    public T get(int index) {
+        if (!has(index)) {
+            throw new IllegalArgumentException("インデックス '" + index + "' は存在しません");
+        }
+
+        if (!checkTypeAt(index)) {
+            throw new IllegalArgumentException("インデックス '" + index + "' は期待される型の値と紐づけられていません");
+        }
+
+        if (index >= 0) return value.get(index);
+        else return value.get(value.size() + index);
+    }
+
+    public void add(int index, T value) {
+        if (index > this.value.size()) {
+            throw new IllegalArgumentException("そのインデックスは使用できません");
+        }
+
+        if (index >= 0) this.value.add(index, value);
+        else this.value.add(this.value.size() + index, value);
+    }
+
+    public void add(T value) {
+        this.value.add(value);
+    }
+
+    public void set(int index, T value) {
+        if (index >= this.value.size()) {
+            throw new IllegalArgumentException("そのインデックスは使用できません");
+        }
+
+        if (index >= 0) this.value.set(index, value);
+        else this.value.set(this.value.size() + index, value);
+    }
+
+    public boolean delete(int index) {
+        if (has(index)) {
+            if (index >= 0) value.remove(index);
+            else value.remove(this.value.size() + index);
+            return true;
+        }
+        else return false;
+    }
+
+    @Override
+    public boolean clear() {
+        if (isEmpty()) return false;
+        else {
+            value.clear();
+            return true;
+        }
+    }
+
+    @Override
+    public int length() {
+        return value.size();
+    }
+
+    @Override
+    public TypedMojangsonList<T> copy() {
+        return untyped().copy().typed(type);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        final List<T> list = new ArrayList<>();
+
+        for (int i = 0; i < this.value.size(); i++) {
+            list.add(get(i));
+        }
+
+        return list.iterator();
+    }
+
+    public MojangsonList untyped() {
+        final MojangsonList list = new MojangsonList();
+        for (int i = 0; i < length(); i++) {
+            list.add(get(i));
+        }
+        return list;
+    }
+
+    @Override
+    public String toString() {
+        return type + super.toString();
+    }
+}
