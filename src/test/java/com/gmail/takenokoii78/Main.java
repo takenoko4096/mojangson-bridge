@@ -34,7 +34,7 @@ void main() {
 	IO.println(MojangsonSerializer.serialize((MojangsonStructure) p.parse(
         """
             {
-                key: bool(bool(true)),
+                key: bool(bool(1ub)),
                 s: false,
                 d: "false",
                 c: 'true',
@@ -42,7 +42,7 @@ void main() {
                 n: strUns(2147483649u),
                 f: 9223372036854775808uL,
                 g: 9223372036854775807L,
-                i: 2147483648ui
+                i: 256ub
             }
             """
     )));
