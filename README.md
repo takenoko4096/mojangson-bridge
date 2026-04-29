@@ -2,6 +2,10 @@
 
 json <-> mojangson <-> nbt の相互変換
 
+## Javadocs
+
+- [0.1.0](https://takenoko4096.github.io/mojangson-bridge/0.1.0)
+
 ## `pom.xml`
 
 ```xml
