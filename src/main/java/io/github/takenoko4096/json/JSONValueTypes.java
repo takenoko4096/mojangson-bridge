@@ -10,10 +10,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * すべての型オブジェクトがこのクラスの静的フィールドで定義されています。
+ * @see JSONValueType
+ */
 @NullMarked
 public final class JSONValueTypes {
     private JSONValueTypes() {}
 
+    /**
+     * booleanに対応。
+     * @see JSONBoolean
+     */
     public static final JSONValueType<JSONBoolean> BOOLEAN = new JSONValueType<>(JSONBoolean.class) {
         @Override
         public JSONBoolean toJSON(@Nullable Object value) {
@@ -23,6 +31,10 @@ public final class JSONValueTypes {
         }
     };
 
+    /**
+     * java.lang.Numberに対応。
+     * @see JSONNumber
+     */
     public static final JSONValueType<JSONNumber> NUMBER = new JSONValueType<>(JSONNumber.class) {
         @Override
         public JSONNumber toJSON(@Nullable Object value) {
@@ -32,6 +44,10 @@ public final class JSONValueTypes {
         }
     };
 
+    /**
+     * java.lang.Stringに対応。
+     * @see JSONString
+     */
     public static final JSONValueType<JSONString> STRING = new JSONValueType<>(JSONString.class) {
         @Override
         public JSONString toJSON(@Nullable Object value) {
@@ -44,6 +60,10 @@ public final class JSONValueTypes {
         }
     };
 
+    /**
+     * java.util.Mapに対応。
+     * @see JSONObject
+     */
     public static final JSONValueType<JSONObject> OBJECT = new JSONValueType<>(JSONObject.class) {
         @Override
         public JSONObject toJSON(@Nullable Object value) {
@@ -64,10 +84,14 @@ public final class JSONValueTypes {
 
                 return new JSONObject(object);
             }
-            else throw new IllegalArgumentException("value is not a json object value: " + value.getClass().getName());
+            else throw new IllegalArgumentException("value is not a json object value: " + (value == null ? null : value.getClass().getName()));
         }
     };
 
+    /**
+     * java.util.Listに対応。
+     * @see JSONArray
+     */
     public static final JSONValueType<JSONArray> ARRAY = new JSONValueType<>(JSONArray.class) {
         @Override
         public JSONArray toJSON(@Nullable Object value) {
@@ -168,14 +192,16 @@ public final class JSONValueTypes {
 
                     return new JSONArray(listOfJSONValue);
                 }
-                case null -> {
-                    throw new IllegalArgumentException("value is not a json array value: null");
-                }
+                case null -> throw new IllegalArgumentException("value is not a json array value: null");
                 default -> throw new IllegalArgumentException("value is not a json array value: " + value.getClass().getName());
             }
         }
     };
 
+    /**
+     * nullに対応。
+     * @see JSONNull
+     */
     public static final JSONValueType<JSONNull> NULL = new JSONValueType<>(JSONNull.class) {
         @Override
         public JSONNull toJSON(@Nullable Object value) {

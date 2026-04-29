@@ -9,6 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
 
+/**
+ * json文字列を解釈してjson構造に変換するクラス。
+ */
 @NullMarked
 public class JSONParser {
     private static final Set<Character> WHITESPACE = Set.of(' ', '\n');
@@ -316,7 +319,13 @@ public class JSONParser {
         return value;
     }
 
-    public JSONValue<?> parse(String text) {
+    /**
+     * 引数に渡された文字列をjsonとしてパースします。
+     * @param text json
+     * @return json値
+     * @throws JSONParseException jsonが無効な場合。
+     */
+    public JSONValue<?> parse(String text) throws JSONParseException {
         this.text = text;
         return parse();
     }
@@ -330,14 +339,32 @@ public class JSONParser {
         else throw new IllegalArgumentException("期待された型(" + clazz.getName() + ")と取得した値(" + value.getClass().getName() + ")が一致しません");
     }
 
+    /**
+     * 引数に渡された文字列をjsonオブジェクトとしてパースします。
+     * @param text json
+     * @return jsonオブジェクト
+     * @throws JSONParseException jsonが無効な場合。
+     */
     public static JSONObject object(String text) throws JSONParseException {
         return parseAs(text, JSONObject.class);
     }
 
+    /**
+     * 引数に渡された文字列をjson配列としてパースします。
+     * @param text json
+     * @return json配列
+     * @throws JSONParseException jsonが無効な場合。
+     */
     public static JSONArray array(String text) throws JSONParseException {
         return parseAs(text, JSONArray.class);
     }
 
+    /**
+     * 引数に渡された文字列をjson構造としてパースします。
+     * @param text json
+     * @return json構造
+     * @throws JSONParseException jsonが無効な場合。
+     */
     public static JSONStructure structure(String text) throws JSONParseException {
         return parseAs(text, JSONStructure.class);
     }

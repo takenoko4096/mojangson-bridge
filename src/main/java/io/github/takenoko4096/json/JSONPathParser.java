@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * jsonパスをパースするクラス。
+ */
 @NullMarked
 public class JSONPathParser {
     private static final Set<Character> WHITESPACE = Set.of(' ');
@@ -22,12 +25,12 @@ public class JSONPathParser {
 
     private static final String EMPTY_STRING = "";
 
-    private final String text;
+    private String text;
 
     private int location = -1;
 
-    private JSONPathParser(String text) {
-        this.text = text;
+    public JSONPathParser() {
+        this.text = "";
     }
 
     private JSONParseException exception(String message) {
@@ -302,17 +305,25 @@ public class JSONPathParser {
         return node;
     }
 
-    private void extraChars() {
+    private void finish() {
         if (!isOver()) throw exception("解析終了後、末尾に無効な文字列(" + text.substring(location) + ")を検出しました");
+        this.location = 0;
     }
 
     private JSONPath parse() {
         final JSONPathNode<?, ?> rootNode = root();
-        extraChars();
+        finish();
         return new JSONPath(rootNode);
     }
 
-    protected static JSONPath parse(String path) throws JSONParseException {
-        return new JSONPathParser(path).parse();
+    /**
+     * 渡された文字列をjsonパスとしてパースします。
+     * @param text jsonパス
+     * @return jsonパスオブジェクト
+     * @throws JSONParseException jsonパスが無効な場合。
+     */
+    public JSONPath parse(String text) throws JSONParseException {
+        this.text = text;
+        return parse();
     }
 }

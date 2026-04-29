@@ -7,6 +7,9 @@ import io.github.takenoko4096.json.values.JSONStructure;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * json構造を文字列にシリアライズするクラス。
+ */
 @NullMarked
 public final class JSONSerializer {
     private final int indentationSpaceCount;
@@ -149,6 +152,11 @@ public final class JSONSerializer {
 
     private static final String NULL = "null";
 
+    /**
+     * json構造を文字列としてシリアライズします。
+     * @param structure json構造体
+     * @return 改行・空白文字によるインデントを含む文字列。
+     */
     public static String serialize(JSONStructure structure) {
         return new JSONSerializer(structure, 4).serialize().toString();
     }

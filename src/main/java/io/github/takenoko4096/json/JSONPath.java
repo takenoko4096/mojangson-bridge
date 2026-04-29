@@ -10,6 +10,9 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * json構造の任意の位置にアクセスするためのパスを表現します。
+ */
 @NullMarked
 public final class JSONPath {
     private final JSONPathNode<?, ?> root;
@@ -114,6 +117,10 @@ public final class JSONPath {
         }, isForcedAccess);
     }
 
+    /**
+     * jsonパスの長さを返します。
+     * @return jsonパスの長さ。例えば、 "foo.bar[0].baz" は4を返します。
+     */
     public int length() {
         JSONPathNode<?, ?> node = root;
 
@@ -126,6 +133,12 @@ public final class JSONPath {
         return i;
     }
 
+    /**
+     * jsonパスの部分パスを作成します。
+     * @param begin 開始位置。
+     * @param end 終了位置。この値は含まれません。
+     * @return 切り取られた部分パス。完全なコピーであり、元のオブジェクトとは関連しません。
+     */
     public JSONPath slice(int begin, int end) {
         if (begin < 0 || end > length() || begin > end) {
             throw new IllegalArgumentException("インデックスが範囲外です");
@@ -158,6 +171,10 @@ public final class JSONPath {
         return new JSONPath(beginNode);
     }
 
+    /**
+     * 終端のアクセスを取り除いた新しいパスを返します。
+     * @return slice(0, length() - 2) の結果に等しくなります。
+     */
     public JSONPath parent() {
         return slice(0, length() - 2);
     }
@@ -186,20 +203,37 @@ public final class JSONPath {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (obj == null) return false;
         else if (obj == this) return true;
         else if (obj.getClass() != getClass()) return false;
         else return toString().equals(obj.toString());
     }
 
+    /**
+     * 文字列からjsonパスを作成します。
+     * @param path jsonパス
+     * @return jsonパスオブジェクト
+     * @throws JSONParseException パスが不正な場合。
+     */
     public static JSONPath of(String path) throws JSONParseException {
-        return JSONPathParser.parse(path);
+        return new JSONPathParser().parse(path);
     }
 
+    /**
+     * jsonパスが構造にアクセスする際に作成される特定のオブジェクトへの参照を表現します。
+     * @param <S> アクセス位置の親の構造。
+     * @param <T> アクセスするために必要なキーまたは添え字。
+     */
     public static abstract class JSONPathReference<S extends JSONStructure, T> {
+        /**
+         * アクセス位置の親の構造。
+         */
         protected final S structure;
 
+        /**
+         * アクセスするために必要なキーまたは添え字。
+         */
         protected final T parameter;
 
         protected JSONPathReference(S structure, T parameter) {

@@ -2,6 +2,11 @@ package io.github.takenoko4096.json;
 
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * JSONParserまたはJSONPathParserによって投げられるパース例外。
+ * @see JSONParser
+ * @see JSONPathParser
+ */
 @NullMarked
 public class JSONParseException extends RuntimeException {
     protected JSONParseException(String message, String json, int location) {
