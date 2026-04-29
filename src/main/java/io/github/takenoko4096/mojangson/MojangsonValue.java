@@ -1,9 +1,14 @@
 package io.github.takenoko4096.mojangson;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * mojangson構造を構成するすべての型のスーパークラス。
+ * @param <T> Javaにおける値。String、Integer, Mapなど。
+ */
 @NullMarked
 public abstract class MojangsonValue<T> {
     protected final T value;
@@ -13,7 +18,7 @@ public abstract class MojangsonValue<T> {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MojangsonValue<?> mv = (MojangsonValue<?>) o;
