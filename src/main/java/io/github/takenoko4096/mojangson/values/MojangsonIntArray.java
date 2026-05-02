@@ -71,6 +71,11 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
         return getView((arr, ind, val) -> arr[ind] = (int) val);
     }
 
+    /**
+     * MojangsonListからMojangsonIntArrayへの変換を試みます。
+     * @param list MojangsonIntのみを要素に持つリスト。
+     * @return MojangsonIntArray。
+     */
     public static MojangsonIntArray from(MojangsonList list) {
         final int[] ints = new int[list.length()];
 

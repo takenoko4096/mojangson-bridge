@@ -12,7 +12,7 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
         super(value);
 
         if (!value.getClass().isArray()) {
-            throw new IllegalArgumentException("配列型でない値はMojangsonArrayに変換できません");
+            throw new IllegalArgumentException("MojangsonArrayのインスタンス化に失敗しました: 配列型でない値はMojangsonArrayに変換できません");
         }
     }
 
@@ -28,6 +28,11 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
      */
     public abstract T toArray();
 
+    /**
+     * リスト型のビューを作成します。
+     * @param setter セッター関数。第一引数の配列の第二引数の添え字に対応する位置に対して第三引数を値を代入することが期待されます。
+     * @return リスト型のビュー。
+     */
     protected MojangsonList getView(TriConsumer<T, Integer, Object> setter) {
         final T array = value;
 
@@ -69,6 +74,10 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
         };
     }
 
+    /**
+     * この配列へのビューを返します。
+     * @return リスト型のビュー。このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。
+     */
     public abstract MojangsonList listView();
 
     @FunctionalInterface

@@ -240,7 +240,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
 
         for (int i = 0; i < length(); i++) {
             if (!getTypeAt(i).equals(type)) {
-                throw new IllegalStateException("その型の値でない要素が見つかりました: " + getTypeAt(i));
+                throw new IllegalStateException("MojangsonListの型付きリストへの変換に失敗しました: " + type + " 型の値でない要素がインデックス " + i + " に見つかりました: " + getTypeAt(i));
             }
 
             final T element = get(i, type);
@@ -248,5 +248,20 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
         }
 
         return array;
+    }
+
+    /**
+     * IterableをMojangsonArrayに変換します。
+     * @param iterable Iterable。
+     * @return MojangsonArray。
+     */
+    public static MojangsonList valueOf(Iterable<?> iterable) {
+        final List<MojangsonValue<?>> list = new ArrayList<>();
+
+        for (final var e : iterable) {
+            list.add(valueOf(e));
+        }
+
+        return new MojangsonList(list);
     }
 }

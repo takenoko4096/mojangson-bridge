@@ -1,8 +1,11 @@
 package io.github.takenoko4096.mojangson;
 
+import io.github.takenoko4096.mojangson.values.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -42,5 +45,23 @@ public abstract class MojangsonValue<T> {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    public static MojangsonValue<?> valueOf(@Nullable Object value) {
+        return switch (value) {
+            case null -> MojangsonNull.NULL;
+            case Boolean v -> MojangsonByte.valueOf(v ? 1 : 0);
+            case Number v -> MojangsonNumber.upcastValueOf(v);
+            case Character v -> MojangsonString.valueOf(v);
+            case String v -> MojangsonString.valueOf(v);
+            case byte[] v -> new MojangsonByteArray(v);
+            case int[] v -> new MojangsonIntArray(v);
+            case long[] v -> new MojangsonLongArray(v);
+            case Map<?, ?> v -> MojangsonCompound.valueOf(v);
+            case Object[] v -> MojangsonList.valueOf(Arrays.asList(v));
+            case Iterable<?> v -> MojangsonList.valueOf(v);
+            case MojangsonValue<?> v -> v;
+            default -> throw new IllegalArgumentException("mojangson値に変換できない型です: " + value.getClass().getName());
+        };
     }
 }

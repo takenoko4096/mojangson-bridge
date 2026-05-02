@@ -71,6 +71,11 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
         return getView((arr, ind, val) -> arr[ind] = (long) val);
     }
 
+    /**
+     * MojangsonListからMojangsonLongArrayへの変換を試みます。
+     * @param list MojangsonLongのみを要素に持つリスト。
+     * @return MojangsonLongArray。
+     */
     public static MojangsonLongArray from(MojangsonList list) {
         final long[] longs = new long[list.length()];
 

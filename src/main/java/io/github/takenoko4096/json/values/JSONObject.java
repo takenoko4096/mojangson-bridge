@@ -281,7 +281,7 @@ public final class JSONObject extends JSONValue<Map<String, JSONValue<?>>> imple
         final var map = new HashMap<String, JSONValue<?>>();
 
         for (final var kv : value.entrySet()) {
-            map.put(kv.getKey().toString(), JSONValue.valueOf(kv.getValue()));
+            map.put(kv.getKey().toString(), valueOf(kv.getValue()));
         }
 
         return new JSONObject(map);

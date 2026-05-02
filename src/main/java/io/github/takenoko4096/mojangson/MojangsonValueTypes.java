@@ -24,7 +24,7 @@ public final class MojangsonValueTypes {
         public MojangsonByte toMojangson(@Nullable Object value) {
             return switch (value) {
                 case MojangsonByte mojangsonByte -> mojangsonByte;
-                case Byte byteValue -> MojangsonByte.valueOf(byteValue);
+                case Byte byteValue -> MojangsonByte.valueOf(byteValue.byteValue());
                 case Boolean booleanValue -> MojangsonByte.valueOf(booleanValue ? (byte) 1 : (byte) 0);
                 case null, default -> throw new IllegalArgumentException("byte型でない値はMojangsonByteに変換できません");
             };
@@ -39,7 +39,7 @@ public final class MojangsonValueTypes {
         @Override
         public MojangsonShort toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonShort mojangsonShort) return mojangsonShort;
-            else if (value instanceof Short shortValue) return MojangsonShort.valueOf(shortValue);
+            else if (value instanceof Short shortValue) return MojangsonShort.valueOf(shortValue.shortValue());
             else throw new IllegalArgumentException("short型でない値はMojangsonShortに変換できません");
         }
     };
@@ -52,7 +52,7 @@ public final class MojangsonValueTypes {
         @Override
         public MojangsonInt toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonInt mojangsonInt) return mojangsonInt;
-            else if (value instanceof Integer intValue) return MojangsonInt.valueOf(intValue);
+            else if (value instanceof Integer intValue) return MojangsonInt.valueOf(intValue.intValue());
             else throw new IllegalArgumentException("int型でない値はMojangsonIntに変換できません");
         }
     };
@@ -65,7 +65,7 @@ public final class MojangsonValueTypes {
         @Override
         public MojangsonLong toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonLong mojangsonLong) return mojangsonLong;
-            else if (value instanceof Long longValue) return MojangsonLong.valueOf(longValue);
+            else if (value instanceof Long longValue) return MojangsonLong.valueOf(longValue.longValue());
             else throw new IllegalArgumentException("long型でない値はMojangsonLongに変換できません");
         }
     };
@@ -78,7 +78,7 @@ public final class MojangsonValueTypes {
         @Override
         public MojangsonFloat toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonFloat mojangsonFloat) return mojangsonFloat;
-            else if (value instanceof Float floatValue) return MojangsonFloat.valueOf(floatValue);
+            else if (value instanceof Float floatValue) return MojangsonFloat.valueOf(floatValue.floatValue());
             else throw new IllegalArgumentException("float型でない値はMojangsonFloatに変換できません");
         }
     };
@@ -91,7 +91,7 @@ public final class MojangsonValueTypes {
         @Override
         public MojangsonDouble toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonDouble mojangsonDouble) return mojangsonDouble;
-            else if (value instanceof Double doubleValue) return MojangsonDouble.valueOf(doubleValue);
+            else if (value instanceof Double doubleValue) return MojangsonDouble.valueOf(doubleValue.doubleValue());
             else throw new IllegalArgumentException("double型でない値はMojangsonDoubleに変換できません");
         }
     };
@@ -106,7 +106,7 @@ public final class MojangsonValueTypes {
             return switch (value) {
                 case MojangsonString mojangsonString -> mojangsonString;
                 case String stringValue -> MojangsonString.valueOf(stringValue);
-                case Character characterValue -> MojangsonString.valueOf(characterValue);
+                case Character characterValue -> MojangsonString.valueOf(characterValue.charValue());
                 case null, default ->
                     throw new IllegalArgumentException("String型でない値はMojangsonStringに変換できません");
             };

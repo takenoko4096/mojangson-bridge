@@ -166,7 +166,7 @@ public class MojangsonParser {
             return (byte) value;
         }
         else {
-            throw exception(value + " は byte の値として不正です");
+            throw exception(value + " は unsigned byte の値として不正です");
         }
     }
 
@@ -184,7 +184,7 @@ public class MojangsonParser {
             return (short) value;
         }
         else {
-            throw exception(value + " は short の値として不正です");
+            throw exception(value + " は unsigned short の値として不正です");
         }
     }
 
@@ -194,13 +194,16 @@ public class MojangsonParser {
 
     private final boolean useNull;
 
-    public MojangsonParser(boolean useNull) {
+    private final boolean useOnlyTypedList;
+
+    public MojangsonParser(boolean useNull, boolean useOnlyTypedList) {
         this.text = "";
         this.useNull = useNull;
+        this.useOnlyTypedList = useOnlyTypedList;
     }
 
     public MojangsonParser() {
-        this(false);
+        this(false, true);
     }
 
     private boolean isOver() {
@@ -470,9 +473,16 @@ public class MojangsonParser {
             return arrayConverter == null ? list : arrayConverter.apply(list);
         }
 
-        elements(list);
+        do {
+            list.add(value());
+        }
+        while (next(COMMA));
 
         expect(ARRAY_LIST_BRACES[1]);
+
+        if (!list.isEmpty() && useOnlyTypedList) {
+            list.typed(list.getTypeAt(0));
+        }
 
         return arrayConverter == null ? list : arrayConverter.apply(list);
     }
@@ -486,16 +496,6 @@ public class MojangsonParser {
 
         if (commaOrBrace == COMMA) keyValues(compound);
         else if (commaOrBrace == COMPOUND_BRACES[1]) back();
-        else throw exception("閉じ括弧が見つかりません");
-    }
-
-    private void elements(MojangsonList list) {
-        list.add(value());
-
-        final char commaOrBrace = next(true);
-
-        if (commaOrBrace == COMMA) elements(list);
-        else if (commaOrBrace == ARRAY_LIST_BRACES[1]) back();
         else throw exception("閉じ括弧が見つかりません");
     }
 

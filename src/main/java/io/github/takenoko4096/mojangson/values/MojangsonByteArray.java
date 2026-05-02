@@ -71,6 +71,11 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
         return getView((arr, ind, val) -> arr[ind] = (byte) val);
     }
 
+    /**
+     * MojangsonListからMojangsonByteArrayへの変換を試みます。
+     * @param list MojangsonByteのみを要素に持つリスト。
+     * @return MojangsonByteArray。
+     */
     public static MojangsonByteArray from(MojangsonList list) {
         final byte[] bytes = new byte[list.length()];
 

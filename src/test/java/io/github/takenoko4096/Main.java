@@ -1,49 +1,26 @@
-import io.github.takenoko4096.json.JSONParser;
-import io.github.takenoko4096.json.JSONPath;
-import io.github.takenoko4096.json.JSONValueTypes;
 import io.github.takenoko4096.mojangson.MojangsonParser;
 import io.github.takenoko4096.mojangson.MojangsonPath;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
+import io.github.takenoko4096.mojangson.values.MojangsonCompound;
 
 void main() {
     System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
     System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
 
-    IO.println("Hello, World!");
-
-    var s = JSONParser.object(
+    var s2 = new MojangsonParser(true, true).parse(
         """
         {
-            "key": {
-                "array": [
+            key: {
+                array: [
                     {
-                        "foo": ["bar", "baz"]
+                        foo: [bar, baz, us]
                     }
                 ]
             }
         }
-        """
+        """,
+        MojangsonCompound.class
     );
 
-    System.out.println(s.get(JSONPath.of("key.array[{\"foo\":[\"baz\"]}].foo[0]"), JSONValueTypes.STRING));
-
-    var s2 = MojangsonParser.compound(
-        """
-        {
-            "key": {
-                "array": [
-                    {
-                        "foo": ["bar", "baz"]
-                    }
-                ]
-            }
-        }
-        """
-    );
-
-    JSONParser.array("[0, 1, 2, 3, 4, 5]")
-        .typed(JSONValueTypes.NUMBER)
-        .forEach(System.out::println);
-
-    System.out.println(s2.get(MojangsonPath.of("key.array[{\"foo\":[\"baz\"]}].foo[0]"), MojangsonValueTypes.STRING));
+    System.out.println(s2.get(MojangsonPath.of("key.array[{\"foo\":[\"baz\"]}].foo[2]"), MojangsonValueTypes.STRING));
 }

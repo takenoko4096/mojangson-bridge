@@ -5,6 +5,7 @@ import io.github.takenoko4096.json.values.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
@@ -59,9 +60,10 @@ public abstract class JSONValue<T> {
             case Number n -> JSONNumber.valueOf(n);
             case String s -> JSONString.valueOf(s);
             case Map<?, ?> m -> JSONObject.valueOf(m);
+            case Object[] i -> JSONArray.valueOf(Arrays.asList(i));
             case Iterable<?> i -> JSONArray.valueOf(i);
             case JSONValue<?> j -> j;
-            default -> JSONString.valueOf(value.getClass().getName());
+            default -> throw new IllegalArgumentException("json値に変換できない型です: " + value.getClass().getName());
         };
     }
 }
