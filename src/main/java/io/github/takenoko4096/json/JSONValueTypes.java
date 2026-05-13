@@ -27,7 +27,7 @@ public final class JSONValueTypes {
         public JSONBoolean toJSON(@Nullable Object value) {
             if (value instanceof JSONBoolean v) return v;
             else if (value instanceof Boolean v) return JSONBoolean.valueOf((boolean) v);
-            else throw new IllegalArgumentException("value is not a boolean value");
+            else throw new IllegalArgumentException("value is not name boolean value");
         }
     };
 
@@ -40,7 +40,7 @@ public final class JSONValueTypes {
         public JSONNumber toJSON(@Nullable Object value) {
             if (value instanceof JSONNumber v) return v;
             else if (value instanceof Number v) return JSONNumber.valueOf(v);
-            else throw new IllegalArgumentException("value is not a number value");
+            else throw new IllegalArgumentException("value is not name number value");
         }
     };
 
@@ -55,7 +55,7 @@ public final class JSONValueTypes {
                 case JSONString v -> v;
                 case String v -> JSONString.valueOf(v);
                 case Character v -> JSONString.valueOf(String.valueOf(v));
-                case null, default -> throw new IllegalArgumentException("value is not a string value");
+                case null, default -> throw new IllegalArgumentException("value is not name string value");
             };
         }
     };
@@ -78,13 +78,13 @@ public final class JSONValueTypes {
                         object.put(string, JSONValueType.get(val).toJSON(val));
                     }
                     else {
-                        throw new IllegalArgumentException("A key of Map is not a string");
+                        throw new IllegalArgumentException("A key of Map is not name string");
                     }
                 }
 
                 return new JSONObject(object);
             }
-            else throw new IllegalArgumentException("value is not a json object value: " + (value == null ? null : value.getClass().getName()));
+            else throw new IllegalArgumentException("value is not name json object value: " + (value == null ? null : value.getClass().getName()));
         }
     };
 
@@ -192,8 +192,8 @@ public final class JSONValueTypes {
 
                     return new JSONArray(listOfJSONValue);
                 }
-                case null -> throw new IllegalArgumentException("value is not a json array value: null");
-                default -> throw new IllegalArgumentException("value is not a json array value: " + value.getClass().getName());
+                case null -> throw new IllegalArgumentException("value is not name json array value: null");
+                default -> throw new IllegalArgumentException("value is not name json array value: " + value.getClass().getName());
             }
         }
     };
@@ -207,7 +207,7 @@ public final class JSONValueTypes {
         public JSONNull toJSON(@Nullable Object value) {
             if (value instanceof JSONNull jsonNull) return jsonNull;
             else if (value == null) return JSONNull.NULL;
-            else throw new IllegalArgumentException("value is not a null value");
+            else throw new IllegalArgumentException("value is not name null value");
         }
     };
 }

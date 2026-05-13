@@ -17,6 +17,10 @@ public abstract class JSONValueType<T extends JSONValue<?>> {
      */
     protected final Class<T> clazz;
 
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param clazz クラスオブジェクト。
+     */
     protected JSONValueType(Class<T> clazz) {
         this.clazz = clazz;
     }

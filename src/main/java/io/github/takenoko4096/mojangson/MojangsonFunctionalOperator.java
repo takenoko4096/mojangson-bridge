@@ -7,6 +7,4 @@ import java.util.function.Function;
  * mojangsonにおける関数を表現します。
  */
 @FunctionalInterface
-public interface MojangsonFunctionalOperator extends Function<List<MojangsonValue<?>>, MojangsonValue<?>> {
-
-}
+public interface MojangsonFunctionalOperator extends Function<List<MojangsonValue<?>>, MojangsonValue<?>> {}

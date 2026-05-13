@@ -58,15 +58,20 @@ public final class MojangsonPath {
 
         while (node.child != null) {
             MojangsonStructure nextStruct = checkedAccess(node, currentStruct, (a, b) -> {
-                if (a instanceof MojangsonCompound compound1 && !compound1.has((String) b)) {
-                    return null;
+                final MojangsonValue<?> value;
+                switch (a) {
+                    case MojangsonCompound obj: {
+                        if (!obj.has((String) b)) return null;
+                        value = obj.get((String) b, obj.getTypeOf((String) b));
+                        break;
+                    }
+                    case MojangsonList arr: {
+                        value = arr.get((Integer) b, arr.getTypeAt((Integer) b));
+                        break;
+                    }
+                    default: throw new IllegalStateException("NEVER HAPPENS");
                 }
 
-                final MojangsonValue<?> value = switch (a) {
-                    case MojangsonCompound obj -> obj.get((String) b, obj.getTypeOf((String) b));
-                    case MojangsonList arr -> arr.get((Integer) b, arr.getTypeAt((Integer) b));
-                    default -> throw new IllegalStateException("NEVER HAPPENS");
-                };
                 if (value instanceof MojangsonStructure structure) {
                     return structure;
                 }
@@ -232,6 +237,11 @@ public final class MojangsonPath {
          */
         protected final T parameter;
 
+        /**
+         * サブクラスのためのコンストラクタ。
+         * @param structure アクセス位置の親の構造。
+         * @param parameter アクセスするために必要なキーまたは添え字。
+         */
         protected MojangsonPathReference(S structure, T parameter) {
             this.structure = structure;
             this.parameter = parameter;

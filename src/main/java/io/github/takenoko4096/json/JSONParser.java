@@ -65,10 +65,9 @@ public class JSONParser {
 
     private int location = 0;
 
-    private JSONParser(String text) {
-        this.text = text;
-    }
-
+    /**
+     * 新しくパーサーを作成します。
+     */
     public JSONParser() {
         this.text = "";
     }
@@ -321,17 +320,15 @@ public class JSONParser {
 
     /**
      * 引数に渡された文字列をjsonとしてパースします。
-     * @param text json
-     * @return json値
+     * @param text json。
+     * @param clazz クラス。
+     * @param <T> 戻り値の型。
+     * @return パースで得られたjsonの値。
      * @throws JSONParseException jsonが無効な場合。
      */
-    public JSONValue<?> parse(String text) throws JSONParseException {
+    public <T extends JSONValue<?>> T parse(String text, Class<T> clazz) throws JSONParseException {
         this.text = text;
-        return parse();
-    }
-
-    private static <T> T parseAs(String text, Class<T> clazz) {
-        final JSONValue<?> value = new JSONParser(text).parse();
+        final JSONValue<?> value = parse();
 
         if (clazz.isInstance(value)) {
             return clazz.cast(value);
@@ -346,7 +343,7 @@ public class JSONParser {
      * @throws JSONParseException jsonが無効な場合。
      */
     public static JSONObject object(String text) throws JSONParseException {
-        return parseAs(text, JSONObject.class);
+        return new JSONParser().parse(text, JSONObject.class);
     }
 
     /**
@@ -356,7 +353,7 @@ public class JSONParser {
      * @throws JSONParseException jsonが無効な場合。
      */
     public static JSONArray array(String text) throws JSONParseException {
-        return parseAs(text, JSONArray.class);
+        return new JSONParser().parse(text, JSONArray.class);
     }
 
     /**
@@ -366,6 +363,9 @@ public class JSONParser {
      * @throws JSONParseException jsonが無効な場合。
      */
     public static JSONStructure structure(String text) throws JSONParseException {
-        return parseAs(text, JSONStructure.class);
+        final JSONValue<?> value = new JSONParser().parse(text, JSONValue.class);
+
+        if (value instanceof JSONStructure structure) return structure;
+        else throw new IllegalArgumentException("期待された型(" + JSONStructure.class.getName() + ")と取得した値(" + value.getClass().getName() + ")が一致しません");
     }
 }

@@ -10,13 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 型付きのJSONArray。このクラスにラップされる要素はすべてT型であることが確約されます。
+ * json構造における配列を表現します。
+ * 型付きのJSONArrayであり、このクラスにラップされる要素はすべてT型であることが確約されます。
  * @param <T> 要素の型。
+ * @see JSONArray
  */
 @NullMarked
 public class TypedJSONArray<T extends JSONValue<?>> extends JSONValue<List<T>> implements JSONIterable<T> {
     private final JSONValueType<T> type;
 
+    /**
+     * 要素の型とJSONValueのListからTypedJSONArrayを作成します。
+     * @param type 要素の型を表現するオブジェクト。
+     * @param list 元となるList。
+     */
     public TypedJSONArray(JSONValueType<T> type, List<T> list) {
         super(new ArrayList<>(list));
         this.type = type;
@@ -30,6 +37,10 @@ public class TypedJSONArray<T extends JSONValue<?>> extends JSONValue<List<T>> i
         }
     }
 
+    /**
+     * 長さ0のTypedJSONArrayを要素の型を指定して作成します。
+     * @param type 要素の型を表現するオブジェクト。
+     */
     public TypedJSONArray(JSONValueType<T> type) {
         this(type, List.of());
     }

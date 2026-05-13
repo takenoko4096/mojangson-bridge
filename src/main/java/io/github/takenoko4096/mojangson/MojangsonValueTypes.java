@@ -169,7 +169,7 @@ public final class MojangsonValueTypes {
                         compound.put(strKey, get(val).toMojangson(val));
                     }
                     else {
-                        throw new IllegalArgumentException("A key of Map is not a string");
+                        throw new IllegalArgumentException("A key of Map is not name string");
                     }
                 }
 

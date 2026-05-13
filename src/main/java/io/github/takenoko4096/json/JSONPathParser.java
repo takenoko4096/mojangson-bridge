@@ -29,6 +29,9 @@ public class JSONPathParser {
 
     private int location = -1;
 
+    /**
+     * 新しくパーサーを作成します。
+     */
     public JSONPathParser() {
         this.text = "";
     }

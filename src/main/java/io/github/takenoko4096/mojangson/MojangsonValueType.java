@@ -18,6 +18,10 @@ public abstract class MojangsonValueType<T extends MojangsonValue<?>> {
      */
     protected final Class<T> clazz;
 
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param clazz クラスオブジェクト。
+     */
     protected MojangsonValueType(Class<T> clazz) {
         this.clazz = clazz;
     }

@@ -7,8 +7,12 @@ import org.jspecify.annotations.NullMarked;
  * @see MojangsonPath
  */
 @NullMarked
-public final class MojangsonPathUnableToAccessException extends Exception {
-    MojangsonPathUnableToAccessException(String message) {
+public class MojangsonPathUnableToAccessException extends Exception {
+    /**
+     * 例外を作成します。
+     * @param message エラーメッセージ。
+     */
+    protected MojangsonPathUnableToAccessException(String message) {
         super(message);
     }
 }

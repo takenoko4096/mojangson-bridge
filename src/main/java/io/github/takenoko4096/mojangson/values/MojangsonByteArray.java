@@ -14,6 +14,10 @@ import java.util.List;
  */
 @NullMarked
 public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされるプリミティブ配列。
+     */
     public MojangsonByteArray(byte[] value) {
         super(value);
     }

@@ -14,6 +14,10 @@ import org.jspecify.annotations.Nullable;
 public final class JSONSerializer {
     private final int indentationSpaceCount;
 
+    /**
+     * 新しくシリアライザーを作成します。
+     * @param indentationSpaceCount インデントの空白の文字数。
+     */
     public JSONSerializer(int indentationSpaceCount) {
         this.indentationSpaceCount = indentationSpaceCount;
     }
@@ -156,6 +160,7 @@ public final class JSONSerializer {
 
     /**
      * json構造を文字列としてシリアライズします。
+     * インデントの空白の文字数には4を使用します。
      * @param structure json構造体
      * @return 改行・空白文字によるインデントを含む文字列。
      */

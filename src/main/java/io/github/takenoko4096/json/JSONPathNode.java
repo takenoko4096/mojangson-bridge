@@ -24,6 +24,11 @@ public abstract class JSONPathNode<S extends JSONStructure, T> {
     @Nullable
     protected JSONPathNode<?, ?> child;
 
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param parameter 子アクセスのためのキーまたは添え字。
+     * @param child 子ノード。
+     */
     protected JSONPathNode(T parameter, @Nullable JSONPathNode<?, ?> child) {
         this.parameter = parameter;
         this.child = child;
@@ -99,33 +104,33 @@ public abstract class JSONPathNode<S extends JSONStructure, T> {
     /**
      * オブジェクトが紐づけられたキーに対する条件付きアクセスを表現するノード。
      */
-    public static final class ObjectKeyCheckerNode extends JSONPathNode<JSONObject, Pair<String, JSONObject>> {
+    public static final class ObjectKeyCheckerNode extends JSONPathNode<JSONObject, JSONConditionalObjectKey> {
         ObjectKeyCheckerNode(String name, JSONObject jsonObject, @Nullable JSONPathNode<?, ?> child) {
-            super(new Pair<>(name, jsonObject), child);
+            super(new JSONConditionalObjectKey(name, jsonObject), child);
         }
 
         @Override
         public <U> @Nullable U access(JSONObject structure, JSONLocationAccessProvider<JSONObject, @Nullable U> function) throws JSONPathUnableToAccessException {
-            if (!structure.has(parameter.a())) return null;
+            if (!structure.has(parameter.name())) return null;
             else {
-                final JSONObject value = structure.get(parameter.a(), JSONValueTypes.OBJECT);
-                final JSONObject condition = parameter.b();
+                final JSONObject value = structure.get(parameter.name(), JSONValueTypes.OBJECT);
+                final JSONObject condition = parameter.object();
 
                 if (value.isSuperOf(condition)) {
-                    return function.use(structure, parameter.a());
+                    return function.use(structure, parameter.name());
                 }
                 else return null;
             }
         }
 
         @Override
-        public JSONPathNode<JSONObject, Pair<String, JSONObject>> copy() {
-            return new ObjectKeyCheckerNode(parameter.a(), parameter.b(), child == null ? null : child.copy());
+        public JSONPathNode<JSONObject, JSONConditionalObjectKey> copy() {
+            return new ObjectKeyCheckerNode(parameter.name(), parameter.object(), child == null ? null : child.copy());
         }
 
         @Override
         public String toString() {
-            return "key_checker<" + parameter.a() + ", " + parameter.b() + ">";
+            return "key_checker<" + parameter.name() + ", " + parameter.object() + ">";
         }
     }
 
@@ -165,6 +170,4 @@ public abstract class JSONPathNode<S extends JSONStructure, T> {
             return "index_finder<" + parameter + ">";
         }
     }
-
-    public record Pair<A, B>(A a, B b) {}
 }

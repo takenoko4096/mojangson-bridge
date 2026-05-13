@@ -24,6 +24,11 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
     @Nullable
     protected MojangsonPathNode<?, ?> child;
 
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param parameter 子アクセスのためのキーまたは添え字。
+     * @param child 子ノード。
+     */
     protected MojangsonPathNode(T parameter, @Nullable MojangsonPathNode<?, ?> child) {
         this.parameter = parameter;
         this.child = child;
@@ -99,33 +104,33 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
     /**
      * オブジェクトが紐づけられたキーに対する条件付きアクセスを表現するノード。
      */
-    public static final class ObjectKeyCheckerNode extends MojangsonPathNode<MojangsonCompound, Pair<String, MojangsonCompound>> {
+    public static final class ObjectKeyCheckerNode extends MojangsonPathNode<MojangsonCompound, MojnagsonConditionalCompoundKey> {
         ObjectKeyCheckerNode(String name, MojangsonCompound jsonObject, @Nullable MojangsonPathNode<?, ?> child) {
-            super(new Pair<>(name, jsonObject), child);
+            super(new MojnagsonConditionalCompoundKey(name, jsonObject), child);
         }
 
         @Override
         public <U> @Nullable U access(MojangsonCompound structure, MojangsonLocationAccessProvider<MojangsonCompound, @Nullable U> function) throws MojangsonPathUnableToAccessException {
-            if (!structure.has(parameter.a())) return null;
+            if (!structure.has(parameter.name())) return null;
             else {
-                final MojangsonCompound value = structure.get(parameter.a(), MojangsonValueTypes.COMPOUND);
-                final MojangsonCompound condition = parameter.b();
+                final MojangsonCompound value = structure.get(parameter.name(), MojangsonValueTypes.COMPOUND);
+                final MojangsonCompound condition = parameter.compound();
 
                 if (value.isSuperOf(condition)) {
-                    return function.use(structure, parameter.a());
+                    return function.use(structure, parameter.name());
                 }
                 else return null;
             }
         }
 
         @Override
-        public MojangsonPathNode<MojangsonCompound, Pair<String, MojangsonCompound>> copy() {
-            return new ObjectKeyCheckerNode(parameter.a(), parameter.b(), child == null ? null : child.copy());
+        public MojangsonPathNode<MojangsonCompound, MojnagsonConditionalCompoundKey> copy() {
+            return new ObjectKeyCheckerNode(parameter.name(), parameter.compound(), child == null ? null : child.copy());
         }
 
         @Override
         public String toString() {
-            return "key_checker<" + parameter.a() + ", " + parameter.b() + ">";
+            return "key_checker<" + parameter.name() + ", " + parameter.compound() + ">";
         }
     }
 
@@ -165,6 +170,4 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
             return "index_finder<" + parameter + ">";
         }
     }
-
-    public record Pair<A, B>(A a, B b) {}
 }

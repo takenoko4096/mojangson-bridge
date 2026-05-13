@@ -14,10 +14,17 @@ import java.util.List;
  */
 @NullMarked
 public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> implements MojangsonIterable<MojangsonValue<?>> {
-    public MojangsonList(List<MojangsonValue<?>> value) {
-        super(value);
+    /**
+     * MojangsonValueのListからMojangsonListを作成します。
+     * @param list 元となるList。
+     */
+    public MojangsonList(List<MojangsonValue<?>> list) {
+        super(list);
     }
 
+    /**
+     * 長さ0のMojangsonListを作成します。
+     */
     public MojangsonList() {
         this(new ArrayList<>());
     }

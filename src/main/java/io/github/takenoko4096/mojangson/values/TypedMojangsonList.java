@@ -17,6 +17,11 @@ import java.util.List;
 public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonValue<List<T>> implements MojangsonIterable<T> {
     private final MojangsonValueType<T> type;
 
+    /**
+     * 要素の型とMojangsonValueのListからTypedMojangsonListを作成します。
+     * @param type 要素の型を表現するオブジェクト。
+     * @param list 元となるList。
+     */
     public TypedMojangsonList(MojangsonValueType<T> type, List<T> list) {
         super(list);
         this.type = type;
@@ -30,6 +35,10 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         }
     }
 
+    /**
+     * 長さ0のTypedMojangsonListを要素の型を指定して作成します。
+     * @param type 要素の型を表現するオブジェクト。
+     */
     public TypedMojangsonList(MojangsonValueType<T> type) {
         this(type, new ArrayList<>());
     }

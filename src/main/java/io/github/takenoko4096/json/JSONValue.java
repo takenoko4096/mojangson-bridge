@@ -10,8 +10,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * json構造を構成するすべての型のスーパークラス。
- * @param <T> Javaにおける値。String、Number, Mapなど。
+ * json構造を構成する「値」を表します。
+ * 0, 1, true, "Hello", [null, 0, false], {"key": "value"} 等はすべてこのクラスまたはそのサブクラスによって表現されます。
+ * @param <T> ラップされる型。java.lang.Boolean, java.lang.Stringなど。
  */
 @NullMarked
 public abstract class JSONValue<T> {
@@ -20,26 +21,48 @@ public abstract class JSONValue<T> {
      */
     protected final T value;
 
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされる値。
+     */
     protected JSONValue(T value) {
         this.value = value;
     }
 
+    /**
+     * この値の文字列表現を返します。出力はラップされた型が実装するtoString()に依存し、jsonフォーマットへの整形は行われません。
+     * jsonフォーマットに整形する場合はJSONSerializerを使用してください。
+     * @return ラップされた値のtoString()の戻り値をそのまま返します。
+     * @see JSONSerializer
+     */
     @Override
     public String toString() {
         return value.toString();
     }
 
+    /**
+     * この値と引数に渡された値が等価であるかを調べます。出力はラップされた型が実装するequals(Object)に依存します。
+     * JSONValueのインスタンスでない値との比較は常にfalseを返します。
+     * @param o 比較対象の値。
+     * @return ラップされた値のequals()の戻り値をそのまま返します。
+     */
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        JSONValue<?> jsonValue = (JSONValue<?>) o;
-        return Objects.equals(value, jsonValue.value);
+
+        if (o instanceof JSONValue<?> jsonValue) {
+            return Objects.equals(value, jsonValue.value);
+        }
+        else return false;
     }
 
+    /**
+     * この値のハッシュコードを返します。
+     * @return ハッシュコード。
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(getClass(), value);
     }
 
     /**

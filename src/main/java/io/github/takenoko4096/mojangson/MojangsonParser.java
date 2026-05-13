@@ -196,12 +196,21 @@ public class MojangsonParser {
 
     private final boolean useOnlyTypedList;
 
+    /**
+     * 新しくパーサーを作成します。
+     * @param useNull 本来mojangsonに存在しないnull値を許容するかどうか。
+     * @param useOnlyTypedList リストの要素がすべて同じ型であることを必須にするかどうか。
+     */
     public MojangsonParser(boolean useNull, boolean useOnlyTypedList) {
         this.text = "";
         this.useNull = useNull;
         this.useOnlyTypedList = useOnlyTypedList;
     }
 
+    /**
+     * 新しくパーサーを作成します。
+     * nullは許容せず、リストの要素がすべて同じ型であることを要求します。
+     */
     public MojangsonParser() {
         this(false, true);
     }

@@ -5,7 +5,7 @@ import io.github.takenoko4096.json.JSONValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jsonにおけるbooleanを表現します。
+ * json構造におけるboolean型を表現します。
  */
 @NullMarked
 public final class JSONBoolean extends JSONPrimitive<Boolean> {

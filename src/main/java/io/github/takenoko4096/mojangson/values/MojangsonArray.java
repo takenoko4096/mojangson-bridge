@@ -1,5 +1,6 @@
 package io.github.takenoko4096.mojangson.values;
 
+import io.github.takenoko4096.mojangson.MojangsonElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValue;
 import org.jspecify.annotations.NullMarked;
 
@@ -13,6 +14,10 @@ import java.util.List;
  */
 @NullMarked
 public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends MojangsonValue<T> implements MojangsonIterable<U> {
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされるプリミティブ配列。
+     */
     protected MojangsonArray(T value) {
         super(value);
 
@@ -38,7 +43,7 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
      * @param setter セッター関数。第一引数の配列の第二引数の添え字に対応する位置に対して第三引数を値を代入することが期待されます。
      * @return リスト型のビュー。
      */
-    protected MojangsonList getView(TriConsumer<T, Integer, Object> setter) {
+    protected MojangsonList getView(MojangsonElementValueSetter<T> setter) {
         final T array = value;
 
         final List<MojangsonValue<?>> values = new ArrayList<>();
@@ -84,9 +89,4 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
      * @return リスト型のビュー。このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。
      */
     public abstract MojangsonList listView();
-
-    @FunctionalInterface
-    public interface TriConsumer<S, T, U> {
-        void accept(S s, T t, U u);
-    }
 }

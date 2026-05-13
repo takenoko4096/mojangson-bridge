@@ -16,6 +16,10 @@ import java.util.function.Function;
 public class NbtFile {
     private final File file;
 
+    /**
+     * FileからNbtFileを作成します。
+     * @param file Fileオブジェクト。
+     */
     public NbtFile(File file) {
         this.file = file;
 
@@ -24,10 +28,18 @@ public class NbtFile {
         }
     }
 
+    /**
+     * PathからNbtFileを作成します。
+     * @param path Pathオブジェクト。
+     */
     public NbtFile(Path path) {
         this(path.toFile());
     }
 
+    /**
+     * パスを表現するStringからNbtFileを作成します。
+     * @param path パスとなる文字列。Path.of()でパースして使用されます。
+     */
     public NbtFile(String path) {
         this(Path.of(path));
     }

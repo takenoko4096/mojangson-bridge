@@ -8,13 +8,17 @@ import org.jspecify.annotations.NullMarked;
  * @param <T> Javaにおける値。String、Number, Mapなど。
  */
 public abstract class MojangsonPrimitive<T> extends MojangsonValue<T> {
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされる値。
+     */
     protected MojangsonPrimitive(T value) {
         super(value);
     }
 
     /**
-     * ラップされていた値を取得します。
-     * @return Javaにおける値。
+     * ラップされている値を取得します。
+     * @return ラップされている値。
      */
     public T getValue() {
         return value;

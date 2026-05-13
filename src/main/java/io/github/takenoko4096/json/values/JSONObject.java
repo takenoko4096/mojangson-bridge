@@ -9,14 +9,21 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * jsonにおけるobjectを表現します。
+ * json構造における連想配列を表現します。
  */
 @NullMarked
 public final class JSONObject extends JSONValue<Map<String, JSONValue<?>>> implements JSONStructure {
+    /**
+     * 空のJSONObjectを作成します。
+     */
     public JSONObject() {
         super(new HashMap<>());
     }
 
+    /**
+     * StringとJSONValueのMapからJSONObjectを作成します。
+     * @param map 元となるMap。
+     */
     public JSONObject(Map<String, JSONValue<?>> map) {
         super(map);
     }

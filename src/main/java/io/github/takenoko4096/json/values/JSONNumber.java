@@ -5,7 +5,7 @@ import io.github.takenoko4096.json.JSONValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jsonにおけるnumberを表現します。
+ * json構造におけるnumber型を表現します。
  */
 @NullMarked
 public final class JSONNumber extends JSONPrimitive<Number> {

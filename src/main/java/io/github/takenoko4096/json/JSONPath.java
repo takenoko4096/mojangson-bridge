@@ -20,7 +20,7 @@ public final class JSONPath {
         this.root = root;
     }
 
-    private <U> @Nullable U checkedAccess(JSONPathNode<?, ?> node, @Nullable JSONStructure structure, JSONLocationAccessProvider<JSONStructure, U> function) throws JSONPathUnableToAccessException {
+    private <U> @Nullable U checkedAccess(JSONPathNode<?, ?> node, @Nullable JSONStructure structure, JSONLocationAccessProvider<JSONStructure, @Nullable U> function) throws JSONPathUnableToAccessException {
         switch (node) {
             case JSONPathNode.ObjectKeyNode objectKeyNode -> {
                 if (!(structure instanceof JSONObject object)) {
@@ -56,11 +56,20 @@ public final class JSONPath {
 
         while (node.child != null) {
             JSONStructure nextStruct = checkedAccess(node, currentStruct, (a, b) -> {
-                final JSONValue<?> value = switch (a) {
-                    case JSONObject obj -> obj.get((String) b, obj.getTypeOf((String) b));
-                    case JSONArray arr -> arr.get((Integer) b, arr.getTypeAt((Integer) b));
-                    default -> throw new IllegalStateException("NEVER HAPPENS");
-                };
+                final JSONValue<?> value;
+                switch (a) {
+                    case JSONObject obj: {
+                        if (!obj.has((String) b)) return null;
+                        value = obj.get((String) b, obj.getTypeOf((String) b));
+                        break;
+                    }
+                    case JSONArray arr: {
+                        value = arr.get((Integer) b, arr.getTypeAt((Integer) b));
+                        break;
+                    }
+                    default: throw new IllegalStateException("NEVER HAPPENS");
+                }
+
                 if (value instanceof JSONStructure structure) {
                     return structure;
                 }
@@ -226,6 +235,11 @@ public final class JSONPath {
          */
         protected final T parameter;
 
+        /**
+         * サブクラスのためのコンストラクタ。
+         * @param structure アクセス位置の親の構造。
+         * @param parameter アクセスするために必要なキーまたは添え字。
+         */
         protected JSONPathReference(S structure, T parameter) {
             this.structure = structure;
             this.parameter = parameter;

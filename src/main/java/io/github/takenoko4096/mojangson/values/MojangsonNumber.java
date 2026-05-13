@@ -9,6 +9,10 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public abstract class MojangsonNumber<T extends Number> extends MojangsonPrimitive<T> {
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされる値。
+     */
     protected MojangsonNumber(T value) {
         super(value);
     }

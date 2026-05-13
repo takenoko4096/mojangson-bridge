@@ -5,7 +5,7 @@ import io.github.takenoko4096.json.JSONValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jsonにおけるstringを表現します。
+ * json構造におけるstring型を表現します。
  */
 @NullMarked
 public final class JSONString extends JSONPrimitive<String> {

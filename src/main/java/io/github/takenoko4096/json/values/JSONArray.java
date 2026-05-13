@@ -12,14 +12,21 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * jsonにおける配列を表現します。
+ * json構造における配列を表現します。
  */
 @NullMarked
 public final class JSONArray extends JSONValue<List<JSONValue<?>>> implements JSONIterable<JSONValue<?>> {
+    /**
+     * 長さ0のJSONArrayを作成します。
+     */
     public JSONArray() {
         super(new ArrayList<>());
     }
 
+    /**
+     * JSONValueのListからJSONArrayを作成します。
+     * @param list 元となるList。
+     */
     public JSONArray(List<JSONValue<?>> list) {
         super(new ArrayList<>(list));
     }

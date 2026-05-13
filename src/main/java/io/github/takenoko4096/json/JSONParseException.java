@@ -9,6 +9,12 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public class JSONParseException extends RuntimeException {
+    /**
+     * 例外を作成します。
+     * @param message エラーメッセージ。
+     * @param json 元のjson文字列。
+     * @param location 例外の発生位置。
+     */
     protected JSONParseException(String message, String json, int location) {
         super(
             String.format(

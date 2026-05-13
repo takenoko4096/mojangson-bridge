@@ -14,6 +14,10 @@ import java.util.List;
  */
 @NullMarked
 public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされるプリミティブ配列。
+     */
     public MojangsonLongArray(long[] value) {
         super(value);
     }

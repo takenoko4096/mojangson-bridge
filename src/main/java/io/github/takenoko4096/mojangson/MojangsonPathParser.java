@@ -29,6 +29,9 @@ public class MojangsonPathParser {
 
     private int location = -1;
 
+    /**
+     * 新しくパーサーを作成します。
+     */
     public MojangsonPathParser() {
         this.text = "";
     }

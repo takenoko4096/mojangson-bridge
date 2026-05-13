@@ -21,6 +21,10 @@ import java.util.function.Function;
 public class JSONFile {
     private final File file;
 
+    /**
+     * FileからJSONFileを作成します。
+     * @param file Fileオブジェクト。
+     */
     public JSONFile(File file) {
         this.file = file;
 
@@ -29,10 +33,18 @@ public class JSONFile {
         }
     }
 
+    /**
+     * PathからJSONFileを作成します。
+     * @param path Pathオブジェクト。
+     */
     public JSONFile(Path path) {
         this(path.toFile());
     }
 
+    /**
+     * パスを表現するStringからJSONFileを作成します。
+     * @param path パスとなる文字列。Path.of()でパースして使用されます。
+     */
     public JSONFile(String path) {
         this(Path.of(path));
     }

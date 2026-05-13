@@ -14,6 +14,10 @@ import java.util.List;
  */
 @NullMarked
 public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
+    /**
+     * サブクラスのためのコンストラクタ。
+     * @param value ラップされるプリミティブ配列。
+     */
     public MojangsonIntArray(int[] value) {
         super(value);
     }

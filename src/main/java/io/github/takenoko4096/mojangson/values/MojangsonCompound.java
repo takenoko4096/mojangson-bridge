@@ -12,10 +12,17 @@ import java.util.Set;
  */
 @NullMarked
 public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue<?>>> implements MojangsonStructure {
-    public MojangsonCompound(Map<String, MojangsonValue<?>> value) {
-        super(value);
+    /**
+     * StringとMojnagsonValueのMapからMojangsonCompoundを作成します。
+     * @param map 元となるMap。
+     */
+    public MojangsonCompound(Map<String, MojangsonValue<?>> map) {
+        super(map);
     }
 
+    /**
+     * 空のMojnagsonCompoundを作成します。
+     */
     public MojangsonCompound() {
         this(new HashMap<>());
     }

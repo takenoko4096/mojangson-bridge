@@ -11,6 +11,7 @@ import java.util.Set;
 
 /**
  * mojangson構造を文字列にシリアライズするクラス。
+ * このクラスにMojangsonCompoundを渡すことによって生成された文字列は、net.minecraft.nbt.TagParser.parseCompoundFully(String)を使用してnet.minecraft.nbt.CompoundTagに変換できます。
  */
 @NullMarked
 public class MojangsonSerializer {
@@ -219,6 +220,7 @@ public class MojangsonSerializer {
 
     /**
      * mojangson構造を文字列としてシリアライズします。
+     * インデントの空白の文字数には4を使用します。
      * @param structure mojangson構造体。
      * @param asJson trueの場合、json形式でシリアライズされます。
      * @return 改行・空白文字によるインデントを含む文字列。
@@ -228,7 +230,8 @@ public class MojangsonSerializer {
     }
 
     /**
-     * mojangson構造を文字列としてシリアライズします。asJson = false。
+     * mojangson構造を文字列としてシリアライズします。
+     * インデントの空白の文字数には4を使用し、mojangson形式でシリアライズされます。
      * @param structure mojangson構造体。
      * @return 改行・空白文字によるインデントを含む文字列。
      */
