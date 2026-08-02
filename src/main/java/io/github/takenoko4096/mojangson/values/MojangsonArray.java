@@ -32,6 +32,9 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
         else return has(length() + index);
     }
 
+    @Override
+    public abstract MojangsonArray<T, U> copy();
+
     /**
      * プリミティブ配列として取得します。
      * @return プリミティブ配列。

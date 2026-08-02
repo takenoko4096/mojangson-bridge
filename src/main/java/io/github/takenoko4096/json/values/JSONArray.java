@@ -85,6 +85,23 @@ public final class JSONArray extends JSONValue<List<JSONValue<?>>> implements JS
     }
 
     /**
+     * 引数に渡されたインデックスに格納された値を返します。インデックスが存在しない、または型の不一致の場合にnullを返します。
+     * @param index インデックス。
+     * @param type 期待する型。
+     * @return インデックスに格納された値。
+     * @param <T> 期待する型。
+     */
+    public <T extends JSONValue<?>> @Nullable T getOrNull(int index, JSONValueType<T> type) {
+        if (has(index)) {
+            if (getTypeAt(index).equals(type)) {
+                return get(index, type);
+            }
+            else return null;
+        }
+        else return null;
+    }
+
+    /**
      * 引数に渡されたインデックスに値を格納し、そのインデックス以降の値を後ろに追いやります。
      * @param index インデックス。
      * @param value 格納する値。

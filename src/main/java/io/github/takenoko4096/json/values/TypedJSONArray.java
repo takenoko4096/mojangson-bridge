@@ -4,6 +4,7 @@ import io.github.takenoko4096.json.JSONValue;
 import io.github.takenoko4096.json.JSONValueType;
 import io.github.takenoko4096.json.JSONValueTypes;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -75,6 +76,20 @@ public class TypedJSONArray<T extends JSONValue<?>> extends JSONValue<List<T>> i
 
         if (index >= 0) return value.get(index);
         else return value.get(value.size() + index);
+    }
+
+    /**
+     * 引数に渡されたインデックスに格納された値を返します。インデックスが存在しない場合にnullを返します。
+     * @param index インデックス。
+     * @return インデックスに格納された値。
+     */
+    public @Nullable T getOrNull(int index) {
+        if (has(index)) {
+            return get(index);
+        }
+        else {
+            return null;
+        }
     }
 
     /**

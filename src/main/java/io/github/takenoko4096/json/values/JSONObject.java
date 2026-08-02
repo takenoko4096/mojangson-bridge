@@ -82,6 +82,23 @@ public final class JSONObject extends JSONValue<Map<String, JSONValue<?>>> imple
     }
 
     /**
+     * 引数に渡されたキーに紐づけられた値を返します。キーが存在しないか、型が予期しないものの場合nullを返します。
+     * @param key キー。
+     * @param type 期待する型。
+     * @return キーに紐づけられた値。
+     * @param <T> 期待する型。
+     */
+    public <T extends JSONValue<?>> @Nullable T getOrNull(String key, JSONValueType<T> type) {
+        if (has(key)) {
+            if (getTypeOf(key).equals(type)) {
+                return get(key, type);
+            }
+            else return null;
+        }
+        else return null;
+    }
+
+    /**
      * 引数に渡されたキーに任意の値を紐づけます。
      * @param key キー。
      * @param value 値。

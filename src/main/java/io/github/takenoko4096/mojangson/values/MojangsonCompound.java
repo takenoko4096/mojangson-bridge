@@ -154,7 +154,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     @Override
-    public MojangsonStructure copy() {
+    public MojangsonCompound copy() {
         return MojangsonValueTypes.COMPOUND.toMojangson(toMap());
     }
 
