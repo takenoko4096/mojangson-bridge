@@ -1,6 +1,5 @@
 package io.github.takenoko4096.mojangson.values;
 
-import io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 
@@ -32,13 +31,8 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
-    protected MojangsonByte getZero() {
-        return MojangsonByte.valueOf((byte) 0);
-    }
-
-    @Override
-    public MojangsonByteArray deepCopy() {
-        return from(listView());
+    public MojangsonByteArray copy() {
+        return new MojangsonByteArray(toArray());
     }
 
     @Override
@@ -51,6 +45,28 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
         return value.length;
     }
 
+    /**
+     * 添字に対応する位置の値を返します。
+     * @param index 添字
+     * @return byte
+     */
+    public byte getOrThrow(int index) {
+        if (index >= this.value.length) {
+            throw new IllegalArgumentException("不正な添字です: " + index);
+        }
+        return value[index];
+    }
+
+    /**
+     * 添字に対応する位置に値を代入します。
+     * @param index 添字
+     * @param value 値
+     */
+    public void set(int index, byte value) {
+        if (index >= this.value.length) return;
+        this.value[index] = value;
+    }
+
     @Override
     public boolean delete(int index) {
         if (index >= value.length) return false;
@@ -61,21 +77,21 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
 
     @Override
     public boolean clear() {
-        boolean successful = false;
-        for (int i = 0; i < value.length; i++) {
-            if (value[i] != 0) {
-                value[i] = 0;
-                successful = true;
+        for (final byte b : value) {
+            if (b != 0) {
+                Arrays.fill(value, (byte) 0);
+                return true;
             }
         }
-        return successful;
+
+        return false;
     }
 
     @Override
     public Iterator<MojangsonByte> iterator() {
         final List<MojangsonByte> bytes = new ArrayList<>();
-        for (final byte byteValue : value) {
-            bytes.add(MojangsonByte.valueOf(byteValue));
+        for (final byte b : value) {
+            bytes.add(MojangsonByte.valueOf(b));
         }
         return bytes.iterator();
     }
@@ -88,18 +104,6 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     @Override
     public byte[] toArray() {
         return Arrays.copyOf(value, value.length);
-    }
-
-    @Override
-    protected void updateView(TypedMojangsonList<MojangsonByte> list) {
-        for (int i = 0; i < value.length; i++) {
-            list.__internal__().set(i, MojangsonByte.valueOf(value[i]));
-        }
-    }
-
-    @Override
-    public TypedMojangsonList<MojangsonByte> listView() {
-        return getView(MojangsonArrayElementValueSetter.BYTE_ARRAY);
     }
 
     /**

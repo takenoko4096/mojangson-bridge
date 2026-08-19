@@ -30,7 +30,7 @@ public final class MojangsonPath {
             case MojangsonPathNode.ArrayIndexNode arrayIndexNode -> {
                 return switch (structure) {
                     case MojangsonList list -> arrayIndexNode.access(list, function::use);
-                    case MojangsonArray<?, ?> array -> arrayIndexNode.access(array.listView().untyped(), function::use);
+                    case MojangsonArray<?, ?> array -> arrayIndexNode.access(array.boxed().untyped(), function::use);
                     case null, default -> throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + node + " にアクセスするには " + structure + " が配列またはリストである必要があります");
                 };
             }

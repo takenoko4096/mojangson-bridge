@@ -74,7 +74,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
         }
 
         if (!getTypeAt(index).equals(type)) {
-            throw new IllegalArgumentException("インデックス '" + index + "' は期待される型の値と紐づけられていません");
+            throw new IllegalArgumentException("インデックス '" + index + "' は期待される型の値と紐づけられていません: " + getTypeAt(index));
         }
 
         if (index >= 0) return type.toMojangson(value.get(index));
@@ -224,7 +224,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
     }
 
     @Override
-    public MojangsonList deepCopy() {
+    public MojangsonList copy() {
         return MojangsonValueTypes.LIST.toMojangson(toListRecursively());
     }
 

@@ -1,6 +1,5 @@
 package io.github.takenoko4096.mojangson.values;
 
-import io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 
@@ -32,13 +31,8 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
-    protected MojangsonLong getZero() {
-        return MojangsonLong.valueOf(0L);
-    }
-
-    @Override
-    public MojangsonLongArray deepCopy() {
-        return from(listView());
+    public MojangsonLongArray copy() {
+        return new MojangsonLongArray(toArray());
     }
 
     @Override
@@ -51,6 +45,28 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
         return value.length;
     }
 
+    /**
+     * 添字に対応する位置の値を返します。
+     * @param index 添字
+     * @return long
+     */
+    public long getOrThrow(int index) {
+        if (index >= this.value.length) {
+            throw new IllegalArgumentException("不正な添字です: " + index);
+        }
+        return value[index];
+    }
+
+    /**
+     * 添字に対応する位置に値を代入します。
+     * @param index 添字
+     * @param value 値
+     */
+    public void set(int index, long value) {
+        if (index >= this.value.length) return;
+        this.value[index] = value;
+    }
+
     @Override
     public boolean delete(int index) {
         if (index >= value.length) return false;
@@ -61,14 +77,14 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
 
     @Override
     public boolean clear() {
-        boolean successful = false;
-        for (int i = 0; i < value.length; i++) {
-            if (value[i] != 0) {
-                value[i] = 0;
-                successful = true;
+        for (final long l : value) {
+            if (l != 0) {
+                Arrays.fill(value, 0L);
+                return true;
             }
         }
-        return successful;
+
+        return false;
     }
 
     @Override
@@ -88,18 +104,6 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     @Override
     public long[] toArray() {
         return Arrays.copyOf(value, value.length);
-    }
-
-    @Override
-    protected void updateView(TypedMojangsonList<MojangsonLong> list) {
-        for (int i = 0; i < value.length; i++) {
-            list.__internal__().set(i, MojangsonLong.valueOf(value[i]));
-        }
-    }
-
-    @Override
-    public TypedMojangsonList<MojangsonLong> listView() {
-        return getView(MojangsonArrayElementValueSetter.LONG_ARRAY);
     }
 
     /**

@@ -191,7 +191,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     @Override
-    public MojangsonCompound deepCopy() {
+    public MojangsonCompound copy() {
         return MojangsonValueTypes.COMPOUND.toMojangson(toMapRecursively());
     }
 

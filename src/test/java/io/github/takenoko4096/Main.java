@@ -1,7 +1,5 @@
-import io.github.takenoko4096.mojangson.MojangsonParser;
-import io.github.takenoko4096.mojangson.values.MojangsonInt;
-import io.github.takenoko4096.mojangson.values.MojangsonIntArray;
-import io.github.takenoko4096.mojangson.values.TypedMojangsonList;
+import io.github.takenoko4096.mojangson.*;
+import io.github.takenoko4096.mojangson.values.MojangsonCompound;
 
 void main() {
     System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
@@ -9,15 +7,14 @@ void main() {
 
     // Maven Central に publish するのはもう少しテストした後
 
-    final MojangsonIntArray ints = MojangsonParser.intArray("[I; 0, 1, 2, 3]");
-    final TypedMojangsonList<MojangsonInt> view1 = ints.listView();
-    final TypedMojangsonList<MojangsonInt> view2 = ints.listView();
+    final MojangsonCompound compound = MojangsonParser.compound(
+        """
+        {
+            array: [I;0,1,2,3]
+        }
+        """
+    );
 
-    view1.set(0, 10);
-    System.out.println(view1.delete(-1));
-    System.out.println(view1.getOrThrow(0));
-    System.out.println(ints);
-
-    System.out.println(view1);
-    System.out.println(ints.listView());
+    var a = compound.getOrThrow(MojangsonPath.of("array[3]"), MojangsonValueTypes.INT);
+    System.out.println(a);
 }

@@ -75,6 +75,7 @@ public abstract class JsonValue<T> {
      */
     public static JsonValue<?> valueOf(@Nullable Object value) {
         return switch (value) {
+            case JsonValue<?> v -> v;
             case null -> JsonNull.NULL;
             case Boolean b -> JsonBoolean.valueOf((boolean) b);
             case Number n -> JsonNumber.valueOf(n);
@@ -82,7 +83,6 @@ public abstract class JsonValue<T> {
             case Map<?, ?> m -> JsonObject.valueOf(m);
             case Object[] a -> JsonArray.valueOf(Arrays.asList(a));
             case Iterable<?> i -> JsonArray.valueOf(i);
-            case JsonValue<?> v -> v;
             default -> throw new IllegalArgumentException("json値に変換できない型です: " + value.getClass().getName());
         };
     }

@@ -184,8 +184,8 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     }
 
     @Override
-    public TypedMojangsonList<T> deepCopy() {
-        return untyped().deepCopy().typed(type);
+    public TypedMojangsonList<T> copy() {
+        return untyped().copy().typed(type);
     }
 
     @Override
@@ -214,9 +214,5 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     @Override
     public String toString() {
         return type + super.toString();
-    }
-
-    final List<T> __internal__() {
-        return value;
     }
 }

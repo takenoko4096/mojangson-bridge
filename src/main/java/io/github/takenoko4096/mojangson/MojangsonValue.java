@@ -75,6 +75,7 @@ public abstract class MojangsonValue<T> {
      */
     public static MojangsonValue<?> valueOf(@Nullable Object value) {
         return switch (value) {
+            case MojangsonValue<?> v -> v;
             case null -> MojangsonNull.NULL;
             case Boolean v -> MojangsonByte.valueOf(v ? 1 : 0);
             case Byte b -> MojangsonByte.valueOf(b.byteValue());
@@ -91,7 +92,6 @@ public abstract class MojangsonValue<T> {
             case Map<?, ?> m -> MojangsonCompound.valueOf(m);
             case Object[] a -> MojangsonList.valueOf(Arrays.asList(a));
             case Iterable<?> i -> MojangsonList.valueOf(i);
-            case MojangsonValue<?> v -> v;
             default -> throw new IllegalArgumentException("mojangson値に変換できない型です: " + value.getClass().getName());
         };
     }

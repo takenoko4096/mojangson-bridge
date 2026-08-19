@@ -34,5 +34,5 @@ public interface MojangsonIterable<T extends MojangsonValue<?>> extends Mojangso
     boolean clear();
 
     @Override
-    MojangsonIterable<T> deepCopy();
+    MojangsonIterable<T> copy();
 }

@@ -20,5 +20,5 @@ public interface MojangsonStructure {
      * 構造体のディープコピーを作成します。
      * @return ディープコピーされたオブジェクト
      */
-    MojangsonStructure deepCopy();
+    MojangsonStructure copy();
 }

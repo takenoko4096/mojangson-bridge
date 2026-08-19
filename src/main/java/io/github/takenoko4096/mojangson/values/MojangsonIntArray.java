@@ -1,6 +1,5 @@
 package io.github.takenoko4096.mojangson.values;
 
-import io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 
@@ -32,13 +31,8 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
-    protected MojangsonInt getZero() {
-        return MojangsonInt.valueOf(0);
-    }
-
-    @Override
-    public MojangsonIntArray deepCopy() {
-        return from(listView());
+    public MojangsonIntArray copy() {
+        return new MojangsonIntArray(toArray());
     }
 
     @Override
@@ -51,6 +45,28 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
         return value.length;
     }
 
+    /**
+     * 添字に対応する位置の値を返します。
+     * @param index 添字
+     * @return int
+     */
+    public int getOrThrow(int index) {
+        if (index >= this.value.length) {
+            throw new IllegalArgumentException("不正な添字です: " + index);
+        }
+        return value[index];
+    }
+
+    /**
+     * 添字に対応する位置に値を代入します。
+     * @param index 添字
+     * @param value 値
+     */
+    public void set(int index, int value) {
+        if (index >= this.value.length) return;
+        this.value[index] = value;
+    }
+
     @Override
     public boolean delete(int index) {
         if (index >= value.length) return false;
@@ -61,18 +77,19 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
 
     @Override
     public boolean clear() {
-        boolean successful = false;
-        for (int i = 0; i < value.length; i++) {
-            if (value[i] != 0) {
-                value[i] = 0;
-                successful = true;
+        for (int i : value) {
+            if (i != 0) {
+                Arrays.fill(value, 0);
+                return true;
             }
         }
-        return successful;
+
+        return false;
     }
 
     @Override
     public Iterator<MojangsonInt> iterator() {
+
         final List<MojangsonInt> bytes = new ArrayList<>();
         for (final int intValue : value) {
             bytes.add(MojangsonInt.valueOf(intValue));
@@ -88,18 +105,6 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     @Override
     public int[] toArray() {
         return Arrays.copyOf(value, value.length);
-    }
-
-    @Override
-    protected void updateView(TypedMojangsonList<MojangsonInt> list) {
-        for (int i = 0; i < value.length; i++) {
-            list.__internal__().set(i, MojangsonInt.valueOf(value[i]));
-        }
-    }
-
-    @Override
-    public TypedMojangsonList<MojangsonInt> listView() {
-        return getView(MojangsonArrayElementValueSetter.INT_ARRAY);
     }
 
     /**
