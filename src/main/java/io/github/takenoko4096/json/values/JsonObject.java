@@ -1,7 +1,6 @@
 package io.github.takenoko4096.json.values;
 
 import io.github.takenoko4096.json.*;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
@@ -12,32 +11,31 @@ import java.util.Set;
 /**
  * json構造における連想配列を表現します。
  */
-@NullMarked
 public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> implements JsonStructure {
     /**
-     * 空のJsonObjectを作成します。
+     * 空の JsonObject を作成します。
      */
     public JsonObject() {
         super(new HashMap<>());
     }
 
     /**
-     * StringとJsonValueのMapからJsonObjectを作成します。
-     * @param map 元となるMap。
+     * String と JsonValue&lt;?&gt; の Map から JsonObject を作成します。
+     * @param map 元となる Map
      */
     public JsonObject(Map<String, JsonValue<?>> map) {
         super(map);
     }
 
     @Override
-    public JsonValueType<?> getType() {
+    public JsonValueType<JsonObject> getType() {
         return JsonValueTypes.OBJECT;
     }
 
     /**
-     * 引数に渡されたキーが存在するかを返します。
-     * @param key キー。
-     * @return 存在する場合、真。
+     * キーに対応する位置が存在するかを返します。
+     * @param key キー
+     * @return 存在する場合 true
      */
     public boolean has(String key) {
         return value.containsKey(key);
@@ -49,10 +47,10 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたキーの型を返します。
-     * @param key キー。
-     * @return キーに紐づけられた値の型。
-     * @throws IllegalArgumentException キーが存在しない場合。
+     * キーに紐づけられた値の型を返します。
+     * @param key キー
+     * @return キーに紐づけられた値の型
+     * @throws IllegalArgumentException キーに対応する位置が存在しない場合
      */
     public JsonValueType<?> getTypeOf(String key) throws IllegalArgumentException {
         if (!has(key)) {
@@ -63,12 +61,12 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたキーに紐づけられた値を返します。
-     * @param key キー。
-     * @param type 期待する型。
-     * @return キーに紐づけられた値。
-     * @param <T> 期待する型。
-     * @throws IllegalArgumentException キーが存在しないか、型が予期しないものの場合。
+     * キーに紐づけられた値を返します。
+     * @param key キー
+     * @param type 期待する型
+     * @return キーに紐づけられた値
+     * @param <T> 期待する型
+     * @throws IllegalArgumentException キーに対応する位置が存在しないか、型が予期しないものの場合
      */
     public <T extends JsonValue<?>> T getOrThrow(String key, JsonValueType<T> type) throws IllegalArgumentException {
         if (!has(key)) {
@@ -83,11 +81,11 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたキーに紐づけられた値を返します。キーが存在しないか、型が予期しないものの場合nullを返します。
-     * @param key キー。
-     * @param type 期待する型。
-     * @return キーに紐づけられた値。
-     * @param <T> 期待する型。
+     * キーに紐づけられた値を返します。キーに対応する位置が存在しないか、型が予期しないものの場合nullを返します。
+     * @param key キー
+     * @param type 期待する型
+     * @return キーに紐づけられた値
+     * @param <T> 期待する型
      */
     public <T extends JsonValue<?>> @Nullable T getOrNull(String key, JsonValueType<T> type) {
         if (has(key)) {
@@ -99,23 +97,31 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
         else return null;
     }
 
-    public <T extends JsonValue<?>> T getOrDefault(String key, JsonValueType<T> type, T defaultValue) {
-        return Objects.requireNonNullElse(getOrNull(key, type), defaultValue);
+    /**
+     * キーに紐づけられた値を返します。キーに対応する位置が存在しないか、型が予期しないものの場合デフォルト値を返します。
+     * @param key キー
+     * @param type 期待する型
+     * @param defaultValue デフォルト値
+     * @return キーに紐づけられた値
+     * @param <T> 期待する型
+     */
+    public <T extends JsonValue<?>> T getOrDefault(String key, JsonValueType<T> type, Object defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(key, type), type.toJson(defaultValue));
     }
 
     /**
-     * 引数に渡されたキーに任意の値を紐づけます。
-     * @param key キー。
-     * @param value 値。
+     * キーに任意の値を紐づけます。
+     * @param key キー
+     * @param value 値
      */
     public void set(String key, Object value) {
         this.value.put(key, JsonValue.valueOf(value));
     }
 
     /**
-     * 引数に渡されたキーを削除します。
-     * @param key キー。
-     * @return 削除に成功した場合、真。
+     * キーを削除します。
+     * @param key キー
+     * @return 削除に成功した場合 true
      */
     public boolean delete(String key) {
         if (has(key)) {
@@ -136,19 +142,23 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
 
     /**
      * このオブジェクトが持つキーの集合を返します。
-     * @return すべてのキーのSet。
+     * @return すべてのキーを含む Set&lt;String&gt;
      */
     public Set<String> keys() {
         return Set.copyOf(value.keySet());
     }
 
+    /**
+     * このオブジェクトをMap&lt;String, JsonValue&lt;?&gt;&gt;に変換して返します。
+     * @return Map&lt;String, JsonValue&lt;?&gt;&gt;
+     */
     public Map<String, JsonValue<?>> toMap() {
         return Map.copyOf(value);
     }
 
     /**
-     * このオブジェクトを再帰的にMapに変換します。
-     * @return Map形式のディープコピー。
+     * このオブジェクトを再帰的にMap&lt;String, Object&gt;に変換します。
+     * @return Map&lt;String, Object&gt;
      */
     public Map<String, @Nullable Object> toMapRecursively() {
         final Map<String, Object> map = new HashMap<>();
@@ -181,9 +191,9 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡された構造体がこの構造体の部分構造であるかを返します。
-     * @param other 構造体。
-     * @return 部分構造であれば、真。
+     * ある構造体がこの構造体の部分構造であるかを返します。
+     * @param other 構造体
+     * @return 部分構造であれば true
      */
     public boolean isSuperOf(JsonObject other) {
         for (final String key : other.keys()) {
@@ -215,9 +225,9 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたパスが存在するかを返します。
-     * @param path パス。
-     * @return 存在する場合、真。
+     * パスに対応する位置が存在するかを返します。
+     * @param path パス
+     * @return 存在する場合 true
      */
     public boolean has(JsonPath path) {
         try {
@@ -231,10 +241,10 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたパスの型を返します。
-     * @param path パス。
-     * @return パスに紐づけられた値の型。
-     * @throws IllegalArgumentException パスが存在しない場合。
+     * パスに紐づけられた値の型を返します。
+     * @param path パス
+     * @return パスに紐づけられた値の型
+     * @throws IllegalArgumentException パスに対応する位置が存在しない場合
      */
     public JsonValueType<?> getTypeOf(JsonPath path) {
         try {
@@ -248,12 +258,12 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたパスに紐づけられた値を返します。
-     * @param path パス。
-     * @param type 期待する型。
-     * @return パスに紐づけられた値。
-     * @param <T> 期待する型。
-     * @throws IllegalArgumentException パスが存在しないか、型が予期しないものの場合。
+     * パスに紐づけられた値を返します。
+     * @param path パス
+     * @param type 期待する型
+     * @return パスに紐づけられた値
+     * @param <T> 期待する型
+     * @throws IllegalArgumentException パスに対応する位置が存在しないか、得られた値の型が予期しないものの場合
      */
     public <T extends JsonValue<?>> T getOrThrow(JsonPath path, JsonValueType<T> type) {
         try {
@@ -269,11 +279,11 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたパスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にnullを返します。
-     * @param path パス。
-     * @param type 期待する型。
-     * @return パスに紐づけられた値。
-     * @param <T> 期待する型。
+     * パスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にnullを返します。
+     * @param path パス
+     * @param type 期待する型
+     * @return パスに紐づけられた値
+     * @param <T> 期待する型
      */
     public <T extends JsonValue<?>> @Nullable T getOrNull(JsonPath path, JsonValueType<T> type) {
         try {
@@ -284,23 +294,33 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
         }
     }
 
-    public <T extends JsonValue<?>> T getOrDefault(JsonPath path, JsonValueType<T> type, T defaultValue) {
+    /**
+     * パスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にデフォルト値を返します。
+     * @param path パス
+     * @param type 期待する型
+     * @param defaultValue デフォルト値
+     * @return パスに紐づけられた値
+     * @param <T> 期待する型
+     */
+    public <T extends JsonValue<?>> T getOrDefault(JsonPath path, JsonValueType<T> type, Object defaultValue) {
+        final T defaultJsonValue = type.toJson(defaultValue);
+
         try {
-            final T value = path.access(this, reference -> reference.getOrDefault(type, defaultValue), false);
+            final T value = path.access(this, reference -> reference.getOrDefault(type, defaultJsonValue), false);
             if (value == null) {
-                return defaultValue;
+                return defaultJsonValue;
             }
             return value;
         }
         catch (JsonPathUnableToAccessException _) {
-            return defaultValue;
+            return defaultJsonValue;
         }
     }
 
     /**
-     * 引数に渡されたパスを削除します。
-     * @param path パス。
-     * @return 削除に成功した場合、真。
+     * パスに対応する位置を削除します。
+     * @param path パス
+     * @return 削除に成功した場合 true
      */
     public boolean delete(JsonPath path) {
         try {
@@ -314,9 +334,9 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * 引数に渡されたパスに任意の値を紐づけます。
-     * @param path パス。
-     * @param value 値。
+     * パスに任意の値を紐づけます。
+     * @param path パス
+     * @param value 値
      */
     public void set(JsonPath path, Object value) {
         try {
@@ -331,15 +351,15 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     /**
-     * MapをJsonObjectに変換します。
-     * @param value Map。
-     * @return JsonObject。
+     * Map&lt;String, ?&gt; を JsonObject に変換します。
+     * @param value Map&lt;String, ?&gt;
+     * @return JsonObject
      */
-    public static JsonObject valueOf(Map<?, ?> value) {
+    public static JsonObject valueOf(Map<String, ?> value) {
         final var map = new HashMap<String, JsonValue<?>>();
 
-        for (final var kv : value.entrySet()) {
-            map.put(kv.getKey().toString(), valueOf(kv.getValue()));
+        for (final Map.Entry<String, ?> entry : value.entrySet()) {
+            map.put(entry.getKey(), valueOf(entry.getValue()));
         }
 
         return new JsonObject(map);

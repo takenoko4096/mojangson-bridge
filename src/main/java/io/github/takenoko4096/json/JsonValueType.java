@@ -1,6 +1,5 @@
 package io.github.takenoko4096.json;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Map;
@@ -8,18 +7,17 @@ import java.util.Objects;
 
 /**
  * jsonにおける型を表現します。
- * @param <T> Javaにおける値。String、Number, Mapなど。
+ * @param <T> 値 String、Number, Map等
  */
-@NullMarked
 public abstract class JsonValueType<T extends JsonValue<?>> {
     /**
-     * クラスオブジェクト。
+     * クラスオブジェクト
      */
     protected final Class<T> clazz;
 
     /**
      * サブクラスのためのコンストラクタ。
-     * @param clazz クラスオブジェクト。
+     * @param clazz クラスオブジェクト
      */
     protected JsonValueType(Class<T> clazz) {
         this.clazz = clazz;
@@ -38,15 +36,19 @@ public abstract class JsonValueType<T extends JsonValue<?>> {
         return Objects.hash(clazz);
     }
 
+    /**
+     * この型の表現に使用されるクラスを返します。
+     * @return クラス
+     */
     public Class<T> getJsonClass() {
         return clazz;
     }
 
     /**
      * 特定の型に対応するオブジェクトのみをjson値に変換し、それ以外は例外を投げます。
-     * @param value nullを含む任意のオブジェクト。
-     * @return 引数をjson構造に変換したオブジェクト。JsonValueが渡された場合、引数をそのまま返します。
-     * @throws IllegalArgumentException 不適切な型の場合。
+     * @param value nullを含む任意のオブジェクト
+     * @return 引数をjson構造に変換したオブジェクト JsonValueが渡された場合、引数をそのまま返します。
+     * @throws IllegalArgumentException 不適切な型の場合
      */
     public abstract T toJson(@Nullable Object value) throws IllegalArgumentException;
 
@@ -57,8 +59,8 @@ public abstract class JsonValueType<T extends JsonValue<?>> {
 
     /**
      * 引数に渡されたオブジェクトに対応する型オブジェクトを返します。
-     * @param value nullを含む任意のオブジェクト。
-     * @return 引数に渡されたオブジェクトの型によるjson型。
+     * @param value null を含む任意のオブジェクト
+     * @return 引数に渡されたオブジェクトの型によるjson型
      */
     public static JsonValueType<?> of(@Nullable Object value) {
         return switch (value) {

@@ -1,7 +1,5 @@
 package io.github.takenoko4096.json;
 
-import org.jspecify.annotations.NullMarked;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -9,7 +7,6 @@ import java.util.Set;
 /**
  * jsonパスをパースするクラス。
  */
-@NullMarked
 public class JsonPathParser {
     private static final Set<Character> WHITESPACE = Set.of(' ');
 
@@ -324,7 +321,7 @@ public class JsonPathParser {
      * 渡された文字列をjsonパスとしてパースします。
      * @param text jsonパス
      * @return jsonパスオブジェクト
-     * @throws JsonParseException jsonパスが無効な場合。
+     * @throws JsonParseException jsonパスが無効な場合
      */
     public JsonPath parse(String text) throws JsonParseException {
         this.text = text;

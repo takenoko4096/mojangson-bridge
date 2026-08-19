@@ -74,7 +74,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="type-param-T"><code>T</code> - 要素の型。</span></dd>
+<dd><span id="type-param-T"><code>T</code> - 要素の型</span></dd>
 </dl>
 <dl class="notes">
 <dt>すべてのスーパーインタフェース:</dt>
@@ -86,8 +86,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public interface </span><span class="element-name type-name-label">JsonIterable&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span><span class="extends-implements">
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">JsonIterable&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span><span class="extends-implements">
 extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Iterable.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Iterable</a>&lt;T&gt;</span></div>
 <div class="block">jsonにおける反復可能オブジェクトを表現します。</div>
 </div>
@@ -118,12 +117,12 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#delete(int)" class="member-name-link">delete</a><wbr>(int&nbsp;index)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">構造体の指定の添え字番目のオブジェクトを消去します。</div>
+<div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#has(int)" class="member-name-link">has</a><wbr>(int&nbsp;index)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">構造体の指定の添え字番目が存在するかどうかを返します。</div>
+<div class="block">構造体の添字番目が存在するかどうかを返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
@@ -163,7 +162,7 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <dt>定義:</dt>
 <dd><code><a href="JsonStructure.html#isEmpty()">isEmpty</a></code>&nbsp;インタフェース内&nbsp;<code><a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>空の場合、真。</dd>
+<dd>空の場合 true</dd>
 </dl>
 </div>
 </section>
@@ -173,12 +172,12 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <h3>has</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
-<div class="block">構造体の指定の添え字番目が存在するかどうかを返します。</div>
+<div class="block">構造体の添字番目が存在するかどうかを返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>index</code> - 添え字。</dd>
+<dd><code>index</code> - 添字</dd>
 <dt>戻り値:</dt>
-<dd>存在する場合、真。</dd>
+<dd>存在する場合 true</dd>
 </dl>
 </div>
 </section>
@@ -191,7 +190,7 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <div class="block">構造体の長さを取得します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>長さ。</dd>
+<dd>要素数</dd>
 </dl>
 </div>
 </section>
@@ -201,12 +200,12 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <h3>delete</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
-<div class="block">構造体の指定の添え字番目のオブジェクトを消去します。</div>
+<div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>index</code> - 添え字。</dd>
+<dd><code>index</code> - 添字</dd>
 <dt>戻り値:</dt>
-<dd>削除に成功した場合、真。</dd>
+<dd>削除に成功した場合 true</dd>
 </dl>
 </div>
 </section>
@@ -222,7 +221,7 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <dt>定義:</dt>
 <dd><code><a href="JsonStructure.html#clear()">clear</a></code>&nbsp;インタフェース内&nbsp;<code><a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>空にすることができた場合、真。</dd>
+<dd>空にすることができた場合 true</dd>
 </dl>
 </div>
 </section>
@@ -238,7 +237,7 @@ extends <a href="JsonStructure.html" title="io.github.takenoko4096.json.values�
 <dt>定義:</dt>
 <dd><code><a href="JsonStructure.html#deepCopy()">deepCopy</a></code>&nbsp;インタフェース内&nbsp;<code><a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>ディープコピーされたオブジェクト。</dd>
+<dd>ディープコピーされたオブジェクト</dd>
 </dl>
 </div>
 </section>

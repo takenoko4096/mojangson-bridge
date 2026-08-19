@@ -70,10 +70,10 @@ loadScripts(document, 'script');</script>
 <li><a href="#has(int)" tabindex="0">has(int)</a></li>
 <li><a href="#getOrThrow(int)" tabindex="0">getOrThrow(int)</a></li>
 <li><a href="#getOrNull(int)" tabindex="0">getOrNull(int)</a></li>
-<li><a href="#getOrDefault(int,T)" tabindex="0">getOrDefault(int, T)</a></li>
-<li><a href="#add(int,T)" tabindex="0">add(int, T)</a></li>
-<li><a href="#add(T)" tabindex="0">add(T)</a></li>
-<li><a href="#set(int,T)" tabindex="0">set(int, T)</a></li>
+<li><a href="#getOrDefault(int,java.lang.Object)" tabindex="0">getOrDefault(int, Object)</a></li>
+<li><a href="#add(int,java.lang.Object)" tabindex="0">add(int, Object)</a></li>
+<li><a href="#add(java.lang.Object)" tabindex="0">add(Object)</a></li>
+<li><a href="#set(int,java.lang.Object)" tabindex="0">set(int, Object)</a></li>
 <li><a href="#delete(int)" tabindex="0">delete(int)</a></li>
 <li><a href="#clear()" tabindex="0">clear()</a></li>
 <li><a href="#length()" tabindex="0">length()</a></li>
@@ -99,7 +99,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="type-param-T"><code>T</code> - 要素の型。</span></dd>
+<dd><span id="type-param-T"><code>T</code> - 要素の型</span></dd>
 </dl>
 <dl class="notes">
 <dt>すべての実装されたインタフェース:</dt>
@@ -107,11 +107,10 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">TypedMojangsonList&lt;T extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TypedMojangsonList&lt;T extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
 <span class="extends-implements">extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;T&gt;&gt;
 implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;T&gt;</span></div>
-<div class="block">型付きのMojangsonList。このクラスにラップされる要素はすべてT型であることが確約されます。</div>
+<div class="block">型付きのMojangsonList このクラスにラップされる要素はすべて T 型であることが確約されます。</div>
 </div>
 </section>
 <section class="summary">
@@ -135,12 +134,12 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="table-header col-last">説明</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.github.takenoko4096.mojangson.MojangsonValueType)" class="member-name-link">TypedMojangsonList</a><wbr>(<a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;&nbsp;type)</code></div>
 <div class="col-last even-row-color">
-<div class="block">長さ0のTypedMojangsonListを要素の型を指定して作成します。</div>
+<div class="block">長さ 0 の TypedMojangsonList を要素の型を指定して作成します。</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(io.github.takenoko4096.mojangson.MojangsonValueType,java.util.List)" class="member-name-link">TypedMojangsonList</a><wbr>(<a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;&nbsp;list)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">要素の型とMojangsonValueのListからTypedMojangsonListを作成します。</div>
+<div class="block">要素の型と MojangsonValue の List から TypedMojangsonList を作成します。</div>
 </div>
 </div>
 </section>
@@ -157,15 +156,15 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="table-header col-second">メソッド</div>
 <div class="table-header col-last">説明</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(int,T)" class="member-name-link">add</a><wbr>(int&nbsp;index,
- <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;value)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(int,java.lang.Object)" class="member-name-link">add</a><wbr>(int&nbsp;index,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたインデックスに値を格納し、そのインデックス以降の値を後ろに追いやります。</div>
+<div class="block">添字に対応する位置に値を格納し、それ以降の値を後ろに追いやります。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(T)" class="member-name-link">add</a><wbr>(<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;value)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(java.lang.Object)" class="member-name-link">add</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">リストの後ろに引数に渡された値を追加します。</div>
+<div class="block">リストの後ろに値を追加します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
@@ -180,24 +179,30 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(int)" class="member-name-link">delete</a><wbr>(int&nbsp;index)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">構造体の指定の添え字番目のオブジェクトを消去します。</div>
+<div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementType()" class="member-name-link">getElementType</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">要素の型を返します。</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrDefault(int,T)" class="member-name-link">getOrDefault</a><wbr>(int&nbsp;index,
- <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;defaultValue)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrDefault(int,java.lang.Object)" class="member-name-link">getOrDefault</a><wbr>(int&nbsp;index,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">添字に対応する位置に格納された値を返します。</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrNull(int)" class="member-name-link">getOrNull</a><wbr>(int&nbsp;index)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">添字に対応する位置に格納された値を返します。</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrThrow(int)" class="member-name-link">getOrThrow</a><wbr>(int&nbsp;index)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたインデックスに格納された値を返します。</div>
+<div class="block">添字に対応する位置に格納された値を返します。</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;?&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;<a href="MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">値の型を取得します。</div>
@@ -205,7 +210,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#has(int)" class="member-name-link">has</a><wbr>(int&nbsp;index)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">構造体の指定の添え字番目が存在するかどうかを返します。</div>
+<div class="block">構造体の指定の添字番目が存在するかどうかを返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
@@ -221,14 +226,16 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="block">構造体の長さを取得します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,T)" class="member-name-link">set</a><wbr>(int&nbsp;index,
- <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;value)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,java.lang.Object)" class="member-name-link">set</a><wbr>(int&nbsp;index,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたインデックスの値を上書きします。</div>
+<div class="block">引数に渡された添字に対応する位置の値を上書きします。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a><wbr>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toList()" class="member-name-link">toList</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">T (MojangsonValue) の List に変換して返します。</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -237,7 +244,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#untyped()" class="member-name-link">untyped</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">型付きリストを型の保証のないMojangsonListに変換します。</div>
+<div class="block">型付きリストを型の保証のない MojangsonList に変換します。</div>
 </div>
 </div>
 </div>
@@ -268,11 +275,11 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TypedMojangsonList</span><wbr><span class="parameters">(<a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;&nbsp;list)</span></div>
-<div class="block">要素の型とMojangsonValueのListからTypedMojangsonListを作成します。</div>
+<div class="block">要素の型と MojangsonValue の List から TypedMojangsonList を作成します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>type</code> - 要素の型を表現するオブジェクト。</dd>
-<dd><code>list</code> - 元となるList。</dd>
+<dd><code>type</code> - 要素の型を表現するオブジェクト</dd>
+<dd><code>list</code> - 元となる List</dd>
 </dl>
 </div>
 </section>
@@ -282,10 +289,10 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <h3>TypedMojangsonList</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TypedMojangsonList</span><wbr><span class="parameters">(<a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;&nbsp;type)</span></div>
-<div class="block">長さ0のTypedMojangsonListを要素の型を指定して作成します。</div>
+<div class="block">長さ 0 の TypedMojangsonList を要素の型を指定して作成します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>type</code> - 要素の型を表現するオブジェクト。</dd>
+<dd><code>type</code> - 要素の型を表現するオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -302,14 +309,14 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <section class="detail" id="getType()">
 <h3>getType</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;?&gt;</span>&nbsp;<span class="element-name">getType</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a>&gt;</span>&nbsp;<span class="element-name">getType</span>()</div>
 <div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="../MojangsonValue.html#getType()">MojangsonValue</a></code></span></div>
 <div class="block">値の型を取得します。</div>
 <dl class="notes">
 <dt>定義:</dt>
 <dd><code><a href="../MojangsonValue.html#getType()">getType</a></code>&nbsp;クラス内&nbsp;<code><a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a> extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>この値の型を表現するオブジェクト。</dd>
+<dd>この値の型を表現するオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -319,6 +326,11 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <h3>getElementType</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;</span>&nbsp;<span class="element-name">getElementType</span>()</div>
+<div class="block">要素の型を返します。</div>
+<dl class="notes">
+<dt>戻り値:</dt>
+<dd>要素の型</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -335,7 +347,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <dt>定義:</dt>
 <dd><code><a href="MojangsonStructure.html#isEmpty()">isEmpty</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>空の場合、真。</dd>
+<dd>空の場合 true</dd>
 </dl>
 </div>
 </section>
@@ -346,14 +358,14 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
 <div class="block"><span class="description-from-type-label">インタフェースからコピーされた説明:&nbsp;<code><a href="MojangsonIterable.html#has(int)">MojangsonIterable</a></code></span></div>
-<div class="block">構造体の指定の添え字番目が存在するかどうかを返します。</div>
+<div class="block">構造体の指定の添字番目が存在するかどうかを返します。</div>
 <dl class="notes">
 <dt>定義:</dt>
 <dd><code><a href="MojangsonIterable.html#has(int)">has</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a> extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</code></dd>
 <dt>パラメータ:</dt>
-<dd><code>index</code> - 添え字。</dd>
+<dd><code>index</code> - 添字。</dd>
 <dt>戻り値:</dt>
-<dd>存在する場合、真。</dd>
+<dd>存在する場合 true</dd>
 </dl>
 </div>
 </section>
@@ -364,14 +376,14 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a></span>&nbsp;<span class="element-name">getOrThrow</span><wbr><span class="parameters">(int&nbsp;index)</span>
              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></span></div>
-<div class="block">引数に渡されたインデックスに格納された値を返します。</div>
+<div class="block">添字に対応する位置に格納された値を返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>index</code> - インデックス。</dd>
+<dd><code>index</code> - 添字</dd>
 <dt>戻り値:</dt>
-<dd>インデックスに格納された値。</dd>
+<dd>添字に対応する位置にに格納された値。</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - インデックスが存在しない場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - 添字に対応する位置が存在しない場合。</dd>
 </dl>
 </div>
 </section>
@@ -381,63 +393,78 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <h3>getOrNull</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a></span>&nbsp;<span class="element-name">getOrNull</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
+<div class="block">添字に対応する位置に格納された値を返します。添字に対応する位置が存在しない場合に null を返します。</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>index</code> - 添字</dd>
+<dt>戻り値:</dt>
+<dd>添字に対応する位置に格納された値</dd>
+</dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getOrDefault(int,T)">
-<h3 id="getOrDefault(int,io.github.takenoko4096.mojangson.MojangsonValue)">getOrDefault</h3>
+<section class="detail" id="getOrDefault(int,java.lang.Object)">
+<h3>getOrDefault</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a></span>&nbsp;<span class="element-name">getOrDefault</span><wbr><span class="parameters">(int&nbsp;index,
- <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;defaultValue)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</span></div>
+<div class="block">添字に対応する位置に格納された値を返します。添字に対応する位置が存在しない場合にデフォルト値を返します。</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>index</code> - 添字</dd>
+<dd><code>defaultValue</code> - デフォルト値</dd>
+<dt>戻り値:</dt>
+<dd>添字に対応する位置に格納された値</dd>
+</dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="add(int,T)">
-<h3 id="add(int,io.github.takenoko4096.mojangson.MojangsonValue)">add</h3>
+<section class="detail" id="add(int,java.lang.Object)">
+<h3>add</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(int&nbsp;index,
- <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;value)</span>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></span></div>
-<div class="block">引数に渡されたインデックスに値を格納し、そのインデックス以降の値を後ろに追いやります。</div>
+<div class="block">添字に対応する位置に値を格納し、それ以降の値を後ろに追いやります。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>index</code> - インデックス。</dd>
-<dd><code>value</code> - 格納する値。</dd>
+<dd><code>index</code> - 添字</dd>
+<dd><code>value</code> - 値</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - インデックスが不正な場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - インデックスが不正な場合</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="add(T)">
-<h3 id="add(io.github.takenoko4096.mojangson.MojangsonValue)">add</h3>
+<section class="detail" id="add(java.lang.Object)">
+<h3>add</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;value)</span></div>
-<div class="block">リストの後ろに引数に渡された値を追加します。</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span></div>
+<div class="block">リストの後ろに値を追加します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - 格納する値。</dd>
+<dd><code>value</code> - 値</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="set(int,T)">
-<h3 id="set(int,io.github.takenoko4096.mojangson.MojangsonValue)">set</h3>
+<section class="detail" id="set(int,java.lang.Object)">
+<h3>set</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;index,
- <a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&nbsp;value)</span>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></span></div>
-<div class="block">引数に渡されたインデックスの値を上書きします。</div>
+<div class="block">引数に渡された添字に対応する位置の値を上書きします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>index</code> - インデックス。</dd>
-<dd><code>value</code> - 格納する値。</dd>
+<dd><code>index</code> - 添字</dd>
+<dd><code>value</code> - 値</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - インデックスが不正な場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - インデックスが不正な場合</dd>
 </dl>
 </div>
 </section>
@@ -447,12 +474,14 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <h3>delete</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
-<div class="block">構造体の指定の添え字番目のオブジェクトを消去します。</div>
+<div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
 <dl class="notes">
+<dt>定義:</dt>
+<dd><code><a href="MojangsonIterable.html#delete(int)">delete</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a> extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</code></dd>
 <dt>パラメータ:</dt>
-<dd><code>index</code> - 添え字。</dd>
+<dd><code>index</code> - 添字</dd>
 <dt>戻り値:</dt>
-<dd>削除に成功した場合、真。</dd>
+<dd>削除に成功した場合 true</dd>
 </dl>
 </div>
 </section>
@@ -470,7 +499,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <dt>定義:</dt>
 <dd><code><a href="MojangsonStructure.html#clear()">clear</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>空にすることができた場合、真。</dd>
+<dd>空にすることができた場合 true</dd>
 </dl>
 </div>
 </section>
@@ -486,7 +515,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <dt>定義:</dt>
 <dd><code><a href="MojangsonIterable.html#length()">length</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a> extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>長さ。</dd>
+<dd>要素数</dd>
 </dl>
 </div>
 </section>
@@ -496,6 +525,11 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <h3>toList</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a>&gt;</span>&nbsp;<span class="element-name">toList</span>()</div>
+<div class="block">T (MojangsonValue) の List に変換して返します。</div>
+<dl class="notes">
+<dt>戻り値:</dt>
+<dd>List&lt;T&gt;</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -512,7 +546,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <dt>定義:</dt>
 <dd><code><a href="MojangsonStructure.html#deepCopy()">deepCopy</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>ディープコピーされたオブジェクト。</dd>
+<dd>ディープコピーされたオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -534,10 +568,10 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <h3>untyped</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a></span>&nbsp;<span class="element-name">untyped</span>()</div>
-<div class="block">型付きリストを型の保証のないMojangsonListに変換します。</div>
+<div class="block">型付きリストを型の保証のない MojangsonList に変換します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>MojangsonList。</dd>
+<dd>MojangsonList</dd>
 </dl>
 </div>
 </section>
@@ -548,13 +582,13 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
 <div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="../MojangsonValue.html#toString()">MojangsonValue</a></code></span></div>
-<div class="block">この値の文字列表現を返します。出力はラップされた型が実装するtoString()に依存し、mojangsonフォーマットへの整形は行われません。
-mojangsonフォーマットに整形する場合はMojangsonSerializerを使用してください。</div>
+<div class="block">この値の文字列表現を返します。出力はラップされた型が実装する toString() に依存し、mojangsonフォーマットへの整形は行われません。
+mojangsonフォーマットに整形する場合は MojangsonSerializer を使用してください。</div>
 <dl class="notes">
 <dt>オーバーライド:</dt>
 <dd><code><a href="../MojangsonValue.html#toString()">toString</a></code>&nbsp;クラス内&nbsp;<code><a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="#type-param-T" title="TypedMojangsonList内の型パラメータ">T</a> extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>ラップされた値のtoString()の戻り値をそのまま返します。</dd>
+<dd>ラップされたクラスの toString() の実装に依存</dd>
 <dt>関連項目:</dt>
 <dd>
 <ul class="tag-list">

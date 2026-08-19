@@ -1,7 +1,5 @@
 package io.github.takenoko4096.mojangson;
 
-import org.jspecify.annotations.NullMarked;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -9,7 +7,6 @@ import java.util.Set;
 /**
  * mojangsonパスをパースするクラス。
  */
-@NullMarked
 public class MojangsonPathParser {
     private static final Set<Character> WHITESPACE = Set.of(' ');
 
@@ -323,8 +320,8 @@ public class MojangsonPathParser {
     /**
      * 渡された文字列をmojangsonパスとしてパースします。
      * @param path mojangsonパス
-     * @return jsonパスオブジェクト
-     * @throws MojangsonParseException jsonパスが無効な場合。
+     * @return mojangsonパスオブジェクト
+     * @throws MojangsonParseException jsonパスが無効な場合
      */
     public MojangsonPath parse(String path) throws MojangsonParseException {
         this.text = path;

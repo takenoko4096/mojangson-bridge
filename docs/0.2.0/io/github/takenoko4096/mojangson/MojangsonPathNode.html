@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">メソッドの詳細</a>
 <ol class="toc-list">
 <li><a href="#access(S,io.github.takenoko4096.mojangson.MojangsonLocationAccessProvider)" tabindex="0">access(S, MojangsonLocationAccessProvider)</a></li>
-<li><a href="#copy()" tabindex="0">copy()</a></li>
+<li><a href="#deepCopy()" tabindex="0">deepCopy()</a></li>
 <li><a href="#toString()" tabindex="0">toString()</a></li>
 </ol>
 </li>
@@ -97,9 +97,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">MojangsonPathNode&lt;S extends <a href="values/MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a>, T&gt;</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span></div>
+<div class="type-signature"><span class="modifiers">public abstract sealed class </span><span class="element-name type-name-label">MojangsonPathNode&lt;S extends <a href="values/MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a>, T&gt;</span>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span>
+<span class="permits">permits <a href="MojangsonPathNode.ObjectKeyNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ObjectKeyNode</a>, <a href="MojangsonPathNode.ArrayIndexNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ArrayIndexNode</a>, <a href="MojangsonPathNode.ObjectKeyCheckerNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ObjectKeyCheckerNode</a>, <a href="MojangsonPathNode.ArrayIndexFinderNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ArrayIndexFinderNode</a></span></div>
 <div class="block">mojangsonパスを構成する各ノードを表現します。</div>
 </div>
 </section>
@@ -149,12 +149,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected @Nullable <a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a><wbr>&lt;?,<wbr>?&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#child" class="member-name-link">child</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">子ノード。</div>
+<div class="block">子ノード</div>
 </div>
 <div class="col-first odd-row-color"><code>protected final <a href="#type-param-T" title="MojangsonPathNode内の型パラメータ">T</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#parameter" class="member-name-link">parameter</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">子アクセスのためのキーまたは添え字。</div>
+<div class="block">子アクセスのためのキーまたは添字</div>
 </div>
 </div>
 </section>
@@ -195,7 +195,7 @@ loadScripts(document, 'script');</script>
 <div class="block">第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a><wbr>&lt;<a href="#type-param-S" title="MojangsonPathNode内の型パラメータ">S</a>,<wbr><a href="#type-param-T" title="MojangsonPathNode内の型パラメータ">T</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#copy()" class="member-name-link">copy</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deepCopy()" class="member-name-link">deepCopy</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">ノードのコピーを作成します。</div>
 </div>
@@ -224,7 +224,7 @@ loadScripts(document, 'script');</script>
 <h3>parameter</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="#type-param-T" title="MojangsonPathNode内の型パラメータ">T</a></span>&nbsp;<span class="element-name">parameter</span></div>
-<div class="block">子アクセスのためのキーまたは添え字。</div>
+<div class="block">子アクセスのためのキーまたは添字</div>
 </div>
 </section>
 </li>
@@ -233,7 +233,7 @@ loadScripts(document, 'script');</script>
 <h3>child</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">@Nullable <a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;?,<wbr>?&gt;</span>&nbsp;<span class="element-name">child</span></div>
-<div class="block">子ノード。</div>
+<div class="block">子ノード</div>
 </div>
 </section>
 </li>
@@ -254,8 +254,8 @@ loadScripts(document, 'script');</script>
 <div class="block">サブクラスのためのコンストラクタ。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>parameter</code> - 子アクセスのためのキーまたは添え字。</dd>
-<dd><code>child</code> - 子ノード。</dd>
+<dd><code>parameter</code> - 子アクセスのためのキーまたは添字</dd>
+<dd><code>child</code> - 子ノード</dd>
 </dl>
 </div>
 </section>
@@ -280,10 +280,10 @@ loadScripts(document, 'script');</script>
 <dt>型パラメータ:</dt>
 <dd><span id="access(S,io.github.takenoko4096.mojangson.MojangsonLocationAccessProvider)-type-param-U"><code>U</code> - コールバックの戻り値の型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>structure</code> - 任意の構造体。</dd>
-<dd><code>function</code> - コールバック。</dd>
+<dd><code>structure</code> - 任意の構造体</dd>
+<dd><code>function</code> - コールバック</dd>
 <dt>戻り値:</dt>
-<dd>コールバックの戻り値そのまま。</dd>
+<dd>コールバックの戻り値そのまま</dd>
 <dt>例外:</dt>
 <dd><code><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></code> - 構造との不整合によりアクセスできなかった場合。</dd>
 </dl>
@@ -291,14 +291,14 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="copy()">
-<h3>copy</h3>
+<section class="detail" id="deepCopy()">
+<h3>deepCopy</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;<a href="#type-param-S" title="MojangsonPathNode内の型パラメータ">S</a>,<wbr><a href="#type-param-T" title="MojangsonPathNode内の型パラメータ">T</a>&gt;</span>&nbsp;<span class="element-name">copy</span>()</div>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;<a href="#type-param-S" title="MojangsonPathNode内の型パラメータ">S</a>,<wbr><a href="#type-param-T" title="MojangsonPathNode内の型パラメータ">T</a>&gt;</span>&nbsp;<span class="element-name">deepCopy</span>()</div>
 <div class="block">ノードのコピーを作成します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>ノードのディープコピー。</dd>
+<dd>ノードのディープコピー</dd>
 </dl>
 </div>
 </section>

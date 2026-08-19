@@ -1,7 +1,6 @@
 package io.github.takenoko4096.mojangson;
 
 import io.github.takenoko4096.mojangson.values.*;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.*;
@@ -10,7 +9,6 @@ import java.util.function.Function;
 /**
  * mojangson文字列を解釈してmojangson構造に変換するクラス。
  */
-@NullMarked
 public class MojangsonParser {
     private static final Set<Character> WHITESPACE = Set.of(' ', '\n', '\t');
 
@@ -192,19 +190,19 @@ public class MojangsonParser {
 
     private int location = 0;
 
-    private final boolean useNull;
+    private final boolean nullable;
 
-    private final boolean useOnlyTypedList;
+    private final boolean typingStrictly;
 
     /**
      * 新しくパーサーを作成します。
-     * @param useNull 本来mojangsonに存在しないnull値を許容するかどうか。
-     * @param useOnlyTypedList リストの要素がすべて同じ型であることを必須にするかどうか。
+     * @param nullable 本来mojangsonに存在しない null 値を許容するかどうか
+     * @param typingStrictly リストの要素がすべて同じ型であることを必須にするかどうか
      */
-    public MojangsonParser(boolean useNull, boolean useOnlyTypedList) {
+    public MojangsonParser(boolean nullable, boolean typingStrictly) {
         this.text = "";
-        this.useNull = useNull;
-        this.useOnlyTypedList = useOnlyTypedList;
+        this.nullable = nullable;
+        this.typingStrictly = typingStrictly;
     }
 
     /**
@@ -395,9 +393,9 @@ public class MojangsonParser {
             }
         }
 
-        final String number = numberBuilder.toString();
+        final String numberString = numberBuilder.toString();
 
-        if (!NUMBERS.contains(number.charAt(number.length() - 1))) {
+        if (!NUMBERS.contains(numberString.charAt(numberString.length() - 1))) {
             throw exception("数値は数字で終わる必要があります");
         }
 
@@ -427,14 +425,14 @@ public class MojangsonParser {
             }
         }
         else if (suffix.length() == 2) {
-            final char s = suffix.charAt(0);
-            final char t = suffix.charAt(1);
+            final char signedOrUnsigned = suffix.charAt(0);
+            final char typeOfNumber = suffix.charAt(1);
 
-            if (s == SIGNED_AND_UNSIGNED[0] && SIGNED_INT_PARSERS.containsKey(t)) {
-                parser = SIGNED_INT_PARSERS.get(t);
+            if (signedOrUnsigned == SIGNED_AND_UNSIGNED[0] && SIGNED_INT_PARSERS.containsKey(typeOfNumber)) {
+                parser = SIGNED_INT_PARSERS.get(typeOfNumber);
             }
-            else if (s == SIGNED_AND_UNSIGNED[1] && UNSIGNED_INT_PARSERS.containsKey(t)) {
-                parser = UNSIGNED_INT_PARSERS.get(t);
+            else if (signedOrUnsigned == SIGNED_AND_UNSIGNED[1] && UNSIGNED_INT_PARSERS.containsKey(typeOfNumber)) {
+                parser = UNSIGNED_INT_PARSERS.get(typeOfNumber);
             }
             else {
                 throw exception("数値の末尾が無効です: '" + suffix + "'");
@@ -444,7 +442,9 @@ public class MojangsonParser {
             throw exception("数値の末尾が無効です: '" + suffix + "'");
         }
 
-        return MojangsonNumber.upcastValueOf(parser.apply(number));
+        final Number number = parser.apply(numberString);
+
+        return (MojangsonNumber<?>) MojangsonValue.valueOf(number);
     }
 
     private MojangsonCompound compound() {
@@ -489,7 +489,7 @@ public class MojangsonParser {
 
         expect(ARRAY_LIST_BRACES[1]);
 
-        if (!list.isEmpty() && useOnlyTypedList) {
+        if (!list.isEmpty() && typingStrictly) {
             list.typed(list.getTypeAt(0));
         }
 
@@ -557,7 +557,7 @@ public class MojangsonParser {
                 return MojangsonByte.valueOf((byte) 1);
             }
             else if (next(NULL)) {
-                if (useNull) {
+                if (nullable) {
                     return MojangsonNull.NULL;
                 }
                 else {
@@ -585,11 +585,11 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列をmojangsonとしてパースします。
-     * @param text mojangson。
-     * @param clazz キャスト先のクラス。
-     * @param <T> キャスト先の型。
+     * @param text mojangson
+     * @param clazz キャスト先のクラス
+     * @param <T> キャスト先の型
      * @return mojangson値
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public <T extends MojangsonValue<?>> T parse(String text, Class<T> clazz) {
         this.text = text;
@@ -605,8 +605,8 @@ public class MojangsonParser {
 
     /**
      * 新しく関数を定義します。
-     * @param name 関数名。
-     * @param function 引数リストを受け取る関数。
+     * @param name 関数名
+     * @param function 引数リストを受け取る関数
      */
     public void register(String name, MojangsonFunctionalOperator function) {
         FUNCTIONS.put(name, function);
@@ -614,9 +614,9 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列を任意の値としてパースします。
-     * @param text mojangson。
-     * @return mojangsonオブジェクト表現。
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @param text mojangson
+     * @return mojangsonオブジェクト表現
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public static MojangsonValue<?> object(String text) throws MojangsonParseException {
         return new MojangsonParser().parse(text, MojangsonValue.class);
@@ -624,9 +624,9 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列をコンパウンドとしてパースします。
-     * @param text mojangson。
-     * @return コンパウンドのmojangsonオブジェクト表現。
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @param text mojangson
+     * @return コンパウンドのmojangsonオブジェクト表現
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public static MojangsonCompound compound(String text) throws MojangsonParseException {
         return new MojangsonParser().parse(text, MojangsonCompound.class);
@@ -634,9 +634,9 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列をリストとしてパースします。
-     * @param text mojangson。
-     * @return リストのmojangsonオブジェクト表現。
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @param text mojangson
+     * @return リストのmojangsonオブジェクト表現
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public static MojangsonList list(String text) throws MojangsonParseException {
         return new MojangsonParser().parse(text, MojangsonList.class);
@@ -644,9 +644,9 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列をバイト配列としてパースします。
-     * @param text mojangson。
-     * @return バイト配列のmojangsonオブジェクト表現。
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @param text mojangson
+     * @return バイト配列のmojangsonオブジェクト表現
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public static MojangsonByteArray byteArray(String text) throws MojangsonParseException {
         return new MojangsonParser().parse(text, MojangsonByteArray.class);
@@ -654,9 +654,9 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列を32ビット整数配列としてパースします。
-     * @param text mojangson。
-     * @return 32ビット整数配列のmojangsonオブジェクト表現。
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @param text mojangson
+     * @return 32ビット整数配列のmojangsonオブジェクト表現
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public static MojangsonIntArray intArray(String text) throws MojangsonParseException {
         return new MojangsonParser().parse(text, MojangsonIntArray.class);
@@ -664,9 +664,9 @@ public class MojangsonParser {
 
     /**
      * 引数に渡された文字列を64ビット整数配列としてパースします。
-     * @param text mojangson。
-     * @return 64ビット整数配列のmojangsonオブジェクト表現。
-     * @throws MojangsonParseException mojangsonが無効な場合。
+     * @param text mojangson
+     * @return 64ビット整数配列のmojangsonオブジェクト表現
+     * @throws MojangsonParseException mojangsonが無効な場合
      */
     public static MojangsonLongArray longArray(String text) throws MojangsonParseException {
         return new MojangsonParser().parse(text, MojangsonLongArray.class);

@@ -2,7 +2,6 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * mojangsonにおけるbyte[]を表現します。
+ * mojangsonにおける byte[] を表現します。
  */
-@NullMarked
 public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     /**
      * サブクラスのためのコンストラクタ。
@@ -33,6 +31,11 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
+    protected MojangsonByte getZero() {
+        return MojangsonByte.valueOf((byte) 0);
+    }
+
+    @Override
     public MojangsonByteArray deepCopy() {
         return from(listView());
     }
@@ -45,6 +48,14 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     @Override
     public int length() {
         return value.length;
+    }
+
+    @Override
+    public boolean delete(int index) {
+        if (index >= value.length) return false;
+        final boolean successful = value[index] != 0;
+        value[index] = 0;
+        return successful;
     }
 
     @Override
@@ -84,9 +95,9 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     /**
-     * MojangsonListからMojangsonByteArrayへの変換を試みます。
-     * @param list MojangsonByteのみを要素に持つリスト。
-     * @return MojangsonByteArray。
+     * MojangsonList から MojangsonByteArray への変換を試みます。
+     * @param list MojangsonByte のみを要素に持つリスト。
+     * @return MojangsonByteArray
      */
     public static MojangsonByteArray from(TypedMojangsonList<MojangsonByte> list) {
         final byte[] bytes = new byte[list.length()];

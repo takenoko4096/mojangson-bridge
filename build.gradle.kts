@@ -4,10 +4,6 @@ plugins {
     signing
 }
 
-group = "io.github.takenoko4096"
-version = "0.2.0"
-description = "library of mojangson"
-
 repositories {
     mavenCentral()
 }
@@ -37,7 +33,7 @@ tasks {
     }
 }
 
-val gitHubUserName = "takenoko4096"
+val gitHubUserName: String by project
 
 mavenPublishing {
     publishToMavenCentral()

@@ -1,7 +1,6 @@
 package io.github.takenoko4096.mojangson;
 
 import io.github.takenoko4096.mojangson.values.*;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.*;
@@ -10,12 +9,11 @@ import java.util.*;
  * すべての型オブジェクトがこのクラスの静的フィールドで定義されています。
  * @see MojangsonValueType
  */
-@NullMarked
 public final class MojangsonValueTypes {
     private MojangsonValueTypes() {}
 
     /**
-     * byteに対応。
+     * byte に対応。
      * @see MojangsonByte
      */
     public static final MojangsonValueType<MojangsonByte> BYTE = new MojangsonValueType<>(MojangsonByte.class) {
@@ -31,7 +29,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * shortに対応。
+     * short に対応。
      * @see MojangsonShort
      */
     public static final MojangsonValueType<MojangsonShort> SHORT = new MojangsonValueType<>(MojangsonShort.class) {
@@ -44,7 +42,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * intに対応。
+     * int に対応。
      * @see MojangsonInt
      */
     public static final MojangsonValueType<MojangsonInt> INT = new MojangsonValueType<>(MojangsonInt.class) {
@@ -57,7 +55,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * longに対応。
+     * long に対応。
      * @see MojangsonLong
      */
     public static final MojangsonValueType<MojangsonLong> LONG = new MojangsonValueType<>(MojangsonLong.class) {
@@ -70,7 +68,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * floatに対応。
+     * float に対応。
      * @see MojangsonFloat
      */
     public static final MojangsonValueType<MojangsonFloat> FLOAT = new MojangsonValueType<>(MojangsonFloat.class) {
@@ -83,7 +81,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * doubleに対応。
+     * double に対応。
      * @see MojangsonDouble
      */
     public static final MojangsonValueType<MojangsonDouble> DOUBLE = new MojangsonValueType<>(MojangsonDouble.class) {
@@ -96,7 +94,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * java.lang.Stringに対応。
+     * java.lang.String に対応。
      * @see MojangsonString
      */
     public static final MojangsonValueType<MojangsonString> STRING = new MojangsonValueType<>(MojangsonString.class) {
@@ -113,7 +111,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * byte[]に対応。
+     * byte[] に対応。
      * @see MojangsonByteArray
      */
     public static final MojangsonValueType<MojangsonByteArray> BYTE_ARRAY = new MojangsonValueType<>(MojangsonByteArray.class) {
@@ -126,7 +124,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * int[]に対応。
+     * int[] に対応。
      * @see MojangsonIntArray
      */
     public static final MojangsonValueType<MojangsonIntArray> INT_ARRAY = new MojangsonValueType<>(MojangsonIntArray.class) {
@@ -139,7 +137,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * long[]に対応。
+     * long[] に対応。
      * @see MojangsonLongArray
      */
     public static final MojangsonValueType<MojangsonLongArray> LONG_ARRAY = new MojangsonValueType<>(MojangsonLongArray.class) {
@@ -152,7 +150,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * java.util.Mapに対応。
+     * java.util.Map&lt;String, ?&gt; に対応。
      * @see MojangsonCompound
      */
     public static final MojangsonValueType<MojangsonCompound> COMPOUND = new MojangsonValueType<>(MojangsonCompound.class) {
@@ -178,7 +176,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * java.util.Listに対応。
+     * java.util.List&lt;?&gt; に対応。
      * @see MojangsonList
      */
     public static final MojangsonValueType<MojangsonList> LIST = new MojangsonValueType<>(MojangsonList.class) {
@@ -202,7 +200,7 @@ public final class MojangsonValueTypes {
     };
 
     /**
-     * nullに対応。
+     * null に対応。
      * @see MojangsonNull
      */
     public static final MojangsonValueType<MojangsonNull> NULL = new MojangsonValueType<>(MojangsonNull.class) {

@@ -2,24 +2,23 @@ package io.github.takenoko4096.json.values;
 
 import io.github.takenoko4096.json.JsonValueType;
 import io.github.takenoko4096.json.JsonValueTypes;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 /**
- * json構造におけるnull型を表現します。
+ * json構造における null 型を表現します。
  */
-public final class JsonNull extends JsonPrimitive<Object> {
+public final class JsonNull extends JsonPrimitive<Void> {
     private JsonNull() {
         super(null);
     }
 
     @Override
-    public @NonNull String toString() {
+    public String toString() {
         return "null";
     }
 
     @Override
-    public @NonNull JsonValueType<?> getType() {
+    public JsonValueType<JsonNull> getType() {
         return JsonValueTypes.NULL;
     }
 
@@ -28,12 +27,12 @@ public final class JsonNull extends JsonPrimitive<Object> {
      * @return null
      */
     @Override
-    public @Nullable Object getValue() {
+    public @Nullable Void getValue() {
         return super.getValue();
     }
 
     /**
-     * nullを表現するシングルトンオブジェクト。
+     * null を表現するシングルトンオブジェクト。
      */
     public static final JsonNull NULL = new JsonNull();
 }

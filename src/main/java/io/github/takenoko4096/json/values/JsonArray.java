@@ -3,7 +3,6 @@ package io.github.takenoko4096.json.values;
 import io.github.takenoko4096.json.JsonValue;
 import io.github.takenoko4096.json.JsonValueType;
 import io.github.takenoko4096.json.JsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -14,25 +13,24 @@ import java.util.Objects;
 /**
  * json構造における配列を表現します。
  */
-@NullMarked
 public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements JsonIterable<JsonValue<?>> {
     /**
-     * 長さ0のJsonArrayを作成します。
+     * 長さ 0 の JsonArray を作成します。
      */
     public JsonArray() {
         super(new ArrayList<>());
     }
 
     /**
-     * JsonValueのListからJsonArrayを作成します。
-     * @param list 元となるList。
+     * JsonValue&lt;?&gt; の List から JsonArray を作成します。
+     * @param list 元となる List
      */
     public JsonArray(List<JsonValue<?>> list) {
         super(new ArrayList<>(list));
     }
 
     @Override
-    public JsonValueType<?> getType() {
+    public JsonValueType<JsonArray> getType() {
         return JsonValueTypes.ARRAY;
     }
 
@@ -49,10 +47,10 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * 引数に渡されたインデックスに格納された値の型を返します。
-     * @param index インデックス。
-     * @return インデックスに格納された値の型。
-     * @throws IllegalArgumentException インデックスが存在しない場合。
+     * 添字に格納された値の型を返します。
+     * @param index 添字
+     * @return 添字に対応する位置に格納された値の型
+     * @throws IllegalArgumentException 添字に対応する位置が存在しない場合
      */
     public JsonValueType<?> getTypeAt(int index) throws IllegalArgumentException {
         if (!has(index)) {
@@ -64,12 +62,12 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * 引数に渡されたインデックスに格納された値を返します。
-     * @param index インデックス。
-     * @param type 期待する型。
-     * @return インデックスに格納された値。
-     * @param <T> 期待する型。
-     * @throws IllegalArgumentException インデックスが存在しない、または予期しない型の場合。
+     * 添字に対応する位置に格納された値を返します。
+     * @param index 添字
+     * @param type 期待する型
+     * @return 添字に対応する位置に格納された値
+     * @param <T> 期待する型
+     * @throws IllegalArgumentException 添字に対応する位置が存在しない、または予期しない型の場合
      */
     public <T extends JsonValue<?>> T getOrThrow(int index, JsonValueType<T> type) throws IllegalArgumentException {
         if (!has(index)) {
@@ -85,11 +83,11 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * 引数に渡されたインデックスに格納された値を返します。インデックスが存在しない、または型の不一致の場合にnullを返します。
-     * @param index インデックス。
-     * @param type 期待する型。
-     * @return インデックスに格納された値。
-     * @param <T> 期待する型。
+     *添字に対応する位置に格納された値を返します。添字に対応する位置が存在しない、または型の不一致の場合にnullを返します。
+     * @param index 添字
+     * @param type 期待する型
+     * @return 添字に対応する位置に格納された値
+     * @param <T> 期待する型
      */
     public <T extends JsonValue<?>> @Nullable T getOrNull(int index, JsonValueType<T> type) {
         if (has(index)) {
@@ -102,22 +100,22 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * 引数に渡されたインデックスに格納された値を返します。インデックスが存在しない、または型の不一致の場合にデフォルト値を返します。
-     * @param index インデックス。
-     * @param type 期待する型。
-     * @param defaultValue デフォルト値。
-     * @return インデックスに格納された値。
-     * @param <T> 期待する型。
+     * 添字に対応する位置に格納された値を返します。添字に対応する位置が存在しない、または型の不一致の場合にデフォルト値を返します。
+     * @param index 添字
+     * @param type 期待する型
+     * @param defaultValue デフォルト値
+     * @return 添字に対応する位置に格納された値
+     * @param <T> 期待する型
      */
-    public <T extends JsonValue<?>> T getOrDefault(int index, JsonValueType<T> type, T defaultValue) {
-        return Objects.requireNonNullElse(getOrNull(index, type), defaultValue);
+    public <T extends JsonValue<?>> T getOrDefault(int index, JsonValueType<T> type, Object defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(index, type), type.toJson(defaultValue));
     }
 
     /**
-     * 引数に渡されたインデックスに値を格納し、そのインデックス以降の値を後ろに追いやります。
-     * @param index インデックス。
-     * @param value 格納する値。
-     * @throws IllegalArgumentException インデックスが不正な場合。
+     * 添字に対応する位置に値を格納し、それ以降の値を後ろに追いやります。
+     * @param index 添字
+     * @param value 値
+     * @throws IllegalArgumentException 添字が不正な場合
      */
     public void add(int index, @Nullable Object value) throws IllegalArgumentException {
         if (index > this.value.size()) {
@@ -135,17 +133,17 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * 配列の後ろに引数に渡された値を追加します。
-     * @param value 格納する値。
+     * 配列の後ろに値を追加します。
+     * @param value 値
      */
     public void add(@Nullable Object value) {
         this.value.add(JsonValue.valueOf(value));
     }
 
     /**
-     * 引数に渡されたインデックスの値を上書きします。
-     * @param index インデックス。
-     * @param value 格納する値。
+     * 添字に対応する位置の値を上書きします。
+     * @param index 添字
+     * @param value 値
      * @throws IllegalArgumentException インデックスが不正な場合。
      */
     public void set(int index, @Nullable Object value) throws IllegalArgumentException {
@@ -205,13 +203,17 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
         return list.iterator();
     }
 
+    /**
+     * JsonValue&lt;?&gt; の List に変換して返します。
+     * @return List&lt;JsonValue&lt;?&gt;&gt;
+     */
     public List<JsonValue<?>> toList() {
         return List.copyOf(value);
     }
 
     /**
-     * この配列を再帰的にListに変換します。
-     * @return List形式のディープコピー。
+     * この配列を再帰的に List に変換します。
+     * @return List&lt;Object&gt;
      */
     public List<@Nullable Object> toListRecursively() {
         final List<Object> list = new ArrayList<>();
@@ -244,9 +246,9 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * 引数に渡された構造体がこの構造体の部分構造であるかを返します。
-     * @param other 構造体。
-     * @return 部分構造であれば、真。
+     * ある構造体がこの構造体の部分構造であるかを返します。
+     * @param other 構造体
+     * @return 部分構造であれば true
      */
     public boolean isSuperOf(JsonArray other) {
         if (other.length() == 0) return true;
@@ -272,8 +274,8 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
 
     /**
      * この配列が引数に渡された型のみを要素に持つ配列であるかを返します。
-     * @param type 任意の型。
-     * @return この配列がその型の配列であれば、真。
+     * @param type 任意の型
+     * @return この配列のすべての要素がその型であれば true
      */
     public boolean isArrayOf(JsonValueType<?> type) {
         for (int i = 0; i < length(); i++) {
@@ -287,16 +289,16 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
 
     /**
      * この配列が引数に渡された型のみを要素に持つ配列であれば、その型の型付き配列に変換して返します。
-     * @param type 任意の型。
-     * @return 型付き配列。
-     * @param <T> 任意の型。
+     * @param type 任意の型
+     * @return 型付き配列
+     * @param <T> 任意の型
      */
     public <T extends JsonValue<?>> TypedJsonArray<T> typed(JsonValueType<T> type) {
         final TypedJsonArray<T> array = new TypedJsonArray<>(type);
 
         for (int i = 0; i < length(); i++) {
             if (!getTypeAt(i).equals(type)) {
-                throw new IllegalStateException("その型の値でない要素が見つかりました: " + getTypeAt(i).toString());
+                throw new IllegalStateException("その型の値でない要素が見つかりました: " + getTypeAt(i));
             }
 
             final T element = getOrThrow(i, type);
@@ -307,9 +309,9 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     /**
-     * IterableをJsonArrayに変換します。
-     * @param iterable Iterable。
-     * @return JsonArray。
+     * Iterable&lt;?&gt; を JsonArray に変換します。
+     * @param iterable Iterable&lt;?&gt;
+     * @return JsonArray
      */
     public static JsonArray valueOf(Iterable<?> iterable) {
         final List<JsonValue<?>> list = new ArrayList<>();

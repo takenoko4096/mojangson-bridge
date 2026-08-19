@@ -2,30 +2,32 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
  * mojangsonにおけるnullを表現します。
  */
-public final class MojangsonNull extends MojangsonPrimitive<Object> {
+public final class MojangsonNull extends MojangsonPrimitive<Void> {
     private MojangsonNull() {
         super(null);
     }
 
     @Override
-    public @NonNull MojangsonValueType<?> getType() {
+    public MojangsonValueType<?> getType() {
         return MojangsonValueTypes.NULL;
     }
 
+    /**
+     * 常に null を返します。
+     * @return null
+     */
     @Override
-    public @Nullable Object getValue() {
-        return null;
+    public @Nullable Void getValue() {
+        return super.getValue();
     }
 
     @Override
-    public @NonNull String toString() {
+    public String toString() {
         return "null";
     }
 

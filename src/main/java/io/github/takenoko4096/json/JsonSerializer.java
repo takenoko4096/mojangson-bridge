@@ -3,19 +3,17 @@ package io.github.takenoko4096.json;
 import io.github.takenoko4096.json.values.JsonIterable;
 import io.github.takenoko4096.json.values.JsonObject;
 import io.github.takenoko4096.json.values.JsonStructure;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
  * json構造を文字列にシリアライズするクラス。
  */
-@NullMarked
 public final class JsonSerializer {
     private final int indentationSpaceCount;
 
     /**
      * 新しくシリアライザーを作成します。
-     * @param indentationSpaceCount インデントの空白の文字数。
+     * @param indentationSpaceCount インデントの空白の文字数
      */
     public JsonSerializer(int indentationSpaceCount) {
         this.indentationSpaceCount = indentationSpaceCount;
@@ -24,7 +22,7 @@ public final class JsonSerializer {
     /**
      * json構造を文字列としてシリアライズします。
      * @param structure json構造体
-     * @return 改行・空白文字によるインデントを含む文字列。
+     * @return 改行・空白文字によるインデントを含む文字列
      */
     public String serialize(JsonStructure structure) {
         return serialize(structure, 1).toString();
@@ -159,9 +157,9 @@ public final class JsonSerializer {
 
     /**
      * json構造を文字列としてシリアライズします。
-     * インデントの空白の文字数には4を使用します。
+     * インデントの空白の文字数には 4 を使用します
      * @param structure json構造体
-     * @return 改行・空白文字によるインデントを含む文字列。
+     * @return 改行・空白文字によるインデントを含む文字列
      */
     public static String structure(JsonStructure structure) throws JsonSerializationException {
         return new JsonSerializer(4).serialize(structure);

@@ -13,12 +13,11 @@ import java.util.Map;
  * すべての型オブジェクトがこのクラスの静的フィールドで定義されています。
  * @see JsonValueType
  */
-@NullMarked
 public final class JsonValueTypes {
     private JsonValueTypes() {}
 
     /**
-     * booleanに対応。
+     * boolean に対応。
      * @see JsonBoolean
      */
     public static final JsonValueType<JsonBoolean> BOOLEAN = new JsonValueType<>(JsonBoolean.class) {
@@ -31,7 +30,7 @@ public final class JsonValueTypes {
     };
 
     /**
-     * java.lang.Numberに対応。
+     * java.lang.Number に対応。
      * @see JsonNumber
      */
     public static final JsonValueType<JsonNumber> NUMBER = new JsonValueType<>(JsonNumber.class) {
@@ -44,7 +43,7 @@ public final class JsonValueTypes {
     };
 
     /**
-     * java.lang.Stringに対応。
+     * java.lang.String に対応。
      * @see JsonString
      */
     public static final JsonValueType<JsonString> STRING = new JsonValueType<>(JsonString.class) {
@@ -60,7 +59,7 @@ public final class JsonValueTypes {
     };
 
     /**
-     * java.util.Mapに対応。
+     * java.util.Map&lt;String, ?&gt; に対応。
      * @see JsonObject
      */
     public static final JsonValueType<JsonObject> OBJECT = new JsonValueType<>(JsonObject.class) {
@@ -87,7 +86,7 @@ public final class JsonValueTypes {
     };
 
     /**
-     * java.util.Listに対応。
+     * java.util.List&lt;?&gt; に対応。
      * @see JsonArray
      */
     public static final JsonValueType<JsonArray> ARRAY = new JsonValueType<>(JsonArray.class) {
@@ -197,7 +196,7 @@ public final class JsonValueTypes {
     };
 
     /**
-     * nullに対応。
+     * null に対応。
      * @see JsonNull
      */
     public static final JsonValueType<JsonNull> NULL = new JsonValueType<>(JsonNull.class) {

@@ -3,7 +3,6 @@ package io.github.takenoko4096.mojangson;
 import io.github.takenoko4096.mojangson.values.MojangsonCompound;
 import io.github.takenoko4096.mojangson.values.MojangsonList;
 import io.github.takenoko4096.mojangson.values.MojangsonStructure;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -11,23 +10,22 @@ import org.jspecify.annotations.Nullable;
  * @param <S> 親となるmojangson構造
  * @param <T> 子アクセス
  */
-@NullMarked
-public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
+public abstract sealed class MojangsonPathNode<S extends MojangsonStructure, T> permits MojangsonPathNode.ObjectKeyNode, MojangsonPathNode.ArrayIndexNode, MojangsonPathNode.ObjectKeyCheckerNode, MojangsonPathNode.ArrayIndexFinderNode {
     /**
-     * 子アクセスのためのキーまたは添え字。
+     * 子アクセスのためのキーまたは添字
      */
     protected final T parameter;
 
     /**
-     * 子ノード。
+     * 子ノード
      */
     @Nullable
     protected MojangsonPathNode<?, ?> child;
 
     /**
      * サブクラスのためのコンストラクタ。
-     * @param parameter 子アクセスのためのキーまたは添え字。
-     * @param child 子ノード。
+     * @param parameter 子アクセスのためのキーまたは添字
+     * @param child 子ノード
      */
     protected MojangsonPathNode(T parameter, @Nullable MojangsonPathNode<?, ?> child) {
         this.parameter = parameter;
@@ -36,9 +34,9 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
 
     /**
      * 第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。各サブクラスにてチェックや検索等その他の処理が事前に行われることがあります。
-     * @param structure 任意の構造体。
-     * @param function コールバック。
-     * @return コールバックの戻り値そのまま。
+     * @param structure 任意の構造体
+     * @param function コールバック
+     * @return コールバックの戻り値そのまま
      * @throws MojangsonPathUnableToAccessException 構造との不整合によりアクセスできなかった場合。
      * @param <U> コールバックの戻り値の型
      */
@@ -46,9 +44,9 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
 
     /**
      * ノードのコピーを作成します。
-     * @return ノードのディープコピー。
+     * @return ノードのディープコピー
      */
-    public abstract MojangsonPathNode<S, T> copy();
+    public abstract MojangsonPathNode<S, T> deepCopy();
 
     @Override
     public abstract String toString();
@@ -62,13 +60,13 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(MojangsonCompound structure, MojangsonLocationAccessProvider<MojangsonCompound, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+        public <U> @Nullable U access(MojangsonCompound structure, MojangsonLocationAccessProvider<MojangsonCompound, U> function) throws MojangsonPathUnableToAccessException {
             return function.use(structure, parameter);
         }
 
         @Override
-        public MojangsonPathNode<MojangsonCompound, String> copy() {
-            return new ObjectKeyNode(parameter, child == null ? null : child.copy());
+        public MojangsonPathNode<MojangsonCompound, String> deepCopy() {
+            return new ObjectKeyNode(parameter, child == null ? null : child.deepCopy());
         }
 
         @Override
@@ -86,13 +84,13 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(MojangsonList structure, MojangsonLocationAccessProvider<MojangsonList, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+        public <U> @Nullable U access(MojangsonList structure, MojangsonLocationAccessProvider<MojangsonList, U> function) throws MojangsonPathUnableToAccessException {
             return function.use(structure, parameter);
         }
 
         @Override
-        public MojangsonPathNode<MojangsonList, Integer> copy() {
-            return new ArrayIndexNode(parameter, child == null ? null : child.copy());
+        public MojangsonPathNode<MojangsonList, Integer> deepCopy() {
+            return new ArrayIndexNode(parameter, child == null ? null : child.deepCopy());
         }
 
         @Override
@@ -110,7 +108,7 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(MojangsonCompound structure, MojangsonLocationAccessProvider<MojangsonCompound, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+        public <U> @Nullable U access(MojangsonCompound structure, MojangsonLocationAccessProvider<MojangsonCompound, U> function) throws MojangsonPathUnableToAccessException {
             if (!structure.has(parameter.name())) return null;
             else {
                 final MojangsonCompound value = structure.getOrThrow(parameter.name(), MojangsonValueTypes.COMPOUND);
@@ -124,8 +122,8 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
         }
 
         @Override
-        public MojangsonPathNode<MojangsonCompound, MojnagsonConditionalCompoundKey> copy() {
-            return new ObjectKeyCheckerNode(parameter.name(), parameter.compound(), child == null ? null : child.copy());
+        public MojangsonPathNode<MojangsonCompound, MojnagsonConditionalCompoundKey> deepCopy() {
+            return new ObjectKeyCheckerNode(parameter.name(), parameter.compound(), child == null ? null : child.deepCopy());
         }
 
         @Override
@@ -143,7 +141,7 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(MojangsonList structure, MojangsonLocationAccessProvider<MojangsonList, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+        public <U> @Nullable U access(MojangsonList structure, MojangsonLocationAccessProvider<MojangsonList, U> function) throws MojangsonPathUnableToAccessException {
             for (int i = 0; i < structure.length(); i++) {
                 if (structure.getTypeAt(i) != MojangsonValueTypes.COMPOUND) {
                     continue;
@@ -154,15 +152,14 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
                 if (element.isSuperOf(parameter)) {
                     return function.use(structure, i);
                 }
-                else return null;
             }
 
             return null;
         }
 
         @Override
-        public MojangsonPathNode<MojangsonList, MojangsonCompound> copy() {
-            return new ArrayIndexFinderNode(parameter, child == null ? null : child.copy());
+        public MojangsonPathNode<MojangsonList, MojangsonCompound> deepCopy() {
+            return new ArrayIndexFinderNode(parameter, child == null ? null : child.deepCopy());
         }
 
         @Override

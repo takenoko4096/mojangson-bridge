@@ -70,7 +70,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#getTypeOf(java.lang.String)" tabindex="0">getTypeOf(String)</a></li>
 <li><a href="#getOrThrow(java.lang.String,io.github.takenoko4096.json.JsonValueType)" tabindex="0">getOrThrow(String, JsonValueType)</a></li>
 <li><a href="#getOrNull(java.lang.String,io.github.takenoko4096.json.JsonValueType)" tabindex="0">getOrNull(String, JsonValueType)</a></li>
-<li><a href="#getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,T)" tabindex="0">getOrDefault(String, JsonValueType, T)</a></li>
+<li><a href="#getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,java.lang.Object)" tabindex="0">getOrDefault(String, JsonValueType, Object)</a></li>
 <li><a href="#set(java.lang.String,java.lang.Object)" tabindex="0">set(String, Object)</a></li>
 <li><a href="#delete(java.lang.String)" tabindex="0">delete(String)</a></li>
 <li><a href="#clear()" tabindex="0">clear()</a></li>
@@ -83,7 +83,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#getTypeOf(io.github.takenoko4096.json.JsonPath)" tabindex="0">getTypeOf(JsonPath)</a></li>
 <li><a href="#getOrThrow(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)" tabindex="0">getOrThrow(JsonPath, JsonValueType)</a></li>
 <li><a href="#getOrNull(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)" tabindex="0">getOrNull(JsonPath, JsonValueType)</a></li>
-<li><a href="#getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,T)" tabindex="0">getOrDefault(JsonPath, JsonValueType, T)</a></li>
+<li><a href="#getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,java.lang.Object)" tabindex="0">getOrDefault(JsonPath, JsonValueType, Object)</a></li>
 <li><a href="#delete(io.github.takenoko4096.json.JsonPath)" tabindex="0">delete(JsonPath)</a></li>
 <li><a href="#set(io.github.takenoko4096.json.JsonPath,java.lang.Object)" tabindex="0">set(JsonPath, Object)</a></li>
 <li><a href="#valueOf(java.util.Map)" tabindex="0">valueOf(Map)</a></li>
@@ -108,8 +108,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public final class </span><span class="element-name type-name-label">JsonObject</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">JsonObject</span>
 <span class="extends-implements">extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;&gt;
 implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></span></div>
 <div class="block">json構造における連想配列を表現します。</div>
@@ -136,11 +135,11 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="table-header col-last">説明</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">JsonObject</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">空のJsonObjectを作成します。</div>
+<div class="block">空の JsonObject を作成します。</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.Map)" class="member-name-link">JsonObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;&nbsp;map)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">StringとJsonValueのMapからJsonObjectを作成します。</div>
+<div class="block">String と JsonValue&lt;?</div>
 </div>
 </div>
 </section>
@@ -169,46 +168,52 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(io.github.takenoko4096.json.JsonPath)" class="member-name-link">delete</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたパスを削除します。</div>
+<div class="block">パスに対応する位置を削除します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(java.lang.String)" class="member-name-link">delete</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたキーを削除します。</div>
+<div class="block">キーを削除します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;<br>T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,T)" class="member-name-link">getOrDefault</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,java.lang.Object)" class="member-name-link">getOrDefault</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type,
- T&nbsp;defaultValue)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">パスに紐づけられた値を返します。</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;<br>T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,T)" class="member-name-link">getOrDefault</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,java.lang.Object)" class="member-name-link">getOrDefault</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type,
- T&nbsp;defaultValue)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">キーに紐づけられた値を返します。</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;<br>@Nullable T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrNull(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)" class="member-name-link">getOrNull</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">パスに紐づけられた値を返します。</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;<br>@Nullable T</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrNull(java.lang.String,io.github.takenoko4096.json.JsonValueType)" class="member-name-link">getOrNull</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたキーに紐づけられた値を返します。</div>
+<div class="block">キーに紐づけられた値を返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;<br>T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrThrow(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)" class="member-name-link">getOrThrow</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたパスに紐づけられた値を返します。</div>
+<div class="block">パスに紐づけられた値を返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;<br>T</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrThrow(java.lang.String,io.github.takenoko4096.json.JsonValueType)" class="member-name-link">getOrThrow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたキーに紐づけられた値を返します。</div>
+<div class="block">キーに紐づけられた値を返します。</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a><wbr>&lt;?&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a><wbr>&lt;<a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">値の型を取得します。</div>
@@ -216,22 +221,22 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a><wbr>&lt;?&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeOf(io.github.takenoko4096.json.JsonPath)" class="member-name-link">getTypeOf</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたパスの型を返します。</div>
+<div class="block">パスに紐づけられた値の型を返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a><wbr>&lt;?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeOf(java.lang.String)" class="member-name-link">getTypeOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたキーの型を返します。</div>
+<div class="block">キーに紐づけられた値の型を返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#has(io.github.takenoko4096.json.JsonPath)" class="member-name-link">has</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたパスが存在するかを返します。</div>
+<div class="block">パスに対応する位置が存在するかを返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#has(java.lang.String)" class="member-name-link">has</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたキーが存在するかを返します。</div>
+<div class="block">キーに対応する位置が存在するかを返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
@@ -241,7 +246,7 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSuperOf(io.github.takenoko4096.json.values.JsonObject)" class="member-name-link">isSuperOf</a><wbr>(<a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&nbsp;other)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡された構造体がこの構造体の部分構造であるかを返します。</div>
+<div class="block">ある構造体がこの構造体の部分構造であるかを返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="java.util内のクラスまたはインタフェース" class="external-link">Set</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#keys()" class="member-name-link">keys</a>()</code></div>
@@ -252,26 +257,28 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(io.github.takenoko4096.json.JsonPath,java.lang.Object)" class="member-name-link">set</a><wbr>(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたパスに任意の値を紐づけます。</div>
+<div class="block">パスに任意の値を紐づけます。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(java.lang.String,java.lang.Object)" class="member-name-link">set</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">引数に渡されたキーに任意の値を紐づけます。</div>
+<div class="block">キーに任意の値を紐づけます。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMap()" class="member-name-link">toMap</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">このオブジェクトをMap&lt;String, JsonValue&lt;?</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, @Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMapRecursively()" class="member-name-link">toMapRecursively</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">このオブジェクトを再帰的にMapに変換します。</div>
+<div class="block">このオブジェクトを再帰的にMap&lt;String, Object&gt;に変換します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.util.Map)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;?,<wbr>?&gt;&nbsp;value)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.util.Map)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>,<wbr>?&gt;&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">MapをJsonObjectに変換します。</div>
+<div class="block">Map&lt;String, ?</div>
 </div>
 </div>
 </div>
@@ -298,7 +305,7 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>JsonObject</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JsonObject</span>()</div>
-<div class="block">空のJsonObjectを作成します。</div>
+<div class="block">空の JsonObject を作成します。</div>
 </div>
 </section>
 </li>
@@ -307,10 +314,10 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>JsonObject</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JsonObject</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;&nbsp;map)</span></div>
-<div class="block">StringとJsonValueのMapからJsonObjectを作成します。</div>
+<div class="block">String と JsonValue&lt;?&gt; の Map から JsonObject を作成します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>map</code> - 元となるMap。</dd>
+<dd><code>map</code> - 元となる Map</dd>
 </dl>
 </div>
 </section>
@@ -327,14 +334,14 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <section class="detail" id="getType()">
 <h3>getType</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;?&gt;</span>&nbsp;<span class="element-name">getType</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;<a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&gt;</span>&nbsp;<span class="element-name">getType</span>()</div>
 <div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="../JsonValue.html#getType()">JsonValue</a></code></span></div>
 <div class="block">値の型を取得します。</div>
 <dl class="notes">
 <dt>定義:</dt>
 <dd><code><a href="../JsonValue.html#getType()">getType</a></code>&nbsp;クラス内&nbsp;<code><a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>この値の型を表現するオブジェクト。</dd>
+<dd>この値の型を表現するオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -344,12 +351,12 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>has</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key)</span></div>
-<div class="block">引数に渡されたキーが存在するかを返します。</div>
+<div class="block">キーに対応する位置が存在するかを返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>key</code> - キー。</dd>
+<dd><code>key</code> - キー</dd>
 <dt>戻り値:</dt>
-<dd>存在する場合、真。</dd>
+<dd>存在する場合 true</dd>
 </dl>
 </div>
 </section>
@@ -365,7 +372,7 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <dt>定義:</dt>
 <dd><code><a href="JsonStructure.html#isEmpty()">isEmpty</a></code>&nbsp;インタフェース内&nbsp;<code><a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>空の場合、真。</dd>
+<dd>空の場合 true</dd>
 </dl>
 </div>
 </section>
@@ -376,14 +383,14 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;?&gt;</span>&nbsp;<span class="element-name">getTypeOf</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key)</span>
                            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></span></div>
-<div class="block">引数に渡されたキーの型を返します。</div>
+<div class="block">キーに紐づけられた値の型を返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>key</code> - キー。</dd>
+<dd><code>key</code> - キー</dd>
 <dt>戻り値:</dt>
-<dd>キーに紐づけられた値の型。</dd>
+<dd>キーに紐づけられた値の型</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - キーが存在しない場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - キーに対応する位置が存在しない場合</dd>
 </dl>
 </div>
 </section>
@@ -395,17 +402,17 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">getOrThrow</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</span>
                                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></span></div>
-<div class="block">引数に渡されたキーに紐づけられた値を返します。</div>
+<div class="block">キーに紐づけられた値を返します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="getOrThrow(java.lang.String,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型。</span></dd>
+<dd><span id="getOrThrow(java.lang.String,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>key</code> - キー。</dd>
-<dd><code>type</code> - 期待する型。</dd>
+<dd><code>key</code> - キー</dd>
+<dd><code>type</code> - 期待する型</dd>
 <dt>戻り値:</dt>
-<dd>キーに紐づけられた値。</dd>
+<dd>キーに紐づけられた値</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - キーが存在しないか、型が予期しないものの場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - キーに対応する位置が存在しないか、型が予期しないものの場合</dd>
 </dl>
 </div>
 </section>
@@ -416,26 +423,37 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">@Nullable T</span>&nbsp;<span class="element-name">getOrNull</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</span></div>
-<div class="block">引数に渡されたキーに紐づけられた値を返します。キーが存在しないか、型が予期しないものの場合nullを返します。</div>
+<div class="block">キーに紐づけられた値を返します。キーに対応する位置が存在しないか、型が予期しないものの場合nullを返します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="getOrNull(java.lang.String,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型。</span></dd>
+<dd><span id="getOrNull(java.lang.String,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>key</code> - キー。</dd>
-<dd><code>type</code> - 期待する型。</dd>
+<dd><code>key</code> - キー</dd>
+<dd><code>type</code> - 期待する型</dd>
 <dt>戻り値:</dt>
-<dd>キーに紐づけられた値。</dd>
+<dd>キーに紐づけられた値</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,T)">
-<h3 id="getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,io.github.takenoko4096.json.JsonValue)">getOrDefault</h3>
+<section class="detail" id="getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,java.lang.Object)">
+<h3>getOrDefault</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">getOrDefault</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type,
- T&nbsp;defaultValue)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</span></div>
+<div class="block">キーに紐づけられた値を返します。キーに対応する位置が存在しないか、型が予期しないものの場合デフォルト値を返します。</div>
+<dl class="notes">
+<dt>型パラメータ:</dt>
+<dd><span id="getOrDefault(java.lang.String,io.github.takenoko4096.json.JsonValueType,java.lang.Object)-type-param-T"><code>T</code> - 期待する型</span></dd>
+<dt>パラメータ:</dt>
+<dd><code>key</code> - キー</dd>
+<dd><code>type</code> - 期待する型</dd>
+<dd><code>defaultValue</code> - デフォルト値</dd>
+<dt>戻り値:</dt>
+<dd>キーに紐づけられた値</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -445,11 +463,11 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span></div>
-<div class="block">引数に渡されたキーに任意の値を紐づけます。</div>
+<div class="block">キーに任意の値を紐づけます。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>key</code> - キー。</dd>
-<dd><code>value</code> - 値。</dd>
+<dd><code>key</code> - キー</dd>
+<dd><code>value</code> - 値</dd>
 </dl>
 </div>
 </section>
@@ -459,12 +477,12 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>delete</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;key)</span></div>
-<div class="block">引数に渡されたキーを削除します。</div>
+<div class="block">キーを削除します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>key</code> - キー。</dd>
+<dd><code>key</code> - キー</dd>
 <dt>戻り値:</dt>
-<dd>削除に成功した場合、真。</dd>
+<dd>削除に成功した場合 true</dd>
 </dl>
 </div>
 </section>
@@ -480,7 +498,7 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <dt>定義:</dt>
 <dd><code><a href="JsonStructure.html#clear()">clear</a></code>&nbsp;インタフェース内&nbsp;<code><a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>空にすることができた場合、真。</dd>
+<dd>空にすることができた場合 true</dd>
 </dl>
 </div>
 </section>
@@ -493,7 +511,7 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="block">このオブジェクトが持つキーの集合を返します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>すべてのキーのSet。</dd>
+<dd>すべてのキーを含む Set&lt;String&gt;</dd>
 </dl>
 </div>
 </section>
@@ -503,6 +521,11 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>toMap</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">toMap</span>()</div>
+<div class="block">このオブジェクトをMap&lt;String, JsonValue&lt;?&gt;&gt;に変換して返します。</div>
+<dl class="notes">
+<dt>戻り値:</dt>
+<dd>Map&lt;String, JsonValue&lt;?&gt;&gt;</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -511,10 +534,10 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>toMapRecursively</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, @Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">toMapRecursively</span>()</div>
-<div class="block">このオブジェクトを再帰的にMapに変換します。</div>
+<div class="block">このオブジェクトを再帰的にMap&lt;String, Object&gt;に変換します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>Map形式のディープコピー。</dd>
+<dd>Map&lt;String, Object&gt;</dd>
 </dl>
 </div>
 </section>
@@ -530,7 +553,7 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <dt>定義:</dt>
 <dd><code><a href="JsonStructure.html#deepCopy()">deepCopy</a></code>&nbsp;インタフェース内&nbsp;<code><a href="JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a></code></dd>
 <dt>戻り値:</dt>
-<dd>ディープコピーされたオブジェクト。</dd>
+<dd>ディープコピーされたオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -540,12 +563,12 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>isSuperOf</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isSuperOf</span><wbr><span class="parameters">(<a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&nbsp;other)</span></div>
-<div class="block">引数に渡された構造体がこの構造体の部分構造であるかを返します。</div>
+<div class="block">ある構造体がこの構造体の部分構造であるかを返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>other</code> - 構造体。</dd>
+<dd><code>other</code> - 構造体</dd>
 <dt>戻り値:</dt>
-<dd>部分構造であれば、真。</dd>
+<dd>部分構造であれば true</dd>
 </dl>
 </div>
 </section>
@@ -555,12 +578,12 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>has</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path)</span></div>
-<div class="block">引数に渡されたパスが存在するかを返します。</div>
+<div class="block">パスに対応する位置が存在するかを返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>path</code> - パス。</dd>
+<dd><code>path</code> - パス</dd>
 <dt>戻り値:</dt>
-<dd>存在する場合、真。</dd>
+<dd>存在する場合 true</dd>
 </dl>
 </div>
 </section>
@@ -570,14 +593,14 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>getTypeOf</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;?&gt;</span>&nbsp;<span class="element-name">getTypeOf</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path)</span></div>
-<div class="block">引数に渡されたパスの型を返します。</div>
+<div class="block">パスに紐づけられた値の型を返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>path</code> - パス。</dd>
+<dd><code>path</code> - パス</dd>
 <dt>戻り値:</dt>
-<dd>パスに紐づけられた値の型。</dd>
+<dd>パスに紐づけられた値の型</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - パスが存在しない場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - パスに対応する位置が存在しない場合</dd>
 </dl>
 </div>
 </section>
@@ -588,17 +611,17 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">getOrThrow</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</span></div>
-<div class="block">引数に渡されたパスに紐づけられた値を返します。</div>
+<div class="block">パスに紐づけられた値を返します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="getOrThrow(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型。</span></dd>
+<dd><span id="getOrThrow(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>path</code> - パス。</dd>
-<dd><code>type</code> - 期待する型。</dd>
+<dd><code>path</code> - パス</dd>
+<dd><code>type</code> - 期待する型</dd>
 <dt>戻り値:</dt>
-<dd>パスに紐づけられた値。</dd>
+<dd>パスに紐づけられた値</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - パスが存在しないか、型が予期しないものの場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - パスに対応する位置が存在しないか、得られた値の型が予期しないものの場合</dd>
 </dl>
 </div>
 </section>
@@ -609,16 +632,37 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">@Nullable T</span>&nbsp;<span class="element-name">getOrNull</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type)</span></div>
+<div class="block">パスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にnullを返します。</div>
+<dl class="notes">
+<dt>型パラメータ:</dt>
+<dd><span id="getOrNull(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型</span></dd>
+<dt>パラメータ:</dt>
+<dd><code>path</code> - パス</dd>
+<dd><code>type</code> - 期待する型</dd>
+<dt>戻り値:</dt>
+<dd>パスに紐づけられた値</dd>
+</dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,T)">
-<h3 id="getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,io.github.takenoko4096.json.JsonValue)">getOrDefault</h3>
+<section class="detail" id="getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,java.lang.Object)">
+<h3>getOrDefault</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">getOrDefault</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="../JsonValueType.html" title="io.github.takenoko4096.json内のクラス">JsonValueType</a>&lt;T&gt;&nbsp;type,
- T&nbsp;defaultValue)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</span></div>
+<div class="block">パスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にデフォルト値を返します。</div>
+<dl class="notes">
+<dt>型パラメータ:</dt>
+<dd><span id="getOrDefault(io.github.takenoko4096.json.JsonPath,io.github.takenoko4096.json.JsonValueType,java.lang.Object)-type-param-T"><code>T</code> - 期待する型</span></dd>
+<dt>パラメータ:</dt>
+<dd><code>path</code> - パス</dd>
+<dd><code>type</code> - 期待する型</dd>
+<dd><code>defaultValue</code> - デフォルト値</dd>
+<dt>戻り値:</dt>
+<dd>パスに紐づけられた値</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -627,12 +671,12 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <h3>delete</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path)</span></div>
-<div class="block">引数に渡されたパスを削除します。</div>
+<div class="block">パスに対応する位置を削除します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>path</code> - パス。</dd>
+<dd><code>path</code> - パス</dd>
 <dt>戻り値:</dt>
-<dd>削除に成功した場合、真。</dd>
+<dd>削除に成功した場合 true</dd>
 </dl>
 </div>
 </section>
@@ -643,11 +687,11 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="../JsonPath.html" title="io.github.takenoko4096.json内のクラス">JsonPath</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span></div>
-<div class="block">引数に渡されたパスに任意の値を紐づけます。</div>
+<div class="block">パスに任意の値を紐づけます。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>path</code> - パス。</dd>
-<dd><code>value</code> - 値。</dd>
+<dd><code>path</code> - パス</dd>
+<dd><code>value</code> - 値</dd>
 </dl>
 </div>
 </section>
@@ -656,13 +700,13 @@ implements <a href="JsonStructure.html" title="io.github.takenoko4096.json.value
 <section class="detail" id="valueOf(java.util.Map)">
 <h3>valueOf</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a></span>&nbsp;<span class="element-name">valueOf</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;?,<wbr>?&gt;&nbsp;value)</span></div>
-<div class="block">MapをJsonObjectに変換します。</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a></span>&nbsp;<span class="element-name">valueOf</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>,<wbr>?&gt;&nbsp;value)</span></div>
+<div class="block">Map&lt;String, ?&gt; を JsonObject に変換します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - Map。</dd>
+<dd><code>value</code> - Map&lt;String, ?&gt;</dd>
 <dt>戻り値:</dt>
-<dd>JsonObject。</dd>
+<dd>JsonObject</dd>
 </dl>
 </div>
 </section>

@@ -1,7 +1,6 @@
 package io.github.takenoko4096.nbt;
 
 import io.github.takenoko4096.mojangson.values.MojangsonCompound;
-import org.jspecify.annotations.NullMarked;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,13 +11,12 @@ import java.util.function.Function;
 /**
  * nbt形式のファイルを表現します。
  */
-@NullMarked
 public class NbtFile {
     private final File file;
 
     /**
-     * FileからNbtFileを作成します。
-     * @param file Fileオブジェクト。
+     * File から NbtFile を作成します。
+     * @param file File
      */
     public NbtFile(File file) {
         this.file = file;
@@ -29,24 +27,24 @@ public class NbtFile {
     }
 
     /**
-     * PathからNbtFileを作成します。
-     * @param path Pathオブジェクト。
+     * Path から NbtFile を作成します。
+     * @param path Path
      */
     public NbtFile(Path path) {
         this(path.toFile());
     }
 
     /**
-     * パスを表現するStringからNbtFileを作成します。
-     * @param path パスとなる文字列。Path.of()でパースして使用されます。
+     * パスを表現する String から NbtFile を作成します。
+     * @param path パスとなる文字列
      */
     public NbtFile(String path) {
         this(Path.of(path));
     }
 
     /**
-     * java.io.Fileとして取得します。
-     * @return ラップされていたFileオブジェクト。
+     * java.io.File として取得します。
+     * @return ラップされていた File
      */
     public File toFile() {
         return file;
@@ -54,7 +52,7 @@ public class NbtFile {
 
     /**
      * ファイルが存在するかどうかを返します。
-     * @return 存在する場合に真。
+     * @return 存在する場合に true
      */
     public boolean exists() {
         return file.exists();
@@ -62,7 +60,7 @@ public class NbtFile {
 
     /**
      * 空のファイルを作成します。
-     * @throws IllegalStateException 既に存在する、またはI/O例外の場合。
+     * @throws IllegalStateException 既に存在する、またはI/O例外の場合
      */
     public void create() throws IllegalStateException {
         if (exists()) throw new IllegalStateException("既にファイル '" + file + "' は存在します");
@@ -76,7 +74,7 @@ public class NbtFile {
 
     /**
      * ファイルを削除します。
-     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合。
+     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合
      */
     public void delete() throws IllegalStateException {
         if (exists()) try {
@@ -90,8 +88,8 @@ public class NbtFile {
 
     /**
      * ファイルサイズを取得します。
-     * @return ファイルサイズ (bytes)。
-     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合。
+     * @return ファイルサイズ (bytes)
+     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合
      */
     public long size() throws IllegalStateException {
         if (exists()) try {
@@ -105,8 +103,8 @@ public class NbtFile {
 
     /**
      * 圧縮されていない形式のファイルとしてバイナリを読み取ります。
-     * @return デシリアライズ結果のコンパウンド。
-     * @throws NbtReadException デコードに失敗した場合。
+     * @return デシリアライズ結果のコンパウンド
+     * @throws NbtReadException デコードに失敗した場合
      */
     public MojangsonCompound readAsRaw() throws NbtReadException {
         return NbtDecoder.raw(file);
@@ -114,8 +112,8 @@ public class NbtFile {
 
     /**
      * データを圧縮されていない形式のバイナリに変換して書き込みます。
-     * @param compound 書き込むデータのルートコンパウンド。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param compound 書き込むデータのルートコンパウンド
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public void writeAsRaw(MojangsonCompound compound) throws NbtWriteException {
         NbtEncoder.raw(file, compound);
@@ -123,9 +121,9 @@ public class NbtFile {
 
     /**
      * 圧縮されていない形式のファイルとしてバイナリを編集します。
-     * @param function 構造を編集する関数。
-     * @throws NbtReadException デコードに失敗した場合。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param function 構造を編集する関数
+     * @throws NbtReadException デコードに失敗した場合
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public void editAsRaw(Function<MojangsonCompound, MojangsonCompound> function) throws NbtReadException, NbtWriteException {
         writeAsRaw(function.apply(readAsRaw()));
@@ -133,8 +131,8 @@ public class NbtFile {
 
     /**
      * GZip圧縮された形式のファイルとしてバイナリを読み取ります。
-     * @return デシリアライズ結果のコンパウンド。
-     * @throws NbtReadException デコードに失敗した場合。
+     * @return デシリアライズ結果のコンパウンド
+     * @throws NbtReadException デコードに失敗した場合
      */
     public MojangsonCompound readAsCompressed() throws NbtReadException {
         return NbtDecoder.decompress(file);
@@ -142,8 +140,8 @@ public class NbtFile {
 
     /**
      * データをGZip圧縮された形式のバイナリに変換して書き込みます。
-     * @param compound 書き込むデータのルートコンパウンド。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param compound 書き込むデータのルートコンパウンド
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public void writeAsCompressed(MojangsonCompound compound) throws NbtWriteException {
         NbtEncoder.compress(file, compound);
@@ -151,9 +149,9 @@ public class NbtFile {
 
     /**
      * GZip圧縮された形式のファイルとしてバイナリを編集します。
-     * @param function 構造を編集する関数。
-     * @throws NbtReadException デコードに失敗した場合。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param function 構造を編集する関数
+     * @throws NbtReadException デコードに失敗した場合
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public void editAsCompressed(Function<MojangsonCompound, MojangsonCompound> function) throws NbtReadException, NbtWriteException {
         writeAsCompressed(function.apply(readAsCompressed()));
@@ -161,8 +159,8 @@ public class NbtFile {
 
     /**
      * GZip圧縮された形式のファイルであるかどうかを返します。
-     * @return GZip圧縮されているならば、真。バイト列が短すぎる場合例外を投げます。
-     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合。
+     * @return GZip圧縮されているならば true バイト列が短すぎる場合例外を投げます。
+     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合
      */
     public boolean isCompressed() throws NbtReadException {
         return NbtDecoder.isCompressed(file);
@@ -170,8 +168,8 @@ public class NbtFile {
 
     /**
      * GZip圧縮されているかどうかを調べ、適切な形式でバイナリをデコードして読み取ります。
-     * @return デシリアライズ結果のコンパウンド。
-     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合。
+     * @return デシリアライズ結果のコンパウンド
+     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合
      */
     public MojangsonCompound readAuto() throws NbtReadException {
         if (isCompressed()) {
@@ -184,9 +182,9 @@ public class NbtFile {
 
     /**
      * GZip圧縮されているかどうかを調べ、適切な形式でバイナリをデコードして編集を行い、再度適切な形式でエンコードします。
-     * @param function 構造を編集する関数。
-     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param function 構造を編集する関数
+     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public void editAuto(Function<MojangsonCompound, MojangsonCompound> function) throws NbtReadException, NbtWriteException {
         if (isCompressed()) {

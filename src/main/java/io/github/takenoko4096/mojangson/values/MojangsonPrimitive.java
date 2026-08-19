@@ -5,12 +5,12 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * mojangsonにおけるプリミティブ値を表現します。
- * @param <T> Javaにおける値。String、Number, Mapなど。
+ * @param <T> 値 java.lang.String、java.lang.Number, java.util.Map&lt;String, ?&gt; など。
  */
 public abstract class MojangsonPrimitive<T> extends MojangsonValue<T> {
     /**
      * サブクラスのためのコンストラクタ。
-     * @param value ラップされる値。
+     * @param value ラップされる値
      */
     protected MojangsonPrimitive(T value) {
         super(value);
@@ -18,7 +18,7 @@ public abstract class MojangsonPrimitive<T> extends MojangsonValue<T> {
 
     /**
      * ラップされている値を取得します。
-     * @return ラップされている値。
+     * @return ラップされている値
      */
     public T getValue() {
         return value;

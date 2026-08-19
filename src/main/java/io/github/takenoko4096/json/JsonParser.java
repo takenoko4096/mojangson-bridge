@@ -1,7 +1,6 @@
 package io.github.takenoko4096.json;
 
 import io.github.takenoko4096.json.values.*;
-import org.jspecify.annotations.NullMarked;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,7 +10,6 @@ import java.util.function.Function;
 /**
  * json文字列を解釈してjson構造に変換するクラス。
  */
-@NullMarked
 public class JsonParser {
     private static final Set<Character> WHITESPACE = Set.of(' ', '\n');
 

@@ -17,13 +17,12 @@ import java.util.function.Function;
 /**
  * json形式のファイルを表現します。
  */
-@NullMarked
 public class JsonFile {
     private final File file;
 
     /**
-     * FileからJsonFileを作成します。
-     * @param file Fileオブジェクト。
+     * File から JsonFile を作成します。
+     * @param file File
      */
     public JsonFile(File file) {
         this.file = file;
@@ -34,24 +33,24 @@ public class JsonFile {
     }
 
     /**
-     * PathからJsonFileを作成します。
-     * @param path Pathオブジェクト。
+     * Path から JsonFile を作成します。
+     * @param path Path
      */
     public JsonFile(Path path) {
         this(path.toFile());
     }
 
     /**
-     * パスを表現するStringからJsonFileを作成します。
-     * @param path パスとなる文字列。Path.of()でパースして使用されます。
+     * パスを表現する String から JsonFile を作成します。
+     * @param path パスとなる文字列
      */
     public JsonFile(String path) {
         this(Path.of(path));
     }
 
     /**
-     * java.io.Fileとして取得します。
-     * @return ラップされていたFileオブジェクト。
+     * java.io.File として取得します。
+     * @return ラップされていた File
      */
     public File toFile() {
         return file;
@@ -59,8 +58,8 @@ public class JsonFile {
 
     /**
      * ファイルの内容を文字列として読み取り、文字列として返します。
-     * @return 空白文字・改行を含む文字列。
-     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合。
+     * @return 空白文字・改行を含む文字列
+     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合
      */
     protected String readAsString() throws IllegalStateException {
         if (exists()) try {
@@ -74,8 +73,8 @@ public class JsonFile {
 
     /**
      * ファイルの内容を引数に渡された文字列で上書きします。
-     * @param json 空白文字・改行を含む文字列。
-     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合。
+     * @param json 空白文字・改行を含む文字列
+     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合
      */
     protected void writeAsString(String json) throws IllegalStateException {
         if (exists()) try {
@@ -94,7 +93,7 @@ public class JsonFile {
 
     /**
      * ファイルが存在するかどうかを返します。
-     * @return 存在する場合に真。
+     * @return 存在する場合に true
      */
     public boolean exists() {
         return file.exists();
@@ -102,7 +101,7 @@ public class JsonFile {
 
     /**
      * 空のファイルを作成します。
-     * @throws IllegalStateException 既に存在する、またはI/O例外の場合。
+     * @throws IllegalStateException 既に存在する、またはI/O例外の場合
      */
     public void create() throws IllegalStateException {
         if (exists()) throw new IllegalStateException("既にファイル '" + file + "' は存在します");
@@ -116,7 +115,7 @@ public class JsonFile {
 
     /**
      * ファイルを削除します。
-     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合。
+     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合
      */
     public void delete() throws IllegalStateException {
         if (exists()) try {
@@ -130,8 +129,8 @@ public class JsonFile {
 
     /**
      * ファイルサイズを取得します。
-     * @return ファイルサイズ (bytes)。
-     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合。
+     * @return ファイルサイズ (bytes)
+     * @throws IllegalStateException ファイルが存在しない、またはI/O例外の場合
      */
     public long size() throws IllegalStateException {
         if (exists()) try {
@@ -145,9 +144,9 @@ public class JsonFile {
 
     /**
      * json構造としてファイルの記述を読み取ります。
-     * @return パース結果。
-     * @throws JsonParseException パースに失敗した場合。
-     * @throws IllegalStateException ファイルの読み取りに失敗した場合。
+     * @return パース結果
+     * @throws JsonParseException パースに失敗した場合
+     * @throws IllegalStateException ファイルの読み取りに失敗した場合
      */
     public JsonStructure read() throws JsonParseException, IllegalStateException {
         return JsonParser.structure(readAsString());
@@ -155,9 +154,9 @@ public class JsonFile {
 
     /**
      * json構造をシリアライズして書き込みます。
-     * @param structure json構造。
-     * @throws JsonSerializationException シリアライズに失敗した場合。
-     * @throws IllegalStateException ファイルの書き込みに失敗した場合。
+     * @param structure json構造
+     * @throws JsonSerializationException シリアライズに失敗した場合
+     * @throws IllegalStateException ファイルの書き込みに失敗した場合
      */
     public void write(JsonStructure structure) throws JsonSerializationException, IllegalStateException {
         writeAsString(JsonSerializer.structure(structure));
@@ -165,9 +164,9 @@ public class JsonFile {
 
     /**
      * ルートがオブジェクトであることを期待してファイルの記述を読み取ります。
-     * @return jsonオブジェクト。
-     * @throws JsonParseException パースに失敗した場合。
-     * @throws IllegalStateException ファイルの読み取りに失敗した場合。
+     * @return jsonオブジェクト
+     * @throws JsonParseException パースに失敗した場合
+     * @throws IllegalStateException ファイルの読み取りに失敗した場合
      */
     public JsonObject readAsObject() throws JsonParseException, IllegalStateException {
         return JsonParser.object(readAsString());
@@ -175,9 +174,9 @@ public class JsonFile {
 
     /**
      * ルートが配列であることを期待してファイルの記述を読み取ります。
-     * @return json配列。
-     * @throws JsonParseException パースに失敗した場合。
-     * @throws IllegalStateException ファイルの読み取りに失敗した場合。
+     * @return json配列
+     * @throws JsonParseException パースに失敗した場合
+     * @throws IllegalStateException ファイルの読み取りに失敗した場合
      */
     public JsonArray readAsArray() throws JsonParseException, IllegalStateException {
         return JsonParser.array(readAsString());
@@ -185,10 +184,10 @@ public class JsonFile {
 
     /**
      * jsonファイルの記述を読み取り、任意の関数によって構造を編集して再度書き込みます。
-     * @param function 構造を編集する関数。
-     * @throws JsonParseException パースに失敗した場合。
-     * @throws JsonSerializationException シリアライズに失敗した場合。
-     * @throws IllegalStateException ファイルの読み取りまたは書き込みに失敗した場合。
+     * @param function 構造を編集する関数
+     * @throws JsonParseException パースに失敗した場合
+     * @throws JsonSerializationException シリアライズに失敗した場合
+     * @throws IllegalStateException ファイルの読み取りまたは書き込みに失敗した場合
      */
     public void edit(Function<JsonStructure, JsonStructure> function) throws JsonParseException, JsonSerializationException, IllegalStateException {
         write(function.apply(read()));

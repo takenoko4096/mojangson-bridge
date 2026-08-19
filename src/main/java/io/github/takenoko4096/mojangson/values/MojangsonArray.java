@@ -3,21 +3,19 @@ package io.github.takenoko4096.mojangson.values;
 import io.github.takenoko4096.mojangson.MojangsonElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
-import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * mojangsonにおける配列を表現します。
- * @param <T> 配列型。
- * @param <U> mojangsonにおける表現。
+ * @param <T> 配列型
+ * @param <U> mojangsonにおける表現
  */
-@NullMarked
 public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends MojangsonValue<T> implements MojangsonIterable<U> {
     /**
      * サブクラスのためのコンストラクタ。
-     * @param value ラップされるプリミティブ配列。
+     * @param value ラップされるプリミティブ配列
      */
     protected MojangsonArray(T value) {
         super(value);
@@ -34,20 +32,33 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
     }
 
     @Override
+    public abstract boolean delete(int index);
+
+    @Override
     public abstract MojangsonArray<T, U> deepCopy();
 
+    /**
+     * 要素の型を返します。
+     * @return 要素の型
+     */
     protected abstract MojangsonValueType<U> getElementType();
 
     /**
+     * 配列要素のデフォルト値を返します。
+     * @return 多くの場合 0 を表現するオブジェクト
+     */
+    protected abstract U getZero();
+
+    /**
      * プリミティブ配列として取得します。
-     * @return プリミティブ配列。
+     * @return プリミティブ配列
      */
     public abstract T toArray();
 
     /**
      * リスト型のビューを作成します。
-     * @param setter セッター関数。第一引数の配列の第二引数の添え字に対応する位置に対して第三引数を値を代入することが期待されます。
-     * @return リスト型のビュー。
+     * @param setter セッター関数 第一引数の配列の第二引数の添字に対応する位置に対して第三引数を値を代入することが期待されます。
+     * @return リスト型のビュー
      */
     protected TypedMojangsonList<U> getView(MojangsonElementValueSetter<T> setter) {
         final T array = value;
@@ -55,31 +66,48 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
         final List<U> values = new ArrayList<>();
         forEach(values::add);
 
-        return new TypedMojangsonList<U>(getElementType(), values) {
+        return new TypedMojangsonList<>(getElementType(), values) {
             @Override
-            public void set(int index, U value) throws IllegalArgumentException {
+            public void set(int index, Object value) throws IllegalArgumentException {
                 super.set(index, value);
                 setter.set(array, (index >= 0) ? index : super.length() + index, value);
             }
 
             @Override
-            public void add(int index, U value) {
+            public void add(int index, Object value) {
                 throw new IllegalStateException("MojangsonArrayから作成されたMojangsonListにおいてこの操作は禁じられています");
             }
 
             @Override
-            public void add(U value) {
+            public void add(Object value) {
                 throw new IllegalStateException("MojangsonArrayから作成されたMojangsonListにおいてこの操作は禁じられています");
             }
 
             @Override
             public boolean delete(int index) {
-                throw new IllegalStateException("MojangsonArrayから作成されたMojangsonListにおいてこの操作は禁じられています");
+                final U zero = getZero();
+
+                if (getOrThrow(index) == zero) {
+                    return false;
+                }
+                else {
+                    set(index, zero);
+                    return true;
+                }
             }
 
             @Override
             public boolean clear() {
-                throw new IllegalStateException("MojangsonArrayから作成されたMojangsonListにおいてこの操作は禁じられています");
+                final int length = length();
+                boolean successful = false;
+
+                for (int i = 0; i < length; i++) {
+                    if (delete(i)) {
+                        successful = true;
+                    }
+                }
+
+                return successful;
             }
 
             @Override
@@ -91,7 +119,7 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
 
     /**
      * この配列へのビューを返します。
-     * @return リスト型のビュー。このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。
+     * @return リスト型のビュー このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。
      */
     public abstract TypedMojangsonList<U> listView();
 }

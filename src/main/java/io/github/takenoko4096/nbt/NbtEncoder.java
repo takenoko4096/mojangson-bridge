@@ -4,7 +4,6 @@ import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 import io.github.takenoko4096.mojangson.values.*;
-import org.jspecify.annotations.NullMarked;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +12,6 @@ import java.util.zip.GZIPOutputStream;
 /**
  * nbtバイナリをエンコードするクラス。
  */
-@NullMarked
 public final class NbtEncoder {
     private static final byte TAG_END = 0;
     private static final byte TAG_BYTE = 1;
@@ -137,9 +135,9 @@ public final class NbtEncoder {
 
     /**
      * 引数に渡されたコンパウンドをGZip圧縮された形式のバイナリに変換してファイルに書き込みます。
-     * @param file 書き込み先のファイル。
-     * @param compound 書き込むデータのルートコンパウンド。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param file 書き込み先のファイル
+     * @param compound 書き込むデータのルートコンパウンド
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public static void compress(File file, MojangsonCompound compound) {
         try (final DataOutputStream stream = new DataOutputStream(new BufferedOutputStream(new GZIPOutputStream(new FileOutputStream(file))))) {
@@ -153,9 +151,9 @@ public final class NbtEncoder {
 
     /**
      * 引数に渡されたコンパウンドを圧縮されていない形式のバイナリに変換してファイルに書き込みます。
-     * @param file 書き込み先のファイル。
-     * @param compound 書き込むデータのルートコンパウンド。
-     * @throws NbtWriteException エンコードに失敗した場合。
+     * @param file 書き込み先のファイル
+     * @param compound 書き込むデータのルートコンパウンド
+     * @throws NbtWriteException エンコードに失敗した場合
      */
     public static void raw(File file, MojangsonCompound compound) {
         try (final DataOutputStream stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
@@ -169,9 +167,9 @@ public final class NbtEncoder {
 
     /**
      * 引数に渡されたコンパウンドをGZip圧縮された形式のバイナリに変換して返します。
-     * @param compound 変換するデータのルートコンパウンド。
-     * @throws NbtWriteException エンコードに失敗した場合。
-     * @return エンコード結果のバイト列。
+     * @param compound 変換するデータのルートコンパウンド
+     * @throws NbtWriteException エンコードに失敗した場合
+     * @return エンコード結果のバイト列
      */
     public static byte[] compress(MojangsonCompound compound) {
         final ByteArrayOutputStream stream1 = new ByteArrayOutputStream();
@@ -189,9 +187,9 @@ public final class NbtEncoder {
 
     /**
      * 引数に渡されたコンパウンドを圧縮されていない形式のバイナリに変換して返します。
-     * @param compound 変換するデータのルートコンパウンド。
-     * @throws NbtWriteException エンコードに失敗した場合。
-     * @return エンコード結果のバイト列。
+     * @param compound 変換するデータのルートコンパウンド
+     * @throws NbtWriteException エンコードに失敗した場合
+     * @return エンコード結果のバイト列
      */
     public static byte[] raw(MojangsonCompound compound) {
         final ByteArrayOutputStream stream1 = new ByteArrayOutputStream();

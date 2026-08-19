@@ -3,7 +3,6 @@ package io.github.takenoko4096.mojangson.values;
 import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -12,17 +11,16 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 型付きのMojangsonList。このクラスにラップされる要素はすべてT型であることが確約されます。
- * @param <T> 要素の型。
+ * 型付きのMojangsonList このクラスにラップされる要素はすべて T 型であることが確約されます。
+ * @param <T> 要素の型
  */
-@NullMarked
 public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonValue<List<T>> implements MojangsonIterable<T> {
     private final MojangsonValueType<T> type;
 
     /**
-     * 要素の型とMojangsonValueのListからTypedMojangsonListを作成します。
-     * @param type 要素の型を表現するオブジェクト。
-     * @param list 元となるList。
+     * 要素の型と MojangsonValue の List から TypedMojangsonList を作成します。
+     * @param type 要素の型を表現するオブジェクト
+     * @param list 元となる List
      */
     public TypedMojangsonList(MojangsonValueType<T> type, List<T> list) {
         super(list);
@@ -38,18 +36,22 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     }
 
     /**
-     * 長さ0のTypedMojangsonListを要素の型を指定して作成します。
-     * @param type 要素の型を表現するオブジェクト。
+     * 長さ 0 の TypedMojangsonList を要素の型を指定して作成します。
+     * @param type 要素の型を表現するオブジェクト
      */
     public TypedMojangsonList(MojangsonValueType<T> type) {
         this(type, new ArrayList<>());
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonList> getType() {
         return MojangsonValueTypes.LIST;
     }
 
+    /**
+     * 要素の型を返します。
+     * @return 要素の型
+     */
     public MojangsonValueType<T> getElementType() {
         return type;
     }
@@ -67,10 +69,10 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     }
 
     /**
-     * 引数に渡されたインデックスに格納された値を返します。
-     * @param index インデックス。
-     * @return インデックスに格納された値。
-     * @throws IllegalArgumentException インデックスが存在しない場合。
+     * 添字に対応する位置に格納された値を返します。
+     * @param index 添字
+     * @return 添字に対応する位置にに格納された値。
+     * @throws IllegalArgumentException 添字に対応する位置が存在しない場合。
      */
     public T getOrThrow(int index) throws IllegalArgumentException {
         if (!has(index)) {
@@ -81,6 +83,11 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         else return value.get(value.size() + index);
     }
 
+    /**
+     * 添字に対応する位置に格納された値を返します。添字に対応する位置が存在しない場合に null を返します。
+     * @param index 添字
+     * @return 添字に対応する位置に格納された値
+     */
     public @Nullable T getOrNull(int index) {
         if (has(index)) {
             return getOrThrow(index);
@@ -88,52 +95,62 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         else return null;
     }
 
-    public T getOrDefault(int index, T defaultValue) {
-        return Objects.requireNonNullElse(getOrNull(index), defaultValue);
+    /**
+     * 添字に対応する位置に格納された値を返します。添字に対応する位置が存在しない場合にデフォルト値を返します。
+     * @param index 添字
+     * @param defaultValue デフォルト値
+     * @return 添字に対応する位置に格納された値
+     */
+    public T getOrDefault(int index, Object defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(index), type.toMojangson(defaultValue));
     }
 
     /**
-     * 引数に渡されたインデックスに値を格納し、そのインデックス以降の値を後ろに追いやります。
-     * @param index インデックス。
-     * @param value 格納する値。
-     * @throws IllegalArgumentException インデックスが不正な場合。
+     * 添字に対応する位置に値を格納し、それ以降の値を後ろに追いやります。
+     * @param index 添字
+     * @param value 値
+     * @throws IllegalArgumentException インデックスが不正な場合
      */
-    public void add(int index, T value) throws IllegalArgumentException {
+    public void add(int index, Object value) throws IllegalArgumentException {
         if (index > this.value.size()) {
             throw new IllegalArgumentException("そのインデックスは使用できません");
         }
 
-        if (index >= 0) this.value.add(index, value);
-        else this.value.add(this.value.size() + index, value);
+        final T t = type.toMojangson(value);
+
+        if (index >= 0) this.value.add(index, t);
+        else this.value.add(this.value.size() + index, t);
     }
 
     /**
-     * リストの後ろに引数に渡された値を追加します。
-     * @param value 格納する値。
+     * リストの後ろに値を追加します。
+     * @param value 値
      */
-    public void add(T value) {
-        this.value.add(value);
+    public void add(Object value) {
+        this.value.add(type.toMojangson(value));
     }
 
     /**
-     * 引数に渡されたインデックスの値を上書きします。
-     * @param index インデックス。
-     * @param value 格納する値。
-     * @throws IllegalArgumentException インデックスが不正な場合。
+     * 引数に渡された添字に対応する位置の値を上書きします。
+     * @param index 添字
+     * @param value 値
+     * @throws IllegalArgumentException インデックスが不正な場合
      */
-    public void set(int index, T value) throws IllegalArgumentException {
+    public void set(int index, Object value) throws IllegalArgumentException {
         if (index >= this.value.size()) {
             throw new IllegalArgumentException("そのインデックスは使用できません");
         }
 
-        if (index >= 0) this.value.set(index, value);
-        else this.value.set(this.value.size() + index, value);
+        final T t = type.toMojangson(value);
+
+        if (index >= 0) this.value.set(index, t);
+        else this.value.set(this.value.size() + index, t);
     }
 
     /**
-     * 構造体の指定の添え字番目のオブジェクトを消去します。
-     * @param index 添え字。
-     * @return 削除に成功した場合、真。
+     * 構造体の指定の添字番目のオブジェクトを消去します。
+     * @param index 添字
+     * @return 削除に成功した場合 true
      */
     public boolean delete(int index) {
         if (has(index)) {
@@ -158,6 +175,10 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         return value.size();
     }
 
+    /**
+     * T (MojangsonValue) の List に変換して返します。
+     * @return List&lt;T&gt;
+     */
     public List<T> toList() {
         return List.copyOf(value);
     }
@@ -179,8 +200,8 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     }
 
     /**
-     * 型付きリストを型の保証のないMojangsonListに変換します。
-     * @return MojangsonList。
+     * 型付きリストを型の保証のない MojangsonList に変換します。
+     * @return MojangsonList
      */
     public MojangsonList untyped() {
         final MojangsonList list = new MojangsonList();

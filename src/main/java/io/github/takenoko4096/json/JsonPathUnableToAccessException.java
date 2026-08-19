@@ -7,7 +7,7 @@ package io.github.takenoko4096.json;
 public class JsonPathUnableToAccessException extends Exception {
     /**
      * 例外を作成します。
-     * @param message エラーメッセージ。
+     * @param message エラーメッセージ
      */
     protected JsonPathUnableToAccessException(String message) {
         super(message);

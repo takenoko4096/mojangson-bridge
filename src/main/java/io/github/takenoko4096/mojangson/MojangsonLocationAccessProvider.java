@@ -1,6 +1,7 @@
 package io.github.takenoko4096.mojangson;
 
 import io.github.takenoko4096.mojangson.values.MojangsonStructure;
+import org.jspecify.annotations.Nullable;
 
 /**
  * 検査例外 MojangsonPathUnableToAccessException を投げるための関数型インターフェース。
@@ -16,5 +17,5 @@ public interface MojangsonLocationAccessProvider<S extends MojangsonStructure, U
      * @return 実装に依存する任意の戻り値。
      * @throws MojangsonPathUnableToAccessException パスの参照先へのアクセスに失敗した場合。
      */
-    U use(S structure, Object parameter) throws MojangsonPathUnableToAccessException;
+    @Nullable U use(S structure, Object parameter) throws MojangsonPathUnableToAccessException;
 }

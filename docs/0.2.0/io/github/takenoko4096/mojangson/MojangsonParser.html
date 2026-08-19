@@ -86,8 +86,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">MojangsonParser</span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MojangsonParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span></div>
 <div class="block">mojangson文字列を解釈してmojangson構造に変換するクラス。</div>
 </div>
@@ -106,8 +105,8 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">新しくパーサーを作成します。</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(boolean,boolean)" class="member-name-link">MojangsonParser</a><wbr>(boolean&nbsp;useNull,
- boolean&nbsp;useOnlyTypedList)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(boolean,boolean)" class="member-name-link">MojangsonParser</a><wbr>(boolean&nbsp;nullable,
+ boolean&nbsp;typingStrictly)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">新しくパーサーを作成します。</div>
 </div>
@@ -188,13 +187,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(boolean,boolean)">
 <h3>MojangsonParser</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MojangsonParser</span><wbr><span class="parameters">(boolean&nbsp;useNull,
- boolean&nbsp;useOnlyTypedList)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MojangsonParser</span><wbr><span class="parameters">(boolean&nbsp;nullable,
+ boolean&nbsp;typingStrictly)</span></div>
 <div class="block">新しくパーサーを作成します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>useNull</code> - 本来mojangsonに存在しないnull値を許容するかどうか。</dd>
-<dd><code>useOnlyTypedList</code> - リストの要素がすべて同じ型であることを必須にするかどうか。</dd>
+<dd><code>nullable</code> - 本来mojangsonに存在しない null 値を許容するかどうか</dd>
+<dd><code>typingStrictly</code> - リストの要素がすべて同じ型であることを必須にするかどうか</dd>
 </dl>
 </div>
 </section>
@@ -226,14 +225,14 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列をmojangsonとしてパースします。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="parse(java.lang.String,java.lang.Class)-type-param-T"><code>T</code> - キャスト先の型。</span></dd>
+<dd><span id="parse(java.lang.String,java.lang.Class)-type-param-T"><code>T</code> - キャスト先の型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
-<dd><code>clazz</code> - キャスト先のクラス。</dd>
+<dd><code>text</code> - mojangson</dd>
+<dd><code>clazz</code> - キャスト先のクラス</dd>
 <dt>戻り値:</dt>
 <dd>mojangson値</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>
@@ -247,8 +246,8 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">新しく関数を定義します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>name</code> - 関数名。</dd>
-<dd><code>function</code> - 引数リストを受け取る関数。</dd>
+<dd><code>name</code> - 関数名</dd>
+<dd><code>function</code> - 引数リストを受け取る関数</dd>
 </dl>
 </div>
 </section>
@@ -262,11 +261,11 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列を任意の値としてパースします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
+<dd><code>text</code> - mojangson</dd>
 <dt>戻り値:</dt>
-<dd>mojangsonオブジェクト表現。</dd>
+<dd>mojangsonオブジェクト表現</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>
@@ -280,11 +279,11 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列をコンパウンドとしてパースします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
+<dd><code>text</code> - mojangson</dd>
 <dt>戻り値:</dt>
-<dd>コンパウンドのmojangsonオブジェクト表現。</dd>
+<dd>コンパウンドのmojangsonオブジェクト表現</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>
@@ -298,11 +297,11 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列をリストとしてパースします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
+<dd><code>text</code> - mojangson</dd>
 <dt>戻り値:</dt>
-<dd>リストのmojangsonオブジェクト表現。</dd>
+<dd>リストのmojangsonオブジェクト表現</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>
@@ -316,11 +315,11 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列をバイト配列としてパースします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
+<dd><code>text</code> - mojangson</dd>
 <dt>戻り値:</dt>
-<dd>バイト配列のmojangsonオブジェクト表現。</dd>
+<dd>バイト配列のmojangsonオブジェクト表現</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>
@@ -334,11 +333,11 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列を32ビット整数配列としてパースします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
+<dd><code>text</code> - mojangson</dd>
 <dt>戻り値:</dt>
-<dd>32ビット整数配列のmojangsonオブジェクト表現。</dd>
+<dd>32ビット整数配列のmojangsonオブジェクト表現</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>
@@ -352,11 +351,11 @@ nullは許容せず、リストの要素がすべて同じ型であることを�
 <div class="block">引数に渡された文字列を64ビット整数配列としてパースします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>text</code> - mojangson。</dd>
+<dd><code>text</code> - mojangson</dd>
 <dt>戻り値:</dt>
-<dd>64ビット整数配列のmojangsonオブジェクト表現。</dd>
+<dd>64ビット整数配列のmojangsonオブジェクト表現</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - mojangsonが無効な場合</dd>
 </dl>
 </div>
 </section>

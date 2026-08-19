@@ -88,7 +88,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="type-param-T"><code>T</code> - ラップされる型。java.lang.Boolean, java.lang.Stringなど。</span></dd>
+<dd><span id="type-param-T"><code>T</code> - ラップされる型 java.lang.Boolean, java.lang.String など。</span></dd>
 </dl>
 <dl class="notes">
 <dt>直系の既知のサブクラス:</dt>
@@ -96,8 +96,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">JsonValue&lt;T&gt;</span>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">JsonValue&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span></div>
 <div class="block">json構造を構成する「値」を表します。
 0, 1, true, "Hello", [null, 0, false], {"key": "value"} 等はすべてこのクラスまたはそのサブクラスによって表現されます。</div>
@@ -117,7 +116,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected final <a href="#type-param-T" title="JsonValue内の型パラメータ">T</a></code></div>
 <div class="col-second even-row-color"><code><a href="#value" class="member-name-link">value</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">ラップされた値。</div>
+<div class="block">ラップされた値 必要に応じてサブクラスで編集される可能性があります。</div>
 </div>
 </div>
 </section>
@@ -173,7 +172,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a><wbr>&lt;?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.Object)" class="member-name-link">valueOf</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">渡されたJavaの値に対応するjson構造を返します。</div>
+<div class="block">渡された値に対応するjson表現を返します。</div>
 </div>
 </div>
 </div>
@@ -197,7 +196,7 @@ loadScripts(document, 'script');</script>
 <h3>value</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="#type-param-T" title="JsonValue内の型パラメータ">T</a></span>&nbsp;<span class="element-name">value</span></div>
-<div class="block">ラップされた値。必要に応じてサブクラスで編集される可能性があります。</div>
+<div class="block">ラップされた値 必要に応じてサブクラスで編集される可能性があります。</div>
 </div>
 </section>
 </li>
@@ -217,7 +216,7 @@ loadScripts(document, 'script');</script>
 <div class="block">サブクラスのためのコンストラクタ。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - ラップされる値。</dd>
+<dd><code>value</code> - ラップされる値</dd>
 </dl>
 </div>
 </section>
@@ -235,13 +234,13 @@ loadScripts(document, 'script');</script>
 <h3>toString</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">この値の文字列表現を返します。出力はラップされた型が実装するtoString()に依存し、jsonフォーマットへの整形は行われません。
-jsonフォーマットに整形する場合はJsonSerializerを使用してください。</div>
+<div class="block">この値の文字列表現を返します。出力はラップされた型が実装する toString() に依存し、jsonフォーマットへの整形は行われません。
+jsonフォーマットに整形する場合は JsonSerializer を使用してください。</div>
 <dl class="notes">
 <dt>オーバーライド:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="java.lang内のクラスまたはインタフェース" class="external-link">toString</a></code>&nbsp;クラス内&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></code></dd>
 <dt>戻り値:</dt>
-<dd>ラップされた値のtoString()の戻り値をそのまま返します。</dd>
+<dd>ラップされたクラスの toString() の実装に依存</dd>
 <dt>関連項目:</dt>
 <dd>
 <ul class="tag-list">
@@ -257,15 +256,15 @@ jsonフォーマットに整形する場合はJsonSerializerを使用してく�
 <h3>equals</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">この値と引数に渡された値が等価であるかを調べます。出力はラップされた型が実装するequals(Object)に依存します。
-JsonValueのインスタンスでない値との比較は常にfalseを返します。</div>
+<div class="block">この値と引数に渡された値が等価であるかを調べます。出力はラップされた型が実装する equals(Object) に依存します。
+JsonValue のインスタンスでない値との比較は常に false を返します。</div>
 <dl class="notes">
 <dt>オーバーライド:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="java.lang内のクラスまたはインタフェース" class="external-link">equals</a></code>&nbsp;クラス内&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></code></dd>
 <dt>パラメータ:</dt>
 <dd><code>o</code> - 比較対象の値。</dd>
 <dt>戻り値:</dt>
-<dd>ラップされた値のequals()の戻り値をそのまま返します。</dd>
+<dd>ラップされたクラスの equals() の実装に依存</dd>
 </dl>
 </div>
 </section>
@@ -280,7 +279,7 @@ JsonValueのインスタンスでない値との比較は常にfalseを返しま
 <dt>オーバーライド:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="java.lang内のクラスまたはインタフェース" class="external-link">hashCode</a></code>&nbsp;クラス内&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></code></dd>
 <dt>戻り値:</dt>
-<dd>ハッシュコード。</dd>
+<dd>ハッシュコード</dd>
 </dl>
 </div>
 </section>
@@ -293,7 +292,7 @@ JsonValueのインスタンスでない値との比較は常にfalseを返しま
 <div class="block">値の型を取得します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>この値の型を表現するオブジェクト。</dd>
+<dd>この値の型を表現するオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -303,12 +302,12 @@ JsonValueのインスタンスでない値との比較は常にfalseを返しま
 <h3>valueOf</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JsonValue.html" title="io.github.takenoko4096.json内のクラス">JsonValue</a>&lt;?&gt;</span>&nbsp;<span class="element-name">valueOf</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span></div>
-<div class="block">渡されたJavaの値に対応するjson構造を返します。</div>
+<div class="block">渡された値に対応するjson表現を返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - nullを含む任意のオブジェクト。</dd>
+<dd><code>value</code> - null を含む任意のオブジェクト</dd>
 <dt>戻り値:</dt>
-<dd>引数をjson構造に変換したオブジェクト。JsonValueが渡された場合、引数をそのまま返します。</dd>
+<dd>json構造に変換されたオブジェクト JsonValue が渡された場合、引数をそのまま返します。</dd>
 </dl>
 </div>
 </section>

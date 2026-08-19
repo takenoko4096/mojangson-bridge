@@ -7,8 +7,8 @@ package io.github.takenoko4096.nbt;
 public class NbtWriteException extends RuntimeException {
     /**
      * 例外を作成します。
-     * @param message エラーメッセージ。
-     * @param cause 原因となる例外。
+     * @param message エラーメッセージ
+     * @param cause 原因
      */
     protected NbtWriteException(String message, Throwable cause) {
         super(message, cause);
@@ -16,7 +16,7 @@ public class NbtWriteException extends RuntimeException {
 
     /**
      * 例外を作成します。
-     * @param message エラーメッセージ。
+     * @param message エラーメッセージ
      */
     protected NbtWriteException(String message) {
         super(message);
@@ -24,7 +24,7 @@ public class NbtWriteException extends RuntimeException {
 
     /**
      * 例外を作成します。
-     * @param cause 原因となる例外。
+     * @param cause 原因
      */
     protected NbtWriteException(Throwable cause) {
         super(cause);

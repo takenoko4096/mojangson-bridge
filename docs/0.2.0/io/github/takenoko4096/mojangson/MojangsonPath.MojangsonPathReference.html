@@ -74,7 +74,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#getType()" tabindex="0">getType()</a></li>
 <li><a href="#getOrThrow(io.github.takenoko4096.mojangson.MojangsonValueType)" tabindex="0">getOrThrow(MojangsonValueType)</a></li>
 <li><a href="#getOrNull(io.github.takenoko4096.mojangson.MojangsonValueType)" tabindex="0">getOrNull(MojangsonValueType)</a></li>
-<li><a href="#getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,U)" tabindex="0">getOrDefault(MojangsonValueType, U)</a></li>
+<li><a href="#getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,java.lang.Object)" tabindex="0">getOrDefault(MojangsonValueType, Object)</a></li>
 <li><a href="#set(java.lang.Object)" tabindex="0">set(Object)</a></li>
 <li><a href="#delete()" tabindex="0">delete()</a></li>
 </ol>
@@ -92,8 +92,8 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="type-param-S"><code>S</code> - アクセス位置の親の構造。</span></dd>
-<dd><span id="type-param-T"><code>T</code> - アクセスするために必要なキーまたは添え字。</span></dd>
+<dd><span id="type-param-S"><code>S</code> - アクセス位置の親の構造</span></dd>
+<dd><span id="type-param-T"><code>T</code> - アクセスするために必要なキーまたは添字</span></dd>
 </dl>
 <dl class="notes">
 <dt>含まれているクラス:</dt>
@@ -120,12 +120,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected final <a href="#type-param-T" title="MojangsonPath.MojangsonPathReference内の型パラメータ">T</a></code></div>
 <div class="col-second even-row-color"><code><a href="#parameter" class="member-name-link">parameter</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">アクセスするために必要なキーまたは添え字。</div>
+<div class="block">アクセスするために必要なキーまたは添字</div>
 </div>
 <div class="col-first odd-row-color"><code>protected final <a href="#type-param-S" title="MojangsonPath.MojangsonPathReference内の型パラメータ">S</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#structure" class="member-name-link">structure</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">アクセス位置の親の構造。</div>
+<div class="block">アクセス位置の親の構造</div>
 </div>
 </div>
 </section>
@@ -165,12 +165,16 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先の値を削除します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;U extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;<br>U</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,U)" class="member-name-link">getOrDefault</a><wbr>(<a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;U&gt;&nbsp;type,
- U&nbsp;defaultValue)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,java.lang.Object)" class="member-name-link">getOrDefault</a><wbr>(<a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;U&gt;&nbsp;type,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">パスの参照先に格納された値を取得します。</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;U extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;<br>@Nullable U</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOrNull(io.github.takenoko4096.mojangson.MojangsonValueType)" class="member-name-link">getOrNull</a><wbr>(<a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;U&gt;&nbsp;type)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">パスの参照先に格納された値を取得します。</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;U extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;<br>U</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOrThrow(io.github.takenoko4096.mojangson.MojangsonValueType)" class="member-name-link">getOrThrow</a><wbr>(<a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;U&gt;&nbsp;type)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
@@ -213,7 +217,7 @@ loadScripts(document, 'script');</script>
 <h3>structure</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="#type-param-S" title="MojangsonPath.MojangsonPathReference内の型パラメータ">S</a> extends <a href="values/MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a></span>&nbsp;<span class="element-name">structure</span></div>
-<div class="block">アクセス位置の親の構造。</div>
+<div class="block">アクセス位置の親の構造</div>
 </div>
 </section>
 </li>
@@ -222,7 +226,7 @@ loadScripts(document, 'script');</script>
 <h3>parameter</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="#type-param-T" title="MojangsonPath.MojangsonPathReference内の型パラメータ">T</a></span>&nbsp;<span class="element-name">parameter</span></div>
-<div class="block">アクセスするために必要なキーまたは添え字。</div>
+<div class="block">アクセスするために必要なキーまたは添字</div>
 </div>
 </section>
 </li>
@@ -243,8 +247,8 @@ loadScripts(document, 'script');</script>
 <div class="block">サブクラスのためのコンストラクタ。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>structure</code> - アクセス位置の親の構造。</dd>
-<dd><code>parameter</code> - アクセスするために必要なキーまたは添え字。</dd>
+<dd><code>structure</code> - アクセス位置の親の構造</dd>
+<dd><code>parameter</code> - アクセスするために必要なキーまたは添字</dd>
 </dl>
 </div>
 </section>
@@ -265,7 +269,7 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先が存在するかどうかを返します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>存在すれば真。</dd>
+<dd>存在すれば true</dd>
 </dl>
 </div>
 </section>
@@ -278,7 +282,7 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先に格納された値の型を取得します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>型オブジェクト。</dd>
+<dd>型オブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -291,11 +295,11 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先に格納された値を取得します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="getOrThrow(io.github.takenoko4096.mojangson.MojangsonValueType)-type-param-U"><code>U</code> - 期待する型。</span></dd>
+<dd><span id="getOrThrow(io.github.takenoko4096.mojangson.MojangsonValueType)-type-param-U"><code>U</code> - 期待する型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>type</code> - 期待する型。</dd>
+<dd><code>type</code> - 期待する型</dd>
 <dt>戻り値:</dt>
-<dd>格納された値。</dd>
+<dd>パスの参照先に格納された値</dd>
 </dl>
 </div>
 </section>
@@ -306,15 +310,34 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="type-parameters">&lt;U extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
 <span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">getOrNull</span><wbr><span class="parameters">(<a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;U&gt;&nbsp;type)</span></div>
+<div class="block">パスの参照先に格納された値を取得します。存在しなければ null を返します。</div>
+<dl class="notes">
+<dt>型パラメータ:</dt>
+<dd><span id="getOrNull(io.github.takenoko4096.mojangson.MojangsonValueType)-type-param-U"><code>U</code> - 期待する型</span></dd>
+<dt>パラメータ:</dt>
+<dd><code>type</code> - 期待する型</dd>
+<dt>戻り値:</dt>
+<dd>パスの参照先に格納された値</dd>
+</dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,U)">
-<h3 id="getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,io.github.takenoko4096.mojangson.MojangsonValue)">getOrDefault</h3>
+<section class="detail" id="getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,java.lang.Object)">
+<h3>getOrDefault</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="type-parameters">&lt;U extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">U</span>&nbsp;<span class="element-name">getOrDefault</span><wbr><span class="parameters">(<a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;U&gt;&nbsp;type,
- U&nbsp;defaultValue)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;defaultValue)</span></div>
+<div class="block">パスの参照先に格納された値を取得します。存在しなければデフォルト値を返します。</div>
+<dl class="notes">
+<dt>型パラメータ:</dt>
+<dd><span id="getOrDefault(io.github.takenoko4096.mojangson.MojangsonValueType,java.lang.Object)-type-param-U"><code>U</code> - 期待する型</span></dd>
+<dt>パラメータ:</dt>
+<dd><code>type</code> - 期待する型</dd>
+<dd><code>defaultValue</code> - デフォルト値</dd>
+<dt>戻り値:</dt>
+<dd>パスの参照先に格納された値</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -326,7 +349,7 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先を任意の値で上書きします。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - 任意の値。</dd>
+<dd><code>value</code> - 任意の値</dd>
 </dl>
 </div>
 </section>
@@ -339,7 +362,7 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先の値を削除します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>削除に成功した場合、真。</dd>
+<dd>削除に成功した場合 true</dd>
 </dl>
 </div>
 </section>

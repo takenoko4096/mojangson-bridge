@@ -1,19 +1,16 @@
 package io.github.takenoko4096.json;
 
-import org.jspecify.annotations.NullMarked;
-
 /**
- * JsonParserまたはJsonPathParserによって投げられるパース例外。
+ * JsonParser または JsonPathParser によって投げられるパース例外。
  * @see JsonParser
  * @see JsonPathParser
  */
-@NullMarked
 public class JsonParseException extends RuntimeException {
     /**
      * 例外を作成します。
-     * @param message エラーメッセージ。
-     * @param json 元のjson文字列。
-     * @param location 例外の発生位置。
+     * @param message エラーメッセージ
+     * @param json 元のjson文字列
+     * @param location 例外の発生位置
      */
     protected JsonParseException(String message, String json, int location) {
         super(

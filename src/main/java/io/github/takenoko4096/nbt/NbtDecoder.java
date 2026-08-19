@@ -2,7 +2,6 @@ package io.github.takenoko4096.nbt;
 
 import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.values.*;
-import org.jspecify.annotations.NullMarked;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +12,6 @@ import java.util.zip.GZIPInputStream;
 /**
  * nbtバイナリをデコードするクラス。
  */
-@NullMarked
 public final class NbtDecoder {
     private static final byte TAG_END = 0;
     private static final byte TAG_BYTE = 1;
@@ -121,8 +119,8 @@ public final class NbtDecoder {
 
     /**
      * 引数に渡されたファイルをGZip圧縮された形式のバイナリファイルであるものとしてデコードします。
-     * @param file 読み取るファイル。
-     * @return デコード結果のコンパウンド。
+     * @param file 読み取るファイル
+     * @return デコード結果のコンパウンド
      */
     public static MojangsonCompound decompress(File file) throws NbtReadException {
         try (final DataInputStream input = new DataInputStream(new BufferedInputStream(new GZIPInputStream(new FileInputStream(file))))) {
@@ -136,8 +134,8 @@ public final class NbtDecoder {
 
     /**
      * 引数に渡されたファイルを圧縮されていない形式のバイナリファイルであるものとしてデコードします。
-     * @param file 読み取るファイル。
-     * @return デコード結果のコンパウンド。
+     * @param file 読み取るファイル
+     * @return デコード結果のコンパウンド
      */
     public static MojangsonCompound raw(File file) throws NbtReadException {
         try (final DataInputStream stream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
@@ -151,9 +149,9 @@ public final class NbtDecoder {
 
     /**
      * GZip圧縮された形式のファイルであるかどうかを返します。
-     * @param file 読み取るファイル。
-     * @return GZip圧縮されているならば、真。バイト列が短すぎる場合例外を投げます。
-     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合。
+     * @param file 読み取るファイル
+     * @return GZip圧縮されているならば true バイト列が短すぎる場合例外を投げます。
+     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合
      */
     public static boolean isCompressed(File file) throws NbtReadException {
         try {
@@ -167,8 +165,8 @@ public final class NbtDecoder {
 
     /**
      * 引数に渡されたバイト列をGZip圧縮された形式であるものとしてデコードします。
-     * @param bytes 解析するバイト列。
-     * @return デコード結果のコンパウンド。
+     * @param bytes 解析するバイト列
+     * @return デコード結果のコンパウンド
      */
     public static MojangsonCompound decompress(byte[] bytes) {
         try (final DataInputStream stream = new DataInputStream(new GZIPInputStream(new ByteArrayInputStream(bytes)))) {
@@ -182,8 +180,8 @@ public final class NbtDecoder {
 
     /**
      * 引数に渡されたバイト列を圧縮されていない形式であるものとしてデコードします。
-     * @param bytes 解析するバイト列。
-     * @return デコード結果のコンパウンド。
+     * @param bytes 解析するバイト列
+     * @return デコード結果のコンパウンド
      */
     public static MojangsonCompound raw(byte[] bytes) {
         try (final DataInputStream stream = new DataInputStream((new ByteArrayInputStream(bytes)))) {
@@ -197,9 +195,9 @@ public final class NbtDecoder {
 
     /**
      * GZip圧縮された形式のバイト列であるかどうかを返します。
-     * @param bytes 解析するバイト列。
-     * @return GZip圧縮されているならば、真。バイト列が短すぎる場合例外を投げます。
-     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合。
+     * @param bytes 解析するバイト列
+     * @return GZip圧縮されているならば true バイト列が短すぎる場合例外を投げます。
+     * @throws NbtReadException デコードに失敗した場合、またはバイト列が短すぎて圧縮形式を判別できない場合
      */
     public static boolean isCompressed(byte[] bytes) throws NbtReadException {
         if (bytes.length <= 1) {

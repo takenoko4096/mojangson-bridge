@@ -1,7 +1,6 @@
 package io.github.takenoko4096.mojangson;
 
 import io.github.takenoko4096.mojangson.values.*;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
@@ -11,9 +10,8 @@ import java.util.Set;
 
 /**
  * mojangson構造を文字列にシリアライズするクラス。
- * このクラスにMojangsonCompoundを渡すことによって生成された文字列は、net.minecraft.nbt.TagParser.parseCompoundFully(String)を使用してnet.minecraft.nbt.CompoundTagに変換できます。
+ * このクラスに MojangsonCompound を渡すことによって生成された文字列は、 net.minecraft.nbt.TagParser.parseCompoundFully(String) を使用して net.minecraft.nbt.CompoundTag に変換できます。
  */
-@NullMarked
 public class MojangsonSerializer {
     private final int indentationSpaceCount;
 
@@ -26,9 +24,9 @@ public class MojangsonSerializer {
 
     /**
      * mojangson構造を文字列としてシリアライズします。
-     * @param structure mojangson構造体。
-     * @return 改行・空白文字によるインデントを含む文字列。
-     * @throws MojangsonSerializationException シリアライズに失敗した場合。
+     * @param structure mojangson構造体
+     * @return 改行・空白文字によるインデントを含む文字列
+     * @throws MojangsonSerializationException シリアライズに失敗した場合
      */
     public String serialize(MojangsonStructure structure) throws MojangsonSerializationException {
         return serialize(structure, 1).toString();
@@ -220,10 +218,10 @@ public class MojangsonSerializer {
 
     /**
      * mojangson構造を文字列としてシリアライズします。
-     * インデントの空白の文字数には4を使用します。
-     * @param structure mojangson構造体。
-     * @param asJson trueの場合、json形式でシリアライズされます。
-     * @return 改行・空白文字によるインデントを含む文字列。
+     * インデントの空白の文字数には 4 を使用します
+     * @param structure mojangson構造体
+     * @param asJson trueの場合、json形式でシリアライズされます
+     * @return 改行・空白文字によるインデントを含む文字列
      */
     public static String structure(MojangsonStructure structure, boolean asJson) throws MojangsonSerializationException {
         return new MojangsonSerializer(4, asJson).serialize(structure);
@@ -231,7 +229,7 @@ public class MojangsonSerializer {
 
     /**
      * mojangson構造を文字列としてシリアライズします。
-     * インデントの空白の文字数には4を使用し、mojangson形式でシリアライズされます。
+     * インデントの空白の文字数には 4 を使用し、mojangson形式でシリアライズされます。
      * @param structure mojangson構造体。
      * @return 改行・空白文字によるインデントを含む文字列。
      */

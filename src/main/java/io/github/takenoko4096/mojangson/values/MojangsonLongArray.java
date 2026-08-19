@@ -2,7 +2,6 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * mojangsonにおけるlong[]を表現します。
+ * mojangsonにおける long[] を表現します
  */
-@NullMarked
 public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     /**
      * サブクラスのためのコンストラクタ。
@@ -33,6 +31,11 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
+    protected MojangsonLong getZero() {
+        return MojangsonLong.valueOf(0L);
+    }
+
+    @Override
     public MojangsonLongArray deepCopy() {
         return from(listView());
     }
@@ -45,6 +48,14 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     @Override
     public int length() {
         return value.length;
+    }
+
+    @Override
+    public boolean delete(int index) {
+        if (index >= value.length) return false;
+        final boolean successful = value[index] != 0;
+        value[index] = 0;
+        return successful;
     }
 
     @Override
@@ -84,9 +95,9 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     /**
-     * MojangsonListからMojangsonLongArrayへの変換を試みます。
-     * @param list MojangsonLongのみを要素に持つリスト。
-     * @return MojangsonLongArray。
+     * MojangsonList から MojangsonLongArray への変換を試みます。
+     * @param list MojangsonLong のみを要素に持つリスト。
+     * @return MojangsonLongArray
      */
     public static MojangsonLongArray from(TypedMojangsonList<MojangsonLong> list) {
         final long[] longs = new long[list.length()];

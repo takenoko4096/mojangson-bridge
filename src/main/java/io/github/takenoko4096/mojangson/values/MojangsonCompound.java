@@ -1,7 +1,6 @@
 package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.*;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
@@ -12,32 +11,31 @@ import java.util.Set;
 /**
  * mojangsonにおけるコンパウンドを表現します。
  */
-@NullMarked
 public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue<?>>> implements MojangsonStructure {
     /**
-     * StringとMojnagsonValueのMapからMojangsonCompoundを作成します。
-     * @param map 元となるMap。
+     * String と MojnagsonValue&lt;?&gt; の Map から MojangsonCompound を作成します。
+     * @param map 元となる Map
      */
     public MojangsonCompound(Map<String, MojangsonValue<?>> map) {
         super(map);
     }
 
     /**
-     * 空のMojnagsonCompoundを作成します。
+     * 空の MojnagsonCompound を作成します。
      */
     public MojangsonCompound() {
         this(new HashMap<>());
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonCompound> getType() {
         return MojangsonValueTypes.COMPOUND;
     }
 
     /**
-     * 引数に渡されたキーが存在するかを返します。
-     * @param key キー。
-     * @return 存在する場合、真。
+     * 引数に渡されたキーに対応する位置が存在するかを返します。
+     * @param key キー
+     * @return 存在する場合 true
      */
     public boolean has(String key) {
         return value.containsKey(key);
@@ -49,10 +47,10 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたキーの型を返します。
-     * @param key キー。
-     * @return キーに紐づけられた値の型。
-     * @throws IllegalArgumentException キーが存在しない場合。
+     * キーに紐づけられた値の型を返します。
+     * @param key キー
+     * @return キーに紐づけられた値の型
+     * @throws IllegalArgumentException キーに対応する位置が存在しない場合
      */
     public MojangsonValueType<?> getTypeOf(String key) throws IllegalArgumentException {
         if (!has(key)) {
@@ -63,12 +61,12 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたキーに紐づけられた値を返します。
-     * @param key キー。
-     * @param type 期待する型。
-     * @return キーに紐づけられた値。
-     * @param <T> 期待する型。
-     * @throws IllegalArgumentException キーが存在しないか、型が予期しないものの場合。
+     * キーに紐づけられた値を返します
+     * @param key キー
+     * @param type 期待する型
+     * @return キーに紐づけられた値
+     * @param <T> 期待する型
+     * @throws IllegalArgumentException キーに対応する位置が存在しないか、型が予期しないものの場合
      */
     public <T extends MojangsonValue<?>> T getOrThrow(String key, MojangsonValueType<T> type) throws IllegalArgumentException {
         if (!has(key)) {
@@ -82,6 +80,13 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         return type.toMojangson(value.get(key));
     }
 
+    /**
+     * キーに紐づけられた値を返します。キーに対応する位置が存在しないか、型が予期しないものの場合nullを返します。
+     * @param key キー
+     * @param type 期待する型
+     * @return キーに紐づけられた値
+     * @param <T> 期待する型
+     */
     public <T extends MojangsonValue<?>> @Nullable T getOrNull(String key, MojangsonValueType<T> type) {
         if (has(key)) {
             if (getTypeOf(key).equals(type)) {
@@ -92,23 +97,31 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         else return null;
     }
 
-    public <T extends MojangsonValue<?>> T getOrDefault(String key, MojangsonValueType<T> type, T defaultValue) {
-        return Objects.requireNonNullElse(getOrNull(key, type), defaultValue);
+    /**
+     * キーに紐づけられた値を返します。キーに対応する位置が存在しないか、型が予期しないものの場合デフォルト値を返します。
+     * @param key キー
+     * @param type 期待する型
+     * @param defaultValue デフォルト値
+     * @return キーに紐づけられた値
+     * @param <T> 期待する型
+     */
+    public <T extends MojangsonValue<?>> T getOrDefault(String key, MojangsonValueType<T> type, Object defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(key, type), type.toMojangson(defaultValue));
     }
 
     /**
-     * 引数に渡されたキーに任意の値を紐づけます。
-     * @param key キー。
-     * @param value 値。
+     * キーに任意の値を紐づけます。
+     * @param key キー
+     * @param value 値
      */
     public void set(String key, Object value) {
-        this.value.put(key, MojangsonValueType.of(value).toMojangson(value));
+        this.value.put(key, MojangsonValue.valueOf(value));
     }
 
     /**
-     * 引数に渡されたキーを削除します。
-     * @param key キー。
-     * @return 削除に成功した場合、真。
+     * キーに紐づけられた値を削除します。
+     * @param key キー
+     * @return 削除に成功した場合 true
      */
     public boolean delete(String key) {
         if (has(key)) {
@@ -131,19 +144,23 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
 
     /**
      * このコンパウンドが持つキーの集合を返します。
-     * @return すべてのキーのSet。
+     * @return すべてのキーを含む Set&lt;String&gt;
      */
     public Set<String> keys() {
         return Set.copyOf(value.keySet());
     }
 
+    /**
+     * このオブジェクトをMap&lt;String, MojangsonValue&lt;?&gt;&gt;に変換して返します。
+     * @return Map&lt;String, MojangsonValue&lt;?&gt;&gt;
+     */
     public Map<String, MojangsonValue<?>> toMap() {
         return Map.copyOf(value);
     }
 
     /**
-     * このコンパウンドを再帰的にMapに変換します。
-     * @return Map形式のディープコピー。
+     * このオブジェクトを再帰的にMap&lt;String, Object&gt;に変換します。
+     * @return Map&lt;String, Object&gt;
      */
     public Map<String, Object> toMapRecursively() {
         final Map<String, Object> map = new HashMap<>();
@@ -179,9 +196,9 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡された構造体がこの構造体の部分構造であるかを返します。
-     * @param other 構造体。
-     * @return 部分構造であれば、真。
+     * ある構造体がこの構造体の部分構造であるかを返します。
+     * @param other 構造体
+     * @return 部分構造であれば true
      */
     public boolean isSuperOf(MojangsonCompound other) {
         for (final String key : other.keys()) {
@@ -213,9 +230,9 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたパスが存在するかを返します。
-     * @param path パス。
-     * @return 存在する場合、真。
+     * 引数に渡されたパスに対応する位置が存在するかを返します。
+     * @param path パス
+     * @return 存在する場合 true
      */
     public boolean has(MojangsonPath path) {
         try {
@@ -227,10 +244,10 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたパスの型を返します。
-     * @param path パス。
-     * @return パスに紐づけられた値の型。
-     * @throws IllegalArgumentException パスが存在しない場合。
+     * 引数に渡されたパスに紐づけられた値の型を返します。
+     * @param path パス
+     * @return パスに紐づけられた値の型
+     * @throws IllegalArgumentException パスに対応する位置が存在しない場合
      */
     public MojangsonValueType<?> getTypeOf(MojangsonPath path) {
         try {
@@ -248,12 +265,12 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたパスに紐づけられた値を返します。
-     * @param path パス。
-     * @param type 期待する型。
-     * @return パスに紐づけられた値。
-     * @param <T> 期待する型。
-     * @throws IllegalArgumentException パスが存在しないか、型が予期しないものの場合。
+     * パスに紐づけられた値を返します。
+     * @param path パス
+     * @param type 期待する型
+     * @return パスに紐づけられた値
+     * @param <T> 期待する型
+     * @throws IllegalArgumentException パスが存在しないか、型が予期しないものの場合
      */
     public <T extends MojangsonValue<?>> T getOrThrow(MojangsonPath path, MojangsonValueType<T> type) {
         try {
@@ -268,6 +285,13 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         }
     }
 
+    /**
+     * パスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にnullを返します。
+     * @param path パス
+     * @param type 期待する型
+     * @return パスに紐づけられた値
+     * @param <T> 期待する型
+     */
     public <T extends MojangsonValue<?>> @Nullable T getOrNull(MojangsonPath path, MojangsonValueType<T> type) {
         try {
             return path.access(this, reference -> reference.getOrNull(type), false);
@@ -277,11 +301,19 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         }
     }
 
-    public <T extends MojangsonValue<?>> @Nullable T getOrDefault(MojangsonPath path, MojangsonValueType<T> type, T defaultValue) {
+    /**
+     * パスに紐づけられた値を返します。パスが存在しない、または型の不一致の場合にデフォルト値を返します。
+     * @param path パス
+     * @param type 期待する型
+     * @param defaultValue デフォルト値
+     * @return パスに紐づけられた値
+     * @param <T> 期待する型
+     */
+    public <T extends MojangsonValue<?>> @Nullable T getOrDefault(MojangsonPath path, MojangsonValueType<T> type, Object defaultValue) {
         try {
             final T value = path.access(this, reference -> reference.getOrDefault(type, defaultValue), false);
             if (value == null) {
-                return defaultValue;
+                return type.toMojangson(defaultValue);
             }
             return value;
         }
@@ -291,9 +323,9 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたパスを削除します。
-     * @param path パス。
-     * @return 削除に成功した場合、真。
+     * パスに対応する位置を削除します。
+     * @param path パス
+     * @return 削除に成功した場合 true
      */
     public boolean delete(MojangsonPath path) {
         try {
@@ -305,9 +337,9 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * 引数に渡されたパスに任意の値を紐づけます。
-     * @param path パス。
-     * @param value 値。
+     * パスに任意の値を紐づけます。
+     * @param path パス
+     * @param value 値
      */
     public void set(MojangsonPath path, Object value) {
         try {
@@ -322,9 +354,9 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * MapをMojangsonCompoundに変換します。
-     * @param value Map。
-     * @return MojangsonCompound。
+     * Map&lt;String, ?&gt; を MojangsonCompound に変換します。
+     * @param value Map&lt;String, ?&gt;
+     * @return MojangsonCompound
      */
     public static MojangsonCompound valueOf(Map<?, ?> value) {
         final var map = new HashMap<String, MojangsonValue<?>>();

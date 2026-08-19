@@ -60,7 +60,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">メソッドの詳細</a>
 <ol class="toc-list">
 <li><a href="#access(io.github.takenoko4096.mojangson.values.MojangsonCompound,io.github.takenoko4096.mojangson.MojangsonLocationAccessProvider)" tabindex="0">access(MojangsonCompound, MojangsonLocationAccessProvider)</a></li>
-<li><a href="#copy()" tabindex="0">copy()</a></li>
+<li><a href="#deepCopy()" tabindex="0">deepCopy()</a></li>
 <li><a href="#toString()" tabindex="0">toString()</a></li>
 </ol>
 </li>
@@ -121,12 +121,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">説明</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;U&gt;&nbsp;@Nullable U</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.mojangson.values.MojangsonCompound,io.github.takenoko4096.mojangson.MojangsonLocationAccessProvider)" class="member-name-link">access</a><wbr>(<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>&nbsp;structure,
- <a href="MojangsonLocationAccessProvider.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonLocationAccessProvider</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, @Nullable U&gt;&nbsp;function)</code></div>
+ <a href="MojangsonLocationAccessProvider.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonLocationAccessProvider</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, U&gt;&nbsp;function)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a><wbr>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="MojnagsonConditionalCompoundKey.html" title="io.github.takenoko4096.mojangson内のクラス">MojnagsonConditionalCompoundKey</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copy()" class="member-name-link">copy</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deepCopy()" class="member-name-link">deepCopy</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">ノードのコピーを作成します。</div>
 </div>
@@ -155,7 +155,7 @@ loadScripts(document, 'script');</script>
 <h3>access</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>&nbsp;structure,
- <a href="MojangsonLocationAccessProvider.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonLocationAccessProvider</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, @Nullable U&gt;&nbsp;function)</span>
+ <a href="MojangsonLocationAccessProvider.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonLocationAccessProvider</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, U&gt;&nbsp;function)</span>
                        throws <span class="exceptions"><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></span></div>
 <div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="MojangsonPathNode.html#access(S,io.github.takenoko4096.mojangson.MojangsonLocationAccessProvider)">MojangsonPathNode</a></code></span></div>
 <div class="block">第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。各サブクラスにてチェックや検索等その他の処理が事前に行われることがあります。</div>
@@ -165,10 +165,10 @@ loadScripts(document, 'script');</script>
 <dt>型パラメータ:</dt>
 <dd><span id="access(S,io.github.takenoko4096.mojangson.MojangsonLocationAccessProvider)-type-param-U"><code>U</code> - コールバックの戻り値の型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>structure</code> - 任意の構造体。</dd>
-<dd><code>function</code> - コールバック。</dd>
+<dd><code>structure</code> - 任意の構造体</dd>
+<dd><code>function</code> - コールバック</dd>
 <dt>戻り値:</dt>
-<dd>コールバックの戻り値そのまま。</dd>
+<dd>コールバックの戻り値そのまま</dd>
 <dt>例外:</dt>
 <dd><code><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></code> - 構造との不整合によりアクセスできなかった場合。</dd>
 </dl>
@@ -176,17 +176,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="copy()">
-<h3>copy</h3>
+<section class="detail" id="deepCopy()">
+<h3>deepCopy</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="MojnagsonConditionalCompoundKey.html" title="io.github.takenoko4096.mojangson内のクラス">MojnagsonConditionalCompoundKey</a>&gt;</span>&nbsp;<span class="element-name">copy</span>()</div>
-<div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="MojangsonPathNode.html#copy()">MojangsonPathNode</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="MojnagsonConditionalCompoundKey.html" title="io.github.takenoko4096.mojangson内のクラス">MojnagsonConditionalCompoundKey</a>&gt;</span>&nbsp;<span class="element-name">deepCopy</span>()</div>
+<div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="MojangsonPathNode.html#deepCopy()">MojangsonPathNode</a></code></span></div>
 <div class="block">ノードのコピーを作成します。</div>
 <dl class="notes">
 <dt>定義:</dt>
-<dd><code><a href="MojangsonPathNode.html#copy()">copy</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="MojnagsonConditionalCompoundKey.html" title="io.github.takenoko4096.mojangson内のクラス">MojnagsonConditionalCompoundKey</a>&gt;</code></dd>
+<dd><code><a href="MojangsonPathNode.html#deepCopy()">deepCopy</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="MojnagsonConditionalCompoundKey.html" title="io.github.takenoko4096.mojangson内のクラス">MojnagsonConditionalCompoundKey</a>&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>ノードのディープコピー。</dd>
+<dd>ノードのディープコピー</dd>
 </dl>
 </div>
 </section>

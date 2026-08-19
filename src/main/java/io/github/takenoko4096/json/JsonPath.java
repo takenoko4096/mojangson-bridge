@@ -3,7 +3,6 @@ package io.github.takenoko4096.json;
 import io.github.takenoko4096.json.values.JsonArray;
 import io.github.takenoko4096.json.values.JsonObject;
 import io.github.takenoko4096.json.values.JsonStructure;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Objects;
@@ -12,7 +11,6 @@ import java.util.function.Function;
 /**
  * json構造の任意の位置にアクセスするためのパスを表現します。
  */
-@NullMarked
 public final class JsonPath {
     private final JsonPathNode<?, ?> root;
 
@@ -20,7 +18,7 @@ public final class JsonPath {
         this.root = root;
     }
 
-    private <U> @Nullable U checkedAccess(JsonPathNode<?, ?> node, @Nullable JsonStructure structure, JsonLocationAccessProvider<JsonStructure, @Nullable U> function) throws JsonPathUnableToAccessException {
+    private <U> @Nullable U checkedAccess(JsonPathNode<?, ?> node, @Nullable JsonStructure structure, JsonLocationAccessProvider<JsonStructure, U> function) throws JsonPathUnableToAccessException {
         switch (node) {
             case JsonPathNode.ObjectKeyNode objectKeyNode -> {
                 if (!(structure instanceof JsonObject object)) {
@@ -46,11 +44,10 @@ public final class JsonPath {
                 }
                 return arrayIndexFinderNode.access(array, function::use);
             }
-            default -> throw new IllegalArgumentException();
         }
     }
 
-    private <U> @Nullable U onTermination(JsonObject jsonObject, JsonLocationAccessProvider<JsonStructure, @Nullable U> function, boolean isForcedAccess) throws JsonPathUnableToAccessException {
+    private <U> @Nullable U onTermination(JsonObject jsonObject, JsonLocationAccessProvider<JsonStructure, U> function, boolean isForcedAccess) throws JsonPathUnableToAccessException {
         JsonPathNode<?, ?> node = root;
         JsonStructure currentStruct = jsonObject;
 
@@ -213,7 +210,7 @@ public final class JsonPath {
      * 文字列からjsonパスを作成します。
      * @param path jsonパス
      * @return jsonパスオブジェクト
-     * @throws JsonParseException パスが不正な場合。
+     * @throws JsonParseException パスが不正な場合
      */
     public static JsonPath of(String path) throws JsonParseException {
         return new JsonPathParser().parse(path);
@@ -221,24 +218,24 @@ public final class JsonPath {
 
     /**
      * jsonパスが構造にアクセスする際に作成される特定のオブジェクトへの参照を表現します。
-     * @param <S> アクセス位置の親の構造。
-     * @param <T> アクセスするために必要なキーまたは添え字。
+     * @param <S> アクセス位置の親の構造
+     * @param <T> アクセスするために必要なキーまたは添字
      */
-    public static abstract class JsonPathReference<S extends JsonStructure, T> {
+    public static abstract sealed class JsonPathReference<S extends JsonStructure, T> permits JsonPathReference.JsonObjectPathReference, JsonPathReference.JsonArrayPathReference {
         /**
-         * アクセス位置の親の構造。
+         * アクセス位置の親の構造
          */
         protected final S structure;
 
         /**
-         * アクセスするために必要なキーまたは添え字。
+         * アクセスするために必要なキーまたは添字
          */
         protected final T parameter;
 
         /**
          * サブクラスのためのコンストラクタ。
-         * @param structure アクセス位置の親の構造。
-         * @param parameter アクセスするために必要なキーまたは添え字。
+         * @param structure アクセス位置の親の構造
+         * @param parameter アクセスするために必要なキーまたは添字
          */
         protected JsonPathReference(S structure, T parameter) {
             this.structure = structure;
@@ -247,37 +244,50 @@ public final class JsonPath {
 
         /**
          * パスの参照先が存在するかどうかを返します。
-         * @return 存在すれば真。
+         * @return 存在すれば true
          */
         public abstract boolean has();
 
         /**
          * パスの参照先に格納された値の型を取得します。
-         * @return 型オブジェクト。
+         * @return 型
          */
         public abstract JsonValueType<?> getType();
 
         /**
          * パスの参照先に格納された値を取得します。
-         * @param type 期待する型。
-         * @param <U> 期待する型。
-         * @return 格納された値。
+         * @param type 期待する型
+         * @param <U> 期待する型
+         * @return パスの参照先に格納された値
          */
         public abstract <U extends JsonValue<?>> U getOrThrow(JsonValueType<U> type);
 
+        /**
+         * パスの参照先に格納された値を取得します。存在しなければ null を返します。
+         * @param type 期待する型
+         * @param <U> 期待する型
+         * @return パスの参照先に格納された値
+         */
         public abstract <U extends JsonValue<?>> @Nullable U getOrNull(JsonValueType<U> type);
 
-        public abstract <U extends JsonValue<?>> U getOrDefault(JsonValueType<U> type, U defaultValue);
+        /**
+         * パスの参照先に格納された値を取得します。存在しなければデフォルト値を返します。
+         * @param type 期待する型
+         * @param defaultValue デフォルト値
+         * @param <U> 期待する型
+         * @return パスの参照先に格納された値
+         */
+        public abstract <U extends JsonValue<?>> U getOrDefault(JsonValueType<U> type, Object defaultValue);
 
         /**
          * パスの参照先を任意の値で上書きします。
-         * @param value 任意の値。
+         * @param value 任意の値
          */
         public abstract void set(Object value);
 
         /**
          * パスの参照先の値を削除します。
-         * @return 削除に成功した場合、真。
+         * @return 削除に成功した場合 true
          */
         public abstract boolean delete();
 
@@ -307,7 +317,7 @@ public final class JsonPath {
             }
 
             @Override
-            public <U extends JsonValue<?>> U getOrDefault(JsonValueType<U> type, U defaultValue) {
+            public <U extends JsonValue<?>> U getOrDefault(JsonValueType<U> type, Object defaultValue) {
                 return structure.getOrDefault(parameter, type, defaultValue);
             }
 
@@ -348,7 +358,7 @@ public final class JsonPath {
             }
 
             @Override
-            public <U extends JsonValue<?>> U getOrDefault(JsonValueType<U> type, U defaultValue) {
+            public <U extends JsonValue<?>> U getOrDefault(JsonValueType<U> type, Object defaultValue) {
                 return structure.getOrDefault(parameter, type, defaultValue);
             }
 

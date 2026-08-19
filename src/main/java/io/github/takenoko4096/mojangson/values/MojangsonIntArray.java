@@ -2,7 +2,6 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * mojangsonにおけるint[]を表現します。
+ * mojangsonにおける int[] を表現します。
  */
-@NullMarked
 public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     /**
      * サブクラスのためのコンストラクタ。
@@ -33,6 +31,11 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
+    protected MojangsonInt getZero() {
+        return MojangsonInt.valueOf(0);
+    }
+
+    @Override
     public MojangsonIntArray deepCopy() {
         return from(listView());
     }
@@ -45,6 +48,14 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     @Override
     public int length() {
         return value.length;
+    }
+
+    @Override
+    public boolean delete(int index) {
+        if (index >= value.length) return false;
+        final boolean successful = value[index] != 0;
+        value[index] = 0;
+        return successful;
     }
 
     @Override
@@ -84,9 +95,9 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     /**
-     * MojangsonListからMojangsonIntArrayへの変換を試みます。
-     * @param list MojangsonIntのみを要素に持つリスト。
-     * @return MojangsonIntArray。
+     * MojangsonList から MojangsonIntArray への変換を試みます。
+     * @param list MojangsonInt のみを要素に持つリスト。
+     * @return MojangsonIntArray
      */
     public static MojangsonIntArray from(TypedMojangsonList<MojangsonInt> list) {
         final int[] ints = new int[list.length()];

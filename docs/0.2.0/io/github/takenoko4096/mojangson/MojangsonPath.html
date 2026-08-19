@@ -80,8 +80,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public final class </span><span class="element-name type-name-label">MojangsonPath</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">MojangsonPath</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span></div>
 <div class="block">mojangson構造の任意の位置にアクセスするためのパスを表現します。</div>
 </div>
@@ -181,15 +180,15 @@ loadScripts(document, 'script');</script>
 <div class="block">任意のコンパウンド上の、このパスに対応する位置へのアクセスを提供します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="access(io.github.takenoko4096.mojangson.values.MojangsonCompound,java.util.function.Function,boolean)-type-param-T"><code>T</code> - コールバックの戻り値の型。</span></dd>
+<dd><span id="access(io.github.takenoko4096.mojangson.values.MojangsonCompound,java.util.function.Function,boolean)-type-param-T"><code>T</code> - コールバックの戻り値の型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>mojangsonCompound</code> - 任意のコンパウンド。</dd>
-<dd><code>function</code> - 参照を消費するコールバック関数。</dd>
-<dd><code>isForcedAccess</code> - trueの場合、コンパウンドのキーに対する単純なアクセスに限り、キーが存在しなくてもその位置に空のコンパウンドを作成します。これにより強制的にアクセス処理の中断を回避します。</dd>
+<dd><code>mojangsonCompound</code> - 任意のコンパウンド</dd>
+<dd><code>function</code> - 参照を消費するコールバック関数</dd>
+<dd><code>isForcedAccess</code> - true の場合、コンパウンドのキーに対する単純なアクセスに限り、キーが存在しなくてもその位置に空のコンパウンドを作成します。これにより強制的にアクセス処理の中断を回避します。</dd>
 <dt>戻り値:</dt>
-<dd>コールバックの戻り値をそのまま返します。何も返す必要がなければnullを返すことができます。</dd>
+<dd>コールバックの戻り値をそのまま返します。何も返す必要がなければ null を返すことができます</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></code> - コンパウンドの構造との不整合によりアクセスできなかった場合。</dd>
+<dd><code><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></code> - コンパウンドの構造との不整合によりアクセスできなかった場合</dd>
 </dl>
 </div>
 </section>
@@ -202,7 +201,7 @@ loadScripts(document, 'script');</script>
 <div class="block">mojangsonパスの長さを返します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>mojangsonパスの長さ。例えば、 "foo.bar[0].baz" は4を返します。</dd>
+<dd>mojangsonパスの長さ 例えば、 "foo.bar[0].baz" は4を返します。</dd>
 </dl>
 </div>
 </section>
@@ -216,10 +215,10 @@ loadScripts(document, 'script');</script>
 <div class="block">mojangsonパスの部分パスを作成します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>begin</code> - 開始位置。</dd>
-<dd><code>end</code> - 終了位置。この値は含まれません。</dd>
+<dd><code>begin</code> - 開始位置</dd>
+<dd><code>end</code> - 終了位置 この値は含まれません。</dd>
 <dt>戻り値:</dt>
-<dd>切り取られた部分パス。完全なコピーであり、元のオブジェクトとは関連しません。</dd>
+<dd>切り取られた部分パス 完全なコピーであり、元のオブジェクトとは関連しません。</dd>
 </dl>
 </div>
 </section>
@@ -286,7 +285,7 @@ loadScripts(document, 'script');</script>
 <dt>戻り値:</dt>
 <dd>mojangsonパスオブジェクト</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - パスが不正な場合。</dd>
+<dd><code><a href="MojangsonParseException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParseException</a></code> - パスが不正な場合</dd>
 </dl>
 </div>
 </section>

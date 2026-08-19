@@ -2,25 +2,23 @@ package io.github.takenoko4096.json.values;
 
 import io.github.takenoko4096.json.JsonValueType;
 import io.github.takenoko4096.json.JsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 
 /**
- * json構造におけるnumber型を表現します。
+ * json構造における number 型を表現します。
  */
-@NullMarked
 public final class JsonNumber extends JsonPrimitive<Number> {
     private JsonNumber(Number value) {
         super(value);
     }
 
     @Override
-    public JsonValueType<?> getType() {
+    public JsonValueType<JsonNumber> getType() {
         return JsonValueTypes.NUMBER;
     }
 
     /**
      * byteとして取得します。
-     * @return byte。
+     * @return byte
      */
     public byte byteValue() {
         return value.byteValue();
@@ -28,7 +26,7 @@ public final class JsonNumber extends JsonPrimitive<Number> {
 
     /**
      * shortとして取得します。
-     * @return short。
+     * @return short
      */
     public short shortValue() {
         return value.shortValue();
@@ -36,7 +34,7 @@ public final class JsonNumber extends JsonPrimitive<Number> {
 
     /**
      * intとして取得します。
-     * @return int。
+     * @return int
      */
     public int intValue() {
         return value.intValue();
@@ -44,7 +42,7 @@ public final class JsonNumber extends JsonPrimitive<Number> {
 
     /**
      * longとして取得します。
-     * @return long。
+     * @return long
      */
     public long longValue() {
         return value.longValue();
@@ -52,7 +50,7 @@ public final class JsonNumber extends JsonPrimitive<Number> {
 
     /**
      * floatとして取得します。
-     * @return float。
+     * @return float
      */
     public float floatValue() {
         return value.floatValue();
@@ -60,7 +58,7 @@ public final class JsonNumber extends JsonPrimitive<Number> {
 
     /**
      * doubleとして取得します。
-     * @return double。
+     * @return double
      */
     public double doubleValue() {
         return value.doubleValue();
@@ -68,8 +66,8 @@ public final class JsonNumber extends JsonPrimitive<Number> {
 
     /**
      * NumberをJsonNumberに変換します。
-     * @param value Number。
-     * @return JsonNumber。
+     * @param value Number
+     * @return JsonNumber
      */
     public static JsonNumber valueOf(Number value) {
         return new JsonNumber(value);

@@ -3,7 +3,6 @@ package io.github.takenoko4096.json;
 import io.github.takenoko4096.json.values.JsonArray;
 import io.github.takenoko4096.json.values.JsonObject;
 import io.github.takenoko4096.json.values.JsonStructure;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -11,23 +10,22 @@ import org.jspecify.annotations.Nullable;
  * @param <S> 親となるjson構造
  * @param <T> 子アクセス
  */
-@NullMarked
-public abstract class JsonPathNode<S extends JsonStructure, T> {
+public abstract sealed class JsonPathNode<S extends JsonStructure, T> permits JsonPathNode.ObjectKeyNode, JsonPathNode.ArrayIndexNode, JsonPathNode.ObjectKeyCheckerNode, JsonPathNode.ArrayIndexFinderNode {
     /**
-     * 子アクセスのためのキーまたは添え字。
+     * 子アクセスのためのキーまたは添字
      */
     protected final T parameter;
 
     /**
-     * 子ノード。
+     * 子ノード
      */
     @Nullable
     protected JsonPathNode<?, ?> child;
 
     /**
      * サブクラスのためのコンストラクタ。
-     * @param parameter 子アクセスのためのキーまたは添え字。
-     * @param child 子ノード。
+     * @param parameter 子アクセスのためのキーまたは添字
+     * @param child 子ノード
      */
     protected JsonPathNode(T parameter, @Nullable JsonPathNode<?, ?> child) {
         this.parameter = parameter;
@@ -36,19 +34,19 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
 
     /**
      * 第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。各サブクラスにてチェックや検索等その他の処理が事前に行われることがあります。
-     * @param structure 任意の構造体。
-     * @param function コールバック。
-     * @return コールバックの戻り値そのまま。
-     * @throws JsonPathUnableToAccessException 構造との不整合によりアクセスできなかった場合。
+     * @param structure 任意の構造体
+     * @param function コールバック
+     * @return コールバックの戻り値そのまま
+     * @throws JsonPathUnableToAccessException 構造との不整合によりアクセスできなかった場合
      * @param <U> コールバックの戻り値の型
      */
     public abstract <U> @Nullable U access(S structure, JsonLocationAccessProvider<S, U> function) throws JsonPathUnableToAccessException;
 
     /**
      * ノードのコピーを作成します。
-     * @return ノードのディープコピー。
+     * @return ノードのディープコピー
      */
-    public abstract JsonPathNode<S, T> copy();
+    public abstract JsonPathNode<S, T> deepCopy();
 
     @Override
     public abstract String toString();
@@ -62,13 +60,13 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(JsonObject structure, JsonLocationAccessProvider<JsonObject, @Nullable U> function) throws JsonPathUnableToAccessException {
+        public <U> @Nullable U access(JsonObject structure, JsonLocationAccessProvider<JsonObject, U> function) throws JsonPathUnableToAccessException {
             return function.use(structure, parameter);
         }
 
         @Override
-        public JsonPathNode<JsonObject, String> copy() {
-            return new ObjectKeyNode(parameter, child == null ? null : child.copy());
+        public JsonPathNode<JsonObject, String> deepCopy() {
+            return new ObjectKeyNode(parameter, child == null ? null : child.deepCopy());
         }
 
         @Override
@@ -86,13 +84,13 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(JsonArray structure, JsonLocationAccessProvider<JsonArray, @Nullable U> function) throws JsonPathUnableToAccessException {
+        public <U> @Nullable U access(JsonArray structure, JsonLocationAccessProvider<JsonArray, U> function) throws JsonPathUnableToAccessException {
             return function.use(structure, parameter);
         }
 
         @Override
-        public JsonPathNode<JsonArray, Integer> copy() {
-            return new ArrayIndexNode(parameter, child == null ? null : child.copy());
+        public JsonPathNode<JsonArray, Integer> deepCopy() {
+            return new ArrayIndexNode(parameter, child == null ? null : child.deepCopy());
         }
 
         @Override
@@ -110,7 +108,7 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(JsonObject structure, JsonLocationAccessProvider<JsonObject, @Nullable U> function) throws JsonPathUnableToAccessException {
+        public <U> @Nullable U access(JsonObject structure, JsonLocationAccessProvider<JsonObject, U> function) throws JsonPathUnableToAccessException {
             if (!structure.has(parameter.name())) return null;
             else {
                 final JsonObject value = structure.getOrThrow(parameter.name(), JsonValueTypes.OBJECT);
@@ -124,8 +122,8 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
         }
 
         @Override
-        public JsonPathNode<JsonObject, JsonConditionalObjectKey> copy() {
-            return new ObjectKeyCheckerNode(parameter.name(), parameter.object(), child == null ? null : child.copy());
+        public JsonPathNode<JsonObject, JsonConditionalObjectKey> deepCopy() {
+            return new ObjectKeyCheckerNode(parameter.name(), parameter.object(), child == null ? null : child.deepCopy());
         }
 
         @Override
@@ -143,7 +141,7 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
         }
 
         @Override
-        public <U> @Nullable U access(JsonArray structure, JsonLocationAccessProvider<JsonArray, @Nullable U> function) throws JsonPathUnableToAccessException {
+        public <U> @Nullable U access(JsonArray structure, JsonLocationAccessProvider<JsonArray, U> function) throws JsonPathUnableToAccessException {
             for (int i = 0; i < structure.length(); i++) {
                 if (structure.getTypeAt(i) != JsonValueTypes.OBJECT) {
                     continue;
@@ -154,15 +152,14 @@ public abstract class JsonPathNode<S extends JsonStructure, T> {
                 if (element.isSuperOf(parameter)) {
                     return function.use(structure, i);
                 }
-                else return null;
             }
 
             return null;
         }
 
         @Override
-        public JsonPathNode<JsonArray, JsonObject> copy() {
-            return new ArrayIndexFinderNode(parameter, child == null ? null : child.copy());
+        public JsonPathNode<JsonArray, JsonObject> deepCopy() {
+            return new ArrayIndexFinderNode(parameter, child == null ? null : child.deepCopy());
         }
 
         @Override

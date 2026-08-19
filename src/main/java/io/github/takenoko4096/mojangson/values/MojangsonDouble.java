@@ -5,7 +5,7 @@ import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * mojangsonにおけるdoubleを表現します。
+ * mojangsonにおける double を表現します。
  */
 @NullMarked
 public final class MojangsonDouble extends MojangsonNumber<Double> {
@@ -14,14 +14,14 @@ public final class MojangsonDouble extends MojangsonNumber<Double> {
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonDouble> getType() {
         return MojangsonValueTypes.DOUBLE;
     }
 
     /**
-     * doubleをMojangsonDoubleに変換します。
-     * @param value double。
-     * @return MojangsonDouble。
+     * double を MojangsonDouble に変換します。
+     * @param value double
+     * @return MojangsonDouble
      */
     public static MojangsonDouble valueOf(double value) {
         return new MojangsonDouble(value);

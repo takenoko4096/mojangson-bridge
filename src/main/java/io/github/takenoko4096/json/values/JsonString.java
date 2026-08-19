@@ -2,26 +2,24 @@ package io.github.takenoko4096.json.values;
 
 import io.github.takenoko4096.json.JsonValueType;
 import io.github.takenoko4096.json.JsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 
 /**
- * json構造におけるstring型を表現します。
+ * json構造における string 型を表現します。
  */
-@NullMarked
 public final class JsonString extends JsonPrimitive<String> {
     private JsonString(String value) {
         super(value);
     }
 
     @Override
-    public JsonValueType<?> getType() {
+    public JsonValueType<JsonString> getType() {
         return JsonValueTypes.STRING;
     }
 
     /**
      * StringをJsonStringに変換します。
-     * @param value String。
-     * @return JsonString。
+     * @param value String
+     * @return JsonString
      */
     public static JsonString valueOf(String value) {
         return new JsonString(value);

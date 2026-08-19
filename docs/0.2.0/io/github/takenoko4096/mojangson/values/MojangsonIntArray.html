@@ -65,9 +65,11 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#getType()" tabindex="0">getType()</a></li>
 <li><a href="#getElementType()" tabindex="0">getElementType()</a></li>
+<li><a href="#getZero()" tabindex="0">getZero()</a></li>
 <li><a href="#deepCopy()" tabindex="0">deepCopy()</a></li>
 <li><a href="#isEmpty()" tabindex="0">isEmpty()</a></li>
 <li><a href="#length()" tabindex="0">length()</a></li>
+<li><a href="#delete(int)" tabindex="0">delete(int)</a></li>
 <li><a href="#clear()" tabindex="0">clear()</a></li>
 <li><a href="#iterator()" tabindex="0">iterator()</a></li>
 <li><a href="#toString()" tabindex="0">toString()</a></li>
@@ -97,10 +99,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">MojangsonIntArray</span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MojangsonIntArray</span>
 <span class="extends-implements">extends <a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</span></div>
-<div class="block">mojangsonにおけるint[]を表現します。</div>
+<div class="block">mojangsonにおける int[] を表現します。</div>
 </div>
 </section>
 <section class="summary">
@@ -150,18 +151,30 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">構造体のディープコピーを作成します。</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="MojangsonIntArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonIntArray</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#from(io.github.takenoko4096.mojangson.values.TypedMojangsonList)" class="member-name-link">from</a><wbr>(<a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;&nbsp;list)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">MojangsonListからMojangsonIntArrayへの変換を試みます。</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementType()" class="member-name-link">getElementType</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;?&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(int)" class="member-name-link">delete</a><wbr>(int&nbsp;index)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="MojangsonIntArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonIntArray</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#from(io.github.takenoko4096.mojangson.values.TypedMojangsonList)" class="member-name-link">from</a><wbr>(<a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;&nbsp;list)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">MojangsonList から MojangsonIntArray への変換を試みます。</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementType()" class="member-name-link">getElementType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">要素の型を返します。</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;?&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">値の型を取得します。</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getZero()" class="member-name-link">getZero</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">配列要素のデフォルト値を返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
@@ -249,7 +262,7 @@ loadScripts(document, 'script');</script>
 <dt>定義:</dt>
 <dd><code><a href="../MojangsonValue.html#getType()">getType</a></code>&nbsp;クラス内&nbsp;<code><a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;int[]&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>この値の型を表現するオブジェクト。</dd>
+<dd>この値の型を表現するオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -259,9 +272,29 @@ loadScripts(document, 'script');</script>
 <h3>getElementType</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</span>&nbsp;<span class="element-name">getElementType</span>()</div>
+<div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="MojangsonArray.html#getElementType()">MojangsonArray</a></code></span></div>
+<div class="block">要素の型を返します。</div>
 <dl class="notes">
 <dt>定義:</dt>
 <dd><code><a href="MojangsonArray.html#getElementType()">getElementType</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
+<dt>戻り値:</dt>
+<dd>要素の型</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getZero()">
+<h3>getZero</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a></span>&nbsp;<span class="element-name">getZero</span>()</div>
+<div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="MojangsonArray.html#getZero()">MojangsonArray</a></code></span></div>
+<div class="block">配列要素のデフォルト値を返します。</div>
+<dl class="notes">
+<dt>定義:</dt>
+<dd><code><a href="MojangsonArray.html#getZero()">getZero</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
+<dt>戻り値:</dt>
+<dd>多くの場合 0 を表現するオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -281,7 +314,7 @@ loadScripts(document, 'script');</script>
 <dt>定義:</dt>
 <dd><code><a href="MojangsonArray.html#deepCopy()">deepCopy</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>ディープコピーされたオブジェクト。</dd>
+<dd>ディープコピーされたオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -295,7 +328,7 @@ loadScripts(document, 'script');</script>
 <div class="block">構造体が空であるかを返します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>空の場合、真。</dd>
+<dd>空の場合 true</dd>
 </dl>
 </div>
 </section>
@@ -309,7 +342,27 @@ loadScripts(document, 'script');</script>
 <div class="block">構造体の長さを取得します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>長さ。</dd>
+<dd>要素数</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="delete(int)">
+<h3>delete</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
+<div class="block"><span class="description-from-type-label">インタフェースからコピーされた説明:&nbsp;<code><a href="MojangsonIterable.html#delete(int)">MojangsonIterable</a></code></span></div>
+<div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
+<dl class="notes">
+<dt>定義:</dt>
+<dd><code><a href="MojangsonIterable.html#delete(int)">delete</a></code>&nbsp;インタフェース内&nbsp;<code><a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
+<dt>定義:</dt>
+<dd><code><a href="MojangsonArray.html#delete(int)">delete</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
+<dt>パラメータ:</dt>
+<dd><code>index</code> - 添字</dd>
+<dt>戻り値:</dt>
+<dd>削除に成功した場合 true</dd>
 </dl>
 </div>
 </section>
@@ -323,7 +376,7 @@ loadScripts(document, 'script');</script>
 <div class="block">構造体を空にします。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>空にすることができた場合、真。</dd>
+<dd>空にすることができた場合 true</dd>
 </dl>
 </div>
 </section>
@@ -342,13 +395,13 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
 <div class="block"><span class="description-from-type-label">クラスからコピーされた説明:&nbsp;<code><a href="../MojangsonValue.html#toString()">MojangsonValue</a></code></span></div>
-<div class="block">この値の文字列表現を返します。出力はラップされた型が実装するtoString()に依存し、mojangsonフォーマットへの整形は行われません。
-mojangsonフォーマットに整形する場合はMojangsonSerializerを使用してください。</div>
+<div class="block">この値の文字列表現を返します。出力はラップされた型が実装する toString() に依存し、mojangsonフォーマットへの整形は行われません。
+mojangsonフォーマットに整形する場合は MojangsonSerializer を使用してください。</div>
 <dl class="notes">
 <dt>オーバーライド:</dt>
 <dd><code><a href="../MojangsonValue.html#toString()">toString</a></code>&nbsp;クラス内&nbsp;<code><a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;int[]&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>ラップされた値のtoString()の戻り値をそのまま返します。</dd>
+<dd>ラップされたクラスの toString() の実装に依存</dd>
 <dt>関連項目:</dt>
 <dd>
 <ul class="tag-list">
@@ -370,7 +423,7 @@ mojangsonフォーマットに整形する場合はMojangsonSerializerを使用�
 <dt>定義:</dt>
 <dd><code><a href="MojangsonArray.html#toArray()">toArray</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>プリミティブ配列。</dd>
+<dd>プリミティブ配列</dd>
 </dl>
 </div>
 </section>
@@ -386,7 +439,7 @@ mojangsonフォーマットに整形する場合はMojangsonSerializerを使用�
 <dt>定義:</dt>
 <dd><code><a href="MojangsonArray.html#listView()">listView</a></code>&nbsp;クラス内&nbsp;<code><a href="MojangsonArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonArray</a>&lt;int[], <a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;</code></dd>
 <dt>戻り値:</dt>
-<dd>リスト型のビュー。このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。</dd>
+<dd>リスト型のビュー このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。</dd>
 </dl>
 </div>
 </section>
@@ -396,12 +449,12 @@ mojangsonフォーマットに整形する場合はMojangsonSerializerを使用�
 <h3>from</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="MojangsonIntArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonIntArray</a></span>&nbsp;<span class="element-name">from</span><wbr><span class="parameters">(<a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="MojangsonInt.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonInt</a>&gt;&nbsp;list)</span></div>
-<div class="block">MojangsonListからMojangsonIntArrayへの変換を試みます。</div>
+<div class="block">MojangsonList から MojangsonIntArray への変換を試みます。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>list</code> - MojangsonIntのみを要素に持つリスト。</dd>
+<dd><code>list</code> - MojangsonInt のみを要素に持つリスト。</dd>
 <dt>戻り値:</dt>
-<dd>MojangsonIntArray。</dd>
+<dd>MojangsonIntArray</dd>
 </dl>
 </div>
 </section>

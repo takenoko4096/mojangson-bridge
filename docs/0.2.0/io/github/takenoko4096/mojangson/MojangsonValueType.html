@@ -89,12 +89,11 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="type-param-T"><code>T</code> - Javaにおける値。String、Number, Mapなど。</span></dd>
+<dd><span id="type-param-T"><code>T</code> - 値 java.lang.String、java.lang.Number, java.util.Map 等</span></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">MojangsonValueType&lt;T extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">MojangsonValueType&lt;T extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span></div>
 <div class="block">mojangsonにおける型を表現します。</div>
 </div>
@@ -113,7 +112,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Class</a><wbr>&lt;<a href="#type-param-T" title="MojangsonValueType内の型パラメータ">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#clazz" class="member-name-link">clazz</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">クラスオブジェクト。</div>
+<div class="block">クラスオブジェクト</div>
 </div>
 </div>
 </section>
@@ -151,14 +150,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Class</a><wbr>&lt;<a href="#type-param-T" title="MojangsonValueType内の型パラメータ">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMojangsonClass()" class="member-name-link">getMojangsonClass</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">この型の表現に使用されるクラスを返します。</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;?&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(java.lang.Object)" class="member-name-link">of</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">引数に渡されたオブジェクトに対応する型オブジェクトを返します。</div>
+<div class="block">オブジェクトに対応する型を返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="#type-param-T" title="MojangsonValueType内の型パラメータ">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toMojangson(java.lang.Object)" class="member-name-link">toMojangson</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</code></div>
@@ -190,7 +191,7 @@ loadScripts(document, 'script');</script>
 <h3>clazz</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Class</a>&lt;<a href="#type-param-T" title="MojangsonValueType内の型パラメータ">T</a> extends <a href="MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">clazz</span></div>
-<div class="block">クラスオブジェクト。</div>
+<div class="block">クラスオブジェクト</div>
 </div>
 </section>
 </li>
@@ -210,7 +211,7 @@ loadScripts(document, 'script');</script>
 <div class="block">サブクラスのためのコンストラクタ。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>clazz</code> - クラスオブジェクト。</dd>
+<dd><code>clazz</code> - クラスオブジェクト</dd>
 </dl>
 </div>
 </section>
@@ -232,11 +233,11 @@ loadScripts(document, 'script');</script>
 <div class="block">特定の型に対応するオブジェクトのみをmojangson値に変換し、それ以外は例外を投げます。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - nullを含む任意のオブジェクト。</dd>
+<dd><code>value</code> - nullを含む任意のオブジェクト</dd>
 <dt>戻り値:</dt>
-<dd>引数をmojangson構造に変換したオブジェクト。MojangsonValueが渡された場合、引数をそのまま返します。</dd>
+<dd>引数をmojangson構造に変換したオブジェクト MojangsonValue が渡された場合、引数をそのまま返します。</dd>
 <dt>例外:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - 不適切な型の場合。</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - 不適切な型の場合</dd>
 </dl>
 </div>
 </section>
@@ -270,6 +271,11 @@ loadScripts(document, 'script');</script>
 <h3>getMojangsonClass</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Class</a>&lt;<a href="#type-param-T" title="MojangsonValueType内の型パラメータ">T</a>&gt;</span>&nbsp;<span class="element-name">getMojangsonClass</span>()</div>
+<div class="block">この型の表現に使用されるクラスを返します。</div>
+<dl class="notes">
+<dt>戻り値:</dt>
+<dd>クラス</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -290,12 +296,12 @@ loadScripts(document, 'script');</script>
 <h3>of</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;?&gt;</span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;value)</span></div>
-<div class="block">引数に渡されたオブジェクトに対応する型オブジェクトを返します。</div>
+<div class="block">オブジェクトに対応する型を返します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>value</code> - nullを含む任意のオブジェクト。</dd>
+<dd><code>value</code> - null を含む任意のオブジェクト</dd>
 <dt>戻り値:</dt>
-<dd>引数に渡されたオブジェクトの型によるmojangson型。</dd>
+<dd>引数に渡されたオブジェクトの型によるmojangson型</dd>
 </dl>
 </div>
 </section>
