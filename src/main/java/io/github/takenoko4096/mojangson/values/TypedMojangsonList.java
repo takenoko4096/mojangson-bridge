@@ -215,4 +215,8 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     public String toString() {
         return type + super.toString();
     }
+
+    final List<T> __internal__() {
+        return value;
+    }
 }

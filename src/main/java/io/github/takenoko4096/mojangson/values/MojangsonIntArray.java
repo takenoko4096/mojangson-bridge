@@ -1,5 +1,6 @@
 package io.github.takenoko4096.mojangson.values;
 
+import io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 
@@ -26,7 +27,7 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
-    protected MojangsonValueType<MojangsonInt> getElementType() {
+    public MojangsonValueType<MojangsonInt> getElementType() {
         return MojangsonValueTypes.INT;
     }
 
@@ -90,8 +91,15 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
+    protected void updateView(TypedMojangsonList<MojangsonInt> list) {
+        for (int i = 0; i < value.length; i++) {
+            list.__internal__().set(i, MojangsonInt.valueOf(value[i]));
+        }
+    }
+
+    @Override
     public TypedMojangsonList<MojangsonInt> listView() {
-        return getView((arr, ind, val) -> arr[ind] = (int) val);
+        return getView(MojangsonArrayElementValueSetter.INT_ARRAY);
     }
 
     /**

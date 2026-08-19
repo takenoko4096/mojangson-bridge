@@ -69,7 +69,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#getElementType()" tabindex="0">getElementType()</a></li>
 <li><a href="#getZero()" tabindex="0">getZero()</a></li>
 <li><a href="#toArray()" tabindex="0">toArray()</a></li>
-<li><a href="#getView(io.github.takenoko4096.mojangson.MojangsonElementValueSetter)" tabindex="0">getView(MojangsonElementValueSetter)</a></li>
+<li><a href="#updateView(io.github.takenoko4096.mojangson.values.TypedMojangsonList)" tabindex="0">updateView(TypedMojangsonList)</a></li>
+<li><a href="#getView(io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter)" tabindex="0">getView(MojangsonArrayElementValueSetter)</a></li>
 <li><a href="#listView()" tabindex="0">listView()</a></li>
 </ol>
 </li>
@@ -156,13 +157,13 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">構造体の指定の添字番目のオブジェクトを消去します。</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a><wbr>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getElementType()" class="member-name-link">getElementType</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">要素の型を返します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a><wbr>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getView(io.github.takenoko4096.mojangson.MojangsonElementValueSetter)" class="member-name-link">getView</a><wbr>(<a href="../MojangsonElementValueSetter.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonElementValueSetter</a>&lt;<a href="#type-param-T" title="MojangsonArray内の型パラメータ">T</a>&gt;&nbsp;setter)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getView(io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter)" class="member-name-link">getView</a><wbr>(<a href="../MojangsonArrayElementValueSetter.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonArrayElementValueSetter</a>&lt;<a href="#type-param-T" title="MojangsonArray内の型パラメータ">T</a>&gt;&nbsp;setter)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">リスト型のビューを作成します。</div>
 </div>
@@ -186,6 +187,9 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">プリミティブ配列として取得します。</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateView(io.github.takenoko4096.mojangson.values.TypedMojangsonList)" class="member-name-link">updateView</a><wbr>(<a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;&nbsp;list)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -291,7 +295,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <section class="detail" id="getElementType()">
 <h3>getElementType</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</span>&nbsp;<span class="element-name">getElementType</span>()</div>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="../MojangsonValueType.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValueType</a>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</span>&nbsp;<span class="element-name">getElementType</span>()</div>
 <div class="block">要素の型を返します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
@@ -327,14 +331,22 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 </section>
 </li>
 <li>
-<section class="detail" id="getView(io.github.takenoko4096.mojangson.MojangsonElementValueSetter)">
+<section class="detail" id="updateView(io.github.takenoko4096.mojangson.values.TypedMojangsonList)">
+<h3>updateView</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateView</span><wbr><span class="parameters">(<a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;&nbsp;list)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getView(io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter)">
 <h3>getView</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</span>&nbsp;<span class="element-name">getView</span><wbr><span class="parameters">(<a href="../MojangsonElementValueSetter.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonElementValueSetter</a>&lt;<a href="#type-param-T" title="MojangsonArray内の型パラメータ">T</a>&gt;&nbsp;setter)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="TypedMojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">TypedMojangsonList</a>&lt;<a href="#type-param-U" title="MojangsonArray内の型パラメータ">U</a>&gt;</span>&nbsp;<span class="element-name">getView</span><wbr><span class="parameters">(<a href="../MojangsonArrayElementValueSetter.html" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonArrayElementValueSetter</a>&lt;<a href="#type-param-T" title="MojangsonArray内の型パラメータ">T</a>&gt;&nbsp;setter)</span></div>
 <div class="block">リスト型のビューを作成します。</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>setter</code> - セッター関数 第一引数の配列の第二引数の添字に対応する位置に対して第三引数を値を代入することが期待されます。</dd>
+<dd><code>setter</code> - セッター関数</dd>
 <dt>戻り値:</dt>
 <dd>リスト型のビュー</dd>
 </dl>
@@ -349,7 +361,7 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="block">この配列へのビューを返します。</div>
 <dl class="notes">
 <dt>戻り値:</dt>
-<dd>リスト型のビュー このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。</dd>
+<dd>リスト型のビュー このリストに対する変更は配列にも反映されます。なお一部の操作 (add) は整合性の確保のため禁じられています。</dd>
 </dl>
 </div>
 </section>

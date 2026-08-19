@@ -1,5 +1,6 @@
 package io.github.takenoko4096.mojangson.values;
 
+import io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 
@@ -26,7 +27,7 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
-    protected MojangsonValueType<MojangsonLong> getElementType() {
+    public MojangsonValueType<MojangsonLong> getElementType() {
         return MojangsonValueTypes.LONG;
     }
 
@@ -90,8 +91,15 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
+    protected void updateView(TypedMojangsonList<MojangsonLong> list) {
+        for (int i = 0; i < value.length; i++) {
+            list.__internal__().set(i, MojangsonLong.valueOf(value[i]));
+        }
+    }
+
+    @Override
     public TypedMojangsonList<MojangsonLong> listView() {
-        return getView((arr, ind, val) -> arr[ind] = (long) val);
+        return getView(MojangsonArrayElementValueSetter.LONG_ARRAY);
     }
 
     /**

@@ -1,5 +1,6 @@
 package io.github.takenoko4096.mojangson.values;
 
+import io.github.takenoko4096.mojangson.MojangsonArrayElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 
@@ -26,7 +27,7 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
-    protected MojangsonValueType<MojangsonByte> getElementType() {
+    public MojangsonValueType<MojangsonByte> getElementType() {
         return MojangsonValueTypes.BYTE;
     }
 
@@ -90,8 +91,15 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
+    protected void updateView(TypedMojangsonList<MojangsonByte> list) {
+        for (int i = 0; i < value.length; i++) {
+            list.__internal__().set(i, MojangsonByte.valueOf(value[i]));
+        }
+    }
+
+    @Override
     public TypedMojangsonList<MojangsonByte> listView() {
-        return getView((arr, ind, val) -> arr[ind] = (byte) val);
+        return getView(MojangsonArrayElementValueSetter.BYTE_ARRAY);
     }
 
     /**
