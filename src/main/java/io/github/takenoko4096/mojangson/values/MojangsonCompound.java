@@ -61,7 +61,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     /**
-     * キーに紐づけられた値を返します
+     * キーに紐づけられた値を返します。
      * @param key キー
      * @param type 期待する型
      * @return キーに紐づけられた値
