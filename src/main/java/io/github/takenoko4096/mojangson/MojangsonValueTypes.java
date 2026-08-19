@@ -1,7 +1,6 @@
 package io.github.takenoko4096.mojangson;
 
 import io.github.takenoko4096.mojangson.values.*;
-import io.github.takenoko4096.mojangson.values.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -163,10 +162,9 @@ public final class MojangsonValueTypes {
             else if (value instanceof Map<?,?> map) {
                 final Map<String, MojangsonValue<?>> compound = new HashMap<>();
 
-                for (final Object k : map.keySet()) {
-                    if (k instanceof String strKey) {
-                        final Object val = map.get(strKey);
-                        compound.put(strKey, get(val).toMojangson(val));
+                for (final Object key : map.keySet()) {
+                    if (key instanceof String string) {
+                        compound.put(string, MojangsonValue.valueOf(map.get(string)));
                     }
                     else {
                         throw new IllegalArgumentException("A key of Map is not name string");
@@ -186,25 +184,20 @@ public final class MojangsonValueTypes {
     public static final MojangsonValueType<MojangsonList> LIST = new MojangsonValueType<>(MojangsonList.class) {
         @Override
         public MojangsonList toMojangson(@Nullable Object value) {
-            switch (value) {
-                case MojangsonList mojangsonList -> {
-                    return mojangsonList;
-                }
-                case TypedMojangsonList<?> typedMojangsonList -> {
-                    return typedMojangsonList.untyped();
-                }
+            return switch (value) {
+                case MojangsonList untyped -> untyped;
+                case TypedMojangsonList<?> typed -> typed.untyped();
                 case Collection<?> iterable -> {
                     final List<MojangsonValue<?>> listOfMojangson = new ArrayList<>();
 
                     for (final Object element : iterable) {
-                        listOfMojangson.add(get(element).toMojangson(element));
+                        listOfMojangson.add(MojangsonValue.valueOf(element));
                     }
 
-                    return new MojangsonList(listOfMojangson);
+                    yield new MojangsonList(listOfMojangson);
                 }
-                case null, default ->
-                    throw new IllegalArgumentException("List<?>型でない値はMojangsonListに変換できません");
-            }
+                case null, default -> throw new IllegalArgumentException("List<?>型でない値はMojangsonListに変換できません");
+            };
         }
     };
 

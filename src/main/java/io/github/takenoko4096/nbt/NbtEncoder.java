@@ -114,7 +114,7 @@ public final class NbtEncoder {
             final MojangsonValueType<?> type = compound.getTypeOf(key);
             stream.writeByte(typeId(type));
             string(MojangsonString.valueOf(key));
-            value(compound.get(key, type));
+            value(compound.getOrThrow(key, type));
         }
         stream.writeByte(TAG_END);
     }

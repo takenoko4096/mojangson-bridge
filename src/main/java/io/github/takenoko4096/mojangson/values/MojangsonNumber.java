@@ -71,6 +71,6 @@ public abstract class MojangsonNumber<T extends Number> extends MojangsonPrimiti
      * @return MojangsonNumber。
      */
     public static MojangsonNumber<?> upcastValueOf(Number value) {
-        return (MojangsonNumber<?>) MojangsonValueType.get(value).toMojangson(value);
+        return (MojangsonNumber<?>) MojangsonValueType.of(value).toMojangson(value);
     }
 }

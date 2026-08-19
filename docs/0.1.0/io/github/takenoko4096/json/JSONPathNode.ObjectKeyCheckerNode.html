@@ -59,8 +59,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">メソッドの概要</a></li>
 <li><a href="#method-detail" tabindex="0">メソッドの詳細</a>
 <ol class="toc-list">
-<li><a href="#get(io.github.takenoko4096.json.values.JSONObject)" tabindex="0">get(JSONObject)</a></li>
-<li><a href="#access(io.github.takenoko4096.json.values.JSONObject,java.util.function.BiFunction)" tabindex="0">access(JSONObject, BiFunction)</a></li>
+<li><a href="#get(io.github.takenoko4096.json.values.JsonObject)" tabindex="0">get(JSONObject)</a></li>
+<li><a href="#access(io.github.takenoko4096.json.values.JsonObject,java.util.function.BiFunction)" tabindex="0">access(JSONObject, BiFunction)</a></li>
 <li><a href="#copy()" tabindex="0">copy()</a></li>
 <li><a href="#toString()" tabindex="0">toString()</a></li>
 </ol>
@@ -73,8 +73,8 @@ loadScripts(document, 'script');</script>
 <h1 title="クラス JSONPathNode.ObjectKeyCheckerNode" class="title">クラス JSONPathNode.ObjectKeyCheckerNode</h1>
 </div>
 <div class="inheritance" title="継承ツリー"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="JSONPathNode.html" title="io.github.takenoko4096.json内のクラス">io.github.takenoko4096.json.JSONPathNode</a>&lt;<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>, <a href="JSONPathNode.Pair.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&gt;&gt;
-<div class="inheritance">io.github.takenoko4096.json.JSONPathNode.ObjectKeyCheckerNode</div>
+<div class="inheritance"><a href="JSONPathNode.html" title="io.github.takenoko4096.json内のクラス">io.github.takenoko4096.json.JsonPathNode</a>&lt;<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>, <a href="JSONPathNode.Pair.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&gt;&gt;
+<div class="inheritance">io.github.takenoko4096.json.JsonPathNode.ObjectKeyCheckerNode</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
@@ -95,7 +95,7 @@ loadScripts(document, 'script');</script>
 <section class="nested-class-summary" id="nested-class-summary">
 <h2>ネストされたクラスの概要</h2>
 <div class="inherited-list">
-<h3 id="nested-classes-inherited-from-class-io.github.takenoko4096.json.JSONPathNode">クラスから継承されたネストされたクラス/インタフェース&nbsp;<a href="JSONPathNode.html#nested-class-summary" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a></h3>
+<h3 id="nested-classes-inherited-from-class-io.github.takenoko4096.json.JsonPathNode">クラスから継承されたネストされたクラス/インタフェース&nbsp;<a href="JSONPathNode.html#nested-class-summary" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a></h3>
 <code><a href="JSONPathNode.ArrayIndexFinderNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.ArrayIndexFinderNode</a>, <a href="JSONPathNode.ArrayIndexNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.ArrayIndexNode</a>, <a href="JSONPathNode.ObjectKeyCheckerNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.ObjectKeyCheckerNode</a>, <a href="JSONPathNode.ObjectKeyNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.ObjectKeyNode</a>, <a href="JSONPathNode.Pair.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.Pair</a>&lt;A,<wbr>B&gt;</code></div>
 </section>
 </li>
@@ -104,7 +104,7 @@ loadScripts(document, 'script');</script>
 <section class="field-summary" id="field-summary">
 <h2>フィールドの概要</h2>
 <div class="inherited-list">
-<h3 id="fields-inherited-from-class-io.github.takenoko4096.json.JSONPathNode">クラスから継承されたフィールド&nbsp;<a href="JSONPathNode.html#field-summary" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a></h3>
+<h3 id="fields-inherited-from-class-io.github.takenoko4096.json.JsonPathNode">クラスから継承されたフィールド&nbsp;<a href="JSONPathNode.html#field-summary" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a></h3>
 <code><a href="JSONPathNode.html#child">child</a>, <a href="JSONPathNode.html#parameter">parameter</a></code></div>
 </section>
 </li>
@@ -120,14 +120,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">メソッド</div>
 <div class="table-header col-last">説明</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;U&gt;&nbsp;@Nullable U</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.json.values.JSONObject,java.util.function.BiFunction)" class="member-name-link">access</a><wbr>(<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&nbsp;structure,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.json.values.JsonObject,java.util.function.BiFunction)" class="member-name-link">access</a><wbr>(<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&nbsp;structure,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>, @Nullable U&gt;&nbsp;function)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="JSONPathNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a><wbr>&lt;<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>, <a href="JSONPathNode.Pair.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode.Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, <a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copy()" class="member-name-link">copy</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(io.github.takenoko4096.json.values.JSONObject)" class="member-name-link">get</a><wbr>(<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&nbsp;structure)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(io.github.takenoko4096.json.values.JsonObject)" class="member-name-link">get</a><wbr>(<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&nbsp;structure)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -150,7 +150,7 @@ loadScripts(document, 'script');</script>
 <h2>メソッドの詳細</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="get(io.github.takenoko4096.json.values.JSONObject)">
+<section class="detail" id="get(io.github.takenoko4096.json.values.JsonObject)">
 <h3>get</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a></span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&nbsp;structure)</span></div>
@@ -162,7 +162,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="access(io.github.takenoko4096.json.values.JSONObject,java.util.function.BiFunction)">
+<section class="detail" id="access(io.github.takenoko4096.json.values.JsonObject,java.util.function.BiFunction)">
 <h3>access</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="values/JSONObject.html" title="io.github.takenoko4096.json.values内のクラス">JSONObject</a>&nbsp;structure,

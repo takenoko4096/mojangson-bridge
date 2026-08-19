@@ -68,7 +68,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#has(int)" tabindex="0">has(int)</a></li>
 <li><a href="#isEmpty()" tabindex="0">isEmpty()</a></li>
 <li><a href="#getTypeAt(int)" tabindex="0">getTypeAt(int)</a></li>
-<li><a href="#get(int,io.github.takenoko4096.json.JSONValueType)" tabindex="0">get(int, JSONValueType)</a></li>
+<li><a href="#get(int,io.github.takenoko4096.json.JsonValueType)" tabindex="0">get(int, JSONValueType)</a></li>
 <li><a href="#add(int,java.lang.Object)" tabindex="0">add(int, Object)</a></li>
 <li><a href="#add(java.lang.Object)" tabindex="0">add(Object)</a></li>
 <li><a href="#set(int,java.lang.Object)" tabindex="0">set(int, Object)</a></li>
@@ -78,9 +78,9 @@ loadScripts(document, 'script');</script>
 <li><a href="#iterator()" tabindex="0">iterator()</a></li>
 <li><a href="#asList()" tabindex="0">asList()</a></li>
 <li><a href="#copy()" tabindex="0">copy()</a></li>
-<li><a href="#isSuperOf(io.github.takenoko4096.json.values.JSONArray)" tabindex="0">isSuperOf(JSONArray)</a></li>
-<li><a href="#isArrayOf(io.github.takenoko4096.json.JSONValueType)" tabindex="0">isArrayOf(JSONValueType)</a></li>
-<li><a href="#typed(io.github.takenoko4096.json.JSONValueType)" tabindex="0">typed(JSONValueType)</a></li>
+<li><a href="#isSuperOf(io.github.takenoko4096.json.values.JsonArray)" tabindex="0">isSuperOf(JSONArray)</a></li>
+<li><a href="#isArrayOf(io.github.takenoko4096.json.JsonValueType)" tabindex="0">isArrayOf(JSONValueType)</a></li>
+<li><a href="#typed(io.github.takenoko4096.json.JsonValueType)" tabindex="0">typed(JSONValueType)</a></li>
 <li><a href="#valueOf(java.lang.Iterable)" tabindex="0">valueOf(Iterable)</a></li>
 </ol>
 </li>
@@ -92,8 +92,8 @@ loadScripts(document, 'script');</script>
 <h1 title="クラス JSONArray" class="title">クラス JSONArray</h1>
 </div>
 <div class="inheritance" title="継承ツリー"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">io.github.takenoko4096.json.JSONValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;&gt;
-<div class="inheritance">io.github.takenoko4096.json.values.JSONArray</div>
+<div class="inheritance"><a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">io.github.takenoko4096.json.JsonValue</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="java.util内のクラスまたはインタフェース" class="external-link">List</a>&lt;<a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;&gt;
+<div class="inheritance">io.github.takenoko4096.json.values.JsonArray</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
@@ -117,7 +117,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 <section class="field-summary" id="field-summary">
 <h2>フィールドの概要</h2>
 <div class="inherited-list">
-<h3 id="fields-inherited-from-class-io.github.takenoko4096.json.JSONValue">クラスから継承されたフィールド&nbsp;<a href="../JSONValue.html#field-summary" title="io.github.takenoko4096.json内のクラス">JSONValue</a></h3>
+<h3 id="fields-inherited-from-class-io.github.takenoko4096.json.JsonValue">クラスから継承されたフィールド&nbsp;<a href="../JSONValue.html#field-summary" title="io.github.takenoko4096.json内のクラス">JSONValue</a></h3>
 <code><a href="../JSONValue.html#value">value</a></code></div>
 </section>
 </li>
@@ -183,7 +183,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 <div class="block">構造体の指定の添え字番目のオブジェクトを消去します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;<br>T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int,io.github.takenoko4096.json.JSONValueType)" class="member-name-link">get</a><wbr>(int&nbsp;index,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int,io.github.takenoko4096.json.JsonValueType)" class="member-name-link">get</a><wbr>(int&nbsp;index,
  <a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;T&gt;&nbsp;type)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">引数に渡されたインデックスに格納された値を返します。</div>
@@ -204,7 +204,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 <div class="block">構造体の指定の添え字番目が存在するかどうかを返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isArrayOf(io.github.takenoko4096.json.JSONValueType)" class="member-name-link">isArrayOf</a><wbr>(<a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;?&gt;&nbsp;type)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isArrayOf(io.github.takenoko4096.json.JsonValueType)" class="member-name-link">isArrayOf</a><wbr>(<a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;?&gt;&nbsp;type)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">この配列が引数に渡された型のみを要素に持つ配列であるかを返します。</div>
 </div>
@@ -214,7 +214,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 <div class="block">構造体が空であるかを返します。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSuperOf(io.github.takenoko4096.json.values.JSONArray)" class="member-name-link">isSuperOf</a><wbr>(<a href="JSONArray.html" title="io.github.takenoko4096.json.values内のクラス">JSONArray</a>&nbsp;other)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSuperOf(io.github.takenoko4096.json.values.JsonArray)" class="member-name-link">isSuperOf</a><wbr>(<a href="JSONArray.html" title="io.github.takenoko4096.json.values内のクラス">JSONArray</a>&nbsp;other)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">引数に渡された構造体がこの構造体の部分構造であるかを返します。</div>
 </div>
@@ -233,7 +233,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 <div class="block">引数に渡されたインデックスの値を上書きします。</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;<br><a href="TypedJSONArray.html" title="io.github.takenoko4096.json.values内のクラス">TypedJSONArray</a><wbr>&lt;T&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#typed(io.github.takenoko4096.json.JSONValueType)" class="member-name-link">typed</a><wbr>(<a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;T&gt;&nbsp;type)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#typed(io.github.takenoko4096.json.JsonValueType)" class="member-name-link">typed</a><wbr>(<a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;T&gt;&nbsp;type)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">この配列が引数に渡された型のみを要素に持つ配列であれば、その型の型付き配列に変換して返します。</div>
 </div>
@@ -246,7 +246,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-io.github.takenoko4096.json.JSONValue">クラスから継承されたメソッド&nbsp;<a href="../JSONValue.html#method-summary" title="io.github.takenoko4096.json内のクラス">JSONValue</a></h3>
+<h3 id="methods-inherited-from-class-io.github.takenoko4096.json.JsonValue">クラスから継承されたメソッド&nbsp;<a href="../JSONValue.html#method-summary" title="io.github.takenoko4096.json内のクラス">JSONValue</a></h3>
 <code><a href="../JSONValue.html#equals(java.lang.Object)" title="equals(Object)">equals</a>, <a href="../JSONValue.html#hashCode()" title="hashCode()">hashCode</a>, <a href="../JSONValue.html#toString()" title="toString()">toString</a>, <a href="../JSONValue.html#valueOf(java.lang.Object)" title="valueOf(Object)">valueOf</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">クラスから継承されたメソッド&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#method-summary" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></h3>
@@ -366,7 +366,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 </section>
 </li>
 <li>
-<section class="detail" id="get(int,io.github.takenoko4096.json.JSONValueType)">
+<section class="detail" id="get(int,io.github.takenoko4096.json.JsonValueType)">
 <h3>get</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;index,
@@ -375,7 +375,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 <div class="block">引数に渡されたインデックスに格納された値を返します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="get(int,io.github.takenoko4096.json.JSONValueType)-type-param-T"><code>T</code> - 期待する型。</span></dd>
+<dd><span id="get(int,io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 期待する型。</span></dd>
 <dt>パラメータ:</dt>
 <dd><code>index</code> - インデックス。</dd>
 <dd><code>type</code> - 期待する型。</dd>
@@ -532,7 +532,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 </section>
 </li>
 <li>
-<section class="detail" id="isSuperOf(io.github.takenoko4096.json.values.JSONArray)">
+<section class="detail" id="isSuperOf(io.github.takenoko4096.json.values.JsonArray)">
 <h3>isSuperOf</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isSuperOf</span><wbr><span class="parameters">(<a href="JSONArray.html" title="io.github.takenoko4096.json.values内のクラス">JSONArray</a>&nbsp;other)</span></div>
@@ -547,7 +547,7 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 </section>
 </li>
 <li>
-<section class="detail" id="isArrayOf(io.github.takenoko4096.json.JSONValueType)">
+<section class="detail" id="isArrayOf(io.github.takenoko4096.json.JsonValueType)">
 <h3>isArrayOf</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isArrayOf</span><wbr><span class="parameters">(<a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;?&gt;&nbsp;type)</span></div>
@@ -562,14 +562,14 @@ implements <a href="JSONIterable.html" title="io.github.takenoko4096.json.values
 </section>
 </li>
 <li>
-<section class="detail" id="typed(io.github.takenoko4096.json.JSONValueType)">
+<section class="detail" id="typed(io.github.takenoko4096.json.JsonValueType)">
 <h3>typed</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="../JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type"><a href="TypedJSONArray.html" title="io.github.takenoko4096.json.values内のクラス">TypedJSONArray</a>&lt;T&gt;</span>&nbsp;<span class="element-name">typed</span><wbr><span class="parameters">(<a href="../JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;T&gt;&nbsp;type)</span></div>
 <div class="block">この配列が引数に渡された型のみを要素に持つ配列であれば、その型の型付き配列に変換して返します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="typed(io.github.takenoko4096.json.JSONValueType)-type-param-T"><code>T</code> - 任意の型。</span></dd>
+<dd><span id="typed(io.github.takenoko4096.json.JsonValueType)-type-param-T"><code>T</code> - 任意の型。</span></dd>
 <dt>パラメータ:</dt>
 <dd><code>type</code> - 任意の型。</dd>
 <dt>戻り値:</dt>

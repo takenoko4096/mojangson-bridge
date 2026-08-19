@@ -47,6 +47,10 @@ public abstract class MojangsonValueType<T extends MojangsonValue<?>> {
         return Objects.hash(clazz);
     }
 
+    public Class<T> getMojangsonClass() {
+        return clazz;
+    }
+
     @Override
     public String toString() {
         return clazz.getSimpleName();
@@ -57,29 +61,37 @@ public abstract class MojangsonValueType<T extends MojangsonValue<?>> {
      * @param value nullを含む任意のオブジェクト。
      * @return 引数に渡されたオブジェクトの型によるmojangson型。
      */
-    public static MojangsonValueType<?> get(@Nullable Object value) {
+    public static MojangsonValueType<?> of(@Nullable Object value) {
         return switch (value) {
-            case Boolean ignored -> MojangsonValueTypes.BYTE;
-            case Byte ignored -> MojangsonValueTypes.BYTE;
-            case Short ignored -> MojangsonValueTypes.SHORT;
-            case Integer ignored -> MojangsonValueTypes.INT;
-            case Long ignored -> MojangsonValueTypes.LONG;
-            case Float ignored -> MojangsonValueTypes.FLOAT;
-            case Double ignored -> MojangsonValueTypes.DOUBLE;
-            case Character ignored -> MojangsonValueTypes.STRING;
-            case String ignored -> MojangsonValueTypes.STRING;
-            case byte[] ignored -> MojangsonValueTypes.BYTE_ARRAY;
-            case int[] ignored -> MojangsonValueTypes.INT_ARRAY;
-            case long[] ignored -> MojangsonValueTypes.LONG_ARRAY;
+            case Boolean _, Byte _ -> MojangsonValueTypes.BYTE;
+            case Short _ -> MojangsonValueTypes.SHORT;
+            case Integer _ -> MojangsonValueTypes.INT;
+            case Long _ -> MojangsonValueTypes.LONG;
+            case Float _ -> MojangsonValueTypes.FLOAT;
+            case Double _ -> MojangsonValueTypes.DOUBLE;
+            case Character _, String _ -> MojangsonValueTypes.STRING;
+            case byte[] _ -> MojangsonValueTypes.BYTE_ARRAY;
+            case int[] _ -> MojangsonValueTypes.INT_ARRAY;
+            case long[] _ -> MojangsonValueTypes.LONG_ARRAY;
             case Map<?, ?> v -> {
-                MojangsonValueTypes.COMPOUND.toMojangson(v);
-                yield MojangsonValueTypes.COMPOUND;
+                try {
+                    MojangsonValueTypes.COMPOUND.toMojangson(v);
+                    yield MojangsonValueTypes.COMPOUND;
+                }
+                catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("対応していない型の値(" + value.getClass().getName() + "型)が渡されました", e);
+                }
             }
             case Collection<?> v -> {
-                MojangsonValueTypes.LIST.toMojangson(v);
-                yield MojangsonValueTypes.LIST;
+                try {
+                    MojangsonValueTypes.LIST.toMojangson(v);
+                    yield MojangsonValueTypes.LIST;
+                }
+                catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("対応していない型の値(" + value.getClass().getName() + "型)が渡されました", e);
+                }
             }
-            case MojangsonValue<?> v -> get(v.value);
+            case MojangsonValue<?> v -> of(v.value);
             case null -> MojangsonValueTypes.NULL;
             default -> throw new IllegalArgumentException("対応していない型の値(" + value.getClass().getName() + "型)が渡されました");
         };

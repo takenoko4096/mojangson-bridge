@@ -4,10 +4,12 @@ import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 型付きのMojangsonList。このクラスにラップされる要素はすべてT型であることが確約されます。
@@ -29,8 +31,8 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         for (int i = 0; i < length(); i++) {
             final T element = value.get(i);
 
-            if (!MojangsonValueType.get(element).equals(type)) {
-                throw new IllegalArgumentException("TypedMojangsonListのインスタンス化に失敗しました: インデックス " + i + " は　" + type + " 型ではありません: " + MojangsonValueType.get(element) + " 型の " + element + " です");
+            if (!MojangsonValueType.of(element).equals(type)) {
+                throw new IllegalArgumentException("TypedMojangsonListのインスタンス化に失敗しました: インデックス " + i + " は　" + type + " 型ではありません: " + MojangsonValueType.of(element) + " 型の " + element + " です");
             }
         }
     }
@@ -46,6 +48,10 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     @Override
     public MojangsonValueType<?> getType() {
         return MojangsonValueTypes.LIST;
+    }
+
+    public MojangsonValueType<T> getElementType() {
+        return type;
     }
 
     @Override
@@ -66,13 +72,24 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
      * @return インデックスに格納された値。
      * @throws IllegalArgumentException インデックスが存在しない場合。
      */
-    public T get(int index) throws IllegalArgumentException {
+    public T getOrThrow(int index) throws IllegalArgumentException {
         if (!has(index)) {
             throw new IllegalArgumentException("インデックス '" + index + "' は存在しません");
         }
 
         if (index >= 0) return value.get(index);
         else return value.get(value.size() + index);
+    }
+
+    public @Nullable T getOrNull(int index) {
+        if (has(index)) {
+            return getOrThrow(index);
+        }
+        else return null;
+    }
+
+    public T getOrDefault(int index, T defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(index), defaultValue);
     }
 
     /**
@@ -141,9 +158,13 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         return value.size();
     }
 
+    public List<T> toList() {
+        return List.copyOf(value);
+    }
+
     @Override
-    public TypedMojangsonList<T> copy() {
-        return untyped().copy().typed(type);
+    public TypedMojangsonList<T> deepCopy() {
+        return untyped().deepCopy().typed(type);
     }
 
     @Override
@@ -151,7 +172,7 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
         final List<T> list = new ArrayList<>();
 
         for (int i = 0; i < this.value.size(); i++) {
-            list.add(get(i));
+            list.add(getOrThrow(i));
         }
 
         return list.iterator();
@@ -164,7 +185,7 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
     public MojangsonList untyped() {
         final MojangsonList list = new MojangsonList();
         for (int i = 0; i < length(); i++) {
-            list.add(get(i));
+            list.add(getOrThrow(i));
         }
         return list;
     }

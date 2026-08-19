@@ -56,7 +56,7 @@ public class MojangsonSerializer {
             final String key = keys[i];
 
             try {
-                final Object childValue = compound.get(key, compound.getTypeOf(key));
+                final Object childValue = compound.getOrThrow(key, compound.getTypeOf(key));
                 stringBuilder
                     .append(LINE_BREAK)
                     .append(indentation(indentation + 1))
@@ -222,7 +222,7 @@ public class MojangsonSerializer {
      * mojangson構造を文字列としてシリアライズします。
      * インデントの空白の文字数には4を使用します。
      * @param structure mojangson構造体。
-     * @param asJson trueの場合、mojangson形式でシリアライズされます。
+     * @param asJson trueの場合、json形式でシリアライズされます。
      * @return 改行・空白文字によるインデントを含む文字列。
      */
     public static String structure(MojangsonStructure structure, boolean asJson) throws MojangsonSerializationException {

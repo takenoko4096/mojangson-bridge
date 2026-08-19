@@ -28,7 +28,12 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
-    public MojangsonLongArray copy() {
+    protected MojangsonValueType<MojangsonLong> getElementType() {
+        return MojangsonValueTypes.LONG;
+    }
+
+    @Override
+    public MojangsonLongArray deepCopy() {
         return from(listView());
     }
 
@@ -74,7 +79,7 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
-    public MojangsonList listView() {
+    public TypedMojangsonList<MojangsonLong> listView() {
         return getView((arr, ind, val) -> arr[ind] = (long) val);
     }
 
@@ -83,15 +88,11 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
      * @param list MojangsonLongのみを要素に持つリスト。
      * @return MojangsonLongArray。
      */
-    public static MojangsonLongArray from(MojangsonList list) {
+    public static MojangsonLongArray from(TypedMojangsonList<MojangsonLong> list) {
         final long[] longs = new long[list.length()];
 
         for (int i = 0; i < list.length(); i++) {
-            if (!list.getTypeAt(i).equals(MojangsonValueTypes.LONG)) {
-                throw new IllegalArgumentException("キャストに失敗しました");
-            }
-
-            longs[i] = list.get(i, MojangsonValueTypes.LONG).longValue();
+            longs[i] = list.getOrThrow(i).longValue();
         }
 
         return new MojangsonLongArray(longs);

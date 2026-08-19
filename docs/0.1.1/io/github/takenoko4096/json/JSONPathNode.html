@@ -65,12 +65,12 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#constructor-detail" tabindex="0">コンストラクタの詳細</a>
 <ol class="toc-list">
-<li><a href="#%3Cinit%3E(T,io.github.takenoko4096.json.JSONPathNode)" tabindex="0">JSONPathNode(T, JSONPathNode)</a></li>
+<li><a href="#%3Cinit%3E(T,io.github.takenoko4096.json.JsonPathNode)" tabindex="0">JSONPathNode(T, JSONPathNode)</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">メソッドの詳細</a>
 <ol class="toc-list">
-<li><a href="#access(S,io.github.takenoko4096.json.JSONLocationAccessProvider)" tabindex="0">access(S, JSONLocationAccessProvider)</a></li>
+<li><a href="#access(S,io.github.takenoko4096.json.JsonLocationAccessProvider)" tabindex="0">access(S, JSONLocationAccessProvider)</a></li>
 <li><a href="#copy()" tabindex="0">copy()</a></li>
 <li><a href="#toString()" tabindex="0">toString()</a></li>
 </ol>
@@ -83,7 +83,7 @@ loadScripts(document, 'script');</script>
 <h1 title="クラス JSONPathNode" class="title">クラス JSONPathNode&lt;S extends <a href="values/JSONStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JSONStructure</a>, T&gt;</h1>
 </div>
 <div class="inheritance" title="継承ツリー"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">java.lang.Object</a>
-<div class="inheritance">io.github.takenoko4096.json.JSONPathNode&lt;S,<wbr>T&gt;</div>
+<div class="inheritance">io.github.takenoko4096.json.JsonPathNode&lt;S,<wbr>T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -172,7 +172,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">コンストラクタ</div>
 <div class="table-header col-last">説明</div>
 <div class="col-first even-row-color"><code>protected </code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(T,io.github.takenoko4096.json.JSONPathNode)" class="member-name-link">JSONPathNode</a><wbr>(<a href="#type-param-T" title="JSONPathNode内の型パラメータ">T</a>&nbsp;parameter,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(T,io.github.takenoko4096.json.JsonPathNode)" class="member-name-link">JSONPathNode</a><wbr>(<a href="#type-param-T" title="JSONPathNode内の型パラメータ">T</a>&nbsp;parameter,
  @Nullable <a href="JSONPathNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a>&lt;?,<wbr>?&gt;&nbsp;child)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -190,7 +190,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">メソッド</div>
 <div class="table-header col-last">説明</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;U&gt;&nbsp;@Nullable U</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#access(S,io.github.takenoko4096.json.JSONLocationAccessProvider)" class="member-name-link">access</a><wbr>(<a href="#type-param-S" title="JSONPathNode内の型パラメータ">S</a>&nbsp;structure,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#access(S,io.github.takenoko4096.json.JsonLocationAccessProvider)" class="member-name-link">access</a><wbr>(<a href="#type-param-S" title="JSONPathNode内の型パラメータ">S</a>&nbsp;structure,
  <a href="JSONLocationAccessProvider.html" title="io.github.takenoko4096.json内のインタフェース">JSONLocationAccessProvider</a>&lt;<a href="#type-param-S" title="JSONPathNode内の型パラメータ">S</a>,<wbr>U&gt;&nbsp;function)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。</div>
@@ -247,8 +247,8 @@ loadScripts(document, 'script');</script>
 <h2>コンストラクタの詳細</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(T,io.github.takenoko4096.json.JSONPathNode)">
-<h3 id="&lt;init&gt;(java.lang.Object,io.github.takenoko4096.json.JSONPathNode)">JSONPathNode</h3>
+<section class="detail" id="&lt;init&gt;(T,io.github.takenoko4096.json.JsonPathNode)">
+<h3 id="&lt;init&gt;(java.lang.Object,io.github.takenoko4096.json.JsonPathNode)">JSONPathNode</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">JSONPathNode</span><wbr><span class="parameters">(<a href="#type-param-T" title="JSONPathNode内の型パラメータ">T</a>&nbsp;parameter,
  @Nullable <a href="JSONPathNode.html" title="io.github.takenoko4096.json内のクラス">JSONPathNode</a>&lt;?,<wbr>?&gt;&nbsp;child)</span></div>
@@ -264,8 +264,8 @@ loadScripts(document, 'script');</script>
 <h2>メソッドの詳細</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="access(S,io.github.takenoko4096.json.JSONLocationAccessProvider)">
-<h3 id="access(io.github.takenoko4096.json.values.JSONStructure,io.github.takenoko4096.json.JSONLocationAccessProvider)">access</h3>
+<section class="detail" id="access(S,io.github.takenoko4096.json.JsonLocationAccessProvider)">
+<h3 id="access(io.github.takenoko4096.json.values.JsonStructure,io.github.takenoko4096.json.JsonLocationAccessProvider)">access</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="#type-param-S" title="JSONPathNode内の型パラメータ">S</a>&nbsp;structure,
  <a href="JSONLocationAccessProvider.html" title="io.github.takenoko4096.json内のインタフェース">JSONLocationAccessProvider</a>&lt;<a href="#type-param-S" title="JSONPathNode内の型パラメータ">S</a>,<wbr>U&gt;&nbsp;function)</span>
@@ -273,7 +273,7 @@ loadScripts(document, 'script');</script>
 <div class="block">第一引数に渡された構造体そのまま、及びこのノードに対応する位置にアクセスするためのキーとなる値の2つを引数に取るラムダを受け取ります。各サブクラスにてチェックや検索等その他の処理が事前に行われることがあります。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="access(S,io.github.takenoko4096.json.JSONLocationAccessProvider)-type-param-U"><code>U</code> - コールバックの戻り値の型</span></dd>
+<dd><span id="access(S,io.github.takenoko4096.json.JsonLocationAccessProvider)-type-param-U"><code>U</code> - コールバックの戻り値の型</span></dd>
 <dt>パラメータ:</dt>
 <dd><code>structure</code> - 任意の構造体。</dd>
 <dd><code>function</code> - コールバック。</dd>

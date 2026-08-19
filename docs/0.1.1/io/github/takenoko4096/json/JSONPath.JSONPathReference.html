@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#has()" tabindex="0">has()</a></li>
 <li><a href="#getType()" tabindex="0">getType()</a></li>
-<li><a href="#get(io.github.takenoko4096.json.JSONValueType)" tabindex="0">get(JSONValueType)</a></li>
+<li><a href="#get(io.github.takenoko4096.json.JsonValueType)" tabindex="0">get(JSONValueType)</a></li>
 <li><a href="#set(java.lang.Object)" tabindex="0">set(Object)</a></li>
 <li><a href="#delete()" tabindex="0">delete()</a></li>
 </ol>
@@ -85,7 +85,7 @@ loadScripts(document, 'script');</script>
 <h1 title="クラス JSONPath.JSONPathReference" class="title">クラス JSONPath.JSONPathReference&lt;S extends <a href="values/JSONStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JSONStructure</a>, T&gt;</h1>
 </div>
 <div class="inheritance" title="継承ツリー"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">java.lang.Object</a>
-<div class="inheritance">io.github.takenoko4096.json.JSONPath.JSONPathReference&lt;S,<wbr>T&gt;</div>
+<div class="inheritance">io.github.takenoko4096.json.JsonPath.JsonPathReference&lt;S,<wbr>T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -161,7 +161,7 @@ loadScripts(document, 'script');</script>
 <div class="block">パスの参照先の値を削除します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;U extends <a href="JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;<br>U</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#get(io.github.takenoko4096.json.JSONValueType)" class="member-name-link">get</a><wbr>(<a href="JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;U&gt;&nbsp;type)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#get(io.github.takenoko4096.json.JsonValueType)" class="member-name-link">get</a><wbr>(<a href="JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;U&gt;&nbsp;type)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">パスの参照先に格納された値を取得します。</div>
 </div>
@@ -225,7 +225,7 @@ loadScripts(document, 'script');</script>
 <ul class="member-list">
 <li>
 <section class="detail" id="&lt;init&gt;(S,T)">
-<h3 id="&lt;init&gt;(io.github.takenoko4096.json.values.JSONStructure,java.lang.Object)">JSONPathReference</h3>
+<h3 id="&lt;init&gt;(io.github.takenoko4096.json.values.JsonStructure,java.lang.Object)">JSONPathReference</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">JSONPathReference</span><wbr><span class="parameters">(<a href="#type-param-S" title="JSONPath.JSONPathReference内の型パラメータ">S</a>&nbsp;structure,
  <a href="#type-param-T" title="JSONPath.JSONPathReference内の型パラメータ">T</a>&nbsp;parameter)</span></div>
@@ -267,14 +267,14 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="get(io.github.takenoko4096.json.JSONValueType)">
+<section class="detail" id="get(io.github.takenoko4096.json.JsonValueType)">
 <h3>get</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="type-parameters">&lt;U extends <a href="JSONValue.html" title="io.github.takenoko4096.json内のクラス">JSONValue</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">U</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(<a href="JSONValueType.html" title="io.github.takenoko4096.json内のクラス">JSONValueType</a>&lt;U&gt;&nbsp;type)</span></div>
 <div class="block">パスの参照先に格納された値を取得します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="get(io.github.takenoko4096.json.JSONValueType)-type-param-U"><code>U</code> - 期待する型。</span></dd>
+<dd><span id="get(io.github.takenoko4096.json.JsonValueType)-type-param-U"><code>U</code> - 期待する型。</span></dd>
 <dt>パラメータ:</dt>
 <dd><code>type</code> - 期待する型。</dd>
 <dt>戻り値:</dt>

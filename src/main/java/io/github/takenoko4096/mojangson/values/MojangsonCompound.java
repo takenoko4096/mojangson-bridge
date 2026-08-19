@@ -2,9 +2,11 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.*;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -57,7 +59,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             throw new IllegalArgumentException("キー '" + key + "' は存在しません");
         }
 
-        return MojangsonValueType.get(value.get(key));
+        return MojangsonValueType.of(value.get(key));
     }
 
     /**
@@ -68,7 +70,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      * @param <T> 期待する型。
      * @throws IllegalArgumentException キーが存在しないか、型が予期しないものの場合。
      */
-    public <T extends MojangsonValue<?>> T get(String key, MojangsonValueType<T> type) throws IllegalArgumentException {
+    public <T extends MojangsonValue<?>> T getOrThrow(String key, MojangsonValueType<T> type) throws IllegalArgumentException {
         if (!has(key)) {
             throw new IllegalArgumentException("キー '" + key + "' は存在しません");
         }
@@ -80,13 +82,27 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         return type.toMojangson(value.get(key));
     }
 
+    public <T extends MojangsonValue<?>> @Nullable T getOrNull(String key, MojangsonValueType<T> type) {
+        if (has(key)) {
+            if (getTypeOf(key).equals(type)) {
+                return getOrThrow(key, type);
+            }
+            else return null;
+        }
+        else return null;
+    }
+
+    public <T extends MojangsonValue<?>> T getOrDefault(String key, MojangsonValueType<T> type, T defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(key, type), defaultValue);
+    }
+
     /**
      * 引数に渡されたキーに任意の値を紐づけます。
      * @param key キー。
      * @param value 値。
      */
     public void set(String key, Object value) {
-        this.value.put(key, MojangsonValueType.get(value).toMojangson(value));
+        this.value.put(key, MojangsonValueType.of(value).toMojangson(value));
     }
 
     /**
@@ -121,23 +137,27 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
         return Set.copyOf(value.keySet());
     }
 
+    public Map<String, MojangsonValue<?>> toMap() {
+        return Map.copyOf(value);
+    }
+
     /**
      * このコンパウンドを再帰的にMapに変換します。
      * @return Map形式のディープコピー。
      */
-    public Map<String, Object> toMap() {
+    public Map<String, Object> toMapRecursively() {
         final Map<String, Object> map = new HashMap<>();
 
         for (final String key : keys()) {
             final MojangsonValueType<?> type = getTypeOf(key);
 
             if (type.equals(MojangsonValueTypes.COMPOUND)) {
-                final MojangsonCompound compound = get(key, MojangsonValueTypes.COMPOUND);
-                map.put(key, compound.toMap());
+                final MojangsonCompound compound = getOrThrow(key, MojangsonValueTypes.COMPOUND);
+                map.put(key, compound.toMapRecursively());
             }
             else if (type.equals(MojangsonValueTypes.LIST)) {
-                final MojangsonList list = get(key, MojangsonValueTypes.LIST);
-                map.put(key, list.toList());
+                final MojangsonList list = getOrThrow(key, MojangsonValueTypes.LIST);
+                map.put(key, list.toListRecursively());
             }
             else if (value.get(key) instanceof MojangsonArray<?, ?> array) {
                 map.put(key, array.toArray());
@@ -154,8 +174,8 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     }
 
     @Override
-    public MojangsonCompound copy() {
-        return MojangsonValueTypes.COMPOUND.toMojangson(toMap());
+    public MojangsonCompound deepCopy() {
+        return MojangsonValueTypes.COMPOUND.toMojangson(toMapRecursively());
     }
 
     /**
@@ -166,21 +186,21 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
     public boolean isSuperOf(MojangsonCompound other) {
         for (final String key : other.keys()) {
             if (has(key)) {
-                final MojangsonValue<?> conditionValue = other.get(key, other.getTypeOf(key));
+                final MojangsonValue<?> conditionValue = other.getOrThrow(key, other.getTypeOf(key));
 
                 switch (conditionValue) {
                     case MojangsonCompound jsonObject -> {
-                        if (!get(key, MojangsonValueTypes.COMPOUND).isSuperOf(jsonObject)) {
+                        if (!getOrThrow(key, MojangsonValueTypes.COMPOUND).isSuperOf(jsonObject)) {
                             return false;
                         }
                     }
                     case MojangsonList jsonArray -> {
-                        if (!get(key, MojangsonValueTypes.LIST).isSuperOf(jsonArray)) {
+                        if (!getOrThrow(key, MojangsonValueTypes.LIST).isSuperOf(jsonArray)) {
                             return false;
                         }
                     }
                     default -> {
-                        if (!get(key, getTypeOf(key)).equals(conditionValue)) {
+                        if (!getOrThrow(key, getTypeOf(key)).equals(conditionValue)) {
                             return false;
                         }
                     }
@@ -235,18 +255,38 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      * @param <T> 期待する型。
      * @throws IllegalArgumentException パスが存在しないか、型が予期しないものの場合。
      */
-    public <T extends MojangsonValue<?>> T get(MojangsonPath path, MojangsonValueType<T> type) {
+    public <T extends MojangsonValue<?>> T getOrThrow(MojangsonPath path, MojangsonValueType<T> type) {
         try {
-            final T value = path.access(this, reference -> reference.get(type), false);
-
+            final T value = path.access(this, reference -> reference.getOrThrow(type), false);
             if (value == null) {
-                throw new IllegalStateException("値の取得に失敗しました: アクセスの戻り値が null です");
+                throw new IllegalArgumentException("値の取得に失敗しました: アクセスの戻り値が null です");
             }
-
             return value;
         }
         catch (MojangsonPathUnableToAccessException e) {
-            throw new IllegalStateException(e);
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public <T extends MojangsonValue<?>> @Nullable T getOrNull(MojangsonPath path, MojangsonValueType<T> type) {
+        try {
+            return path.access(this, reference -> reference.getOrNull(type), false);
+        }
+        catch (MojangsonPathUnableToAccessException _) {
+            return null;
+        }
+    }
+
+    public <T extends MojangsonValue<?>> @Nullable T getOrDefault(MojangsonPath path, MojangsonValueType<T> type, T defaultValue) {
+        try {
+            final T value = path.access(this, reference -> reference.getOrDefault(type, defaultValue), false);
+            if (value == null) {
+                return defaultValue;
+            }
+            return value;
+        }
+        catch (MojangsonPathUnableToAccessException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 

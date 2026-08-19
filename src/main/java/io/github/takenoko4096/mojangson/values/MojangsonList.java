@@ -4,10 +4,12 @@ import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * mojangsonにおけるListを表現します。
@@ -56,8 +58,8 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
             throw new IllegalArgumentException("インデックス '" + index + "' は存在しません");
         }
 
-        if (index >= 0) return MojangsonValueType.get(value.get(index));
-        else return MojangsonValueType.get(value.get(value.size() + index));
+        if (index >= 0) return MojangsonValueType.of(value.get(index));
+        else return MojangsonValueType.of(value.get(value.size() + index));
     }
 
     /**
@@ -68,7 +70,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
      * @param <T> 期待する型。
      * @throws IllegalArgumentException インデックスが存在しない、または予期しない型の場合。
      */
-    public <T extends MojangsonValue<?>> T get(int index, MojangsonValueType<T> type) throws IllegalArgumentException {
+    public <T extends MojangsonValue<?>> T getOrThrow(int index, MojangsonValueType<T> type) throws IllegalArgumentException {
         if (!has(index)) {
             throw new IllegalArgumentException("インデックス '" + index + "' は存在しません");
         }
@@ -79,6 +81,20 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
 
         if (index >= 0) return type.toMojangson(value.get(index));
         else return type.toMojangson(value.get(value.size() + index));
+    }
+
+    public <T extends MojangsonValue<?>> @Nullable T getOrNull(int index, MojangsonValueType<T> type) {
+        if (has(index)) {
+            if (getTypeAt(index).equals(type)) {
+                return getOrThrow(index, type);
+            }
+            else return null;
+        }
+        else return null;
+    }
+
+    public <T extends MojangsonValue<?>> T getOrDefault(int index, MojangsonValueType<T> type, T defaultValue) {
+        return Objects.requireNonNullElse(getOrNull(index, type), defaultValue);
     }
 
     /**
@@ -92,8 +108,8 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
             throw new IllegalArgumentException("そのインデックスは使用できません");
         }
 
-        if (index >= 0) this.value.add(index, MojangsonValueType.get(value).toMojangson(value));
-        else this.value.add(this.value.size() + index, MojangsonValueType.get(value).toMojangson(value));
+        if (index >= 0) this.value.add(index, MojangsonValueType.of(value).toMojangson(value));
+        else this.value.add(this.value.size() + index, MojangsonValueType.of(value).toMojangson(value));
     }
 
     /**
@@ -101,7 +117,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
      * @param value 格納する値。
      */
     public void add(Object value) {
-        this.value.add(MojangsonValueType.get(value).toMojangson(value));
+        this.value.add(MojangsonValueType.of(value).toMojangson(value));
     }
 
     /**
@@ -115,8 +131,8 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
             throw new IllegalArgumentException("そのインデックスは使用できません");
         }
 
-        if (index >= 0) this.value.set(index, MojangsonValueType.get(value).toMojangson(value));
-        else this.value.set(this.value.size() + index, MojangsonValueType.get(value).toMojangson(value));
+        if (index >= 0) this.value.set(index, MojangsonValueType.of(value).toMojangson(value));
+        else this.value.set(this.value.size() + index, MojangsonValueType.of(value).toMojangson(value));
     }
 
     /**
@@ -152,29 +168,33 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
         final List<MojangsonValue<?>> list = new ArrayList<>();
 
         for (int i = 0; i < this.value.size(); i++) {
-            list.add(get(i, getTypeAt(i)));
+            list.add(getOrThrow(i, getTypeAt(i)));
         }
 
         return list.iterator();
+    }
+
+    public List<MojangsonValue<?>> toList() {
+        return List.copyOf(value);
     }
 
     /**
      * このリストを再帰的にListに変換します。
      * @return List形式のディープコピー。
      */
-    public List<Object> toList() {
+    public List<Object> toListRecursively() {
         final List<Object> arrayList = new ArrayList<>();
 
         for (int i = 0; i < length(); i++) {
             final MojangsonValueType<?> type = getTypeAt(i);
 
             if (type.equals(MojangsonValueTypes.COMPOUND)) {
-                final MojangsonCompound compound = get(i, MojangsonValueTypes.COMPOUND);
-                arrayList.add(compound.toMap());
+                final MojangsonCompound compound = getOrThrow(i, MojangsonValueTypes.COMPOUND);
+                arrayList.add(compound.toMapRecursively());
             }
             else if (type.equals(MojangsonValueTypes.LIST)) {
-                final MojangsonList list = get(i, MojangsonValueTypes.LIST);
-                arrayList.add(list.toList());
+                final MojangsonList list = getOrThrow(i, MojangsonValueTypes.LIST);
+                arrayList.add(list.toListRecursively());
             }
             else if (value.get(i) instanceof MojangsonArray<?, ?> array) {
                 arrayList.add(array.toArray());
@@ -191,8 +211,8 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
     }
 
     @Override
-    public MojangsonList copy() {
-        return MojangsonValueTypes.LIST.toMojangson(toList());
+    public MojangsonList deepCopy() {
+        return MojangsonValueTypes.LIST.toMojangson(toListRecursively());
     }
 
     /**
@@ -250,7 +270,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
                 throw new IllegalStateException("MojangsonListの型付きリストへの変換に失敗しました: " + type + " 型の値でない要素がインデックス " + i + " に見つかりました: " + getTypeAt(i));
             }
 
-            final T element = get(i, type);
+            final T element = getOrThrow(i, type);
             array.add(element);
         }
 

@@ -12,5 +12,5 @@ public interface MojangsonElementValueSetter<A> {
      * @param index 代入先のインデックス。
      * @param value 代入する値。
      */
-    void accept(A array, int index, Object value);
+    void set(A array, int index, Object value);
 }

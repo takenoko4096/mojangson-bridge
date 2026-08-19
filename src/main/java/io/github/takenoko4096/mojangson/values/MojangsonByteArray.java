@@ -28,7 +28,12 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
-    public MojangsonByteArray copy() {
+    protected MojangsonValueType<MojangsonByte> getElementType() {
+        return MojangsonValueTypes.BYTE;
+    }
+
+    @Override
+    public MojangsonByteArray deepCopy() {
         return from(listView());
     }
 
@@ -74,7 +79,7 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
-    public MojangsonList listView() {
+    public TypedMojangsonList<MojangsonByte> listView() {
         return getView((arr, ind, val) -> arr[ind] = (byte) val);
     }
 
@@ -83,15 +88,11 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
      * @param list MojangsonByteのみを要素に持つリスト。
      * @return MojangsonByteArray。
      */
-    public static MojangsonByteArray from(MojangsonList list) {
+    public static MojangsonByteArray from(TypedMojangsonList<MojangsonByte> list) {
         final byte[] bytes = new byte[list.length()];
 
         for (int i = 0; i < list.length(); i++) {
-            if (!list.getTypeAt(i).equals(MojangsonValueTypes.BYTE)) {
-                throw new IllegalArgumentException("キャストに失敗しました");
-            }
-
-            bytes[i] = list.get(i, MojangsonValueTypes.BYTE).byteValue();
+            bytes[i] = list.getOrThrow(i).byteValue();
         }
 
         return new MojangsonByteArray(bytes);

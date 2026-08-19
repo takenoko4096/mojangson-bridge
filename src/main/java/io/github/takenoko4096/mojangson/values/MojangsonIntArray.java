@@ -28,7 +28,12 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
-    public MojangsonIntArray copy() {
+    protected MojangsonValueType<MojangsonInt> getElementType() {
+        return MojangsonValueTypes.INT;
+    }
+
+    @Override
+    public MojangsonIntArray deepCopy() {
         return from(listView());
     }
 
@@ -74,7 +79,7 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
-    public MojangsonList listView() {
+    public TypedMojangsonList<MojangsonInt> listView() {
         return getView((arr, ind, val) -> arr[ind] = (int) val);
     }
 
@@ -83,15 +88,11 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
      * @param list MojangsonIntのみを要素に持つリスト。
      * @return MojangsonIntArray。
      */
-    public static MojangsonIntArray from(MojangsonList list) {
+    public static MojangsonIntArray from(TypedMojangsonList<MojangsonInt> list) {
         final int[] ints = new int[list.length()];
 
         for (int i = 0; i < list.length(); i++) {
-            if (!list.getTypeAt(i).equals(MojangsonValueTypes.INT)) {
-                throw new IllegalArgumentException("キャストに失敗しました");
-            }
-
-            ints[i] = list.get(i, MojangsonValueTypes.INT).intValue();
+            ints[i] = list.getOrThrow(i).intValue();
         }
 
         return new MojangsonIntArray(ints);

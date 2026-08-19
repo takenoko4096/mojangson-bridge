@@ -32,7 +32,7 @@ public final class MojangsonPath {
             case MojangsonPathNode.ArrayIndexNode arrayIndexNode -> {
                 return switch (structure) {
                     case MojangsonList list -> arrayIndexNode.access(list, function::use);
-                    case MojangsonArray<?, ?> array -> arrayIndexNode.access(array.listView(), function::use);
+                    case MojangsonArray<?, ?> array -> arrayIndexNode.access(array.listView().untyped(), function::use);
                     case null, default -> throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + node + " にアクセスするには " + structure + " が配列またはリストである必要があります");
                 };
             }
@@ -62,11 +62,11 @@ public final class MojangsonPath {
                 switch (a) {
                     case MojangsonCompound obj: {
                         if (!obj.has((String) b)) return null;
-                        value = obj.get((String) b, obj.getTypeOf((String) b));
+                        value = obj.getOrThrow((String) b, obj.getTypeOf((String) b));
                         break;
                     }
                     case MojangsonList arr: {
-                        value = arr.get((Integer) b, arr.getTypeAt((Integer) b));
+                        value = arr.getOrThrow((Integer) b, arr.getTypeAt((Integer) b));
                         break;
                     }
                     default: throw new IllegalStateException("NEVER HAPPENS");
@@ -265,7 +265,11 @@ public final class MojangsonPath {
          * @param <U> 期待する型。
          * @return 格納された値。
          */
-        public abstract <U extends MojangsonValue<?>> U get(MojangsonValueType<U> type);
+        public abstract <U extends MojangsonValue<?>> U getOrThrow(MojangsonValueType<U> type);
+
+        public abstract <U extends MojangsonValue<?>> @Nullable U getOrNull(MojangsonValueType<U> type);
+
+        public abstract <U extends MojangsonValue<?>> U getOrDefault(MojangsonValueType<U> type, U defaultValue);
 
         /**
          * パスの参照先を任意の値で上書きします。
@@ -295,8 +299,18 @@ public final class MojangsonPath {
             }
 
             @Override
-            public <U extends MojangsonValue<?>> U get(MojangsonValueType<U> type) {
-                return structure.get(parameter, type);
+            public <U extends MojangsonValue<?>> U getOrThrow(MojangsonValueType<U> type) {
+                return structure.getOrThrow(parameter, type);
+            }
+
+            @Override
+            public @Nullable <U extends MojangsonValue<?>> U getOrNull(MojangsonValueType<U> type) {
+                return structure.getOrNull(parameter, type);
+            }
+
+            @Override
+            public <U extends MojangsonValue<?>> U getOrDefault(MojangsonValueType<U> type, U defaultValue) {
+                return structure.getOrDefault(parameter, type, defaultValue);
             }
 
             @Override
@@ -326,8 +340,18 @@ public final class MojangsonPath {
             }
 
             @Override
-            public <U extends MojangsonValue<?>> U get(MojangsonValueType<U> type) {
-                return structure.get(parameter, type);
+            public <U extends MojangsonValue<?>> U getOrThrow(MojangsonValueType<U> type) {
+                return structure.getOrThrow(parameter, type);
+            }
+
+            @Override
+            public @Nullable <U extends MojangsonValue<?>> U getOrNull(MojangsonValueType<U> type) {
+                return structure.getOrNull(parameter, type);
+            }
+
+            @Override
+            public <U extends MojangsonValue<?>> U getOrDefault(MojangsonValueType<U> type, U defaultValue) {
+                return structure.getOrDefault(parameter, type, defaultValue);
             }
 
             @Override
@@ -341,5 +365,4 @@ public final class MojangsonPath {
             }
         }
     }
-
 }

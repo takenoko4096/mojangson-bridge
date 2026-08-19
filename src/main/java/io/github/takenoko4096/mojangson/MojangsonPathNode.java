@@ -113,7 +113,7 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
         public <U> @Nullable U access(MojangsonCompound structure, MojangsonLocationAccessProvider<MojangsonCompound, @Nullable U> function) throws MojangsonPathUnableToAccessException {
             if (!structure.has(parameter.name())) return null;
             else {
-                final MojangsonCompound value = structure.get(parameter.name(), MojangsonValueTypes.COMPOUND);
+                final MojangsonCompound value = structure.getOrThrow(parameter.name(), MojangsonValueTypes.COMPOUND);
                 final MojangsonCompound condition = parameter.compound();
 
                 if (value.isSuperOf(condition)) {
@@ -149,7 +149,7 @@ public abstract class MojangsonPathNode<S extends MojangsonStructure, T> {
                     continue;
                 }
 
-                final MojangsonCompound element = structure.get(i, MojangsonValueTypes.COMPOUND);
+                final MojangsonCompound element = structure.getOrThrow(i, MojangsonValueTypes.COMPOUND);
 
                 if (element.isSuperOf(parameter)) {
                     return function.use(structure, i);

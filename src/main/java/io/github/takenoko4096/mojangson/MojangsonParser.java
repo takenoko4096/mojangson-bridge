@@ -51,9 +51,9 @@ public class MojangsonParser {
     private static final Function<String, ? extends Number> DEFAULT_DECIMAL_PARSER = Double::parseDouble;
 
     private static final Map<Character, Function<MojangsonList, MojangsonIterable<? extends MojangsonNumber<?>>>> PRIMITIVE_ARRAY_CONVERTERS = new HashMap<>(Map.of(
-        'B', MojangsonByteArray::from,
-        'I', MojangsonIntArray::from,
-        'L', MojangsonLongArray::from
+        'B', list -> MojangsonByteArray.from(list.typed(MojangsonValueTypes.BYTE)),
+        'I', list -> MojangsonIntArray.from(list.typed(MojangsonValueTypes.INT)),
+        'L', list -> MojangsonLongArray.from(list.typed(MojangsonValueTypes.LONG))
     ));
 
     private static final Set<Character> SYMBOLS_ON_STRING = new HashSet<>();

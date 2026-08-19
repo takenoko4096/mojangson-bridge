@@ -2,6 +2,7 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonElementValueSetter;
 import io.github.takenoko4096.mojangson.MojangsonValue;
+import io.github.takenoko4096.mojangson.MojangsonValueType;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
     }
 
     @Override
-    public abstract MojangsonArray<T, U> copy();
+    public abstract MojangsonArray<T, U> deepCopy();
+
+    protected abstract MojangsonValueType<U> getElementType();
 
     /**
      * プリミティブ配列として取得します。
@@ -46,27 +49,26 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
      * @param setter セッター関数。第一引数の配列の第二引数の添え字に対応する位置に対して第三引数を値を代入することが期待されます。
      * @return リスト型のビュー。
      */
-    protected MojangsonList getView(MojangsonElementValueSetter<T> setter) {
+    protected TypedMojangsonList<U> getView(MojangsonElementValueSetter<T> setter) {
         final T array = value;
 
-        final List<MojangsonValue<?>> values = new ArrayList<>();
+        final List<U> values = new ArrayList<>();
         forEach(values::add);
 
-        return new MojangsonList(values) {
+        return new TypedMojangsonList<U>(getElementType(), values) {
             @Override
-            public void set(int index, Object value1) {
-                super.set(index, value1);
-
-                setter.accept(array, (index >= 0) ? index : super.length() + index, value1);
+            public void set(int index, U value) throws IllegalArgumentException {
+                super.set(index, value);
+                setter.set(array, (index >= 0) ? index : super.length() + index, value);
             }
 
             @Override
-            public void add(int index, Object value1) {
+            public void add(int index, U value) {
                 throw new IllegalStateException("MojangsonArrayから作成されたMojangsonListにおいてこの操作は禁じられています");
             }
 
             @Override
-            public void add(Object value1) {
+            public void add(U value) {
                 throw new IllegalStateException("MojangsonArrayから作成されたMojangsonListにおいてこの操作は禁じられています");
             }
 
@@ -91,5 +93,5 @@ public abstract class MojangsonArray<T, U extends MojangsonValue<?>> extends Moj
      * この配列へのビューを返します。
      * @return リスト型のビュー。このリストに対する変更は配列にも反映されます。なお一部の操作は整合性の確保のため禁じられています。
      */
-    public abstract MojangsonList listView();
+    public abstract TypedMojangsonList<U> listView();
 }
