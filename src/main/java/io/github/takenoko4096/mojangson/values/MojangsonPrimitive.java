@@ -1,7 +1,6 @@
 package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValue;
-import org.jspecify.annotations.NullMarked;
 
 /**
  * mojangsonにおけるプリミティブ値を表現します。

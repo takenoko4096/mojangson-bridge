@@ -2,12 +2,10 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
-import org.jspecify.annotations.NullMarked;
 
 /**
  * mojangsonにおける double を表現します。
  */
-@NullMarked
 public final class MojangsonDouble extends MojangsonNumber<Double> {
     private MojangsonDouble(double value) {
         super(value);

@@ -1,7 +1,6 @@
 package io.github.takenoko4096.json;
 
 import io.github.takenoko4096.json.values.*;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;

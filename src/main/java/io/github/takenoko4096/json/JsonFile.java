@@ -3,7 +3,6 @@ package io.github.takenoko4096.json;
 import io.github.takenoko4096.json.values.JsonArray;
 import io.github.takenoko4096.json.values.JsonObject;
 import io.github.takenoko4096.json.values.JsonStructure;
-import org.jspecify.annotations.NullMarked;
 
 import java.io.File;
 import java.io.IOException;
