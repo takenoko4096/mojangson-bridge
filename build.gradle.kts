@@ -1,6 +1,6 @@
 plugins {
     `java-library`
-    id("com.vanniktech.maven.publish") version "0.36.0"
+    id("com.vanniktech.maven.publish") version "0.37.0"
     signing
 }
 
@@ -10,13 +10,13 @@ repositories {
 
 dependencies {
     compileOnly("org.jspecify:jspecify:1.0.0")
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-val signingKey: String by project
-val signingPassword: String by project
-
 signing {
-    useInMemoryPgpKeys(signingKey.replace("\\n", "\n"), signingPassword)
+    useGpgCmd()
 }
 
 tasks {
@@ -31,9 +31,13 @@ tasks {
             encoding = Charsets.UTF_8.name()
         }
     }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
-val gitHubUserName: String by project
+val gitHubUserName = "${property("github-user-name")}"
 
 mavenPublishing {
     publishToMavenCentral()

@@ -65,6 +65,7 @@ public abstract class MojangsonValueType<T extends MojangsonValue<?>> {
      */
     public static MojangsonValueType<?> of(@Nullable Object value) {
         return switch (value) {
+            case MojangsonValue<?> v -> v.getType();
             case Boolean _, Byte _ -> MojangsonValueTypes.BYTE;
             case Short _ -> MojangsonValueTypes.SHORT;
             case Integer _ -> MojangsonValueTypes.INT;
@@ -84,7 +85,7 @@ public abstract class MojangsonValueType<T extends MojangsonValue<?>> {
                     throw new IllegalArgumentException("対応していない型の値(" + value.getClass().getName() + "型)が渡されました", e);
                 }
             }
-            case Collection<?> v -> {
+            case Iterable<?> v -> {
                 try {
                     MojangsonValueTypes.LIST.toMojangson(v);
                     yield MojangsonValueTypes.LIST;
@@ -93,7 +94,6 @@ public abstract class MojangsonValueType<T extends MojangsonValue<?>> {
                     throw new IllegalArgumentException("対応していない型の値(" + value.getClass().getName() + "型)が渡されました", e);
                 }
             }
-            case MojangsonValue<?> v -> of(v.value);
             case null -> MojangsonValueTypes.NULL;
             default -> throw new IllegalArgumentException("対応していない型の値(" + value.getClass().getName() + "型)が渡されました");
         };

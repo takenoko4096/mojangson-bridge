@@ -21,7 +21,7 @@ public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonLongArray> getType() {
         return MojangsonValueTypes.LONG_ARRAY;
     }
 

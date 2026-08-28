@@ -13,7 +13,7 @@ public final class MojangsonNull extends MojangsonPrimitive<Void> {
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonNull> getType() {
         return MojangsonValueTypes.NULL;
     }
 

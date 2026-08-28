@@ -64,7 +64,7 @@ public abstract class JsonValueType<T extends JsonValue<?>> {
      */
     public static JsonValueType<?> of(@Nullable Object value) {
         return switch (value) {
-            case JsonValue<?> v -> of(v.value);
+            case JsonValue<?> v -> v.getType();
             case Boolean _ -> JsonValueTypes.BOOLEAN;
             case Number _ -> JsonValueTypes.NUMBER;
             case String _ -> JsonValueTypes.STRING;

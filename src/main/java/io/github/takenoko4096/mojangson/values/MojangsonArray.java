@@ -36,6 +36,9 @@ public abstract class MojangsonArray<A, B extends MojangsonValue<?>> extends Moj
     @Override
     public abstract MojangsonArray<A, B> copy();
 
+    @Override
+    public abstract MojangsonValueType<? extends MojangsonArray<A, B>> getType();
+
     /**
      * 要素の型を返します。
      * @return 要素の型

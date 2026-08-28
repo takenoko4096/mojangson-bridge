@@ -21,7 +21,7 @@ public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonByteArray> getType() {
         return MojangsonValueTypes.BYTE_ARRAY;
     }
 

@@ -12,7 +12,7 @@ public class MojangsonString extends MojangsonPrimitive<String> {
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonString> getType() {
         return MojangsonValueTypes.STRING;
     }
 

@@ -21,7 +21,7 @@ public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     }
 
     @Override
-    public MojangsonValueType<?> getType() {
+    public MojangsonValueType<MojangsonIntArray> getType() {
         return MojangsonValueTypes.INT_ARRAY;
     }
 

@@ -9,7 +9,7 @@ import org.jspecify.annotations.Nullable;
  */
 public final class JsonNull extends JsonPrimitive<Void> {
     private JsonNull() {
-        super(null);
+        super( null);
     }
 
     @Override

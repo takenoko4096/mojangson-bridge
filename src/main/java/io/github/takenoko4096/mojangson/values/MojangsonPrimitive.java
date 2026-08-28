@@ -1,6 +1,7 @@
 package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValue;
+import io.github.takenoko4096.mojangson.MojangsonValueType;
 
 /**
  * mojangsonにおけるプリミティブ値を表現します。
@@ -14,6 +15,9 @@ public abstract class MojangsonPrimitive<T> extends MojangsonValue<T> {
     protected MojangsonPrimitive(T value) {
         super(value);
     }
+
+    @Override
+    public abstract MojangsonValueType<? extends MojangsonPrimitive<T>> getType();
 
     /**
      * ラップされている値を取得します。
