@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mojangsonにおける byte[] を表現します。
  */
-public class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
+public non-sealed class MojangsonByteArray extends MojangsonArray<byte[], MojangsonByte> {
     /**
      * サブクラスのためのコンストラクタ。
      * @param value ラップされるプリミティブ配列。

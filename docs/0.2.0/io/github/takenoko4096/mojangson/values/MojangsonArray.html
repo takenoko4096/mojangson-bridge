@@ -70,6 +70,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#getElementType()" tabindex="0">getElementType()</a></li>
 <li><a href="#toArray()" tabindex="0">toArray()</a></li>
 <li><a href="#arrayView()" tabindex="0">arrayView()</a></li>
+<li><a href="#write(java.util.function.Function)" tabindex="0">write(Function)</a></li>
 <li><a href="#boxed()" tabindex="0">boxed()</a></li>
 </ol>
 </li>
@@ -101,9 +102,10 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">MojangsonArray&lt;A, B extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
+<div class="type-signature"><span class="modifiers">public abstract sealed class </span><span class="element-name type-name-label">MojangsonArray&lt;A, B extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;?&gt;&gt;</span>
 <span class="extends-implements">extends <a href="../MojangsonValue.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonValue</a>&lt;A&gt;
-implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;B&gt;</span></div>
+implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;B&gt;</span>
+<span class="permits">permits <a href="MojangsonByteArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonByteArray</a>, <a href="MojangsonIntArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonIntArray</a>, <a href="MojangsonLongArray.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonLongArray</a></span></div>
 <div class="block">mojangsonにおける配列を表現します。</div>
 </div>
 </section>
@@ -186,6 +188,9 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">プリミティブ配列としてコピーを取得します。</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final &lt;U&gt;&nbsp;@Nullable U</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#write(java.util.function.Function)" class="member-name-link">write</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">Function</a>&lt;<a href="MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a>, @Nullable U&gt;&nbsp;function)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -339,6 +344,14 @@ implements <a href="MojangsonIterable.html" title="io.github.takenoko4096.mojang
 <dt>戻り値:</dt>
 <dd>プリミティブ配列</dd>
 </dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="write(java.util.function.Function)">
+<h3>write</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">write</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">Function</a>&lt;<a href="MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a>, @Nullable U&gt;&nbsp;function)</span></div>
 </div>
 </section>
 </li>

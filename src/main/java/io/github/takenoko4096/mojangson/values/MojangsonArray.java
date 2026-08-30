@@ -2,16 +2,19 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValue;
 import io.github.takenoko4096.mojangson.MojangsonValueType;
+import io.github.takenoko4096.mojangson.MojangsonValueTypes;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * mojangsonにおける配列を表現します。
  * @param <A> 配列型
  * @param <B> mojangsonにおける表現
  */
-public abstract class MojangsonArray<A, B extends MojangsonValue<?>> extends MojangsonValue<A> implements MojangsonIterable<B> {
+public abstract sealed class MojangsonArray<A, B extends MojangsonValue<?>> extends MojangsonValue<A> implements MojangsonIterable<B> permits MojangsonByteArray, MojangsonIntArray, MojangsonLongArray {
     /**
      * サブクラスのためのコンストラクタ。
      * @param value ラップされるプリミティブ配列
@@ -57,6 +60,41 @@ public abstract class MojangsonArray<A, B extends MojangsonValue<?>> extends Moj
      */
     public A arrayView() {
         return value;
+    }
+
+    /**
+     * 配列に一時リストビューを用いて書き込みます。
+     * @param function
+     * @return
+     * @param <U>
+     */
+    public final <U> @Nullable U write(Function<MojangsonList, @Nullable U> function) {
+        final MojangsonList list = boxed().untyped();
+        final U u = function.apply(list);
+
+        if (list.length() != length()) {
+            throw new IllegalStateException("配列長は変更できません");
+        }
+
+        switch (this) {
+            case MojangsonByteArray byteArray -> {
+                for (int i = 0; i < length(); i++) {
+                    byteArray.set(i, list.getOrDefault(i, MojangsonValueTypes.BYTE, byteArray.getOrThrow(i)).byteValue());
+                }
+            }
+            case MojangsonIntArray intArray -> {
+                for (int i = 0; i < length(); i++) {
+                    intArray.set(i, list.getOrDefault(i, MojangsonValueTypes.INT, intArray.getOrThrow(i)).intValue());
+                }
+            }
+            case MojangsonLongArray longArray -> {
+                for (int i = 0; i < length(); i++) {
+                    longArray.set(i, list.getOrDefault(i, MojangsonValueTypes.LONG, longArray.getOrThrow(i)).longValue());
+                }
+            }
+        }
+
+        return u;
     }
 
     /**

@@ -3,7 +3,7 @@ import io.github.takenoko4096.mojangson.values.*;
 import org.junit.jupiter.api.Test;
 
 @Test
-void main() {
+void main() throws MojangsonPathUnableToAccessException {
     System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
     System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
 
@@ -12,17 +12,12 @@ void main() {
     final MojangsonCompound compound = MojangsonParser.compound(
         """
         {
-            int_array: [I; 0, 1, 2, 3],
-            three: 3
+            int_array: [I; 0, 1, 2, 3]
         }
         """
     );
 
-    final MojangsonIntArray array = compound.getOrThrow(MojangsonPath.of("int_array"), MojangsonValueTypes.INT_ARRAY);
-    System.out.println(array);
-
-    compound.getOrThrow("three", MojangsonValueTypes.INT).getValue();
-
+    compound.set(MojangsonPath.of("int_array[0]"), 10);
     System.out.println(compound);
 
     // TODO: IntArray[int] 等の参照を制限すべき？

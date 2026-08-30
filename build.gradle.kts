@@ -44,29 +44,29 @@ mavenPublishing {
     signAllPublications()
 
     pom {
-        name.set(project.name)
-        description.set(project.description)
-        url.set("https://github.com/$gitHubUserName/${project.name}")
+        name = project.name
+        description = project.description
+        url = "https://github.com/$gitHubUserName/${project.name}"
 
         licenses {
             license {
-                name.set("The Apache License, Version 2.0")
-                url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
             }
         }
 
         developers {
             developer {
-                id.set(gitHubUserName)
-                name.set(gitHubUserName)
-                url.set("https://github.com/$gitHubUserName/")
+                id = gitHubUserName
+                name = gitHubUserName
+                url = "https://github.com/$gitHubUserName/"
             }
         }
 
         scm {
-            connection.set("scm:git:git://github.com/$gitHubUserName/${project.name}.git")
-            developerConnection.set("scm:git:ssh://github.com/$gitHubUserName/${project.name}.git")
-            url.set("https://github.com/$gitHubUserName/${project.name}/")
+            connection = "scm:git:git://github.com/$gitHubUserName/${project.name}.git"
+            developerConnection = "scm:git:ssh://github.com/$gitHubUserName/${project.name}.git"
+            url = "https://github.com/$gitHubUserName/${project.name}/"
         }
     }
 }

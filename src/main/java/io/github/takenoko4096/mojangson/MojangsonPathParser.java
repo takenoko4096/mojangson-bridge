@@ -1,5 +1,7 @@
 package io.github.takenoko4096.mojangson;
 
+import io.github.takenoko4096.mojangson.node.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -149,7 +151,7 @@ public class MojangsonPathParser {
         return string.toString();
     }
 
-    private String[] objectKey(boolean isRoot) {
+    private IObjectKeyString objectKey(boolean isRoot) {
         if (!isRoot) expect(DOT);
 
         final StringBuilder sb = new StringBuilder();
@@ -207,21 +209,21 @@ public class MojangsonPathParser {
 
                 mojangson.append(sb2);
 
-                return new String[]{sb.toString(), mojangson.toString()};
+                return new ObjectKeyCheckerString(sb.toString(), mojangson.toString());
             }
 
             sb.append(c);
             next();
         }
 
-        return new String[]{sb.toString()};
+        return new ObjectKeyString(sb.toString());
     }
 
-    private String arrayIndex() {
+    private IArrayIndexString arrayIndex() {
         expect(ARRAY_BRACES[0]);
 
         if (next(ARRAY_BRACES[1])) {
-            return EMPTY_STRING;
+            return new ArrayEmptyString();
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -254,11 +256,18 @@ public class MojangsonPathParser {
 
         expect(ARRAY_BRACES[1]);
 
-        return sb.toString();
+        final String string = sb.toString();
+
+        if (string.matches("^[+-]?[1-9]*\\d+|0$")) {
+            return new ArrayIndexString(Integer.parseInt(string));
+        }
+        else {
+            return new ArrayIndexFinderString(string);
+        }
     }
 
     private MojangsonPathNode<?, ?> root() {
-        final List<Object> list = new ArrayList<>();
+        final List<INodeString> list = new ArrayList<>();
 
         list.add(objectKey(true));
 
@@ -276,26 +285,15 @@ public class MojangsonPathParser {
 
         MojangsonPathNode<?, ?> node = null;
         for (int i = list.size() - 1; i >= 0; i--) {
-            final Object value = list.get(i);
+            final INodeString str = list.get(i);
 
-            if (value instanceof String[] strings) {
-                if (strings.length == 1) {
-                    node = new MojangsonPathNode.ObjectKeyNode(strings[0], node);
-                }
-                else if (strings.length == 2) {
-                    node = new MojangsonPathNode.ObjectKeyCheckerNode(strings[0], MojangsonParser.compound(strings[1]), node);
-                }
-                else throw exception("NEVER HAPPENS");
-            }
-            else if (value instanceof String string) {
-                if (string.matches("^[+-]?[1-9]*\\d+|0$")) {
-                    node = new MojangsonPathNode.ArrayIndexNode(Integer.parseInt(string), node);
-                }
-                else {
-                    node = new MojangsonPathNode.ArrayIndexFinderNode(MojangsonParser.compound(string), node);
-                }
-            }
-            else throw exception("NEVER HAPPENS");
+            node = switch (str) {
+                case ObjectKeyString(String key) -> new MojangsonObjectKeyNode(key, node);
+                case ObjectKeyCheckerString(String key, String mojangson) -> new MojangsonObjectKeyCheckerNode(key, MojangsonParser.compound(mojangson), node);
+                case ArrayIndexString(int index) -> new MojangsonArrayIndexNode(index, node);
+                case ArrayIndexFinderString(String mojangson) -> new MojangsonArrayIndexFinderNode(MojangsonParser.compound(mojangson), node);
+                case ArrayEmptyString _ -> new MojangsonArrayIndexNode(-2147483648, node); // TODO
+            };
         }
 
         if (node == null) {
@@ -327,4 +325,15 @@ public class MojangsonPathParser {
         this.text = path;
         return parse();
     }
+
+    private sealed interface INodeString {}
+
+    private sealed interface IObjectKeyString extends INodeString {}
+    private record ObjectKeyString(String key) implements IObjectKeyString {}
+    private record ObjectKeyCheckerString(String key, String mojangson) implements IObjectKeyString {}
+
+    private sealed interface IArrayIndexString extends INodeString {}
+    private record ArrayIndexString(int i) implements IArrayIndexString {}
+    private record ArrayIndexFinderString(String mojangson) implements IArrayIndexString {}
+    private record ArrayEmptyString() implements IArrayIndexString {}
 }

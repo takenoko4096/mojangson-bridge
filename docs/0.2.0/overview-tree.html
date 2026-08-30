@@ -54,6 +54,7 @@ loadScripts(document, 'script');</script>
 <li><a href="io/github/takenoko4096/json/package-tree.html">io.github.takenoko4096.json</a>, </li>
 <li><a href="io/github/takenoko4096/json/values/package-tree.html">io.github.takenoko4096.json.values</a>, </li>
 <li><a href="io/github/takenoko4096/mojangson/package-tree.html">io.github.takenoko4096.mojangson</a>, </li>
+<li><a href="io/github/takenoko4096/mojangson/node/package-tree.html">io.github.takenoko4096.mojangson.node</a>, </li>
 <li><a href="io/github/takenoko4096/mojangson/values/package-tree.html">io.github.takenoko4096.mojangson.values</a>, </li>
 <li><a href="io/github/takenoko4096/nbt/package-tree.html">io.github.takenoko4096.nbt</a></li>
 </ul>
@@ -95,13 +96,12 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.github.takenoko4096.json.<a href="io/github/takenoko4096/json/JsonValueTypes.html" class="type-name-link" title="io.github.takenoko4096.json内のクラス">JsonValueTypes</a></li>
 <li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonParser.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonParser</a></li>
 <li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPath.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPath</a></li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPath.MojangsonPathReference.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPath.MojangsonPathReference</a>&lt;S,<wbr>T&gt;</li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPathNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode</a>&lt;S,<wbr>T&gt;
+<li class="circle">io.github.takenoko4096.mojangson.node.<a href="io/github/takenoko4096/mojangson/node/MojangsonPathNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonPathNode</a>&lt;S,<wbr>T&gt;
 <ul>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPathNode.ArrayIndexFinderNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ArrayIndexFinderNode</a></li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPathNode.ArrayIndexNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ArrayIndexNode</a></li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPathNode.ObjectKeyCheckerNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ObjectKeyCheckerNode</a></li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPathNode.ObjectKeyNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathNode.ObjectKeyNode</a></li>
+<li class="circle">io.github.takenoko4096.mojangson.node.<a href="io/github/takenoko4096/mojangson/node/MojangsonArrayIndexFinderNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonArrayIndexFinderNode</a></li>
+<li class="circle">io.github.takenoko4096.mojangson.node.<a href="io/github/takenoko4096/mojangson/node/MojangsonArrayIndexNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonArrayIndexNode</a></li>
+<li class="circle">io.github.takenoko4096.mojangson.node.<a href="io/github/takenoko4096/mojangson/node/MojangsonObjectKeyCheckerNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonObjectKeyCheckerNode</a></li>
+<li class="circle">io.github.takenoko4096.mojangson.node.<a href="io/github/takenoko4096/mojangson/node/MojangsonObjectKeyNode.html" class="type-name-link" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonObjectKeyNode</a></li>
 </ul>
 </li>
 <li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonPathParser.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathParser</a></li>
@@ -185,7 +185,6 @@ loadScripts(document, 'script');</script>
 <li class="circle">io.github.takenoko4096.json.values.<a href="io/github/takenoko4096/json/values/JsonIterable.html" class="type-name-link" title="io.github.takenoko4096.json.values内のインタフェース">JsonIterable</a>&lt;T&gt; (同様に extends java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Iterable.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Iterable</a>&lt;T&gt;)</li>
 </ul>
 </li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonLocationAccessProvider.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のインタフェース">MojangsonLocationAccessProvider</a>&lt;S,<wbr>U&gt;</li>
 <li class="circle">io.github.takenoko4096.mojangson.values.<a href="io/github/takenoko4096/mojangson/values/MojangsonStructure.html" class="type-name-link" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a>
 <ul>
 <li class="circle">io.github.takenoko4096.mojangson.values.<a href="io/github/takenoko4096/mojangson/values/MojangsonIterable.html" class="type-name-link" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonIterable</a>&lt;T&gt; (同様に extends java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Iterable.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Iterable</a>&lt;T&gt;)</li>
@@ -201,7 +200,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Record.html" class="type-name-link external-link" title="java.lang内のクラスまたはインタフェース">Record</a>
 <ul>
 <li class="circle">io.github.takenoko4096.json.<a href="io/github/takenoko4096/json/JsonConditionalObjectKey.html" class="type-name-link" title="io.github.takenoko4096.json内のクラス">JsonConditionalObjectKey</a></li>
-<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojnagsonConditionalCompoundKey.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojnagsonConditionalCompoundKey</a></li>
+<li class="circle">io.github.takenoko4096.mojangson.<a href="io/github/takenoko4096/mojangson/MojangsonConditionalCompoundKey.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonConditionalCompoundKey</a></li>
 </ul>
 </li>
 </ul>

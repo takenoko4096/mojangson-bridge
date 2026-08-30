@@ -53,11 +53,10 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">コンテンツ&nbsp;<input type="text" class="filter-input" disabled placeholder="コンテンツのフィルタ(.と入力)" aria-label="目次のフィルタ" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="リセット"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">説明</a></li>
-<li><a href="#nested-class-summary" tabindex="0">ネストされたクラスの概要</a></li>
 <li><a href="#method-summary" tabindex="0">メソッドの概要</a></li>
 <li><a href="#method-detail" tabindex="0">メソッドの詳細</a>
 <ol class="toc-list">
-<li><a href="#access(io.github.takenoko4096.mojangson.values.MojangsonCompound,java.util.function.Function,boolean)" tabindex="0">access(MojangsonCompound, Function, boolean)</a></li>
+<li><a href="#access(io.github.takenoko4096.mojangson.values.MojangsonCompound,boolean,java.util.function.BiFunction,java.util.function.BiFunction)" tabindex="0">access(MojangsonCompound, boolean, BiFunction, BiFunction)</a></li>
 <li><a href="#length()" tabindex="0">length()</a></li>
 <li><a href="#slice(int,int)" tabindex="0">slice(int, int)</a></li>
 <li><a href="#parent()" tabindex="0">parent()</a></li>
@@ -87,23 +86,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<li>
-<section class="nested-class-summary" id="nested-class-summary">
-<h2>ネストされたクラスの概要</h2>
-<div class="caption"><span>ネストされたクラス</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">修飾子とタイプ</div>
-<div class="table-header col-second">クラス</div>
-<div class="table-header col-last">説明</div>
-<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="MojangsonPath.MojangsonPathReference.html" class="type-name-link" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPath.MojangsonPathReference</a>&lt;<a href="MojangsonPath.MojangsonPathReference.html#type-param-S" title="MojangsonPath.MojangsonPathReference内の型パラメータ">S</a> extends <a href="values/MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a>, <a href="MojangsonPath.MojangsonPathReference.html#type-param-T" title="MojangsonPath.MojangsonPathReference内の型パラメータ">T</a>&gt;</code></div>
-<div class="col-last even-row-color">
-<div class="block">mojangsonパスが構造にアクセスする際に作成される特定のオブジェクトへの参照を表現します。</div>
-</div>
-</div>
-</section>
-</li>
 <!-- ========== METHOD SUMMARY =========== -->
 <li>
 <section class="method-summary" id="method-summary">
@@ -115,13 +97,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">修飾子とタイプ</div>
 <div class="table-header col-second">メソッド</div>
 <div class="table-header col-last">説明</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;@Nullable T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.mojangson.values.MojangsonCompound,java.util.function.Function,boolean)" class="member-name-link">access</a><wbr>(<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>&nbsp;mojangsonCompound,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">Function</a>&lt;<a href="MojangsonPath.MojangsonPathReference.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPath.MojangsonPathReference</a>&lt;?,<wbr>?&gt;, @Nullable T&gt;&nbsp;function,
- boolean&nbsp;isForcedAccess)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">任意のコンパウンド上の、このパスに対応する位置へのアクセスを提供します。</div>
-</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;U&gt;&nbsp;@Nullable U</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.mojangson.values.MojangsonCompound,boolean,java.util.function.BiFunction,java.util.function.BiFunction)" class="member-name-link">access</a><wbr>(<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>&nbsp;compound,
+ boolean&nbsp;createWay,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, @Nullable U&gt;&nbsp;function1,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Integer</a>, @Nullable U&gt;&nbsp;function2)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;obj)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -170,25 +151,17 @@ loadScripts(document, 'script');</script>
 <h2>メソッドの詳細</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="access(io.github.takenoko4096.mojangson.values.MojangsonCompound,java.util.function.Function,boolean)">
+<section class="detail" id="access(io.github.takenoko4096.mojangson.values.MojangsonCompound,boolean,java.util.function.BiFunction,java.util.function.BiFunction)">
 <h3>access</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">@Nullable T</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>&nbsp;mojangsonCompound,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">Function</a>&lt;<a href="MojangsonPath.MojangsonPathReference.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPath.MojangsonPathReference</a>&lt;?,<wbr>?&gt;, @Nullable T&gt;&nbsp;function,
- boolean&nbsp;isForcedAccess)</span>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>&nbsp;compound,
+ boolean&nbsp;createWay,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/MojangsonCompound.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonCompound</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, @Nullable U&gt;&nbsp;function1,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/MojangsonList.html" title="io.github.takenoko4096.mojangson.values内のクラス">MojangsonList</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Integer</a>, @Nullable U&gt;&nbsp;function2)</span>
                        throws <span class="exceptions"><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></span></div>
-<div class="block">任意のコンパウンド上の、このパスに対応する位置へのアクセスを提供します。</div>
 <dl class="notes">
-<dt>型パラメータ:</dt>
-<dd><span id="access(io.github.takenoko4096.mojangson.values.MojangsonCompound,java.util.function.Function,boolean)-type-param-T"><code>T</code> - コールバックの戻り値の型</span></dd>
-<dt>パラメータ:</dt>
-<dd><code>mojangsonCompound</code> - 任意のコンパウンド</dd>
-<dd><code>function</code> - 参照を消費するコールバック関数</dd>
-<dd><code>isForcedAccess</code> - true の場合、コンパウンドのキーに対する単純なアクセスに限り、キーが存在しなくてもその位置に空のコンパウンドを作成します。これにより強制的にアクセス処理の中断を回避します。</dd>
-<dt>戻り値:</dt>
-<dd>コールバックの戻り値をそのまま返します。何も返す必要がなければ null を返すことができます</dd>
 <dt>例外:</dt>
-<dd><code><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></code> - コンパウンドの構造との不整合によりアクセスできなかった場合</dd>
+<dd><code><a href="MojangsonPathUnableToAccessException.html" title="io.github.takenoko4096.mojangson内のクラス">MojangsonPathUnableToAccessException</a></code></dd>
 </dl>
 </div>
 </section>

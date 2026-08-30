@@ -236,7 +236,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public boolean has(MojangsonPath path) {
         try {
-            return Boolean.TRUE.equals(path.access(this, MojangsonPath.MojangsonPathReference::has, false));
+            final Boolean t = path.access(
+                this,
+                false,
+                MojangsonCompound::has,
+                MojangsonList::has
+            );
+
+            if (t == null) {
+                return false;
+            }
+
+            return t;
         }
         catch (MojangsonPathUnableToAccessException e) {
             return false;
@@ -251,13 +262,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public MojangsonValueType<?> getTypeOf(MojangsonPath path) {
         try {
-            final MojangsonValueType<?> type = path.access(this, MojangsonPath.MojangsonPathReference::getType, false);
+            final MojangsonValueType<?> t = path.access(
+                this,
+                false,
+                MojangsonCompound::getTypeOf,
+                MojangsonList::getTypeAt
+            );
 
-            if (type == null) {
-                throw new IllegalStateException("型の取得に失敗しました: アクセスの戻り値が null です");
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
             }
 
-            return type;
+            return t;
         }
         catch (MojangsonPathUnableToAccessException e) {
             throw new IllegalStateException(e);
@@ -274,11 +290,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public <T extends MojangsonValue<?>> T getOrThrow(MojangsonPath path, MojangsonValueType<T> type) {
         try {
-            final T value = path.access(this, reference -> reference.getOrThrow(type), false);
-            if (value == null) {
-                throw new IllegalArgumentException("値の取得に失敗しました: アクセスの戻り値が null です");
+            final T t = path.access(
+                this,
+                false,
+                (s, p) -> s.getOrThrow(p, type),
+                (s, p) -> s.getOrThrow(p, type)
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
             }
-            return value;
+
+            return t;
         }
         catch (MojangsonPathUnableToAccessException e) {
             throw new IllegalArgumentException(e);
@@ -294,7 +317,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public <T extends MojangsonValue<?>> @Nullable T getOrNull(MojangsonPath path, MojangsonValueType<T> type) {
         try {
-            return path.access(this, reference -> reference.getOrNull(type), false);
+            final T t = path.access(
+                this,
+                false,
+                (s, p) -> s.getOrNull(p, type),
+                (s, p) -> s.getOrNull(p, type)
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
+            }
+
+            return t;
         }
         catch (MojangsonPathUnableToAccessException _) {
             return null;
@@ -311,11 +345,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public <T extends MojangsonValue<?>> @Nullable T getOrDefault(MojangsonPath path, MojangsonValueType<T> type, Object defaultValue) {
         try {
-            final T value = path.access(this, reference -> reference.getOrDefault(type, defaultValue), false);
-            if (value == null) {
-                return type.toMojangson(defaultValue);
+            final T t = path.access(
+                this,
+                false,
+                (s, p) -> s.getOrDefault(p, type, defaultValue),
+                (s, p) -> s.getOrDefault(p, type, defaultValue)
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
             }
-            return value;
+
+            return t;
         }
         catch (MojangsonPathUnableToAccessException e) {
             throw new IllegalArgumentException(e);
@@ -329,7 +370,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public boolean delete(MojangsonPath path) {
         try {
-            return Boolean.TRUE.equals(path.access(this, MojangsonPath.MojangsonPathReference::delete, false));
+            final Boolean t = path.access(
+                this,
+                false,
+                MojangsonCompound::delete,
+                MojangsonList::delete
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
+            }
+
+            return t;
         }
         catch (MojangsonPathUnableToAccessException e) {
             return false;
@@ -343,10 +395,18 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
      */
     public void set(MojangsonPath path, Object value) {
         try {
-            path.access(this, reference -> {
-                reference.set(value);
-                return null;
-            }, true);
+            path.access(
+                this,
+                false,
+                (s, p) -> {
+                    s.set(p, value);
+                    return null;
+                },
+                (s, p) -> {
+                    s.set(p, value);
+                    return null;
+                }
+            );
         }
         catch (MojangsonPathUnableToAccessException e) {
             throw new IllegalStateException(e);

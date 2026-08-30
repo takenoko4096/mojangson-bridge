@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mojangsonにおける long[] を表現します
  */
-public class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
+public non-sealed class MojangsonLongArray extends MojangsonArray<long[], MojangsonLong> {
     /**
      * サブクラスのためのコンストラクタ。
      * @param value ラップされるプリミティブ配列。

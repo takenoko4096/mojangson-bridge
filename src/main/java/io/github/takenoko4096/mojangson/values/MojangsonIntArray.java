@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mojangsonにおける int[] を表現します。
  */
-public class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
+public non-sealed class MojangsonIntArray extends MojangsonArray<int[], MojangsonInt> {
     /**
      * サブクラスのためのコンストラクタ。
      * @param value ラップされるプリミティブ配列。

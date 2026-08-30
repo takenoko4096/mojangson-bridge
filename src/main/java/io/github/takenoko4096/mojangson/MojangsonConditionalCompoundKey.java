@@ -7,4 +7,4 @@ import io.github.takenoko4096.mojangson.values.MojangsonCompound;
  * @param name キーの名前
  * @param compound 条件となるコンパウンド
  */
-public record MojnagsonConditionalCompoundKey(String name, MojangsonCompound compound) {}
+public record MojangsonConditionalCompoundKey(String name, MojangsonCompound compound) {}

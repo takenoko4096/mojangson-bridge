@@ -1,13 +1,13 @@
 package io.github.takenoko4096.mojangson;
 
-import io.github.takenoko4096.mojangson.values.MojangsonArray;
+import io.github.takenoko4096.mojangson.node.*;
 import io.github.takenoko4096.mojangson.values.MojangsonCompound;
 import io.github.takenoko4096.mojangson.values.MojangsonList;
 import io.github.takenoko4096.mojangson.values.MojangsonStructure;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * mojangson構造の任意の位置にアクセスするためのパスを表現します。
@@ -19,100 +19,43 @@ public final class MojangsonPath {
         this.root = root;
     }
 
-    private <U> @Nullable U checkedAccess(MojangsonPathNode<?, ?> node, @Nullable MojangsonStructure structure, MojangsonLocationAccessProvider<MojangsonStructure, U> function) throws MojangsonPathUnableToAccessException {
-        switch (node) {
-            case MojangsonPathNode.ObjectKeyNode objectKeyNode -> {
-                if (!(structure instanceof MojangsonCompound object)) {
-                    throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + node + " にアクセスするには " + structure + " がコンパウンドである必要があります");
-                }
-                return objectKeyNode.access(object, function::use);
-            }
-            case MojangsonPathNode.ArrayIndexNode arrayIndexNode -> {
-                return switch (structure) {
-                    case MojangsonList list -> arrayIndexNode.access(list, function::use);
-                    case MojangsonArray<?, ?> array -> arrayIndexNode.access(array.boxed().untyped(), function::use);
-                    case null, default -> throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + node + " にアクセスするには " + structure + " が配列またはリストである必要があります");
-                };
-            }
-            case MojangsonPathNode.ObjectKeyCheckerNode objectKeyCheckerNode -> {
-                if (!(structure instanceof MojangsonCompound object)) {
-                    throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + node + " にアクセスするには " + structure + " がコンパウンドである必要があります");
-                }
-                return objectKeyCheckerNode.access(object, function::use);
-            }
-            case MojangsonPathNode.ArrayIndexFinderNode arrayIndexFinderNode -> {
-                if (!(structure instanceof MojangsonList array)) {
-                    throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + node + " にアクセスするには " + structure + " がリストである必要があります");
-                }
-                return arrayIndexFinderNode.access(array, function::use);
-            }
-        }
-    }
-
-    private <U> @Nullable U onTermination(MojangsonCompound compound, MojangsonLocationAccessProvider<MojangsonStructure, U> function, boolean isForcedAccess) throws MojangsonPathUnableToAccessException {
+    public <U> @Nullable U access(MojangsonCompound compound, boolean createWay, BiFunction<MojangsonCompound, String, @Nullable U> function1, BiFunction<MojangsonList, Integer, @Nullable U> function2) throws MojangsonPathUnableToAccessException {
         MojangsonPathNode<?, ?> node = root;
-        MojangsonStructure currentStruct = compound;
+        MojangsonPathNode<?, ?> child;
 
-        while (node.child != null) {
-            MojangsonStructure nextStruct = checkedAccess(node, currentStruct, (a, b) -> {
-                final MojangsonValue<?> value;
-                switch (a) {
-                    case MojangsonCompound obj: {
-                        if (!obj.has((String) b)) return null;
-                        value = obj.getOrThrow((String) b, obj.getTypeOf((String) b));
-                        break;
-                    }
-                    case MojangsonList arr: {
-                        value = arr.getOrThrow((Integer) b, arr.getTypeAt((Integer) b));
-                        break;
-                    }
-                    default: throw new IllegalStateException("NEVER HAPPENS");
-                }
+        MojangsonStructure current = compound;
+        MojangsonStructure next;
 
-                if (value instanceof MojangsonStructure structure) {
-                    return structure;
+        MojangsonValue<?> value;
+
+        while ((child = node.getChild()) != null) {
+            value = node.getValue(current);
+
+            if (value == null) {
+                next = null;
+            }
+            else if (value instanceof MojangsonStructure structure) {
+                next = structure;
+            }
+            else {
+                throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: アクセス過程で取得された値 " + value + " は構造体ではありませんが、パスはこの先にも続いています");
+            }
+
+            if (next == null) {
+                if (node instanceof MojangsonObjectKeyNode objectKeyNode && createWay) {
+                    next = new MojangsonCompound();
+                    ((MojangsonCompound) current).set(objectKeyNode.getParameter(), next);
                 }
                 else {
-                    throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: アクセス過程で取得された値 " + value + " は構造体ではありませんが、パスはこの先にも続いています");
-                }
-            });
-
-            if (nextStruct == null) {
-                if (node instanceof MojangsonPathNode.ObjectKeyNode objectKeyNode && isForcedAccess) {
-                    nextStruct = new MojangsonCompound();
-                    ((MojangsonCompound) currentStruct).set(objectKeyNode.parameter, nextStruct);
-                }
-                else {
-                    throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: " + "オブジェクト " + currentStruct + " に条件 " + node.parameter + " を満たすキーは存在しません");
+                    throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: " + "オブジェクト " + current + " に条件 " + node.getParameter() + " を満たすキーは存在しません");
                 }
             }
 
-            currentStruct = nextStruct;
-            node = node.child;
+            current = next;
+            node = child;
         }
 
-        return checkedAccess(node, currentStruct, function);
-    }
-
-    /**
-     * 任意のコンパウンド上の、このパスに対応する位置へのアクセスを提供します。
-     * @param mojangsonCompound 任意のコンパウンド
-     * @param function 参照を消費するコールバック関数
-     * @param isForcedAccess true の場合、コンパウンドのキーに対する単純なアクセスに限り、キーが存在しなくてもその位置に空のコンパウンドを作成します。これにより強制的にアクセス処理の中断を回避します。
-     * @param <T> コールバックの戻り値の型
-     * @return コールバックの戻り値をそのまま返します。何も返す必要がなければ null を返すことができます
-     * @throws MojangsonPathUnableToAccessException コンパウンドの構造との不整合によりアクセスできなかった場合
-     */
-    public <T> @Nullable T access(MojangsonCompound mojangsonCompound, Function<MojangsonPathReference<?, ?>, @Nullable T> function, boolean isForcedAccess) throws MojangsonPathUnableToAccessException {
-        return onTermination(mojangsonCompound, (lastStructure, nodeParameter) -> {
-            final MojangsonPathReference<?, ?> reference = switch (lastStructure) {
-                case MojangsonCompound object -> new MojangsonPathReference.MojangsonCompoundPathReference(object, (String) nodeParameter);
-                case MojangsonList array -> new MojangsonPathReference.MojangsonListPathReference(array, (Integer) nodeParameter);
-                default -> throw new IllegalArgumentException("NEVER HAPPENS");
-            };
-
-            return function.apply(reference);
-        }, isForcedAccess);
+        return node.access(current, function1, function2);
     }
 
     /**
@@ -125,7 +68,7 @@ public final class MojangsonPath {
         int i = 0;
         while (node != null) {
             i++;
-            node = node.child;
+            node = node.getChild();
         }
 
         return i;
@@ -138,17 +81,31 @@ public final class MojangsonPath {
      * @return 切り取られた部分パス 完全なコピーであり、元のオブジェクトとは関連しません。
      */
     public MojangsonPath slice(int begin, int end) {
-        if (begin < 0 || end > length() || begin > end) {
-            throw new IllegalArgumentException("インデックスが範囲外です");
+        final int length = length();
+
+        if (begin < 0) {
+            begin = length + begin;
         }
 
-        MojangsonPathNode<?, ?> beginNode = root;
+        if (end < 0) {
+            end = length + end;
+        }
+
+        if (begin > end) {
+            throw new IllegalArgumentException("無効な範囲指定です: begin = " + begin + " > end = " + end);
+        }
+
+        if (end >= length()) {
+            throw new IllegalArgumentException("無効な範囲指定です: end = " + end + " >= " + length);
+        }
+
+        MojangsonPathNode<?, ?> beginNode = root.copy();
         for (int i = 0; i < begin; i++) {
             if (beginNode == null) {
                 throw new IllegalStateException("NEVER HAPPENS");
             }
 
-            beginNode = beginNode.child;
+            beginNode = beginNode.getChild();
         }
 
         MojangsonPathNode<?, ?> node = beginNode;
@@ -157,14 +114,14 @@ public final class MojangsonPath {
                 throw new IllegalStateException("NEVER HAPPENS");
             }
 
-            node = node.child;
+            node = node.getChild();
         }
 
         if (node == null) {
             throw new IllegalStateException("NEVER HAPPENS");
         }
 
-        node.child = null;
+        node.setChild(null);
 
         return new MojangsonPath(beginNode);
     }
@@ -185,7 +142,7 @@ public final class MojangsonPath {
 
         while (node != null) {
             sb.append(node);
-            node = node.child;
+            node = node.getChild();
 
             if (node != null) {
                 sb.append(".");
@@ -216,163 +173,5 @@ public final class MojangsonPath {
      */
     public static MojangsonPath of(String path) throws MojangsonParseException {
         return new MojangsonPathParser().parse(path);
-    }
-
-    /**
-     * mojangsonパスが構造にアクセスする際に作成される特定のオブジェクトへの参照を表現します。
-     * @param <S> アクセス位置の親の構造
-     * @param <T> アクセスするために必要なキーまたは添字
-     */
-    public static abstract class MojangsonPathReference<S extends MojangsonStructure, T> {
-        /**
-         * アクセス位置の親の構造
-         */
-        protected final S structure;
-
-        /**
-         * アクセスするために必要なキーまたは添字
-         */
-        protected final T parameter;
-
-        /**
-         * サブクラスのためのコンストラクタ。
-         * @param structure アクセス位置の親の構造
-         * @param parameter アクセスするために必要なキーまたは添字
-         */
-        protected MojangsonPathReference(S structure, T parameter) {
-            this.structure = structure;
-            this.parameter = parameter;
-        }
-
-        /**
-         * パスの参照先が存在するかどうかを返します。
-         * @return 存在すれば true
-         */
-        public abstract boolean has();
-
-        /**
-         * パスの参照先に格納された値の型を取得します。
-         * @return 型オブジェクト
-         */
-        public abstract MojangsonValueType<?> getType();
-
-        /**
-         * パスの参照先に格納された値を取得します。
-         * @param type 期待する型
-         * @param <U> 期待する型
-         * @return パスの参照先に格納された値
-         */
-        public abstract <U extends MojangsonValue<?>> U getOrThrow(MojangsonValueType<U> type);
-
-        /**
-         * パスの参照先に格納された値を取得します。存在しなければ null を返します。
-         * @param type 期待する型
-         * @param <U> 期待する型
-         * @return パスの参照先に格納された値
-         */
-        public abstract <U extends MojangsonValue<?>> @Nullable U getOrNull(MojangsonValueType<U> type);
-
-        /**
-         * パスの参照先に格納された値を取得します。存在しなければデフォルト値を返します。
-         * @param type 期待する型
-         * @param defaultValue デフォルト値
-         * @param <U> 期待する型
-         * @return パスの参照先に格納された値
-         */
-        public abstract <U extends MojangsonValue<?>> U getOrDefault(MojangsonValueType<U> type, Object defaultValue);
-
-        /**
-         * パスの参照先を任意の値で上書きします。
-         * @param value 任意の値
-         */
-        public abstract void set(Object value);
-
-        /**
-         * パスの参照先の値を削除します。
-         * @return 削除に成功した場合 true
-         */
-        public abstract boolean delete();
-
-        private static final class MojangsonCompoundPathReference extends MojangsonPathReference<MojangsonCompound, String> {
-            private MojangsonCompoundPathReference(MojangsonCompound structure, String parameter) {
-                super(structure, parameter);
-            }
-
-            @Override
-            public boolean has() {
-                return structure.has(parameter);
-            }
-
-            @Override
-            public MojangsonValueType<?> getType() {
-                return structure.getTypeOf(parameter);
-            }
-
-            @Override
-            public <U extends MojangsonValue<?>> U getOrThrow(MojangsonValueType<U> type) {
-                return structure.getOrThrow(parameter, type);
-            }
-
-            @Override
-            public @Nullable <U extends MojangsonValue<?>> U getOrNull(MojangsonValueType<U> type) {
-                return structure.getOrNull(parameter, type);
-            }
-
-            @Override
-            public <U extends MojangsonValue<?>> U getOrDefault(MojangsonValueType<U> type, Object defaultValue) {
-                return structure.getOrDefault(parameter, type, defaultValue);
-            }
-
-            @Override
-            public void set(Object value) {
-                structure.set(parameter, value);
-            }
-
-            @Override
-            public boolean delete() {
-                return structure.delete(parameter);
-            }
-        }
-
-        private static final class MojangsonListPathReference extends MojangsonPathReference<MojangsonList, Integer> {
-            private MojangsonListPathReference(MojangsonList structure, Integer parameter) {
-                super(structure, parameter);
-            }
-
-            @Override
-            public boolean has() {
-                return structure.has(parameter);
-            }
-
-            @Override
-            public MojangsonValueType<?> getType() {
-                return structure.getTypeAt(parameter);
-            }
-
-            @Override
-            public <U extends MojangsonValue<?>> U getOrThrow(MojangsonValueType<U> type) {
-                return structure.getOrThrow(parameter, type);
-            }
-
-            @Override
-            public @Nullable <U extends MojangsonValue<?>> U getOrNull(MojangsonValueType<U> type) {
-                return structure.getOrNull(parameter, type);
-            }
-
-            @Override
-            public <U extends MojangsonValue<?>> U getOrDefault(MojangsonValueType<U> type, Object defaultValue) {
-                return structure.getOrDefault(parameter, type, defaultValue);
-            }
-
-            @Override
-            public void set(Object value) {
-                structure.set(parameter, value);
-            }
-
-            @Override
-            public boolean delete() {
-                return structure.delete(parameter);
-            }
-        }
     }
 }
