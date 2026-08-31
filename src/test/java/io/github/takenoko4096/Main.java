@@ -6,11 +6,11 @@ import io.github.takenoko4096.mojangson.*;
 import org.junit.jupiter.api.Test;
 
 @Test
-void main() throws MojangsonPathUnableToAccessException {
+void main() {
     System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
     System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
 
-    // Maven Central に publish するのはもう少しテストした後
+    // TODO: Maven Central に publish するのはもう少しテストした後
 
     final JsonObject object = JsonParser.object(
         """
