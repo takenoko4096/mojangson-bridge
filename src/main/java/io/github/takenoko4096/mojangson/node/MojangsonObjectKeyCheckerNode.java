@@ -1,6 +1,5 @@
 package io.github.takenoko4096.mojangson.node;
 
-import io.github.takenoko4096.mojangson.MojangsonConditionalCompoundKey;
 import io.github.takenoko4096.mojangson.MojangsonPathUnableToAccessException;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
 import io.github.takenoko4096.mojangson.values.MojangsonCompound;
@@ -12,7 +11,7 @@ import java.util.function.BiFunction;
 /**
  * オブジェクトが紐づけられたキーに対する条件付きアクセスを表現するノード。
  */
-public final class MojangsonObjectKeyCheckerNode extends MojangsonPathNode<MojangsonCompound, MojangsonConditionalCompoundKey> {
+public final class MojangsonObjectKeyCheckerNode extends MojangsonPathNode<MojangsonCompound, MojangsonObjectKeyCheckerNode.MojangsonConditionalCompoundKey> {
     /**
      * {@link MojangsonObjectKeyCheckerNode} を作成します。
      * @param name キー名
@@ -73,4 +72,11 @@ public final class MojangsonObjectKeyCheckerNode extends MojangsonPathNode<Mojan
     public String toString() {
         return "key_checker<" + parameter.name() + ", " + parameter.compound() + ">";
     }
+
+    /**
+     * mojangsonパスにおける条件付きのキーアクセスを表現します。
+     * @param name キーの名前
+     * @param compound 条件となるコンパウンド
+     */
+    public record MojangsonConditionalCompoundKey(String name, MojangsonCompound compound) {}
 }

@@ -1,6 +1,5 @@
 package io.github.takenoko4096.json.node;
 
-import io.github.takenoko4096.json.JsonConditionalObjectKey;
 import io.github.takenoko4096.json.JsonPathUnableToAccessException;
 import io.github.takenoko4096.json.JsonValueTypes;
 import io.github.takenoko4096.json.values.JsonObject;
@@ -12,7 +11,7 @@ import java.util.function.BiFunction;
 /**
  * オブジェクトが紐づけられたキーに対する条件付きアクセスを表現するノード。
  */
-public final class JsonObjectKeyCheckerNode extends JsonPathNode<JsonObject, JsonConditionalObjectKey> {
+public final class JsonObjectKeyCheckerNode extends JsonPathNode<JsonObject, JsonObjectKeyCheckerNode.JsonConditionalObjectKey> {
     /**
      * {@link JsonObjectKeyCheckerNode} を作成します。
      * @param name キー名
@@ -73,4 +72,11 @@ public final class JsonObjectKeyCheckerNode extends JsonPathNode<JsonObject, Jso
     public String toString() {
         return "key_checker<" + parameter.name() + ", " + parameter.object() + ">";
     }
+
+    /**
+     * jsonパスにおける条件付きのキーアクセスを表現します。
+     * @param name キーの名前
+     * @param object 条件となるオブジェクト
+     */
+    public record JsonConditionalObjectKey(String name, JsonObject object) {}
 }

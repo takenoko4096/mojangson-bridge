@@ -89,7 +89,8 @@ loadScripts(document, 'script');</script>
 </li>
 <li>
 <div id="class-summary">
-<div class="caption"><span>クラス</span></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">すべてのクラスおよびインタフェース</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">クラス</button><button id="class-summary-tab4" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab4', 2)" class="table-tab">レコード・クラス</button></div>
+<div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">クラス</div>
 <div class="table-header col-last">説明</div>
@@ -109,13 +110,18 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">オブジェクトが紐づけられたキーに対する条件付きアクセスを表現するノード。</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="MojangsonObjectKeyNode.html" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonObjectKeyNode</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="MojangsonObjectKeyCheckerNode.MojangsonConditionalCompoundKey.html" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonObjectKeyCheckerNode.MojangsonConditionalCompoundKey</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
+<div class="block">mojangsonパスにおける条件付きのキーアクセスを表現します。</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="MojangsonObjectKeyNode.html" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonObjectKeyNode</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">オブジェクトのキーに対する単純なアクセスを表現するノード。</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonPathNode</a>&lt;S extends <a href="../values/MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a>, T&gt;</div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="MojangsonPathNode.html" title="io.github.takenoko4096.mojangson.node内のクラス">MojangsonPathNode</a>&lt;S extends <a href="../values/MojangsonStructure.html" title="io.github.takenoko4096.mojangson.values内のインタフェース">MojangsonStructure</a>, T&gt;</div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">mojangsonパスを構成する各ノードを表現します。</div>
+</div>
 </div>
 </div>
 </div>
