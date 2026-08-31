@@ -13,8 +13,14 @@ import java.util.function.BiFunction;
  * オブジェクトが紐づけられたキーに対する条件付きアクセスを表現するノード。
  */
 public final class MojangsonObjectKeyCheckerNode extends MojangsonPathNode<MojangsonCompound, MojangsonConditionalCompoundKey> {
-    public MojangsonObjectKeyCheckerNode(String name, MojangsonCompound compound, @Nullable MojangsonPathNode<?, ?> child) {
-        super(new MojangsonConditionalCompoundKey(name, compound), child);
+    /**
+     * {@link MojangsonObjectKeyCheckerNode} を作成します。
+     * @param name キー名
+     * @param condition 条件となるコンパウンド
+     * @param child 子ノード
+     */
+    public MojangsonObjectKeyCheckerNode(String name, MojangsonCompound condition, @Nullable MojangsonPathNode<?, ?> child) {
+        super(new MojangsonConditionalCompoundKey(name, condition), child);
     }
 
     @Override
@@ -38,7 +44,7 @@ public final class MojangsonObjectKeyCheckerNode extends MojangsonPathNode<Mojan
         }
     }
 
-    public @Nullable <U> U access(MojangsonStructure structure, BiFunction<MojangsonCompound, String, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+    @Nullable <U> U access(MojangsonStructure structure, BiFunction<MojangsonCompound, String, @Nullable U> function) throws MojangsonPathUnableToAccessException {
         if (!(structure instanceof MojangsonCompound compound)) {
             throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + this + " にアクセスするには " + structure + " がコンパウンドである必要があります");
         }

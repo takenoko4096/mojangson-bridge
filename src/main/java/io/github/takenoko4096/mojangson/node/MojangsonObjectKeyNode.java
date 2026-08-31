@@ -12,6 +12,11 @@ import java.util.function.BiFunction;
  * オブジェクトのキーに対する単純なアクセスを表現するノード。
  */
 public final class MojangsonObjectKeyNode extends MojangsonPathNode<MojangsonCompound, String> {
+    /**
+     * {@link MojangsonObjectKeyNode} を作成します。
+     * @param name キー名
+     * @param child 子ノード
+     */
     public MojangsonObjectKeyNode(String name, @Nullable MojangsonPathNode<?, ?> child) {
         super(name, child);
     }
@@ -29,7 +34,7 @@ public final class MojangsonObjectKeyNode extends MojangsonPathNode<MojangsonCom
         return compound.getOrNull(parameter, compound.getTypeOf(parameter));
     }
 
-    public <U> @Nullable U access(MojangsonStructure structure, BiFunction<MojangsonCompound, String, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+    <U> @Nullable U access(MojangsonStructure structure, BiFunction<MojangsonCompound, String, @Nullable U> function) throws MojangsonPathUnableToAccessException {
         if (!(structure instanceof MojangsonCompound compound)) {
             throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + this + " にアクセスするには " + structure + " がコンパウンドである必要があります");
         }

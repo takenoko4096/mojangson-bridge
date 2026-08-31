@@ -19,7 +19,18 @@ public final class MojangsonPath {
         this.root = root;
     }
 
-    public <U> @Nullable U access(MojangsonCompound compound, boolean createWay, BiFunction<MojangsonCompound, String, @Nullable U> function1, BiFunction<MojangsonList, Integer, @Nullable U> function2) throws MojangsonPathUnableToAccessException {
+    /**
+     * 引数に渡された構造体に対してパスが参照する位置へのアクセスを提供します。
+     * @param compound ルート構造体 (コンパウンド)
+     * @param createWay アクセスに必要な空のコンパウンドを自動作成するかどうか; {@code true} のときコンパウンドに対するキーによる単純なアクセスに限り空のコンパウンドを生成し例外の発生を回避します。
+     * @param requirePreciseLocation 正確な位置を要求するかどうか; {@code true} のとき添字指定のない且つサイズが 1 でないリストアクセスを禁止します。
+     * @param function1 構造体が {@link MojangsonCompound} だった場合のコールバック
+     * @param function2 構造体が {@link MojangsonList} または {@link io.github.takenoko4096.mojangson.values.MojangsonArray} だった場合のコールバック
+     * @return コールバックの戻り値
+     * @param <U> コールバックの戻り値の型
+     * @throws MojangsonPathUnableToAccessException 構造との不整合によりアクセスできなかった場合
+     */
+    public <U> @Nullable U access(MojangsonCompound compound, boolean createWay, boolean requirePreciseLocation, BiFunction<MojangsonCompound, String, @Nullable U> function1, BiFunction<MojangsonList, Integer, @Nullable U> function2) throws MojangsonPathUnableToAccessException {
         MojangsonPathNode<?, ?> node = root;
         MojangsonPathNode<?, ?> child;
 
@@ -55,7 +66,7 @@ public final class MojangsonPath {
             node = child;
         }
 
-        return node.access(current, function1, function2);
+        return node.access(requirePreciseLocation, current, function1, function2);
     }
 
     /**
@@ -154,15 +165,13 @@ public final class MojangsonPath {
 
     @Override
     public int hashCode() {
-        return Objects.hash(toString());
+        return Objects.hash(root);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        else if (obj == this) return true;
-        else if (obj.getClass() != getClass()) return false;
-        else return toString().equals(obj.toString());
+        if (!(obj instanceof MojangsonPath path)) return false;
+        return root.equals(path.root);
     }
 
     /**

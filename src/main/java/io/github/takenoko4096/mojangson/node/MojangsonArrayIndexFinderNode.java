@@ -13,8 +13,13 @@ import java.util.function.BiFunction;
  * 配列内において条件を満たす最初の要素への探索アクセスを表現するノード。
  */
 public final class MojangsonArrayIndexFinderNode extends MojangsonPathNode<MojangsonList, MojangsonCompound> {
-    public MojangsonArrayIndexFinderNode(MojangsonCompound parameter, @Nullable MojangsonPathNode<?, ?> child) {
-        super(parameter, child);
+    /**
+     * {@link MojangsonArrayIndexFinderNode} を作成します。
+     * @param condition 条件となるコンパウンド
+     * @param child 子ノード
+     */
+    public MojangsonArrayIndexFinderNode(MojangsonCompound condition, @Nullable MojangsonPathNode<?, ?> child) {
+        super(condition, child);
     }
 
     @Override
@@ -38,7 +43,7 @@ public final class MojangsonArrayIndexFinderNode extends MojangsonPathNode<Mojan
         return null;
     }
 
-    public @Nullable <U> U access(MojangsonStructure structure, BiFunction<MojangsonList, Integer, @Nullable U> function) throws MojangsonPathUnableToAccessException {
+    @Nullable <U> U access(MojangsonStructure structure, BiFunction<MojangsonList, Integer, @Nullable U> function) throws MojangsonPathUnableToAccessException {
         if (!(structure instanceof MojangsonList list)) {
             throw new MojangsonPathUnableToAccessException("パスに対応する値へのアクセスに失敗しました: ノード " + this + " にアクセスするには " + structure + " がリストである必要があります");
         }

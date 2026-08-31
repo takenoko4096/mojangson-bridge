@@ -174,13 +174,7 @@ public class MojangsonList extends MojangsonValue<List<MojangsonValue<?>>> imple
 
     @Override
     public Iterator<MojangsonValue<?>> iterator() {
-        final List<MojangsonValue<?>> list = new ArrayList<>();
-
-        for (int i = 0; i < this.value.size(); i++) {
-            list.add(getOrThrow(i, getTypeAt(i)));
-        }
-
-        return list.iterator();
+        return value.iterator();
     }
 
     /**

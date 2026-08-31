@@ -12,14 +12,18 @@ void main() throws MojangsonPathUnableToAccessException {
     final MojangsonCompound compound = MojangsonParser.compound(
         """
         {
-            int_array: [I; 0, 1, 2, 3]
+            int_array: [I; 0, 1, 2],
+            list: [
+                {
+                    key: value
+                }
+            ]
         }
         """
     );
 
-    compound.set(MojangsonPath.of("int_array[0]"), 10);
-    System.out.println(compound);
+    final MojangsonPath path = MojangsonPath.of("list[]");
 
-    // TODO: IntArray[int] 等の参照を制限すべき？
-    // または MojangsonUnit<Integer> 等を作るか
+    compound.set(path, 1);
+    System.out.println(compound);
 }

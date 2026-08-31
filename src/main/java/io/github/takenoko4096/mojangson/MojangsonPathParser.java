@@ -223,7 +223,7 @@ public class MojangsonPathParser {
         expect(ARRAY_BRACES[0]);
 
         if (next(ARRAY_BRACES[1])) {
-            return new ArrayEmptyString();
+            return ArrayEmptyString.INSTANCE;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -292,7 +292,7 @@ public class MojangsonPathParser {
                 case ObjectKeyCheckerString(String key, String mojangson) -> new MojangsonObjectKeyCheckerNode(key, MojangsonParser.compound(mojangson), node);
                 case ArrayIndexString(int index) -> new MojangsonArrayIndexNode(index, node);
                 case ArrayIndexFinderString(String mojangson) -> new MojangsonArrayIndexFinderNode(MojangsonParser.compound(mojangson), node);
-                case ArrayEmptyString _ -> new MojangsonArrayIndexNode(-2147483648, node); // TODO
+                case ArrayEmptyString _ -> new MojangsonArrayIndexUnspecifiedNode(node);
             };
         }
 
@@ -335,5 +335,8 @@ public class MojangsonPathParser {
     private sealed interface IArrayIndexString extends INodeString {}
     private record ArrayIndexString(int i) implements IArrayIndexString {}
     private record ArrayIndexFinderString(String mojangson) implements IArrayIndexString {}
-    private record ArrayEmptyString() implements IArrayIndexString {}
+    private static final class ArrayEmptyString implements IArrayIndexString {
+        private ArrayEmptyString() {}
+        public static final ArrayEmptyString INSTANCE = new ArrayEmptyString();
+    }
 }

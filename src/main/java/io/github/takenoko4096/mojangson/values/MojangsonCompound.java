@@ -239,6 +239,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             final Boolean t = path.access(
                 this,
                 false,
+                false,
                 MojangsonCompound::has,
                 MojangsonList::has
             );
@@ -265,6 +266,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             final MojangsonValueType<?> t = path.access(
                 this,
                 false,
+                true,
                 MojangsonCompound::getTypeOf,
                 MojangsonList::getTypeAt
             );
@@ -293,6 +295,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             final T t = path.access(
                 this,
                 false,
+                true,
                 (s, p) -> s.getOrThrow(p, type),
                 (s, p) -> s.getOrThrow(p, type)
             );
@@ -320,6 +323,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             final T t = path.access(
                 this,
                 false,
+                true,
                 (s, p) -> s.getOrNull(p, type),
                 (s, p) -> s.getOrNull(p, type)
             );
@@ -348,6 +352,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             final T t = path.access(
                 this,
                 false,
+                true,
                 (s, p) -> s.getOrDefault(p, type, defaultValue),
                 (s, p) -> s.getOrDefault(p, type, defaultValue)
             );
@@ -373,6 +378,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             final Boolean t = path.access(
                 this,
                 false,
+                true,
                 MojangsonCompound::delete,
                 MojangsonList::delete
             );
@@ -398,6 +404,7 @@ public class MojangsonCompound extends MojangsonValue<Map<String, MojangsonValue
             path.access(
                 this,
                 false,
+                true,
                 (s, p) -> {
                     s.set(p, value);
                     return null;

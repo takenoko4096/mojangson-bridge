@@ -2,6 +2,7 @@ package io.github.takenoko4096.mojangson.values;
 
 import io.github.takenoko4096.mojangson.MojangsonValueType;
 import io.github.takenoko4096.mojangson.MojangsonValueTypes;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,10 +52,45 @@ public non-sealed class MojangsonIntArray extends MojangsonArray<int[], Mojangso
      * @return int
      */
     public int getOrThrow(int index) {
+        if (index < 0) {
+            index = value.length - index;
+        }
+
         if (index >= this.value.length) {
             throw new IllegalArgumentException("不正な添字です: " + index);
         }
+
         return value[index];
+    }
+
+    @Override
+    public @Nullable MojangsonInt getBoxedOrNull(int index) {
+        if (index < 0) {
+            index = value.length + index;
+        }
+
+        if (index >= this.value.length) {
+            return null;
+        }
+
+        return MojangsonInt.valueOf(value[index]);
+    }
+
+    @Override
+    protected void setBoxed(int index, Object value) {
+        if (index < 0) {
+            index = this.value.length + index;
+        }
+
+        if (value instanceof Integer intValue) {
+            this.value[index] = intValue;
+        }
+        else if (value instanceof MojangsonInt mojangsonInt) {
+            this.value[index] = mojangsonInt.intValue();
+        }
+        else {
+            throw new IllegalArgumentException(MojangsonIntArray.class.getSimpleName() + " の要素に " + value.getClass().getName() + " を代入できません");
+        }
     }
 
     /**
@@ -63,12 +99,14 @@ public non-sealed class MojangsonIntArray extends MojangsonArray<int[], Mojangso
      * @param value 値
      */
     public void set(int index, int value) {
+        if (index < 0) index = this.value.length + index;
         if (index >= this.value.length) return;
         this.value[index] = value;
     }
 
     @Override
     public boolean delete(int index) {
+        if (index < 0) index = value.length + index;
         if (index >= value.length) return false;
         final boolean successful = value[index] != 0;
         value[index] = 0;

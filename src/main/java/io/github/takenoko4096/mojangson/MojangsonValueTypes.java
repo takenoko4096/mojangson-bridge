@@ -23,7 +23,7 @@ public final class MojangsonValueTypes {
                 case MojangsonByte mojangsonByte -> mojangsonByte;
                 case Byte byteValue -> MojangsonByte.valueOf(byteValue.byteValue());
                 case Boolean booleanValue -> MojangsonByte.valueOf(booleanValue ? (byte) 1 : (byte) 0);
-                case null, default -> throw new IllegalArgumentException("byte型でない値はMojangsonByteに変換できません");
+                case null, default -> throw new IllegalArgumentException("byte 型でない値は MojangsonByte に変換できません");
             };
         }
     };
@@ -37,7 +37,7 @@ public final class MojangsonValueTypes {
         public MojangsonShort toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonShort mojangsonShort) return mojangsonShort;
             else if (value instanceof Short shortValue) return MojangsonShort.valueOf(shortValue.shortValue());
-            else throw new IllegalArgumentException("short型でない値はMojangsonShortに変換できません");
+            else throw new IllegalArgumentException("short 型でない値は MojangsonShort に変換できません");
         }
     };
 
@@ -50,7 +50,7 @@ public final class MojangsonValueTypes {
         public MojangsonInt toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonInt mojangsonInt) return mojangsonInt;
             else if (value instanceof Integer intValue) return MojangsonInt.valueOf(intValue.intValue());
-            else throw new IllegalArgumentException("int型でない値はMojangsonIntに変換できません");
+            else throw new IllegalArgumentException("int 型でない値は MojangsonInt に変換できません");
         }
     };
 
@@ -63,7 +63,7 @@ public final class MojangsonValueTypes {
         public MojangsonLong toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonLong mojangsonLong) return mojangsonLong;
             else if (value instanceof Long longValue) return MojangsonLong.valueOf(longValue.longValue());
-            else throw new IllegalArgumentException("long型でない値はMojangsonLongに変換できません");
+            else throw new IllegalArgumentException("long 型でない値は MojangsonLong に変換できません");
         }
     };
 
@@ -76,7 +76,7 @@ public final class MojangsonValueTypes {
         public MojangsonFloat toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonFloat mojangsonFloat) return mojangsonFloat;
             else if (value instanceof Float floatValue) return MojangsonFloat.valueOf(floatValue.floatValue());
-            else throw new IllegalArgumentException("float型でない値はMojangsonFloatに変換できません");
+            else throw new IllegalArgumentException("float 型でない値は MojangsonFloat に変換できません");
         }
     };
 
@@ -89,7 +89,7 @@ public final class MojangsonValueTypes {
         public MojangsonDouble toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonDouble mojangsonDouble) return mojangsonDouble;
             else if (value instanceof Double doubleValue) return MojangsonDouble.valueOf(doubleValue.doubleValue());
-            else throw new IllegalArgumentException("double型でない値はMojangsonDoubleに変換できません");
+            else throw new IllegalArgumentException("double 型でない値は MojangsonDouble に変換できません");
         }
     };
 
@@ -105,7 +105,7 @@ public final class MojangsonValueTypes {
                 case String stringValue -> MojangsonString.valueOf(stringValue);
                 case Character characterValue -> MojangsonString.valueOf(characterValue.charValue());
                 case null, default ->
-                    throw new IllegalArgumentException("String型でない値はMojangsonStringに変換できません");
+                    throw new IllegalArgumentException("String 型でない値は MojangsonString に変換できません");
             };
         }
     };
@@ -119,7 +119,7 @@ public final class MojangsonValueTypes {
         public MojangsonByteArray toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonByteArray mojangsonByteArray) return mojangsonByteArray;
             else if (value instanceof byte[] bytes) return new MojangsonByteArray(bytes);
-            else throw new IllegalArgumentException("byte[]型でない値はMojangsonByteArrayに変換できません");
+            else throw new IllegalArgumentException("byte[] 型でない値は MojangsonByteArray に変換できません");
         }
     };
 
@@ -132,7 +132,7 @@ public final class MojangsonValueTypes {
         public MojangsonIntArray toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonIntArray mojangsonIntArray) return mojangsonIntArray;
             else if (value instanceof int[] ints) return new MojangsonIntArray(ints);
-            else throw new IllegalArgumentException("int[]型でない値はMojangsonIntArrayに変換できません");
+            else throw new IllegalArgumentException("int[] 型でない値は MojangsonIntArray に変換できません");
         }
     };
 
@@ -145,7 +145,7 @@ public final class MojangsonValueTypes {
         public MojangsonLongArray toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonLongArray mojangsonLongArray) return mojangsonLongArray;
             else if (value instanceof long[] longs) return new MojangsonLongArray(longs);
-            else throw new IllegalArgumentException("long[]型でない値はMojangsonLongArrayに変換できません");
+            else throw new IllegalArgumentException("long[] 型でない値は MojangsonLongArray に変換できません");
         }
     };
 
@@ -171,7 +171,7 @@ public final class MojangsonValueTypes {
 
                 return new MojangsonCompound(compound);
             }
-            else throw new IllegalArgumentException("Map<String, ?>型でない値はMojangsonCompoundに変換できません");
+            else throw new IllegalArgumentException("Map<String, ?> 型でない値は MojangsonCompound に変換できません");
         }
     };
 
@@ -194,7 +194,7 @@ public final class MojangsonValueTypes {
 
                     yield new MojangsonList(listOfMojangson);
                 }
-                case null, default -> throw new IllegalArgumentException("List<?>型でない値はMojangsonListに変換できません");
+                case null, default -> throw new IllegalArgumentException("List<?> 型でない値は MojangsonList に変換できません");
             };
         }
     };
@@ -208,7 +208,7 @@ public final class MojangsonValueTypes {
         public MojangsonNull toMojangson(@Nullable Object value) {
             if (value instanceof MojangsonNull mojangsonNull) return mojangsonNull;
             else if (value == null) return MojangsonNull.NULL;
-            else throw new IllegalArgumentException("nullでない値はMojangsonNullに変換できません");
+            else throw new IllegalArgumentException("null でない値は MojangsonNull に変換できません");
         }
     };
 }

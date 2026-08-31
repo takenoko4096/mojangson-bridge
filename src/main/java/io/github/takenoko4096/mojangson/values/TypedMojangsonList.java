@@ -190,13 +190,7 @@ public class TypedMojangsonList<T extends MojangsonValue<?>> extends MojangsonVa
 
     @Override
     public Iterator<T> iterator() {
-        final List<T> list = new ArrayList<>();
-
-        for (int i = 0; i < this.value.size(); i++) {
-            list.add(getOrThrow(i));
-        }
-
-        return list.iterator();
+        return value.iterator();
     }
 
     /**
