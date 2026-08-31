@@ -182,8 +182,8 @@ public class TypedJsonArray<T extends JsonValue<?>> extends JsonValue<List<T>> i
     }
 
     @Override
-    public TypedJsonArray<T> deepCopy() {
-        return untyped().deepCopy().typed(type);
+    public TypedJsonArray<T> copy() {
+        return untyped().copy().typed(type);
     }
 
     @Override

@@ -235,7 +235,7 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
     }
 
     @Override
-    public JsonArray deepCopy() {
+    public JsonArray copy() {
         return JsonValueTypes.ARRAY.toJson(toListRecursively());
     }
 

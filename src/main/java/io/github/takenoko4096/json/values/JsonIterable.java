@@ -34,5 +34,5 @@ public interface JsonIterable<T extends JsonValue<?>> extends JsonStructure, Ite
     boolean clear();
 
     @Override
-    JsonIterable<T> deepCopy();
+    JsonIterable<T> copy();
 }

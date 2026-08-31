@@ -20,5 +20,5 @@ public interface JsonStructure {
      * 構造体のディープコピーを作成します。
      * @return ディープコピーされたオブジェクト
      */
-    JsonStructure deepCopy();
+    JsonStructure copy();
 }

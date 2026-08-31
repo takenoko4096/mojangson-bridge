@@ -1,5 +1,8 @@
+import io.github.takenoko4096.json.JsonParser;
+import io.github.takenoko4096.json.JsonPath;
+import io.github.takenoko4096.json.JsonValueTypes;
+import io.github.takenoko4096.json.values.JsonObject;
 import io.github.takenoko4096.mojangson.*;
-import io.github.takenoko4096.mojangson.values.*;
 import org.junit.jupiter.api.Test;
 
 @Test
@@ -9,21 +12,23 @@ void main() throws MojangsonPathUnableToAccessException {
 
     // Maven Central に publish するのはもう少しテストした後
 
-    final MojangsonCompound compound = MojangsonParser.compound(
+    final JsonObject object = JsonParser.object(
         """
         {
-            int_array: [I; 0, 1, 2],
-            list: [
-                {
-                    key: value
-                }
-            ]
+            "pack": {
+                "description": "This is a description.",
+                "min_format": [106, 1],
+                "max_format": [109, 1]
+            }
         }
         """
     );
 
-    final MojangsonPath path = MojangsonPath.of("list[]");
+    final JsonPath path = JsonPath.of("pack{\"min_format\": [1]}.max_format[0]");
 
-    compound.set(path, 1);
-    System.out.println(compound);
+    System.out.println(object.getOrThrow(path, JsonValueTypes.NUMBER));
+
+    object.set(path, 108);
+
+    System.out.println(object);
 }

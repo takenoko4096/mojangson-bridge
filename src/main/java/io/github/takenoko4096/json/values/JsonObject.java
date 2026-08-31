@@ -186,7 +186,7 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
     }
 
     @Override
-    public JsonObject deepCopy() {
+    public JsonObject copy() {
         return JsonValueTypes.OBJECT.toJson(toMapRecursively());
     }
 
