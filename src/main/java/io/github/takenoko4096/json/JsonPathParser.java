@@ -1,5 +1,7 @@
 package io.github.takenoko4096.json;
 
+import io.github.takenoko4096.json.node.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -149,7 +151,7 @@ public class JsonPathParser {
         return string.toString();
     }
 
-    private String[] objectKey(boolean isRoot) {
+    private IObjectKeyString objectKey(boolean isRoot) {
         if (!isRoot) expect(DOT);
 
         final StringBuilder sb = new StringBuilder();
@@ -207,21 +209,21 @@ public class JsonPathParser {
 
                 json.append(sb2);
 
-                return new String[]{sb.toString(), json.toString()};
+                return new ObjectKeyCheckerString(sb.toString(), json.toString());
             }
 
             sb.append(c);
             next();
         }
 
-        return new String[]{sb.toString()};
+        return new ObjectKeyString(sb.toString());
     }
 
-    private String arrayIndex() {
+    private IArrayIndexString arrayIndex() {
         expect(ARRAY_BRACES[0]);
 
         if (next(ARRAY_BRACES[1])) {
-            return EMPTY_STRING;
+            return ArrayEmptyString.INSTANCE;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -254,11 +256,19 @@ public class JsonPathParser {
 
         expect(ARRAY_BRACES[1]);
 
-        return sb.toString();
+        final String string = sb.toString();
+
+        if (string.matches("^[+-]?[1-9]*\\d+|0$")) {
+            return new ArrayIndexString(Integer.parseInt(string));
+        }
+        else {
+            return new ArrayIndexFinderString(string);
+        }
+
     }
 
     private JsonPathNode<?, ?> root() {
-        final List<Object> list = new ArrayList<>();
+        final List<INodeString> list = new ArrayList<>();
 
         list.add(objectKey(true));
 
@@ -276,26 +286,15 @@ public class JsonPathParser {
 
         JsonPathNode<?, ?> node = null;
         for (int i = list.size() - 1; i >= 0; i--) {
-            final Object value = list.get(i);
+            final INodeString str = list.get(i);
 
-            if (value instanceof String[] strings) {
-                if (strings.length == 1) {
-                    node = new JsonPathNode.ObjectKeyNode(strings[0], node);
-                }
-                else if (strings.length == 2) {
-                    node = new JsonPathNode.ObjectKeyCheckerNode(strings[0], JsonParser.object(strings[1]), node);
-                }
-                else throw exception("NEVER HAPPENS");
-            }
-            else if (value instanceof String string) {
-                if (string.matches("^[+-]?[1-9]*\\d+|0$")) {
-                    node = new JsonPathNode.ArrayIndexNode(Integer.parseInt(string), node);
-                }
-                else {
-                    node = new JsonPathNode.ArrayIndexFinderNode(JsonParser.object(string), node);
-                }
-            }
-            else throw exception("NEVER HAPPENS");
+            node = switch (str) {
+                case ObjectKeyString(String key) -> new JsonObjectKeyNode(key, node);
+                case ObjectKeyCheckerString(String key, String json) -> new JsonObjectKeyCheckerNode(key, JsonParser.object(json), node);
+                case ArrayIndexString(int index) -> new JsonArrayIndexNode(index, node);
+                case ArrayIndexFinderString(String json) -> new JsonArrayIndexFinderNode(JsonParser.object(json), node);
+                case ArrayEmptyString _ -> new JsonArrayIndexUnspecifiedNode(node);
+            };
         }
 
         if (node == null) {
@@ -326,5 +325,19 @@ public class JsonPathParser {
     public JsonPath parse(String text) throws JsonParseException {
         this.text = text;
         return parse();
+    }
+
+    private sealed interface INodeString {}
+
+    private sealed interface IObjectKeyString extends INodeString {}
+    private record ObjectKeyString(String key) implements IObjectKeyString {}
+    private record ObjectKeyCheckerString(String key, String json) implements IObjectKeyString {}
+
+    private sealed interface IArrayIndexString extends INodeString {}
+    private record ArrayIndexString(int i) implements IArrayIndexString {}
+    private record ArrayIndexFinderString(String json) implements IArrayIndexString {}
+    private static final class ArrayEmptyString implements IArrayIndexString {
+        private ArrayEmptyString() {}
+        public static final ArrayEmptyString INSTANCE = new ArrayEmptyString();
     }
 }

@@ -188,13 +188,7 @@ public class TypedJsonArray<T extends JsonValue<?>> extends JsonValue<List<T>> i
 
     @Override
     public Iterator<T> iterator() {
-        final List<T> list = new ArrayList<>();
-
-        for (int i = 0; i < this.value.size(); i++) {
-            list.add(getOrThrow(i));
-        }
-
-        return list.iterator();
+        return value.iterator();
     }
 
     /**

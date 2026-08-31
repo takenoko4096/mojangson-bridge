@@ -53,11 +53,10 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">コンテンツ&nbsp;<input type="text" class="filter-input" disabled placeholder="コンテンツのフィルタ(.と入力)" aria-label="目次のフィルタ" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="リセット"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">説明</a></li>
-<li><a href="#nested-class-summary" tabindex="0">ネストされたクラスの概要</a></li>
 <li><a href="#method-summary" tabindex="0">メソッドの概要</a></li>
 <li><a href="#method-detail" tabindex="0">メソッドの詳細</a>
 <ol class="toc-list">
-<li><a href="#access(io.github.takenoko4096.json.values.JsonObject,java.util.function.Function,boolean)" tabindex="0">access(JsonObject, Function, boolean)</a></li>
+<li><a href="#access(io.github.takenoko4096.json.values.JsonObject,boolean,boolean,java.util.function.BiFunction,java.util.function.BiFunction)" tabindex="0">access(JsonObject, boolean, boolean, BiFunction, BiFunction)</a></li>
 <li><a href="#length()" tabindex="0">length()</a></li>
 <li><a href="#slice(int,int)" tabindex="0">slice(int, int)</a></li>
 <li><a href="#parent()" tabindex="0">parent()</a></li>
@@ -87,23 +86,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<li>
-<section class="nested-class-summary" id="nested-class-summary">
-<h2>ネストされたクラスの概要</h2>
-<div class="caption"><span>ネストされたクラス</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">修飾子とタイプ</div>
-<div class="table-header col-second">クラス</div>
-<div class="table-header col-last">説明</div>
-<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="JsonPath.JsonPathReference.html" class="type-name-link" title="io.github.takenoko4096.json内のクラス">JsonPath.JsonPathReference</a>&lt;<a href="JsonPath.JsonPathReference.html#type-param-S" title="JsonPath.JsonPathReference内の型パラメータ">S</a> extends <a href="values/JsonStructure.html" title="io.github.takenoko4096.json.values内のインタフェース">JsonStructure</a>, <a href="JsonPath.JsonPathReference.html#type-param-T" title="JsonPath.JsonPathReference内の型パラメータ">T</a>&gt;</code></div>
-<div class="col-last even-row-color">
-<div class="block">jsonパスが構造にアクセスする際に作成される特定のオブジェクトへの参照を表現します。</div>
-</div>
-</div>
-</section>
-</li>
 <!-- ========== METHOD SUMMARY =========== -->
 <li>
 <section class="method-summary" id="method-summary">
@@ -115,15 +97,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">修飾子とタイプ</div>
 <div class="table-header col-second">メソッド</div>
 <div class="table-header col-last">説明</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;@Nullable T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.json.values.JsonObject,java.util.function.Function,boolean)" class="member-name-link">access</a><wbr>(<a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&nbsp;jsonObject,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">Function</a>&lt;<a href="JsonPath.JsonPathReference.html" title="io.github.takenoko4096.json内のクラス">JsonPath.JsonPathReference</a>&lt;?,<wbr>?&gt;, @Nullable T&gt;&nbsp;function,
- boolean&nbsp;isForcedAccess)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;U&gt;&nbsp;@Nullable U</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#access(io.github.takenoko4096.json.values.JsonObject,boolean,boolean,java.util.function.BiFunction,java.util.function.BiFunction)" class="member-name-link">access</a><wbr>(<a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&nbsp;object,
+ boolean&nbsp;createWay,
+ boolean&nbsp;requirePreciseLocation,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, @Nullable U&gt;&nbsp;function1,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/JsonArray.html" title="io.github.takenoko4096.json.values内のクラス">JsonArray</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Integer</a>, @Nullable U&gt;&nbsp;function2)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">任意のオブジェクト上の、このパスに対応する位置へのアクセスを提供します。</div>
+<div class="block">引数に渡された構造体に対してパスが参照する位置へのアクセスを提供します。</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;obj)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;obj)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
@@ -170,25 +154,29 @@ loadScripts(document, 'script');</script>
 <h2>メソッドの詳細</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="access(io.github.takenoko4096.json.values.JsonObject,java.util.function.Function,boolean)">
+<section class="detail" id="access(io.github.takenoko4096.json.values.JsonObject,boolean,boolean,java.util.function.BiFunction,java.util.function.BiFunction)">
 <h3>access</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">@Nullable T</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&nbsp;jsonObject,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">Function</a>&lt;<a href="JsonPath.JsonPathReference.html" title="io.github.takenoko4096.json内のクラス">JsonPath.JsonPathReference</a>&lt;?,<wbr>?&gt;, @Nullable T&gt;&nbsp;function,
- boolean&nbsp;isForcedAccess)</span>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">@Nullable U</span>&nbsp;<span class="element-name">access</span><wbr><span class="parameters">(<a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>&nbsp;object,
+ boolean&nbsp;createWay,
+ boolean&nbsp;requirePreciseLocation,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス">JsonObject</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>, @Nullable U&gt;&nbsp;function1,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BiFunction.html" title="java.util.function内のクラスまたはインタフェース" class="external-link">BiFunction</a>&lt;<a href="values/JsonArray.html" title="io.github.takenoko4096.json.values内のクラス">JsonArray</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Integer</a>, @Nullable U&gt;&nbsp;function2)</span>
                        throws <span class="exceptions"><a href="JsonPathUnableToAccessException.html" title="io.github.takenoko4096.json内のクラス">JsonPathUnableToAccessException</a></span></div>
-<div class="block">任意のオブジェクト上の、このパスに対応する位置へのアクセスを提供します。</div>
+<div class="block">引数に渡された構造体に対してパスが参照する位置へのアクセスを提供します。</div>
 <dl class="notes">
 <dt>型パラメータ:</dt>
-<dd><span id="access(io.github.takenoko4096.json.values.JsonObject,java.util.function.Function,boolean)-type-param-T"><code>T</code> - コールバックの戻り値の型。</span></dd>
+<dd><span id="access(io.github.takenoko4096.json.values.JsonObject,boolean,boolean,java.util.function.BiFunction,java.util.function.BiFunction)-type-param-U"><code>U</code> - コールバックの戻り値の型</span></dd>
 <dt>パラメータ:</dt>
-<dd><code>jsonObject</code> - 任意のオブジェクト。</dd>
-<dd><code>function</code> - 参照を消費するコールバック関数。</dd>
-<dd><code>isForcedAccess</code> - trueの場合、オブジェクトのキーに対する単純なアクセスに限り、キーが存在しなくてもその位置に空のオブジェクトを作成します。これにより強制的にアクセス処理の中断を回避します。</dd>
+<dd><code>object</code> - ルート構造体 (オブジェクト)</dd>
+<dd><code>createWay</code> - アクセスに必要な空のオブジェクトを自動作成するかどうか; <code>true</code> のときオブジェクトに対するキーによる単純なアクセスに限り空のオブジェクトを生成し例外の発生を回避します。</dd>
+<dd><code>requirePreciseLocation</code> - 正確な位置を要求するかどうか; <code>true</code> のとき添字指定のない且つサイズが 1 でないリストアクセスを禁止します。</dd>
+<dd><code>function1</code> - 構造体が <a href="values/JsonObject.html" title="io.github.takenoko4096.json.values内のクラス"><code>JsonObject</code></a> だった場合のコールバック</dd>
+<dd><code>function2</code> - 構造体が <a href="values/JsonArray.html" title="io.github.takenoko4096.json.values内のクラス"><code>JsonArray</code></a> だった場合のコールバック</dd>
 <dt>戻り値:</dt>
-<dd>コールバックの戻り値をそのまま返します。何も返す必要がなければnullを返すことができます。</dd>
+<dd>コールバックの戻り値</dd>
 <dt>例外:</dt>
-<dd><code><a href="JsonPathUnableToAccessException.html" title="io.github.takenoko4096.json内のクラス">JsonPathUnableToAccessException</a></code> - オブジェクトの構造との不整合によりアクセスできなかった場合。</dd>
+<dd><code><a href="JsonPathUnableToAccessException.html" title="io.github.takenoko4096.json内のクラス">JsonPathUnableToAccessException</a></code> - 構造との不整合によりアクセスできなかった場合</dd>
 </dl>
 </div>
 </section>
@@ -219,6 +207,8 @@ loadScripts(document, 'script');</script>
 <dd><code>end</code> - 終了位置。この値は含まれません。</dd>
 <dt>戻り値:</dt>
 <dd>切り取られた部分パス。完全なコピーであり、元のオブジェクトとは関連しません。</dd>
+<dt>例外:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - <code>begin &gt; end</code> 、または <code>end &gt;=</code> <a href="#length()"><code>length()</code></a> のとき</dd>
 </dl>
 </div>
 </section>
@@ -264,7 +254,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;obj)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a>&nbsp;obj)</span></div>
 <dl class="notes">
 <dt>オーバーライド:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="java.lang内のクラスまたはインタフェース" class="external-link">equals</a></code>&nbsp;クラス内&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></code></dd>

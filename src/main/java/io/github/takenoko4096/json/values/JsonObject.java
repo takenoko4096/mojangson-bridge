@@ -231,9 +231,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
      */
     public boolean has(JsonPath path) {
         try {
-            final Boolean flag = path.access(this, JsonPath.JsonPathReference::has, false);
-            if (flag == null) throw new IllegalStateException("NEVER HAPPENS");
-            return flag;
+            final Boolean t = path.access(
+                this,
+                false,
+                false,
+                JsonObject::has,
+                JsonArray::has
+            );
+
+            if (t == null) {
+                return false;
+            }
+
+            return t;
         }
         catch (JsonPathUnableToAccessException e) {
             return false;
@@ -248,9 +258,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
      */
     public JsonValueType<?> getTypeOf(JsonPath path) {
         try {
-            final JsonValueType<?> type = path.access(this, JsonPath.JsonPathReference::getType, false);
-            if (type == null) throw new IllegalStateException("NEVER HAPPENS");
-            return type;
+            final JsonValueType<?> t = path.access(
+                this,
+                false,
+                true,
+                JsonObject::getTypeOf,
+                JsonArray::getTypeAt
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
+            }
+
+            return t;
         }
         catch (JsonPathUnableToAccessException e) {
             throw new IllegalStateException(e);
@@ -267,11 +287,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
      */
     public <T extends JsonValue<?>> T getOrThrow(JsonPath path, JsonValueType<T> type) {
         try {
-            final T value = path.access(this, reference -> reference.getOrThrow(type), false);
-            if (value == null) {
-                throw new IllegalArgumentException("値の取得に失敗しました: アクセスの戻り値が null です");
+            final T t = path.access(
+                this,
+                false,
+                true,
+                (s, p) -> s.getOrThrow(p, type),
+                (s, p) -> s.getOrThrow(p, type)
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
             }
-            return value;
+
+            return t;
         }
         catch (JsonPathUnableToAccessException e) {
             throw new IllegalArgumentException(e);
@@ -287,7 +315,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
      */
     public <T extends JsonValue<?>> @Nullable T getOrNull(JsonPath path, JsonValueType<T> type) {
         try {
-            return path.access(this, reference -> reference.getOrNull(type), false);
+            final T t = path.access(
+                this,
+                false,
+                true,
+                (s, p) -> s.getOrNull(p, type),
+                (s, p) -> s.getOrNull(p, type)
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
+            }
+
+            return t;
         }
         catch (JsonPathUnableToAccessException _) {
             return null;
@@ -306,11 +346,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
         final T defaultJsonValue = type.toJson(defaultValue);
 
         try {
-            final T value = path.access(this, reference -> reference.getOrDefault(type, defaultJsonValue), false);
-            if (value == null) {
-                return defaultJsonValue;
+            final T t = path.access(
+                this,
+                false,
+                true,
+                (s, p) -> s.getOrDefault(p, type, defaultValue),
+                (s, p) -> s.getOrDefault(p, type, defaultValue)
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
             }
-            return value;
+
+            return t;
         }
         catch (JsonPathUnableToAccessException _) {
             return defaultJsonValue;
@@ -324,9 +372,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
      */
     public boolean delete(JsonPath path) {
         try {
-            final Boolean flag = path.access(this, JsonPath.JsonPathReference::delete, false);
-            if (flag == null) throw new IllegalStateException("NEVER HAPPENS");
-            return flag;
+            final Boolean t = path.access(
+                this,
+                false,
+                true,
+                JsonObject::delete,
+                JsonArray::delete
+            );
+
+            if (t == null) {
+                throw new IllegalStateException("NEVER HAPPENS");
+            }
+
+            return t;
         }
         catch (JsonPathUnableToAccessException e) {
             throw new IllegalStateException(e);
@@ -340,10 +398,19 @@ public final class JsonObject extends JsonValue<Map<String, JsonValue<?>>> imple
      */
     public void set(JsonPath path, Object value) {
         try {
-            path.access(this, reference -> {
-                reference.set(value);
-                return null;
-            }, true);
+            path.access(
+                this,
+                false,
+                true,
+                (s, p) -> {
+                    s.set(p, value);
+                    return null;
+                },
+                (s, p) -> {
+                    s.set(p, value);
+                    return null;
+                }
+            );
         }
         catch (JsonPathUnableToAccessException e) {
             throw new IllegalStateException(e);

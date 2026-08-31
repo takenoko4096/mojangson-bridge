@@ -194,13 +194,7 @@ public final class JsonArray extends JsonValue<List<JsonValue<?>>> implements Js
 
     @Override
     public Iterator<JsonValue<?>> iterator() {
-        final List<JsonValue<?>> list = new ArrayList<>();
-
-        for (int i = 0; i < this.value.size(); i++) {
-            list.add(getOrThrow(i, getTypeAt(i)));
-        }
-
-        return list.iterator();
+        return value.iterator();
     }
 
     /**

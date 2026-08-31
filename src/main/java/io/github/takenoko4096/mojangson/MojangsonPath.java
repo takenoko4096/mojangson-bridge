@@ -90,6 +90,7 @@ public final class MojangsonPath {
      * @param begin 開始位置
      * @param end 終了位置 この値は含まれません。
      * @return 切り取られた部分パス 完全なコピーであり、元のオブジェクトとは関連しません。
+     * @throws IllegalArgumentException {@code begin > end} 、または {@code end >=} {@link MojangsonPath#length()} のとき
      */
     public MojangsonPath slice(int begin, int end) {
         final int length = length();

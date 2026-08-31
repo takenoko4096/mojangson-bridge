@@ -9,7 +9,7 @@ public class JsonPathUnableToAccessException extends Exception {
      * 例外を作成します。
      * @param message エラーメッセージ
      */
-    protected JsonPathUnableToAccessException(String message) {
+    public JsonPathUnableToAccessException(String message) {
         super(message);
     }
 }
